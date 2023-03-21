@@ -1,0 +1,19 @@
+.container-cover {
+  height: 40vw;
+}
+.img-cover {
+  background-image: url("https://previews-te.wetransfer.net/file/wetransfer/j1ov/sqzmagnng2ydbseij20230309231906/salaxbs096qb1m1kb20230315212203~ff?width=512&height=512&source=transloadit&origin=collect-pro&s=2837e33a545fab34a1c300ef3d7c821b20dbe591&Expires=1679441745&Signature=Te6DcSi-sRhObSAuO2NO12aeVgP4wd1rSwsqwMDCLW6ugdu4jtgWpuY39ggaQzJT5hXM9VMYMb-05TlO3wVV4ftUMsNPyZshihrscjF0xRSrh85h~oNwspdnrFYLunrIhphVN9iALmoIDBOfHp65NR13MssLz3MePn2sT22swvAB2WsM1ywSCxvWlXJRzsx-RQK9X4GZptvFbh9GU2IPk7vvT8PdECPEZYBLmmsKVrvccNqL8kIZVmCbTDmIWeEo~zti8CWPl71KZ71AYlg1hXdm8OnkgcY-5IAWi4sAczAHrIkR8x8vJT6wIpHjNXplQ3MKppTBhAfPMEUcKXwV~Q__&Key-Pair-Id=APKAIRLQFERKGUWFG7GQ");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.section-title {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.section-btn {
+  background-color: rgba(21, 64, 204, 0.705) !important;
+  border: 0 !important;
+  font-weight: 500 !important;
+}

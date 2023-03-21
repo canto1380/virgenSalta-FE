@@ -1,0 +1,26 @@
+.img-logo {
+  width: 50px;
+  height: auto;
+}
+
+.nav-section2 {
+  border-left: 1.5px solid #000000E6;
+}
+.nav-section2:first-child{
+  padding-left: 100px;
+}
+.btn-language{
+  color: #0000008C !important;
+  font-weight: 500 !important;
+}
+.btn-language:hover{
+  color: #000000E6 !important;
+}
+@media(max-width: 992px) {
+  .nav-section2{
+    border-left: 0px;
+  }
+  .nav-section2 button {
+    text-align: start !important;
+  }
+}

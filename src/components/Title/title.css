@@ -1,0 +1,15 @@
+.container-title {
+  background-color: #f8f9fa;
+}
+
+.title1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.5vw;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.phrase{
+font-family: 'Mr Dafoe', cursive;
+font-size: 3.5vw;
+margin-bottom: 0px;
+}
