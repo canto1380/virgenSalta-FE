@@ -4,9 +4,8 @@ import { FreeMode, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
-import CardModel from "../Cards/CardModel";
-import { noticias } from "../../utils/seeders";
-const NewCarousel = () => {
+import GenericCard from "./GenericCard";
+const NewCarousel = ({ data }) => {
   return (
     <div>
       <Swiper
@@ -27,12 +26,12 @@ const NewCarousel = () => {
           992: {
             slidesPerView: 3,
             spaceBetween: 30,
-          }
+          },
         }}
       >
-        {noticias?.map((news, i) => (
+        {data?.map((d, i) => (
           <SwiperSlide key={i}>
-            <CardModel news={news} i={i}/>
+            <GenericCard data={d} i={i} />
           </SwiperSlide>
         ))}
       </Swiper>

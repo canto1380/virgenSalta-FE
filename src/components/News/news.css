@@ -1,4 +1,10 @@
-
+.card-container {
+  width: 100% !important;
+  height: 500px !important;
+}
+.card-img {
+  height: 100%;
+}
 .card-title {
   background-color: rgba(174, 174, 174, 0.514);
   padding: 4px 8px;

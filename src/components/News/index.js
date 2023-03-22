@@ -1,20 +1,21 @@
-import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import NewCarousel from "./NewCarousel";
+import React, { useState, useEffect } from "react";
+import { Row } from "react-bootstrap";
+import HeaderSections from "../Title/HeaderSections";
+import NewCarousel from "../Carousel/GenericCarousel";
+import { noticias } from "../../utils/seeders";
 
 const News = () => {
+  const [news, setNews] = useState();
+
+  useEffect(() => {
+    const filterNews = noticias.slice(0, 6);
+    setNews(filterNews);
+  }, []);
   return (
     <>
-      <Row className="">
-        <Col xs={7} className="text-start">
-          <h4 className='section-title'>Noticias</h4>
-        </Col>
-        <Col xs={5} className="text-end">
-          <Button className='section-btn'>Ver todo</Button>
-        </Col>
-      </Row>
-      <Row className='mt-3 mb-5'>
-        <NewCarousel />
+      <HeaderSections title={"Noticias"} linkRef={"/"} />
+      <Row className="mt-3 mb-5">
+        <NewCarousel data={news} />
       </Row>
     </>
   );
