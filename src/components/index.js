@@ -5,6 +5,9 @@ import News from "./News";
 import Categories from "./Categories";
 import Title from "./Title";
 import SpecialDays from "./SpecialDays";
+import Statics from "./Statics";
+import PhotosGallery from "./PhotosGallery";
+import VideoGallery from "./VideoGallery";
 
 const Home = () => {
   return (
@@ -31,6 +34,13 @@ const Home = () => {
       </Container>
       <Container fluid className='container-special-day py-5'>
         <SpecialDays className='px-0'/>
+      </Container>
+      <Container className='py-5'>
+        <Statics />
+        <hr className='my-5'/>
+        <PhotosGallery />
+        <hr className='my-5'/>
+        <VideoGallery />
       </Container>
     </div>
   );

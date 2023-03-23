@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Home from "./components";
+import Footer from "./components/Footer";
 import Nav from "./components/Navbar";
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
+        <div>
+          <Footer />
+        </div>
       </Router>
     </div>
   );

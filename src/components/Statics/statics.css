@@ -1,0 +1,23 @@
+.card-effect:hover{
+  transition:all ease 2.5s;
+  transform-style: preserve-3d;
+  transform: perspective(500px) rotatey(360deg);
+}
+
+.static-number {
+  color: rgb(17, 157, 167);
+  font-weight: 700;
+  font-size: 26px;
+}
+.static-data {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@media(max-width: 992px) {
+  .static-data {
+    margin-bottom: 60px;
+  }
+}

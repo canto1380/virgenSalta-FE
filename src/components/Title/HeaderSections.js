@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 
 const HeaderSections = ({ title, linkRef, styleAdd }) => {
-  console.log(styleAdd);
   return (
     <Row className="">
       <Col xs={7} className="text-start">

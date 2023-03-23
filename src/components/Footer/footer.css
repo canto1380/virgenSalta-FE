@@ -1,0 +1,36 @@
+.container-footer {
+  background-color: rgb(49, 49, 49);
+}
+
+.img-foot {
+  width: 9vw;
+  height: auto;
+}
+
+.title-section-footer {
+  font-size: 18px !important;
+  color: rgb(216, 216, 216) !important;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.container-section a {
+  text-decoration: none;
+}
+.container-section a:hover{
+  font-weight: 600;
+}
+.container-section p {
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(216, 216, 216);
+}
+
+
+.icon-footer {
+  color: rgb(216, 216, 216);
+  font-size: 28px;
+}
+
+.text-contact-footer{
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(216, 216, 216);
+}

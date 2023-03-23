@@ -102,3 +102,26 @@ export const jornadas = [
     titulo:'Jornada especial'
   },
 ]
+
+export const photos = () => {
+  let arrPhotos = [];
+  let i = 1;
+  while(i <= 20) {
+    const obj = {id: i, img: ''}
+    arrPhotos.push(obj)
+    i++;
+  }
+  return arrPhotos;
+}
+
+export const videos = () => {
+  let arrVideos = [];
+  let i = 1;
+  while(i <= 16) {
+    // const obj = {id: i, url: 'https://www.youtube.com/watch?v=YjBSl8v1u8w'}
+    const obj = {id: i, titulo: 'Titulo de video', url: '../../videos/Presentacin1 - Comprimida.mp4'}
+    arrVideos.push(obj)
+    i++;
+  }
+  return arrVideos;
+}
