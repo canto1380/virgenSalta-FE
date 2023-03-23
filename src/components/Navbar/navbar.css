@@ -16,6 +16,31 @@
 .btn-language:hover{
   color: #000000E6 !important;
 }
+
+.container-dd{
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 14px;
+}
+.container-dd div{
+  padding: 0px;
+  border-radius: 10px;
+  border: 1px solid #1540cc52 !important;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+.container-dd div a{
+  border-radius: 10px;
+  padding: 7px 16px !important;
+}
+/* .container-dd div a:first-child {
+  margin-top: 7px !important;
+} */
+.container-dd div a:hover{
+  background-color: #1540cc52 !important;
+  border-radius: 10px;
+}
+
 @media(max-width: 992px) {
   .nav-section2{
     border-left: 0px;
