@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "react-bootstrap";
 import "../News/news.css";
 import ImgPrueba from "../../images/logo.jpg";
 
