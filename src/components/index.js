@@ -8,6 +8,7 @@ import SpecialDays from "./SpecialDays";
 import Statics from "./Statics";
 import PhotosGallery from "./PhotosGallery";
 import VideoGallery from "./VideoGallery";
+import FastAccess from "./FastAccess";
 
 const Home = () => {
   return (
@@ -31,6 +32,7 @@ const Home = () => {
         </div>
         <hr className='my-5'/>
         <Categories/>
+        <FastAccess />
       </Container>
       <Container fluid className='container-special-day py-5'>
         <SpecialDays className='px-0'/>
