@@ -1,11 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
 import "./App.css";
-import Home from "./components";
 import Footer from "./components/Footer";
 import Nav from "./components/Navbar";
 import AppRouter from "./routes/AppRouter";
@@ -29,11 +22,11 @@ function App() {
     //     </Router>
     // </div>
     <div className="App">
-      <div>
+      <div className="navbar-container">
         <Nav />
       </div>
       <AppRouter />
-      <div>
+      <div className="footer">
         <Footer />
       </div>
     </div>
