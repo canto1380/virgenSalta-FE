@@ -13,7 +13,7 @@ const News = () => {
   }, []);
   return (
     <>
-      <HeaderSections title={"Noticias"} linkRef={"/"} />
+      <HeaderSections title={"Noticias"} linkRef={"/noticias"}/>
       <Row className="mt-3 mb-5">
         <NewCarousel data={news} />
       </Row>

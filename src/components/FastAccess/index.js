@@ -6,7 +6,7 @@ const FastAccess = () => {
       <div className="col-xs-12 col-sm-4 col-lg-3 mb-3">
         {/* <button className="btn section-btn w-100">Horarios</button> */}
         <a href={'/horarios'} className="btn section-btn w-100">
-          Ver todo
+          Horarios
         </a>
       </div>
       <div className="col-xs-12 col-sm-4 col-lg-3 mb-3">

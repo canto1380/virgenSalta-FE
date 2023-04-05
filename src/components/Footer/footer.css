@@ -16,7 +16,7 @@
 .container-section a {
   text-decoration: none;
 }
-.container-section a:hover{
+.container-section a:hover {
   font-weight: 600;
 }
 .container-section p {
@@ -24,13 +24,12 @@
   color: rgb(216, 216, 216);
 }
 
-
 .icon-footer {
   color: rgb(216, 216, 216);
   font-size: 28px;
 }
 
-.text-contact-footer{
+.text-contact-footer {
   font-family: "Times New Roman", Times, serif;
   color: rgb(216, 216, 216);
 }

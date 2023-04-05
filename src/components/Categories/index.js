@@ -16,7 +16,7 @@ const Sections = () => {
       <Row className="mt-3 mb-5">
         {category?.map((secc, i) => (
           <Col key={i} xs={12} md={6} lg={4} className="mb-4">
-            <CardGeneric info={secc} i={i} />
+            <CardGeneric info={secc} />
           </Col>
         ))}
       </Row>
