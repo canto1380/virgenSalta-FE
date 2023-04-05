@@ -5,7 +5,7 @@ const ContactFooter = () => {
   return (
     <div>
       <div className='pb-4'>
-      <h4 className='title-section-footer'> Contacto</h4>
+      <h4 className='title-section-footer'> CONTACTO</h4>
       </div>
       <div>
         <p><FiSmartphone className='icon-footer me-2' /> <span className='text-contact-footer'>+549 0381 155001122</span></p>

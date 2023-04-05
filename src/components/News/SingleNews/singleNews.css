@@ -1,0 +1,15 @@
+.single-news-title{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.single-news-subtitle{
+  font-size: 18px;
+  color: rgb(59, 55, 55);
+}
+.single-news-description{
+  font-size: 18px;
+  font-family:'Times New Roman', Times, serif
+}
+.image-news{
+  height: 500px;
+  /* object-fit: cover; */
+}
