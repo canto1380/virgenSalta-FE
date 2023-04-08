@@ -9,6 +9,10 @@
   height: 100%;
 }
 
+.page-section-title {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 38px;
+}
 .section-title {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
@@ -60,13 +64,6 @@
   border-radius: 20px;
 }
 
-.img-backpage {
-  /* background-image: url("../public/images/imgFondo.jpg");
-  background-size: cover;
-  background-position: center; */
-  background: linear-gradient(to top, #1d333ccb, 70%, #2b9ac6ba);
-}
-
 .pagintacion-component li {
   padding: 0px 5px !important;
 }
@@ -85,6 +82,10 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 26px;
 }
-.more-news-container{
+.bg-gradient-1{
   background: linear-gradient(to top, #1d333ccb, 70%, #2b9ac6ba);
 }
+.bg-gradient-2{
+  background: linear-gradient(to top, #15262ccb, 70%, #2d4e5bba);
+}
+
