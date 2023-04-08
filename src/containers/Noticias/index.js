@@ -57,7 +57,7 @@ const Noticias = () => {
   };
   console.log(search)
   return (
-    <div className="img-backpage">
+    <div className="bg-gradient-1">
       <BackdropNews />
       <Container className="mt-5 pt-5">
         <Search setSearch={setSearch}/>

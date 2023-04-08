@@ -1,3 +1,6 @@
+// const randomNumberBetween = (min = 1000, max = 50000) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
+
 export const noticias = [
   {
     id: 1,
@@ -179,3 +182,226 @@ export const videos = () => {
   }
   return arrVideos;
 };
+
+export const eventType = () => [
+  {
+    id: 1,
+    eventName: "Misa",
+  },
+  {
+    id: 2,
+    eventName: "Otras celebraciones",
+  },
+];
+
+// export const dailyEvents = () => {
+//   let arrSchedules =[];
+//   let dias = [
+//     "Domingo",
+//     "Lunes",
+//     "Martes",
+//     "Miercoles",
+//     "Jueves",
+//     "Viernes",
+//     "Sabado",
+//   ];
+//   let i = 1;
+//   while (i <= 20) {
+//     const eventyTypeID = randomNumberBetween(1, 2)
+//     const aa = eventType()
+//     const textEvent = aa.filter((t) => t.id === eventyTypeID)
+//     const obj = {
+//       id: i,
+//       day: dias[randomNumberBetween(0,6)],
+//       eventType: randomNumberBetween(1, 2),
+//       time: "19:30hs",
+//       text: textEvent[0].eventName,
+//       additionalText: "Texto adicional. No requerido",
+//     };
+//     arrSchedules.push(obj)
+//     i++
+//   }
+//   return arrSchedules
+// };
+export const dailyEvents = () => [
+  {
+    id: 1,
+    day: 'Lunes',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 13,
+    day: 'Lunes',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 2,
+    day: 'Lunes',
+    eventType: 2,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Celebracion',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 3,
+    day: 'Martes',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 4,
+    day: 'Miercoles',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 5,
+    day: 'Miercoles',
+    eventType: 2,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Celebracion',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 6,
+    day: 'Jueves',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 7,
+    day: 'Jueves',
+    eventType: 2,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Celebracion',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 8,
+    day: 'Viernes',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 9,
+    day: 'Sabado',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 10,
+    day: 'Sabado',
+    eventType: 2,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Celebracion',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 11,
+    day: 'Domingo',
+    eventType: 1,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Misa',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+  {
+    id: 12,
+    day: 'Domingo',
+    eventType: 2,
+    time: "19:30hs",
+    text: 'Texto de ejemplo - Celebracion',
+    additionalText: "Texto adicional. No requerido",
+    importantEvent: false
+  },
+];
+
+export const importantEventName =() => [
+  {
+    id: 1,
+    name: 'Pascuas',
+    active: true
+  },
+  {
+    id: 2,
+    name: 'Navidad',
+    active: true
+  }
+]
+export const importantEvent = () => [
+  {
+    id: 1,
+    idImportantEventName: 1,
+    event: 'Jueves Santo',
+    date: '04/04/2023',
+    descripcion: 'Misa de Jueves Santo',
+    time: '20hs',
+  },
+  {
+    id: 2,
+    idImportantEventName: 1,
+    event: 'Viernes Santo',
+    date: '05/04/2023',
+    descripcion: 'Misa de Viernes Santo',
+    time: '20hs',
+  },
+  {
+    id: 3,
+    idImportantEventName: 1,
+    event: 'Sabado Santo',
+    date: '06/04/2023',
+    descripcion: 'Misa de Sabado Santo',
+    time: '20hs',
+  },
+  {
+    id: 4,
+    idImportantEventName: 1,
+    event: 'Domingo de Pascuas',
+    date: '07/04/2023',
+    descripcion: 'Misa de Domingo de Pascuas',
+    time: '20hs',
+  },
+  {
+    id: 5,
+    idImportantEventName: 2,
+    event: 'Navidad',
+    date: '08/04/2023',
+    descripcion: 'Misa de Navidad',
+    time: '20hs',
+  },
+  {
+    id: 6,
+    idImportantEventName: 3,
+    event: 'Evento 3',
+    date: '08/04/2023',
+    descripcion: 'Misa de Evento 3',
+    time: '20hs',
+  },
+]
