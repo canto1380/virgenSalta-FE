@@ -34,7 +34,7 @@ const SingleNews = ({ data }) => {
       </Row>
     </Container>
     <Container fluid>
-      <Row className='more-news-container px-3 pt-4 pb-5'>
+      <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
         <MoreNewsCarousel data={moreNews} />
       </Row>
     </Container>
