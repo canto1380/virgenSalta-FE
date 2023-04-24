@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import MoreNewsCarousel from "../../components/Carousel/MoreNewsCarousel";
+import Layout from "../../components/Layout/Layout";
+import LayoutFoot from "../../components/Layout/LayoutFoot";
 import BodyNews from "../../components/News/SingleNews/BodyNews";
 import HeaderNews from "../../components/News/SingleNews/HeaderNews";
 
@@ -22,6 +24,7 @@ const SingleNews = ({ data }) => {
   }, [data, title]);
   return (
     <>
+    <Layout />
     <Container>
       <Row className="mx-3 pt-2 pb-5">
         <Col xs={12} className="pt-5 pb-3">
@@ -33,11 +36,12 @@ const SingleNews = ({ data }) => {
         <hr />
       </Row>
     </Container>
-    <Container fluid>
+    <Container fluid className=''>
       <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
         <MoreNewsCarousel data={moreNews} />
       </Row>
     </Container>
+    <LayoutFoot />
     </>
   );
 };

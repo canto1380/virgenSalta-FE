@@ -2,8 +2,9 @@ import React from "react";
 import { Nav, Navbar, Container, NavDropdown, Button, Image } from "react-bootstrap";
 import "./navbar.css";
 import ImageLogo from '../../images/logo-corazon.jpg'
-const NavbarPrimary = () => {
+const NavbarPrimary = ({home}) => {
   return (
+    
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Container fluid>
         <Navbar.Brand href="/home">

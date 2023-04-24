@@ -5,6 +5,8 @@ import CardNewsPage from "../../components/News/NewsPage/CardNewsPage";
 import { noticias } from "../../utils/seeders";
 import { Pagination } from "antd";
 import Search from "../../components/Search";
+import Layout from "../../components/Layout/Layout";
+import LayoutFoot from "../../components/Layout/LayoutFoot";
 
 const Noticias = () => {
   const [search, setSearch] = useState("");
@@ -58,6 +60,7 @@ const Noticias = () => {
   console.log(search)
   return (
     <div className="bg-gradient-1">
+      <Layout />
       <BackdropNews />
       <Container className="mt-5 pt-5">
         <Search setSearch={setSearch}/>
@@ -83,6 +86,7 @@ const Noticias = () => {
           <Spinner animation="grow" variant="info" />
         )}
       </Container>
+      <LayoutFoot />
     </div>
   );
 };
