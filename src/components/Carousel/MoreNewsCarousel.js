@@ -8,7 +8,7 @@ import MoreNewsCard from "./MoreNewsCard";
 
 const MoreNewsCarousel = ({ data }) => {
   return (
-    <div className='px-5'>
+    <div className='px-5 pb-5'>
       <p className="title-recent-news pt-4 pb-2 text-light">Noticias recientes</p>
 
       <Swiper

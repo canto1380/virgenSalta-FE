@@ -1,6 +1,4 @@
 import "./App.css";
-import Footer from "./components/Footer";
-import Nav from "./components/Navbar";
 import AppRouter from "./routes/AppRouter";
 // import { IntlProvider, FormattedMessage } from "react-intl";
 // import MensajeUS from "./utils/lang/en-us.json";
@@ -22,13 +20,8 @@ function App() {
     //     </Router>
     // </div>
     <div className="App">
-      <div className="navbar-container">
-        <Nav />
-      </div>
       <AppRouter />
-      <div className="footer">
-        <Footer />
-      </div>
+
     </div>
   );
 }
