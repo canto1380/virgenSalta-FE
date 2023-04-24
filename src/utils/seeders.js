@@ -1,5 +1,11 @@
 // const randomNumberBetween = (min = 1000, max = 50000) =>
 //   Math.floor(Math.random() * (max - min + 1) + min);
+export const user = [
+  {
+    email: 'email@gmail.com',
+    clave: 12345678
+  }
+]
 
 export const noticias = [
   {
