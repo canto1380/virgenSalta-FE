@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import {Container } from 'react-bootstrap'
+import { Container } from "react-bootstrap";
 import { getToken } from "../../../helpers/helpers";
 import Sidebar from "../../../components/Admin/Sidebar";
-import '../index.css'
-import '../../../components/Admin/sidebar.css'
+import "../index.css";
+import "../../../components/Admin/sidebar.css";
 import MenuNews from "../../../components/Admin/MenuNews";
 import MenuCategories from "../../../components/Admin/MenuCategories";
 
-const MenuAdmin = ({userInfo}) => {
+const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
-  const [tokenAuth, setTokenAuth] = useState([])
-  const [dataAuth, setDataAuth] = useState([])
-  const [tab, setTab] = useState('Noticias')
-
+  const [tokenAuth, setTokenAuth] = useState([]);
+  // const [dataAuth, setDataAuth] = useState([]);
+  const [tab, setTab] = useState("Noticias");
 
   useEffect(() => {
-    const tokenData = getToken()
-    setTokenAuth(tokenData)
+    const tokenData = getToken();
+    setTokenAuth(tokenData);
     // if(localStorage.getItem('jwt-security-page')) {
     //   setDataAuth(JSON.parse(localStorage.getItem('data-security-page')))
     //   setTokenAuth(JSON.parse(localStorage.getItem('jwt-security-page')))
     // }
-  }, [])
-  console.log(tab)
+  }, []);
+  console.log(tab);
   return (
-    <Container fluid className="container-admin p-0 d-flex justify-content-start">
+    <Container
+      fluid
+      className="container-admin p-0 d-flex justify-content-start"
+    >
       <Sidebar
         setTab={setTab}
         inactivo={inactivo}
@@ -33,24 +35,12 @@ const MenuAdmin = ({userInfo}) => {
         dataAuth={userInfo}
       />
       {tab === "Noticias" && (
-        <div
-          className={`${
-            inactivo ? `parte2Inactivo` : `parte2`
-          }`}
-        >
-          <MenuNews
-            tokenAuth={tokenAuth}
-            dataAuth={userInfo}
-            setTab={setTab}
-          />
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuNews tokenAuth={tokenAuth} dataAuth={userInfo} setTab={setTab} />
         </div>
       )}
       {tab === "Categorias" && (
-        <div
-          className={`${
-            inactivo ? `parte2Inactivo` : `parte2`
-          } `}
-        >
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuCategories
             tokenAuth={tokenAuth}
             dataAuth={userInfo}
