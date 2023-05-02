@@ -65,7 +65,6 @@ const Login = (props) => {
         setLoading(true);
         setTimeout(() => {
           // e.target.reset();
-
           setLoading(false);
         }, 3000);
         setTimeout(() => {
