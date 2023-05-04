@@ -5,8 +5,9 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
 } from "react-icons/bs";
-import { BiCategoryAlt, BiUserCircle } from "react-icons/bi";
-import '../sidebar.css'
+import { BiCategoryAlt, BiUserCircle, BiLogOut } from "react-icons/bi";
+import "../sidebar.css";
+import { deleteCookies, deleteToken } from "../../../helpers/helpers";
 
 const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
   const [initial, setInitial] = useState("");
@@ -15,24 +16,30 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
     setTab(dataTab);
   };
 
+  const cerrarSesion = async (e) => {
+    deleteToken();
+    deleteCookies()
+    window.location.href ='/admin/login'
+  };
+
   const itemsSideBar = [
     {
-      title: 'Noticias',
+      title: "Noticias",
       iconName: <BsNewspaper className="sizeIcon" />,
-      name: 'Noticias'
+      name: "Noticias",
     },
     {
-      title: 'Categorias',
+      title: "Categorias",
       iconName: <BiCategoryAlt className="sizeIcon" />,
-      name: 'Categorias'
+      name: "Categorias",
     },
     {
-      title: 'Cuenta',
+      title: "Cuenta",
       iconName: <BiUserCircle className="sizeIcon" />,
-      name: 'Cuenta'
-    }
+      name: "Cuenta",
+    },
 
-  ]
+  ];
   useEffect(() => {
     const a = dataAuth?.name?.toUpperCase();
     setInitial(a?.substr(0, 1));
@@ -88,9 +95,8 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
       </Row>
       <hr />
       <ul className="text-decoration-none list-unstyled sidebarList">
-        {
-          itemsSideBar.map((items, i) =>(
-            <li
+        {itemsSideBar.map((items, i) => (
+          <li
             key={i}
             onClick={() => changeTab(items.title)}
             title={items.title}
@@ -100,15 +106,27 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
                 : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
             }`}
           >
-            <div className="">
-              {items.iconName}
-            </div>
+            <div className="">{items.iconName}</div>
             <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
               {items.name}
             </div>
           </li>
-          ))
-        }
+        ))}
+
+<li
+            onClick={() => cerrarSesion()}
+            title='Salir'
+            className={`${
+              inactivo
+                ? `sidebarListRow d-flex justify-content-center align-items-center`
+                : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
+            }`}
+          >
+            <div className=""><BiLogOut className="sizeIcon" /></div>
+            <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
+              Salir
+            </div>
+          </li>
 
       </ul>
     </div>

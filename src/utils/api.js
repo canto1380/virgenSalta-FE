@@ -2,13 +2,16 @@ import axios from "axios";
 
 export const api = async (method, endpoint, data, token) => {
   try {
+    const url = process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
+    console.log(url)
     const res = await axios({
       data,
       headers: {
         authorization: `${token}`,
       },
       method,
-      url: `${process.env.REACT_APP_API}/${endpoint}`,
+      url: `${url}/${endpoint}`
+      // url: `${process.env.REACT_APP_API}/${endpoint}`,
     });
     return res
   } catch (error) {

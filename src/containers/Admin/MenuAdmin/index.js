@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { getToken } from "../../../helpers/helpers";
+import { getToken, getDataToken } from "../../../helpers/helpers";
 import Sidebar from "../../../components/Admin/Sidebar";
 import "../index.css";
 import "../../../components/Admin/sidebar.css";
@@ -10,18 +10,18 @@ import MenuCategories from "../../../components/Admin/MenuCategories";
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState([]);
-  // const [dataAuth, setDataAuth] = useState([]);
+  const [dataAuth, setDataAuth] = useState([]);
   const [tab, setTab] = useState("Noticias");
 
   useEffect(() => {
     const tokenData = getToken();
     setTokenAuth(tokenData);
-    // if(localStorage.getItem('jwt-security-page')) {
-    //   setDataAuth(JSON.parse(localStorage.getItem('data-security-page')))
-    //   setTokenAuth(JSON.parse(localStorage.getItem('jwt-security-page')))
-    // }
-  }, []);
-  console.log(tab);
+    setDataAuth(getDataToken)
+  }, [tokenAuth]);
+
+  console.log(tokenAuth);
+  console.log(dataAuth)
+
   return (
     <Container
       fluid
@@ -32,7 +32,7 @@ const MenuAdmin = ({ userInfo }) => {
         inactivo={inactivo}
         setInactivo={setInactivo}
         tokenAuth={tokenAuth}
-        dataAuth={userInfo}
+        dataAuth={dataAuth}
       />
       {tab === "Noticias" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
