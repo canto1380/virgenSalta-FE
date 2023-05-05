@@ -59,7 +59,7 @@ const MenuAdmin = ({ userInfo }) => {
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuAccount
             tokenAuth={tokenAuth}
-            dataAuth={userInfo}
+            dataAuth={userData}
             setTab={setTab}
           />
         </div>
