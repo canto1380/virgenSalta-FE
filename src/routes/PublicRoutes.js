@@ -10,6 +10,7 @@ import Schedules from "../containers/Schedules";
 import Login from "../containers/Admin/login";
 
 const PublicRoutes = ({bandera, setBandera}) => {
+  console.log('publicas')
   return (
     <Routes>
       <Route exact path="/home" element={<Home/>} />

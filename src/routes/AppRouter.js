@@ -4,18 +4,12 @@ import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
 const AppRouter = ({ bandera, setBandera, token }) => {
-  if(token && token !== null) {
-    console.log('1')
-  } else {
-    console.log('2')
-  }
+  console.log(typeof token)
   return (
     <div>
       <Router>
         <Routes>
-          {token && token !== null ? (
-            <Route path="/*" element={<PrivateRoutes token={token} />} />
-          ) : (
+          {!token || token.length === 0 ? (
             <Route
               path="/*"
               element={
@@ -26,6 +20,8 @@ const AppRouter = ({ bandera, setBandera, token }) => {
                 />
               }
             />
+          ) : (
+            <Route path="/*" element={<PrivateRoutes token={token} />} />
           )}
         </Routes>
       </Router>

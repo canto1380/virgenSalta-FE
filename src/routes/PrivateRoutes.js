@@ -10,7 +10,7 @@ import Schedules from "../containers/Schedules";
 import MenuAdmin from "../containers/Admin/MenuAdmin/index";
 
 const PrivateRoutes = ({ token }) => {
-
+  console.log('privadas')
   return (
     <Routes>
       <Route exact path="/home" element={<Home />} />
@@ -30,7 +30,7 @@ const PrivateRoutes = ({ token }) => {
         <Route path="*" element={<Navigate to="/admin/home" replace />} />
       ) : null}
 
-      {/* <Route path="*" element={<Navigate to="/admin/login" replace />} /> */}
+      <Route path="*" element={<Navigate to="/admin/login" replace />} />
     </Routes>
   );
 };
