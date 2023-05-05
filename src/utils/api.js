@@ -11,7 +11,6 @@ export const api = async (method, endpoint, data, token) => {
       },
       method,
       url: `${url}/${endpoint}`
-      // url: `${process.env.REACT_APP_API}/${endpoint}`,
     });
     return res
   } catch (error) {

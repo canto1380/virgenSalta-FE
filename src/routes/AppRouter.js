@@ -4,6 +4,11 @@ import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
 const AppRouter = ({ bandera, setBandera, token }) => {
+  if(token && token !== null) {
+    console.log('1')
+  } else {
+    console.log('2')
+  }
   return (
     <div>
       <Router>

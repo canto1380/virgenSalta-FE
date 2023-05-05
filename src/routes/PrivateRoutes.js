@@ -30,7 +30,7 @@ const PrivateRoutes = ({ token }) => {
         <Route path="*" element={<Navigate to="/admin/home" replace />} />
       ) : null}
 
-      <Route path="*" element={<Navigate to="/admin/login" replace />} />
+      {/* <Route path="*" element={<Navigate to="/admin/login" replace />} /> */}
     </Routes>
   );
 };
