@@ -4,7 +4,6 @@ import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
 const AppRouter = ({ bandera, setBandera, token }) => {
-  console.log(typeof token)
   return (
     <div>
       <Router>

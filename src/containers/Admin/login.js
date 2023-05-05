@@ -6,14 +6,14 @@ import { validaEmail, validaClave } from "../../utils/validations/validation";
 import Cookies from "js-cookie";
 import { setToken, setDataToken } from "../../helpers/helpers";
 import MsgError from "../../components/Messages/MsgError";
-import loginAPI from '../../utils/authentication/login'
+import loginAPI from "../../utils/authentication/login";
 
 export const COOKIES = {
   authToken: "token",
   authId: "idUser",
 };
 
-const Login = ({bandera, setBandera}) => {
+const Login = ({ bandera, setBandera, token }) => {
   const [loading, setLoading] = useState(false);
 
   const [dataError, setDataError] = useState(false);
@@ -39,27 +39,37 @@ const Login = ({bandera, setBandera}) => {
     }
   };
 
-  const login = async(values) => {
+  const login = async (values) => {
     try {
       const res = await loginAPI(values);
       if (res.status === 200) {
-        const {token, user: {_id, nickname, name, surname}} = res.data
-        Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API,{ expires: 1 })
-        Cookies.set(COOKIES.authId, (_id, nickname, name, surname), process.env.REACT_APP_API, { expires: 1 })
+        const {
+          token,
+          user: { _id, nickname, name, surname },
+        } = res.data;
+        Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API, {
+          expires: 1,
+        });
+        Cookies.set(
+          COOKIES.authId,
+          (_id, nickname, name, surname),
+          process.env.REACT_APP_API,
+          { expires: 1 }
+        );
         setToken(res?.data?.token);
         setDataToken(res?.data?.user);
 
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
+          setBandera(!bandera);
         }, 3000);
         setTimeout(() => {
-          setBandera(!bandera)
-          window.location.href ='/admin/home'
+          // window.location.href ='/admin/home'
         }, 3000);
       }
       if (res?.response?.status === 404) {
-        console.log(res)
+        console.log(res);
         setDataError(true);
         setMsgDataError(res?.response?.data?.error);
         setTimeout(() => {
@@ -110,7 +120,7 @@ const Login = ({bandera, setBandera}) => {
                 <Input.Password />
               </Form.Item>
 
-              <Form.Item wrapperCol={{ offset: 10, span: 16 }} className='pt-4'>
+              <Form.Item wrapperCol={{ offset: 10, span: 16 }} className="pt-4">
                 {loading ? (
                   <Button disabled type="primary" htmlType="submit">
                     <Spinner
@@ -133,23 +143,23 @@ const Login = ({bandera, setBandera}) => {
         </Row>
         <Row className="justify-content-center align-items-center">
           <Col xs={10} sm={8} md={6} className="">
-        {errorValid && (
-          <MsgError
-            text1="Datos incorrectos."
-            text2="Ingrese un mail y clave valida."
-          />
-        )}
-        {dataError && (
-          <MsgError text1="Datos incorrectos." text2={msgDataError} />
-        )}
-        {errorServer && (
-          <MsgError
-            text1="Hubo un problema en el servidor."
-            text2="Intente mas tarde"
-          />
-        )}
+            {errorValid && (
+              <MsgError
+                text1="Datos incorrectos."
+                text2="Ingrese un mail y clave valida."
+              />
+            )}
+            {dataError && (
+              <MsgError text1="Datos incorrectos." text2={msgDataError} />
+            )}
+            {errorServer && (
+              <MsgError
+                text1="Hubo un problema en el servidor."
+                text2="Intente mas tarde"
+              />
+            )}
           </Col>
-          </Row>
+        </Row>
       </Container>
     </div>
   );

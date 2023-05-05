@@ -9,8 +9,7 @@ import PrayerRequest from "../containers/PrayerRequest";
 import Schedules from "../containers/Schedules";
 import Login from "../containers/Admin/login";
 
-const PublicRoutes = ({bandera, setBandera}) => {
-  console.log('publicas')
+const PublicRoutes = ({bandera, setBandera, token}) => {
   return (
     <Routes>
       <Route exact path="/home" element={<Home/>} />
@@ -24,7 +23,7 @@ const PublicRoutes = ({bandera, setBandera}) => {
       <Route exact path="/pedido-oracion" element={<PrayerRequest />} />
       <Route exact path="/vivo-capilla" element={<LiveChapel />} />
 
-      <Route exact path="/admin/login" element={<Login bandera={bandera} setBandera={setBandera}/>} />
+      <Route exact path="/admin/login" element={<Login bandera={bandera} setBandera={setBandera}/>} token={token}/>
 
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

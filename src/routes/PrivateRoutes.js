@@ -10,7 +10,6 @@ import Schedules from "../containers/Schedules";
 import MenuAdmin from "../containers/Admin/MenuAdmin/index";
 
 const PrivateRoutes = ({ token }) => {
-  console.log('privadas')
   return (
     <Routes>
       <Route exact path="/home" element={<Home />} />

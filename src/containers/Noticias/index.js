@@ -57,7 +57,6 @@ const Noticias = () => {
   const doSearch = () => {
     getActivities(1);
   };
-  console.log(search)
   return (
     <div className="bg-gradient-1">
       <Layout />
