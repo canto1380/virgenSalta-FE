@@ -13,7 +13,7 @@ export const COOKIES = {
   authId: "idUser",
 };
 
-const Login = (props) => {
+const Login = ({bandera, setBandera}) => {
   const [loading, setLoading] = useState(false);
 
   const [dataError, setDataError] = useState(false);
@@ -43,10 +43,9 @@ const Login = (props) => {
     try {
       const res = await loginAPI(values);
       if (res.status === 200) {
-        console.log(res)
-        const {token, user: {_id, nickname}} = res.data
+        const {token, user: {_id, nickname, name, surname}} = res.data
         Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API,{ expires: 1 })
-        Cookies.set(COOKIES.authId, (_id, nickname), process.env.REACT_APP_API, { expires: 1 })
+        Cookies.set(COOKIES.authId, (_id, nickname, name, surname), process.env.REACT_APP_API, { expires: 1 })
         setToken(res?.data?.token);
         setDataToken(res?.data?.user);
 
@@ -55,6 +54,7 @@ const Login = (props) => {
           setLoading(false);
         }, 3000);
         setTimeout(() => {
+          setBandera(!bandera)
           window.location.href ='/admin/home'
         }, 3000);
       }

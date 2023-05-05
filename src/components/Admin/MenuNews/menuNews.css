@@ -1,0 +1,39 @@
+.rowData{
+  padding-left: 20px !important;
+  padding-right: 0px !important;
+}
+
+.dataContainer{
+  margin: 20px 40px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgba(225, 235, 254, 0.399);
+}
+
+.imputForm{
+  background-color: transparent !important;
+}
+
+.enabledField{
+  pointer-events: none;
+}
+.enabledFieldd{
+  visibility: hidden;
+}
+.enabledFieldPass{
+  visibility: hidden;
+}
+
+.alertError {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .btnAlign {
+    text-align: left !important;
+  }
+  .btnAlign div {
+    padding-top: 0px !important;
+  }
+}

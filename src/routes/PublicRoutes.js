@@ -8,9 +8,8 @@ import LiveChapel from "../containers/LiveChapel";
 import PrayerRequest from "../containers/PrayerRequest";
 import Schedules from "../containers/Schedules";
 import Login from "../containers/Admin/login";
-import MenuAdmin from '../containers/Admin/MenuAdmin/index'
 
-const PublicRoutes = () => {
+const PublicRoutes = ({bandera, setBandera}) => {
   return (
     <Routes>
       <Route exact path="/home" element={<Home/>} />
@@ -24,8 +23,7 @@ const PublicRoutes = () => {
       <Route exact path="/pedido-oracion" element={<PrayerRequest />} />
       <Route exact path="/vivo-capilla" element={<LiveChapel />} />
 
-      <Route exact path="/admin/login" element={<Login />} />
-      <Route exact path="/admin/home" element={<MenuAdmin />} />
+      <Route exact path="/admin/login" element={<Login bandera={bandera} setBandera={setBandera}/>} />
 
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

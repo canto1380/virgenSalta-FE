@@ -1,9 +1,9 @@
 import axios from "axios";
 
+const url = process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
 export const api = async (method, endpoint, data, token) => {
+  console.log(token)
   try {
-    const url = process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
-    console.log(url)
     const res = await axios({
       data,
       headers: {
@@ -19,16 +19,17 @@ export const api = async (method, endpoint, data, token) => {
   }
 };
 
-export const apiParams = async (method, params, endpoint, data, token) => {
+export const apiParams = async (method, params, endpoint, data, tokenAuth) => {
   try {
+    console.log(tokenAuth)
     const res = await axios({
       data,
       params,
       headers: {
-        authorization: `${token}`,
+        authorization: `${tokenAuth}`,
       },
       method,
-      url: `${process.env.REACT_APP_API}/${endpoint}`,
+      url: `${url}/${endpoint}`,
     });
     return res
   } catch (error) {

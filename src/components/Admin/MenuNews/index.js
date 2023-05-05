@@ -1,10 +1,25 @@
-import React from 'react';
+import React from "react";
+import "./menuNews.css";
+import {
+  Container,
+  // Row,
+  // Col,
+  // Form,
+  // Button,
+  // Spinner,
+  // Alert,
+} from "react-bootstrap";
+// import { setDataToken } from "../../../helpers/helpers";
+// import moment from "moment/moment";
+// import { api } from "../../../utils/api";
+// import MsgError from "../../Messages/MsgError";
 
-const MenuNews = () => {
+const MenuNews = ({ tokenAuth, dataAuth }) => {
+
   return (
-    <div>
-      Menu noticias
-    </div>
+    <Container>
+Noticias
+    </Container>
   );
 };
 

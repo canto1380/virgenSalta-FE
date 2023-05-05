@@ -13,7 +13,12 @@ export const setToken = (token) => {
 };
 export const getToken = () => {
   if(typeof window !== 'undefined') {
-    return localStorage.getItem("jwt-security-page-ssma");
+    let aa = localStorage.getItem("jwt-security-page-ssma")
+    if(aa !== null ) {
+      aa = aa.replace(/['"]+/g, '')
+      // return localStorage.getItem("jwt-security-page-ssma");
+      return aa
+    }
   }
 };
 export const deleteToken = () => {

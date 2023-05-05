@@ -46,19 +46,6 @@
 .rowActive {
   border-right: 5px solid rgb(230, 230, 230);
 }
-.imgUser {
-  text-align: center;
-}
-.btnSalir {
-  cursor: pointer;
-  height: 50px;
-}
-.btnSalir:hover {
-  background-color: rgb(31, 36, 53);
-}
-.btnMenu {
-  cursor: pointer;
-}
 
 .inactivo {
   visibility: hidden;
