@@ -1,26 +1,42 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
-const AppRouter = ({ bandera, setBandera, token }) => {
+import { User } from "../context/userProvider";
+
+const AppRouter = ({ bandera, setBandera }) => {
+  const { state } = useContext(User);
+
   return (
     <div>
       <Router>
         <Routes>
-          {!token || token.length === 0 ? (
+          {window?.location?.pathname === "/" && (
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          )}
+
+          {!state.userToken || state.userToken.length === 0 ? (
             <Route
               path="/*"
               element={
                 <PublicRoutes
                   bandera={bandera}
-                  token={token}
+                  token={state.userToken}
                   setBandera={setBandera}
                 />
               }
             />
           ) : (
-            <Route path="/*" element={<PrivateRoutes token={token} />} />
+            <Route
+              path="/*"
+              element={<PrivateRoutes token={state.userToken} />}
+            />
           )}
         </Routes>
       </Router>

@@ -13,7 +13,7 @@ export const COOKIES = {
   authId: "idUser",
 };
 
-const Login = ({ bandera, setBandera, token }) => {
+const Login = ({ bandera, setBandera }) => {
   const [loading, setLoading] = useState(false);
 
   const [dataError, setDataError] = useState(false);
@@ -65,7 +65,7 @@ const Login = ({ bandera, setBandera, token }) => {
           setBandera(!bandera);
         }, 3000);
         setTimeout(() => {
-          // window.location.href ='/admin/home'
+          window.location.href ='/admin/home'
         }, 3000);
       }
       if (res?.response?.status === 404) {

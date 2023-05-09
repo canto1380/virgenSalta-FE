@@ -1,6 +1,9 @@
 .container-cover {
   height: 40vw;
 }
+.cursorPointer{
+  cursor: pointer;
+}
 .img-cover {
   background-image: url("../src/images/logo.jpg");
   background-size: cover;

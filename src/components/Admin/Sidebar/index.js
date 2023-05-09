@@ -87,7 +87,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
             className={`text-light mt-3 btn-menu text-center px-0`}
             onClick={() => setInactivo(!inactivo)}
           >
-            {<BsFillCaretRightFill title="Desplegar" className={`sizeIcon`} />}
+            {<BsFillCaretRightFill title="Desplegar" className={`sizeIcon cursorPointer`} />}
           </Col>
         ) : (
           <Col
@@ -95,7 +95,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
             className={`p-0 text-light btn-menu`}
             onClick={() => setInactivo(!inactivo)}
           >
-            {<BsFillCaretLeftFill title="Minimizar" className="sizeIcon" />}
+            {<BsFillCaretLeftFill title="Minimizar" className="sizeIcon cursorPointer" />}
           </Col>
         )}
       </Row>
