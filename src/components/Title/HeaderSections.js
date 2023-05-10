@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const HeaderSections = ({ title, linkRef, styleAdd }) => {
   return (
@@ -8,9 +9,9 @@ const HeaderSections = ({ title, linkRef, styleAdd }) => {
         <h4 className={`section-title ${styleAdd}`}>{title}</h4>
       </Col>
       <Col xs={5} className="text-end">
-        <a href={linkRef} className="btn section-btn">
+        <Link to={linkRef} className="btn section-btn">
           Ver todo
-        </a>
+        </Link>
       </Col>
     </Row>
   );

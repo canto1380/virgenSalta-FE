@@ -5,12 +5,13 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import MoreNewsCard from "./MoreNewsCard";
+import { Container } from "react-bootstrap";
 
 const MoreNewsCarousel = ({ data }) => {
   return (
     <div className='px-5 pb-5'>
+      <Container>
       <p className="title-recent-news pt-4 pb-2 text-light">Noticias recientes</p>
-
       <Swiper
         freeMode={true}
         grabCursor={true}
@@ -38,6 +39,8 @@ const MoreNewsCarousel = ({ data }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      </Container>
     </div>
   );
 };

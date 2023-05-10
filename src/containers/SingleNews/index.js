@@ -13,7 +13,7 @@ const SingleNews = ({ data }) => {
   const [singleNews, setSingleNews] = useState();
   const [moreNews, setMoreNews] = useState([]);
   useEffect(() => {
-    setMoreNews(data.slice(0, 4));
+    setMoreNews(data.slice(0, 6));
     const news = data.filter((d) => d.titulo.replace(/ /g, "-") === title);
     if (news.length === 0) {
       navigate("/home");

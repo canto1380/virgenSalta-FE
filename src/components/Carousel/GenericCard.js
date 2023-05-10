@@ -12,7 +12,6 @@ const CardModel = ({ data: { img, titulo, id }, i }) => {
           {titulo}
         </p>
         </a>
-      {/* </Card> */}
     </div>
   );
 };
