@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MenuCategories = () => {
+const MenuCategories = ({newsCategoryData}) => {
   return (
     <div>
 categorias

@@ -14,8 +14,7 @@ import {
 // import { api } from "../../../utils/api";
 // import MsgError from "../../Messages/MsgError";
 
-const MenuNews = ({ tokenAuth, dataAuth }) => {
-
+const MenuNews = ({ tokenAuth, dataAuth, newsData }) => {
   return (
     <Container>
 Noticias
