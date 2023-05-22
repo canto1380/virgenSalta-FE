@@ -12,7 +12,6 @@ import { User } from "../context/userProvider";
 
 const AppRouter = ({ bandera, setBandera }) => {
   const { state } = useContext(User);
-
   return (
     <div>
       <Router>

@@ -16,7 +16,7 @@ import {
 
 const MenuNews = ({ tokenAuth, dataAuth, newsData }) => {
   return (
-    <Container>
+    <Container fluid>
 Noticias
     </Container>
   );
