@@ -8,8 +8,8 @@ import MenuNews from "../../../components/Admin/MenuNews";
 import MenuCategories from "../../../components/Admin/MenuCategories";
 import MenuAccount from "../../../components/Admin/MenuAccount";
 import { getUserById } from "../../../utils/queryAPI/user";
-import { getNewsCategory } from "../../../utils/queryAPI/newsCategory";
 import { getNews } from "../../../utils/queryAPI/news";
+import Unauthorized from "../../../components/Unauthorized";
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
@@ -17,8 +17,8 @@ const MenuAdmin = ({ userInfo }) => {
   const [dataAuth, setDataAuth] = useState([]);
   const [tab, setTab] = useState("Noticias");
   const [userData, setUserData] = useState([]);
-  const [newsCategoryData, setNewsCategoryData] = useState([]);
-  const [newsData, setNewsData] = useState([])
+  const [newsData, setNewsData] = useState([]);
+  const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   useEffect(() => {
     const tokenData = getToken();
@@ -27,22 +27,21 @@ const MenuAdmin = ({ userInfo }) => {
   }, []);
   useEffect(() => {
     dataUser();
-    dataNewsCategory()
-    dataNews()
+    dataNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
   const dataUser = async () => {
     const data = await getUserById(dataAuth?._id, tokenAuth);
+    if (data === false) {
+      setModalUnauthorized(true);
+    }
     setUserData(data);
   };
-  const dataNewsCategory = async () => {
-    const data = await getNewsCategory()
-    setNewsCategoryData(data)
-  }
+
   const dataNews = async () => {
-    const data = await getNews()
-    setNewsData(data)
-  }
+    const data = await getNews();
+    setNewsData(data);
+  };
   return (
     <Container
       fluid
@@ -55,9 +54,16 @@ const MenuAdmin = ({ userInfo }) => {
         tokenAuth={tokenAuth}
         dataAuth={dataAuth}
       />
+      <Container fluid className='container-admin-data'>
+
       {tab === "Noticias" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-          <MenuNews tokenAuth={tokenAuth} dataAuth={userData} setTab={setTab} newsData={newsData}/>
+          <MenuNews
+            tokenAuth={tokenAuth}
+            dataAuth={userData}
+            setTab={setTab}
+            newsData={newsData}
+          />
         </div>
       )}
       {tab === "Categorias" && (
@@ -66,7 +72,6 @@ const MenuAdmin = ({ userInfo }) => {
             tokenAuth={tokenAuth}
             dataAuth={userInfo}
             setTab={setTab}
-            newsCategoryData={newsCategoryData}
           />
         </div>
       )}
@@ -79,6 +84,13 @@ const MenuAdmin = ({ userInfo }) => {
           />
         </div>
       )}
+
+      {modalUnauthorized && (
+        <div className="">
+          <Unauthorized />
+        </div>
+      )}
+      </Container>
     </Container>
   );
 };

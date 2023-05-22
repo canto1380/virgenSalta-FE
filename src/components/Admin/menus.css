@@ -1,0 +1,35 @@
+.menuContainer {
+  margin: 20px 40px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.styleIcons {
+  font-size: 20px !important;
+}
+
+.loadingSpin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.ass {
+  overflow: hidden;
+}
+.aas {
+  overflow: visible;
+}
+
+@media (max-width: 950px) {
+  .menuContainer{
+    margin: 20px;
+  }
+}
+
+@media(max-width: 576px) {
+  .menuContainer{
+    padding: 0px;
+  }
+}
