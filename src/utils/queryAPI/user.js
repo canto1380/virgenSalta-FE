@@ -7,5 +7,8 @@ export const getUserById = async (id, tokenAuth) => {
       const data = res?.data;
       return data;
     }
+    if(res.response.status === 401) {
+      return false
+    }
   }
 };

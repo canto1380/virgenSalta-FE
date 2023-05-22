@@ -161,7 +161,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
   }, [dataAuth]);
 
   return (
-    <Container>
+    <Container fluid>
       <Row className={`d-flex justify-content-between align-items-center`}>
         <Col xs={12} md={8} className={`mt-3`}>
           <div className={`pt-4 pb-1 px-4`}>
@@ -171,7 +171,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
         <Col xs={12} md={4} className={`btnAlign mt-3 text-end`}>
           <div className={`pt-4 pb-1 px-4`}>
             <Button
-              className={`${editBand ? `aa` : ``}`}
+              className={`section-btn ${editBand ? `aa` : ``}`}
               onClick={() => setEditBand(!editBand)}
             >
               {" "}
@@ -202,7 +202,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
             </Col>
             <Col xs={12} md={6} className={``}>
               <p className={`fw-bolder mb-0`}>Apellido</p>
-              <Form.Group className="" controlId="formBasicEmail">
+              <Form.Group className="" controlId="formBasicEmail1">
                 <Form.Control
                   className={` ${
                     editBand
@@ -239,7 +239,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
             </Col>
             <Col xs={12} md={6} className={``}>
               <p className={`fw-bolder mb-0`}>Telefono</p>
-              <Form.Group className="" controlId="formBasicEmail">
+              <Form.Group className="" controlId="formBasicEmail2">
                 <Form.Control
                   className={` ${
                     editBand
@@ -259,7 +259,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
           <Row className={`justify-content-center  rowData`}>
             <Col xs={12} className={``}>
               <p className={`fw-bolder mb-0`}>Email</p>
-              <Form.Group className="" controlId="formBasicEmail">
+              <Form.Group className="" controlId="formBasicEmail3">
                 <Form.Control
                   className={` ${
                     editBand
@@ -299,7 +299,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
                 <Button
                   variant="success"
                   type="submit"
-                  className={` ${editBand ? `` : `enabledFieldd`}`}
+                  className={`${editBand ? `` : `enabledFieldd`}`}
                 >
                   Actualizar
                 </Button>
@@ -323,7 +323,10 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
         </Col>
         <Col xs={12} md={4} className={`btnAlign text-aling-midle text-end`}>
           <div className={`pb-1 px-4`}>
-            <Button className={``} onClick={() => setEditPass(!editPass)}>
+            <Button
+              className={`section-btn`}
+              onClick={() => setEditPass(!editPass)}
+            >
               {" "}
               {editPass ? "Cancelar" : "Editar Clave"}
             </Button>
@@ -356,13 +359,14 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
                   name="passwordOld"
                   minLength="8"
                   maxLength="16"
+                  autoComplete="on"
                   onChange={handleChangePass}
                 />
               </Form.Group>
             </Col>
             <Col xs={12} sm={6} lg={4}>
               <p className={`fw-bolder mb-0`}>Nueva Clave</p>
-              <Form.Group className="" controlId="formBasicPassword">
+              <Form.Group className="" controlId="formBasicPassword1">
                 <Form.Control
                   size="sm"
                   type="password"
@@ -370,6 +374,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
                   minLength="8"
                   maxLength="16"
                   onChange={handleChangePass}
+                  autoComplete="on"
                 />
               </Form.Group>
             </Col>
@@ -404,9 +409,9 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
           </Row>
           {dataErrorPass ? (
             <div className="alertError">
-            <Alert className={`text-center mt-3 w-50`} variant="danger">
-              {msgErrorPass}. Intente nuevamente
-            </Alert>
+              <Alert className={`text-center mt-3 w-50`} variant="danger">
+                {msgErrorPass}. Intente nuevamente
+              </Alert>
             </div>
           ) : null}
         </Form>
