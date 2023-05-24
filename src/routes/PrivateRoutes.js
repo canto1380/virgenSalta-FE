@@ -23,10 +23,10 @@ const PrivateRoutes = ({ token }) => {
       <Route exact path="/pedido-oracion" element={<PrayerRequest />} />
       <Route exact path="/vivo-capilla" element={<LiveChapel />} />
 
-      <Route exact path="/admin/home" element={<MenuAdmin />} />
+      <Route exact path="/admin/home/:idTab" element={<MenuAdmin />} />
 
       {token.length && window?.location?.pathname === "/admin/login" ? (
-        <Route path="*" element={<Navigate to="/admin/home" replace />} />
+        <Route path="*" element={<Navigate to="/admin/home/noticias" replace />} />
       ) : null}
 
       <Route path="*" element={<Navigate to="/admin/login" replace />} />

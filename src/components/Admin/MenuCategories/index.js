@@ -13,7 +13,7 @@ const MenuCategories = () => {
   const [deleted, setDeleted] = useState(undefined);
   const [newsCategoryData, setNewsCategoryData] = useState([]);
   const [band, setBand] = useState(false);
-  const [form, setForm] = useState(false);
+  const [formAdd, setFormAdd] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pageSelected, setPageSelected] = useState(1);
   const [formEdit, setFormEdit] = useState(false)
@@ -33,8 +33,8 @@ const MenuCategories = () => {
     const data = await getNewsCategory(params);
     setNewsCategoryData(data);
   };
-  const funci =(da) => {
-    setDataRegisterEdit(da)
+  const resetValuesEdit =(valueEdit) => {
+    setDataRegisterEdit(valueEdit)
     setFormEdit(!formEdit)
   }
   return (
@@ -46,7 +46,7 @@ const MenuCategories = () => {
           </div>
         </Col>
       </Row>
-      {!form && !formEdit ? (
+      {!formAdd && !formEdit ? (
         <Row>
           <Col>
             <FiltersAdmin
@@ -55,19 +55,20 @@ const MenuCategories = () => {
               setDeleted={setDeleted}
             />
             <HeaderList
-              title="Listado de categorías"
-              form={form}
-              setForm={setForm}
+              title="Listado de Categorías"
+              formAdd={formAdd}
+              setFormAdd={setFormAdd}
               formEdit={formEdit}
               setFormEdit={setFormEdit}
-              funci={funci}
+              resetValuesEdit={resetValuesEdit}
             />
             <ListElements
-              data={newsCategoryData}
+              data={newsCategoryData?.allNewsCategory}
               userToken={userToken}
               band={band}
               setBand={setBand}
-              funci={funci}
+              resetValuesEdit={resetValuesEdit}
+              routeAPI='newsCategory'
             />
             <PaginationAdmin
               data={newsCategoryData}
@@ -81,13 +82,13 @@ const MenuCategories = () => {
           <Col>
             <HeaderList
               title="Nueva categoría"
-              form={form}
-              setForm={setForm}
+              formAdd={formAdd}
+              setFormAdd={setFormAdd}
               loading={loading}
               setLoading={setLoading}
               formEdit={formEdit}
               setFormEdit={setFormEdit}
-              funci={funci}
+              resetValuesEdit={resetValuesEdit}
             />
             <FormAddEdit
               userToken={userToken}

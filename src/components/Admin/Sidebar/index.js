@@ -8,14 +8,15 @@ import {
 import { BiCategoryAlt, BiUserCircle, BiLogOut } from "react-icons/bi";
 import "../sidebar.css";
 import { deleteCookies, deleteToken } from "../../../helpers/helpers";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
+const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
   const [initial, setInitial] = useState("");
   const [initialSurname, setInitialSurname] = useState("");
 
-  const changeTab = (dataTab) => {
-    setTab(dataTab);
-  };
+  // const changeTab = (dataTab) => {
+  //   setTab(dataTab);
+  // };
 
   const cerrarSesion = async (e) => {
     deleteToken();
@@ -25,17 +26,17 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
 
   const itemsSideBar = [
     {
-      title: "Noticias",
+      title: "noticias",
       iconName: <BsNewspaper className="sizeIcon" />,
       name: "Noticias",
     },
     {
-      title: "Categorias",
+      title: "categorias",
       iconName: <BiCategoryAlt className="sizeIcon" />,
       name: "Categorias",
     },
     {
-      title: "Cuenta",
+      title: "cuenta",
       iconName: <BiUserCircle className="sizeIcon" />,
       name: "Cuenta",
     },
@@ -102,21 +103,22 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataAuth, setTab }) => {
       <hr />
       <ul className="text-decoration-none list-unstyled sidebarList">
         {itemsSideBar.map((items, i) => (
-          <li
-            key={i}
-            onClick={() => changeTab(items.title)}
-            title={items.title}
-            className={`${
-              inactivo
-                ? `sidebarListRow d-flex justify-content-center align-items-center`
-                : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
-            }`}
-          >
+          <Link key={i} className='text-white text-decoration-none' to={`/admin/home/${items.title}`}>
+            <li
+              // onClick={() => changeTab(items.title)}
+              title={items.title}
+              className={`${
+                inactivo
+                  ? `sidebarListRow d-flex justify-content-center align-items-center`
+                  : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
+              }`}
+            >
             <div className="">{items.iconName}</div>
             <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
               {items.name}
             </div>
           </li>
+          </Link>
         ))}
 
         <li
