@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import ImageBackdrop from "../../../images/logo.jpg";
-import "../news.css";
-const BackdropNews = () => {
+import ImageBackdrop from "../../images/logo.jpg";
+import "../News/news.css";
+const BackdropSections = ({title}) => {
   const [imageBackdrop, setImageBackdrop] = useState("");
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const BackdropNews = () => {
         >
           <Row className="backdropNew">
             <Col>
-              <p className="title m-0 text-center">Noticias</p>
+              <p className="title m-0 text-center">{title}</p>
             </Col>
           </Row>
         </Container>
@@ -30,7 +30,7 @@ const BackdropNews = () => {
         >
           <Row className="backdropNew">
             <Col>
-              <p className="title m-0 text-center">Noticias</p>
+              <p className="title m-0 text-center">{title}</p>
             </Col>
           </Row>
         </Container>
@@ -39,4 +39,4 @@ const BackdropNews = () => {
   );
 };
 
-export default BackdropNews;
+export default BackdropSections;

@@ -1,10 +1,9 @@
 import { Pagination } from "antd";
 
-const onShowSizeChange = (current, pageSize) => {
-  console.log(current, pageSize);
-};
-
-const PaginationAdmin = ({ data, pageSelected, setPageSelected }) => {
+const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
+  const onShowSizeChange = (pageSize) => {
+    setLimit(pageSize);
+  };
   return (
     <div className="menuContainer text-end">
       <Pagination

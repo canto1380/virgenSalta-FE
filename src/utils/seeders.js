@@ -118,47 +118,46 @@ export const secciones = [
     titulo: "Seccion",
   },
 ];
-
 export const jornadas = [
   {
-    id: 1,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 1,
+    photo: "1TubkJ5KKr8VlmiGk9uXDV_6n6JtBgLdQ",
+    title: "Jornada especial 1",
   },
   {
-    id: 2,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 2,
+    photo: "1A_pgdwNhExm-Da-tO_P59BRmaBgWWP_h",
+    title: "Jornada especial 2",
   },
   {
-    id: 3,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 3,
+    photo: "1uFnd8PLCmeZx6WkdAmbJdRhmTKx5x8Nc",
+    title: "Jornada especial 3",
   },
   {
-    id: 4,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 4,
+    photo: "14snKQsM1k40fYJqhFUI_0K9VvNjSPNmG",
+    title: "Jornada especial 4",
   },
   {
-    id: 5,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 5,
+    photo: "1A_pgdwNhExm-Da-tO_P59BRmaBgWWP_h",
+    title: "Jornada especial 5",
   },
   {
-    id: 6,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 6,
+    photo: "1TubkJ5KKr8VlmiGk9uXDV_6n6JtBgLdQ",
+    title: "Jornada especial 6",
   },
   {
-    id: 7,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 7,
+    photo: "qI01IUsqNh1zswPDSSjlYoDsrr",
+    title: "Jornada especial 7",
   },
   {
-    id: 8,
-    img: "",
-    titulo: "Jornada especial",
+    _id: 8,
+    photo: "1GQh0IZE5w6sWBnguDmD22sxzHa50Sg",
+    title: "Jornada especial 8",
   },
 ];
 

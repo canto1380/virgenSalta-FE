@@ -11,6 +11,7 @@ import PaginationAdmin from "../Pagination";
 const MenuCategories = () => {
   const [search, setSearch] = useState("");
   const [deleted, setDeleted] = useState(undefined);
+  const [limit, setLimit] = useState(10)
   const [newsCategoryData, setNewsCategoryData] = useState([]);
   const [band, setBand] = useState(false);
   const [formAdd, setFormAdd] = useState(false);
@@ -26,10 +27,10 @@ const MenuCategories = () => {
   useEffect(() => {
     dataNewsCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected]);
+  }, [search, deleted, band, pageSelected, limit]);
 
   const dataNewsCategory = async () => {
-    const params = { search, deleted, page: pageSelected };
+    const params = { search, deleted, page: pageSelected, limit };
     const data = await getNewsCategory(params);
     setNewsCategoryData(data);
   };
@@ -74,6 +75,7 @@ const MenuCategories = () => {
               data={newsCategoryData}
               pageSelected={pageSelected}
               setPageSelected={setPageSelected}
+              setLimit={setLimit}
             />
           </Col>
         </Row>

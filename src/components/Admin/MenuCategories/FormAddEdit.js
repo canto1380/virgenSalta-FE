@@ -57,7 +57,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   const changeInputBackdrop = (e) => {
     setSelectedImage(e?.target?.value);
   };
-  
+
   return (
     <div className="menuContainer">
       <Form

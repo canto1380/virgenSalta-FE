@@ -18,6 +18,7 @@ const MenuNews = () => {
   const [search, setSearch] = useState("");
   const [deleted, setDeleted] = useState(undefined);
   const [idNewsCategory, setIdNewsCategory] = useState(undefined)
+  const [limit, setLimit] = useState(10)
   const [newsData, setNewsData] = useState([]);
   const [newsCategoryData, setNewsCategoryData] = useState([]);
   const [band, setBand] = useState(false);
@@ -34,10 +35,10 @@ const MenuNews = () => {
   useEffect(() => {
     dataNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected, idNewsCategory]);
+  }, [search, deleted, band, pageSelected, idNewsCategory, limit]);
 
   const dataNews = async () => {
-    const params = { search, deleted, page: pageSelected, idNewsCategory };
+    const params = { search, deleted, page: pageSelected, idNewsCategory, limit };
     const data = await getNews(params);
     setNewsData(data);
   };
@@ -96,6 +97,7 @@ const MenuNews = () => {
               data={newsData}
               pageSelected={pageSelected}
               setPageSelected={setPageSelected}
+              setLimit={setLimit}
             />
           </Col>
         </Row>

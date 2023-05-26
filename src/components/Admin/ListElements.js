@@ -14,7 +14,7 @@ const ListElements = ({ data, userToken, band, setBand, resetValuesEdit, routeAP
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
-  
+
   const convertRoute = routeAPI[0].toUpperCase() + routeAPI.slice(1);
   const handleDelete = async (deleted, id) => {
     try {
@@ -103,9 +103,7 @@ const ListElements = ({ data, userToken, band, setBand, resetValuesEdit, routeAP
         aas.map((d) => {
 
           const a = d.backdrop.split('/')
-          // console.log(a);
           const len =a.length
-          // console.log(len)
           const b = a[len -2]
           return (
             <div key={d._id}>

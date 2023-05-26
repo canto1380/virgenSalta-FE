@@ -8,6 +8,8 @@ import LiveChapel from "../containers/LiveChapel";
 import PrayerRequest from "../containers/PrayerRequest";
 import Schedules from "../containers/Schedules";
 import MenuAdmin from "../containers/Admin/MenuAdmin/index";
+import Categories from "../containers/Categories";
+import SingleNewsCategory from "../containers/SingleNewsCategory";
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -17,7 +19,13 @@ const PrivateRoutes = ({ token }) => {
       <Route
         exact
         path="/noticias/:title"
-        element={<SingleNews data={noticias} />}
+        element={<SingleNews />}
+      />
+      <Route exact path='/categorias' element={<Categories />} />
+      <Route
+        exact
+        path="/categorias/:nameCategory"
+        element={<SingleNewsCategory />}
       />
       <Route exact path="/horarios" element={<Schedules />} />
       <Route exact path="/pedido-oracion" element={<PrayerRequest />} />
