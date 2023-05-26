@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../components";
 import Noticias from "../containers/Noticias";
 import SingleNews from "../containers/SingleNews";
-import { noticias } from "../utils/seeders";
 import LiveChapel from "../containers/LiveChapel";
 import PrayerRequest from "../containers/PrayerRequest";
 import Schedules from "../containers/Schedules";

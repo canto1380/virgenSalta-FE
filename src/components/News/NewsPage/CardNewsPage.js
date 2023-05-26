@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import ImgPrueba from "../../../images/logo.jpg";
 import { MdDateRange, MdAccessTime } from "react-icons/md";
 import "../news.css";
 const CardNewsPage = ({ data: { img, title, _id }, data }) => {
