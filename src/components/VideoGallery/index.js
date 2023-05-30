@@ -15,7 +15,7 @@ const VideoGallery = () => {
 
   return (
     <div>
-      <HeaderSections title={"Videos"} linkRef={"/videos"} />
+      <HeaderSections title={"Videos"} linkRef={"https://www.youtube.com"} blank titleBtn={'Ver Canal'}/>
       <Row className="mt-3 mb-5">
         <VideosCarousel data={videosBack} />
       </Row>
