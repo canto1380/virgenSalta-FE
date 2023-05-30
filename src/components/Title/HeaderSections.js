@@ -3,7 +3,6 @@ import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const HeaderSections = ({ title, linkRef, styleAdd, titleBtn, blank }) => {
-  console.log(blank)
   return (
     <Row className="">
       <Col xs={7} className="text-start">
