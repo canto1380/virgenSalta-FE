@@ -13,7 +13,7 @@ const CardNewsCategorypage = ({ data: { nameCategory, backdrop } }) => {
         <Card className="cardG-container border border-0">
           <Card.Img
             variant="top"
-            src={`https://drive.google.com/uc?id=${backdrop}`}
+            src={backdrop}
             className="cardG-img"
           />
           <p className="mb-0 cardG-title">{nameCategory.toUpperCase()}</p>

@@ -19,7 +19,7 @@ const CardGeneric = ({
         <a href={`/categorias/${titleParams}`} className="">
           <Card className={`cardG-container border border-0`}>
             <img
-              src={`https://drive.google.com/uc?id=${backdrop}`}
+              src={backdrop}
               alt="imagen"
               className={`cardG-img ${styleAdd}`}
             />

@@ -6,7 +6,7 @@ const CardModel = ({ data: { photos, img, title, _id }, photos1 }) => {
     <div className="card-container">
       {/* <Card className="card-container"> */}
       <a href={`/noticias/${title.replace(/ /g, "-")}`} className="aa">
-        <img src={`https://drive.google.com/uc?id=${photos1}`} alt="imagen" className="card-img" />
+        <img src={photos1} alt="imagen" className="card-img" />
         <p className="mb-0 card-title1">
           {title}
         </p>

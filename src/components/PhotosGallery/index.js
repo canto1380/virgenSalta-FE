@@ -9,7 +9,6 @@ const PhotosGallery = () => {
 
   const getInstaFeed = async () => {
     const token = process.env.REACT_APP_INSTAGRAM;
-    console.log(token)
     const fields =
       "thumbnail_url,media_url,media_type,caption,permalink,limit=80";
     const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}`;

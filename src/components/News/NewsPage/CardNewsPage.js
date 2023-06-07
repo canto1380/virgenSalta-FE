@@ -21,7 +21,7 @@ const CardNewsPage = ({ data: { img, title, _id }, data }) => {
       <Card className="cardNewsPage">
         <Card.Img
           variant="top"
-          src={`https://drive.google.com/uc?id=${data?.photos[0]}`}
+          src={data?.photos[0]}
           className="cardNewsPage-img"
         />
         <Card.Body className="cardNewPage-body">

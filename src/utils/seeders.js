@@ -121,42 +121,42 @@ export const secciones = [
 export const jornadas = [
   {
     _id: 1,
-    photo: "1TubkJ5KKr8VlmiGk9uXDV_6n6JtBgLdQ",
+    photo: 'https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia1.jpeg?alt=media&token=a23c6bc8-0f1b-4e45-8880-26b2669479aa&_gl=1*15olakb*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NjAuMC4wLjA.',
     title: "Jornada especial 1",
   },
   {
     _id: 2,
-    photo: "1A_pgdwNhExm-Da-tO_P59BRmaBgWWP_h",
+    photo: 'https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia10.jpeg?alt=media&token=84b16069-6862-480a-aaa7-dea0a77f36db&_gl=1*190spt3*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NjYuMC4wLjA.',
     title: "Jornada especial 2",
   },
   {
     _id: 3,
-    photo: "1uFnd8PLCmeZx6WkdAmbJdRhmTKx5x8Nc",
+    photo: 'https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia2.jpeg?alt=media&token=0b9b55f8-2789-446d-a9ef-34169328cb9d&_gl=1*1l8deoy*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NjkuMC4wLjA.',
     title: "Jornada especial 3",
   },
   {
     _id: 4,
-    photo: "14snKQsM1k40fYJqhFUI_0K9VvNjSPNmG",
+    photo: "https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia7.jpeg?alt=media&token=b493dc51-387c-4e04-9b9a-3422df3f128e&_gl=1*172d382*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4ODguMC4wLjA.",
     title: "Jornada especial 4",
   },
   {
     _id: 5,
-    photo: "1A_pgdwNhExm-Da-tO_P59BRmaBgWWP_h",
+    photo: "https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia6.jpeg?alt=media&token=c97925ed-81c5-42cc-a70e-0235bd53c48a&_gl=1*1i6o4uj*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4ODMuMC4wLjA.",
     title: "Jornada especial 5",
   },
   {
     _id: 6,
-    photo: "1TubkJ5KKr8VlmiGk9uXDV_6n6JtBgLdQ",
+    photo: "https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia5.jpeg?alt=media&token=7fee5eb8-2ba3-4e0f-a3ab-73230e808c4c&_gl=1*qtxm5l*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NzkuMC4wLjA.",
     title: "Jornada especial 6",
   },
   {
     _id: 7,
-    photo: "qI01IUsqNh1zswPDSSjlYoDsrr",
+    photo: "https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia4.jpeg?alt=media&token=880e35aa-74c5-472b-9d25-d6978702e6b0&_gl=1*3iy2y4*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NzYuMC4wLjA.",
     title: "Jornada especial 7",
   },
   {
     _id: 8,
-    photo: "1GQh0IZE5w6sWBnguDmD22sxzHa50Sg",
+    photo: "https://firebasestorage.googleapis.com/v0/b/virgen-salta-4f8e3.appspot.com/o/img-noticias%2Fnoticia3.jpeg?alt=media&token=4ec47862-50bd-4457-97d4-a5326f359860&_gl=1*9p073y*_ga*MTAyNjkyMzAyMy4xNjg1NTg5MzY1*_ga_CW55HF8NVT*MTY4NTczNTM1Ny4xMi4xLjE2ODU3MzY4NzMuMC4wLjA.",
     title: "Jornada especial 8",
   },
 ];

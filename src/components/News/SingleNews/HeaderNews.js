@@ -21,7 +21,7 @@ const HeaderNews = ({ data }) => {
       </div>
       <div className="pt-3 pb-4">
         <Image
-          src={`https://drive.google.com/uc?id=${data?.photos[0]}`}
+          src={data?.photos[0]}
           className="w-100 image-news"
         />
         <p className="text-secondary lead ps-2 mb-0">{data?.caption}</p>

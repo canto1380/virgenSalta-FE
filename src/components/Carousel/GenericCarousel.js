@@ -31,7 +31,6 @@ const NewCarousel = ({ data }) => {
       >
         {data?.map((d, i) => (
           <SwiperSlide key={i}>
-            {/* <GenericCard data={d} photos1={d?.photos[0]} /> */}
             <GenericCard data={d} photos1={d.photos ? d?.photos[0] : d?.photo} />
           </SwiperSlide>
         ))}

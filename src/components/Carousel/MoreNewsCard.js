@@ -11,6 +11,7 @@ const MoreNewsCard = ({ data, typeFlag }) => {
   let year = date.getFullYear();
   let hour = date.getHours();
   const minuts = date.getMinutes();
+  console.log(typeFlag)
 
   useEffect(() => {
     setTitleParams(typeFlag === 'news' ? data?.title.replace(/ /g, "-") : data?.nameCategory.replace(/ /g, "-"));
@@ -20,7 +21,7 @@ const MoreNewsCard = ({ data, typeFlag }) => {
     <Card className="cardNewsPage">
       <Card.Img
         variant="top"
-        src={`https://drive.google.com/uc?id=${typeFlag === 'news' ? data?.photos[0] : data?.backdrop}`}
+        src={`${typeFlag === 'news' ? data?.photos[0] : data?.backdrop}`}
         className="cardNewsPage-img"
       />
       <Card.Body className="cardNewPage-body">
