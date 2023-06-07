@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Spin } from "antd";
 // import { PlusOutlined } from "@ant-design/icons";
 import { api } from "../../../utils/api";
-import { uploadFile } from "../../../firebase/config";
+import { uploadFile, deleteFile } from "../../../firebase/config";
 import MsgError from "../../Messages/MsgError";
 
 const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
@@ -52,7 +52,11 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         } else {
           url = preview
         }
+        if(dataRegisterEdit.backdrop !== url) {
+          deleteFile(dataRegisterEdit.backdrop)
+        }
         values.backdrop =url
+
         const res = await api(
           "PATCH",
           `newsCategory/${dataRegisterEdit._id}`,

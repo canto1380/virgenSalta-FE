@@ -6,17 +6,27 @@ import {
   getDownloadURL,
   uploadBytesResumable,
   listAll,
+  deleteObject,
 } from "firebase/storage";
 import { v4 } from "uuid";
 
+const {
+  REACT_APP_FIREBASE_API_KEY,
+  REACT_APP_FIREBASE_AUTH_DOMAIN,
+  REACT_APP_FIREBASE_PROJECT_ID,
+  REACT_APP_FIREBASE_STORAGE_BUCKET,
+  REACT_APP_FIREBASE_MESSAGING_SENDERING,
+  REACT_APP_FIREBASE_APP_ID,
+  REACT_APP_FIREBASE_MEASUREMENT_ID
+} = process.env
 const firebaseConfig = {
-  apiKey: "AIzaSyCbJ49vQDhbqCafwlK0YVziBCvcdfb3dpQ",
-  authDomain: "virgen-salta-4f8e3.firebaseapp.com",
-  projectId: "virgen-salta-4f8e3",
-  storageBucket: "virgen-salta-4f8e3.appspot.com",
-  messagingSenderId: "798955403103",
-  appId: "1:798955403103:web:cf0d66391144509b6168ea",
-  measurementId: "G-0XWSQBX5XX",
+  apiKey: REACT_APP_FIREBASE_API_KEY,
+  authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_FIREBASE_MESSAGING_SENDERING,
+  appId: REACT_APP_FIREBASE_APP_ID,
+  measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -67,3 +77,12 @@ export const listFile = async (id) => {
     });
   });
 };
+
+export const deleteFile = async(url) => {
+  const storageRef= ref(storage, url)
+  deleteObject(storageRef).then(() => {
+    console.log('eliminado')
+  }).catch((error) => {
+    console.log(error)
+  })
+}

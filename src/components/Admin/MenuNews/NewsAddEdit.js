@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Select, Spin } from "antd";
 import { api } from "../../../utils/api";
-import { uploadFile } from "../../../firebase/config";
+import { deleteFile, uploadFile } from "../../../firebase/config";
 import MsgError from "../../Messages/MsgError";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -117,6 +117,11 @@ const NewsAddEdit = ({
           }
           dataImgUpdate = arr;
         }
+        dataRegisterEdit.photos.forEach((d2) => {
+          if(!dataImgUpdate.includes(d2)) {
+            deleteFile(d2)
+          }
+        });
         /** Carga IMG en Firebase **/
 
         values.photos = dataImgUpdate;
