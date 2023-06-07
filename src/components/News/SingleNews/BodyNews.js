@@ -3,12 +3,12 @@ import React, { useEffect } from 'react';
 const BodyNews = ({data}) => {
   console.log(data)
 
-  const as = () => {
-    const ida = document.querySelector('.ida')
-    ida.innerHTML += `
-    ${data}
-    `
-  }
+  // const as = () => {
+  //   const ida = document.querySelector('.ida')
+  //   ida.innerHTML += `
+  //   ${data}
+  //   `
+  // }
   useEffect(()=> {
     if(data) {
       const ida = document.querySelector('.ida')
