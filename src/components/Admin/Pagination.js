@@ -11,7 +11,7 @@ const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
         current={pageSelected}
         showSizeChange
         onShowSizeChange={onShowSizeChange}
-        defaultPageSize={data.foundRegisters}
+        defaultPageSize={data?.foundRegisters}
         total={data?.totalRegister}
         onChange={(page) => setPageSelected(page)}
       />

@@ -13,6 +13,7 @@ const Categories = () => {
   const [pageSelected, setPageSelected] = useState(1);
   const [limit, setLimit] = useState(10);
   const [newsCategoryData, setNewsCategoryData] = useState([])
+  const [newsCategoryInf, setNewsCategoryInf] = useState()
   const deleted = false
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const Categories = () => {
     const params= {search, deleted, page: pageSelected, limit}
     const data = await getNewsCategory(params)
     setNewsCategoryData(data.allNewsCategory)
+    setNewsCategoryInf(data)
   }
   return (
     <div className="bg-gradient-1">
@@ -44,18 +46,16 @@ const Categories = () => {
                 <CardNewsCategorypage data={data} />
               </Col>
             ))}
-            {newsCategoryData.length > 10 && (
             <Row>
               <Col>
                 <PaginationAdmin
-                  data={newsCategoryData}
+                  data={newsCategoryInf}
                   pageSelected={pageSelected}
                   setPageSelected={setPageSelected}
                   setLimit={setLimit}
                 />
               </Col>
             </Row>
-            )}
           </Row>
         ) : (
           <Spinner animation="grow" variant="info" />
