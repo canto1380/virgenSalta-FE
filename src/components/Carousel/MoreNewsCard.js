@@ -11,7 +11,6 @@ const MoreNewsCard = ({ data, typeFlag }) => {
   let year = date.getFullYear();
   let hour = date.getHours();
   const minuts = date.getMinutes();
-  console.log(typeFlag)
 
   useEffect(() => {
     setTitleParams(typeFlag === 'news' ? data?.title.replace(/ /g, "-") : data?.nameCategory.replace(/ /g, "-"));

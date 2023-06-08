@@ -44,7 +44,6 @@ export const storage = getStorage(app);
 
 export const uploadFile = async (url, file, updateCb) => {
   const storageRef = ref(storage, `/${url}/`+v4());
-  console.log(url)
   const uploadFile = uploadBytesResumable(storageRef, file);
   return new Promise((res, rej) => {
     return uploadFile.on(
@@ -81,7 +80,6 @@ export const listFile = async (id) => {
 export const deleteFile = async(url) => {
   const storageRef= ref(storage, url)
   deleteObject(storageRef).then(() => {
-    console.log('eliminado')
   }).catch((error) => {
     console.log(error)
   })

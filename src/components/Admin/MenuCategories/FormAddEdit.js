@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Spin } from "antd";
-// import { PlusOutlined } from "@ant-design/icons";
 import { api } from "../../../utils/api";
 import { uploadFile, deleteFile } from "../../../firebase/config";
 import MsgError from "../../Messages/MsgError";
@@ -177,47 +176,6 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
             Agregar imagen
           </label>
         </div>
-
-        {/************ OPCION DE DRIVE  ******************/}
-        {/* <Form.Item
-          label="Backdrop"
-          name="backdrop"
-          onChange={(e) => changeInputBackdrop(e)}
-          rules={[
-            {
-              required: true,
-              message: "Debe ingresar una url válida",
-              pattern: expr,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-        {/* <div>
-          {selectedImage && (
-            <div>
-              <img
-                alt="not found"
-                width={"250px"}
-                src={`https://drive.google.com/uc?id=${linkImage}`}
-              />
-              <br />
-            </div>
-          )}
-
-          <br />
-          <br />
-        </div>
-        <div className="text-center">
-          <span className="text-danger">* </span>Para cargar una imagen, ingrese{" "}
-          <a href="https://drive.google.com/drive/u/1/folders/1H4bCePOsLD4X1ns9GNh35g_Pi_YOCchZ">
-            Aqui
-          </a>
-          , haga click derecho en la imagen a cargar y presione 'Copiar enlace'
-          y luego peguelo en el campo.
-        </div> */}
-        {/************ OPCION DE DRIVE  ******************/}
-
         <Form.Item
           className="text-end"
           labelCol={{ span: 1 }}

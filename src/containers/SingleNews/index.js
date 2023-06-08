@@ -40,11 +40,12 @@ const SingleNews = () => {
       <Layout />
       <Container>
         <Row className="mx-3 pt-2 pb-5">
-          <Col xs={12} className="pt-5 pb-3">
+          <Col xs={12} className="pt-5">
             <HeaderNews data={singleNews} />
           </Col>
+          <hr className='pb-3'/>
           <Col xs={12} className="pb-5">
-            <BodyNews data={singleNews?.description} />
+            <BodyNews data={singleNews?.description} photos={singleNews?.photos}/>
           </Col>
           <hr />
         </Row>

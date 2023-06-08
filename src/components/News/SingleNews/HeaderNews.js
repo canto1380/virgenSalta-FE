@@ -19,7 +19,7 @@ const HeaderNews = ({ data }) => {
         <span>{`${day}/${month}/${year}`} |</span>
         <span> {`${hour}:${minuts}hs`}</span>
       </div>
-      <div className="pt-3 pb-4">
+      <div className="pt-3 pb-3">
         <Image
           src={data?.photos[0]}
           className="w-100 image-news"

@@ -4,10 +4,9 @@ import { api } from "../../../utils/api";
 import { deleteFile, uploadFile } from "../../../firebase/config";
 import MsgError from "../../Messages/MsgError";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
-
-const { TextArea } = Input;
 
 const NewsAddEdit = ({
   data,
@@ -16,7 +15,7 @@ const NewsAddEdit = ({
   setLoading,
   userToken,
 }) => {
-  // const [description, setDescription] = useState();
+  const [description, setDescription] = useState();
   const [imgData, setImgData] = useState();
   const [preview, setPreview] = useState({
     preview: "",
@@ -62,7 +61,7 @@ const NewsAddEdit = ({
         const ls = await Promise.all(promises);
         /** Carga IMG en Firebase **/
 
-        // values.description = description;
+        values.description = description;
         values.photos = ls;
         const res = await api("POST", "news", values, userToken);
         if (res.status === 200) {
@@ -118,14 +117,14 @@ const NewsAddEdit = ({
           dataImgUpdate = arr;
         }
         dataRegisterEdit.photos.forEach((d2) => {
-          if(!dataImgUpdate.includes(d2)) {
-            deleteFile(d2)
+          if (!dataImgUpdate.includes(d2)) {
+            deleteFile(d2);
           }
         });
         /** Carga IMG en Firebase **/
 
         values.photos = dataImgUpdate;
-        // values.description = description;
+        values.description = description;
         const res = await api(
           "PATCH",
           `news/${dataRegisterEdit._id}`,
@@ -180,48 +179,6 @@ const NewsAddEdit = ({
     }
   };
 
-  // useEffect(()=> {
-  //   DecoupledEditor
-  // 	.create( document.querySelector( '#editor' ) )
-  // 	.then( editor => {
-  // 		console.log( 'Editor was initialized', editor );
-
-  // 		// Append the toolbar to the <body> element.
-  // 		document.body.appendChild( editor.ui.view.toolbar.element );
-  // 	} )
-  // 	.catch( err => {
-  // 		console.error( err.stack );
-  // 	} );
-  // },[])
-
-  // useEffect(() => {
-  //   CKEditorScript();
-  // }, []);
-  // const CKEditorScript = () => {
-  //   const data = document.querySelector(".editor");
-  //   data.innerHTML += `
-  //     ClassicEditor.create(document.querySelector("#editor"), {
-  //       simpleUpload: {
-  //         // The URL that the images are uploaded to.
-  //         uploadUrl:
-  //           "https://drive.google.com/drive/u/1/folders/1H4bCePOsLD4X1ns9GNh35g_Pi_YOCchZ",
-  //         headers: {
-  //           // "X-CSRF-TOKEN": "CSRF-Token",
-  //           // Authorization: "Bearer <JSON Web Token>",
-  //           "Access-Control-Allow-Origin": "*",
-  //           "Access-Control-Allow-Credentials": "true",
-  //           "Access-Control-Max-Age": "1800",
-  //           "Access-Control-Allow-Headers": "content-type",
-  //           "Access-Control-Allow-Methods":
-  //             "PUT, POST, GET, DELETE, PATCH, OPTIONS",
-  //         },
-  //       },
-  //     }).catch((error) => {
-  //       console.error(error);
-  //     });
-  //   `;
-  // };
-
   useEffect(() => {
     if (!imgData) {
       setPreview(undefined);
@@ -271,7 +228,6 @@ const NewsAddEdit = ({
           description: dataRegisterEdit?.description,
           idNewsCategory: dataRegisterEdit?.idNewsCategory?._id,
           caption: dataRegisterEdit?.caption,
-          // photos: dataRegisterEdit?.photos,
         }}
       >
         <Form.Item
@@ -287,15 +243,6 @@ const NewsAddEdit = ({
           rules={[{ required: true, message: "Debe ingresar un texto" }]}
         >
           <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Descripción"
-          name="description"
-          id="aa"
-          rules={[{ required: true, message: "Debe ingresar un texto" }]}
-        >
-          <TextArea rows={8} />
         </Form.Item>
 
         <Form.Item
@@ -315,6 +262,20 @@ const NewsAddEdit = ({
         </Form.Item>
 
         <div>
+          <p>
+            <span className="text-danger fw-bolder">*</span>Descripción
+          </p>
+        </div>
+        <CKEditor
+          editor={ClassicEditor}
+          data={dataRegisterEdit ? dataRegisterEdit.description : ""}
+          onReady={(editor) => {}}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setDescription(data);
+          }}
+        />
+        <div className="mt-4">
           <p>
             <span className="text-danger fw-bolder me-1">*</span>Imágenes
           </p>
@@ -357,7 +318,7 @@ const NewsAddEdit = ({
         </div>
 
         <Form.Item
-          label="Pie de foto principal"
+          label="Pie de foto principal (Primera foto seleccionada)"
           name="caption"
           rules={[{ required: true, message: "Debe ingresar un texto" }]}
         >
@@ -393,11 +354,6 @@ const NewsAddEdit = ({
           : null}
         {serverError ? <MsgError text2="Server internal Error" /> : null}
       </Form>
-      <h1>EDITOR</h1>
-
-      <div id="editor">
-        <p>This is some sample content.</p>
-      </div>
     </div>
   );
 };
