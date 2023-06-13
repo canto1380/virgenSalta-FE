@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
 import LayoutFoot from "../../components/Layout/LayoutFoot";
 import DailyEvents from "../../components/Schedules/DailyEvents";
 import ImportantDates from "../../components/Schedules/ImportantDates";
+import { getEventType } from "../../utils/queryAPI/eventType";
+import { getDailyEvent } from "../../utils/queryAPI/dailyEvent";
 
 const Schedules = () => {
+  const [eventType, setEventType] = useState([]);
+  const [dailyEvent, setDailyEvent] = useState([]);
+
+  useEffect(() => {
+    dataEventType();
+  }, []);
+
+  const dataEventType = async () => {
+    const params = { deleted: false };
+    const data = await getEventType(params);
+    setEventType(data.allEvent);
+  };
+
+  useEffect(() => {
+    dataDailyEvent();
+  }, []);
+
+  const dataDailyEvent = async () => {
+    const params = { deleted: false, limit: 5000 };
+    const data = await getDailyEvent(params);
+    setDailyEvent(data.allDailyEvent);
+  };
+
   return (
     <>
-    <Layout/>
+      <Layout />
       <Container fluid className="bg-gradient-2">
         <div className="container">
           <Row className="mx-3 pt-2 pb-5">
@@ -22,7 +47,7 @@ const Schedules = () => {
               <ImportantDates />
             </Col>
             <Col xs={12} className="my-5 bg-light px-0">
-              <DailyEvents />
+              <DailyEvents eventType={eventType} dailyEvent={dailyEvent} />
             </Col>
           </Row>
         </div>
