@@ -5,7 +5,7 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
 } from "react-icons/bs";
-import { BiCategoryAlt, BiUserCircle, BiLogOut } from "react-icons/bi";
+import { BiCategoryAlt, BiUserCircle, BiLogOut, BiTime } from "react-icons/bi";
 import "../sidebar.css";
 import { deleteCookies, deleteToken } from "../../../helpers/helpers";
 import { Link } from "react-router-dom";
@@ -13,10 +13,6 @@ import { Link } from "react-router-dom";
 const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
   const [initial, setInitial] = useState("");
   const [initialSurname, setInitialSurname] = useState("");
-
-  // const changeTab = (dataTab) => {
-  //   setTab(dataTab);
-  // };
 
   const cerrarSesion = async (e) => {
     deleteToken();
@@ -34,6 +30,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       title: "categorias",
       iconName: <BiCategoryAlt className="sizeIcon" />,
       name: "Categorias",
+    },
+    {
+      title: "horarios",
+      iconName: <BiTime className="sizeIcon" />,
+      name: "Horarios",
     },
     {
       title: "cuenta",
@@ -88,7 +89,12 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
             className={`text-light mt-3 btn-menu text-center px-0`}
             onClick={() => setInactivo(!inactivo)}
           >
-            {<BsFillCaretRightFill title="Desplegar" className={`sizeIcon cursorPointer`} />}
+            {
+              <BsFillCaretRightFill
+                title="Desplegar"
+                className={`sizeIcon cursorPointer`}
+              />
+            }
           </Col>
         ) : (
           <Col
@@ -96,14 +102,23 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
             className={`p-0 text-light btn-menu`}
             onClick={() => setInactivo(!inactivo)}
           >
-            {<BsFillCaretLeftFill title="Minimizar" className="sizeIcon cursorPointer" />}
+            {
+              <BsFillCaretLeftFill
+                title="Minimizar"
+                className="sizeIcon cursorPointer"
+              />
+            }
           </Col>
         )}
       </Row>
       <hr />
       <ul className="text-decoration-none list-unstyled sidebarList">
         {itemsSideBar.map((items, i) => (
-          <Link key={i} className='text-white text-decoration-none' to={`/admin/home/${items.title}`}>
+          <Link
+            key={i}
+            className="text-white text-decoration-none"
+            to={`/admin/home/${items.title}`}
+          >
             <li
               // onClick={() => changeTab(items.title)}
               title={items.title}
@@ -113,11 +128,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
                   : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
               }`}
             >
-            <div className="">{items.iconName}</div>
-            <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
-              {items.name}
-            </div>
-          </li>
+              <div className="">{items.iconName}</div>
+              <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
+                {items.name}
+              </div>
+            </li>
           </Link>
         ))}
 

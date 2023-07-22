@@ -56,10 +56,6 @@ const ListElements = ({ data, userToken, band, setBand, resetValuesEdit, routeAP
     } catch (error) {}
   };
 
-  // const [aas, setAas] = useState([]);
-  // useEffect(() => {
-  //   setAas(data?.allNewsCategory);
-  // }, [data]);
   useEffect(() => {
     setInitLoading(false);
   }, []);
@@ -92,25 +88,13 @@ const ListElements = ({ data, userToken, band, setBand, resetValuesEdit, routeAP
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                title={<p className="mb-0">{item?.nameCategory} {item?.title}</p>}
+                title={<p className="mb-0">{item?.nameCategory} {item?.title} {item?.eventName}</p>}
               />
             </Skeleton>
           </List.Item>
         )}
       />
-      {/* {aas &&
-        aas.length &&
-        aas.map((d) => {
 
-          const a = d.backdrop.split('/')
-          const len =a.length
-          const b = a[len -2]
-          return (
-            <div key={d._id}>
-              <img src={`https://drive.google.com/uc?id=${b}`} alt={d._id} />
-            </div>
-          );
-        })} */}
       {loading && (
         <div className="loadingSpin">
           <Spin />

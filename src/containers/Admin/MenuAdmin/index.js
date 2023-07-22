@@ -11,6 +11,7 @@ import { getUserById } from "../../../utils/queryAPI/user";
 import { getNews } from "../../../utils/queryAPI/news";
 import Unauthorized from "../../../components/Unauthorized";
 import { useParams } from "react-router-dom";
+import MenuSchedules from "../../../components/Admin/MenuSchedules";
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
@@ -64,7 +65,6 @@ const MenuAdmin = ({ userInfo }) => {
           <MenuNews
             tokenAuth={tokenAuth}
             dataAuth={userData}
-            newsData={newsData}
           />
         </div>
       )}
@@ -79,6 +79,14 @@ const MenuAdmin = ({ userInfo }) => {
       {idTab === "cuenta" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuAccount
+            tokenAuth={tokenAuth}
+            dataAuth={userData}
+          />
+        </div>
+      )}
+      {idTab === "horarios" && (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuSchedules
             tokenAuth={tokenAuth}
             dataAuth={userData}
           />

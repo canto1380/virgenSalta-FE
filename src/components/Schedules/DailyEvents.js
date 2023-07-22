@@ -7,7 +7,9 @@ const DailyEvents = ({ eventType, dailyEvent }) => {
 
   let arraa = [];
   eventType.forEach((data, i) => {
-    arraa.push([{ i: data.eventName }]);
+      if(data.deleted === false) {
+        arraa.push([{ i: data.eventName }]);
+      }
   });
 
   const tabSelect = () => {
@@ -63,7 +65,7 @@ const DailyEvents = ({ eventType, dailyEvent }) => {
     // );
 
     return (
-      <div className="pt-3">
+      <div className="">
         {arraa && (
           <div className="bg-ligth">
             {arraa.map((data, i) => (
@@ -74,7 +76,7 @@ const DailyEvents = ({ eventType, dailyEvent }) => {
                   </>
                 )}
                 {data.map((data1, i) => (
-                  <div key={i} className="pb-2">
+                  <div key={i} className="">
                     {data1.i ? null : (
                       <>
                         <div>

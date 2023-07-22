@@ -10,10 +10,6 @@ import { User } from "../../../context/userProvider";
 import { getNewsCategory } from "../../../utils/queryAPI/newsCategory";
 import NewsAddEdit from "./NewsAddEdit";
 
-// import moment from "moment/moment";
-// import { api } from "../../../utils/api";
-// import MsgError from "../../Messages/MsgError";
-
 const MenuNews = () => {
   const [search, setSearch] = useState("");
   const [deleted, setDeleted] = useState(undefined);
@@ -36,7 +32,6 @@ const MenuNews = () => {
     dataNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, deleted, band, pageSelected, idNewsCategory, limit]);
-
   const dataNews = async () => {
     const params = { search, deleted, page: pageSelected, idNewsCategory, limit };
     const data = await getNews(params);
@@ -56,7 +51,6 @@ const MenuNews = () => {
     setDataRegisterEdit(valueEdit);
     setFormEdit(!formEdit);
   };
-
   return (
     <Container fluid>
       <Row>
@@ -76,6 +70,7 @@ const MenuNews = () => {
               setIdNewsCategory={setIdNewsCategory}
               newsRoute="news"
               data={newsCategoryData?.allNewsCategory}
+              setPageSelected={setPageSelected}
             />
             <HeaderList
               title="Listado de Noticias"

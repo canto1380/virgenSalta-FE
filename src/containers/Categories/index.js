@@ -33,8 +33,10 @@ const Categories = () => {
       <BackdropSections title="Categorías" />
       <Container className="mt-3 pt-5">
         <NewsFilter
-        typeFlag='newsCategory'
+          typeFlag='newsCategory'
           setSearch={setSearch}
+          setPageSelected={setPageSelected}
+
         />
         {newsCategoryData ? (
           <Row className='mt-3 pb-5'>

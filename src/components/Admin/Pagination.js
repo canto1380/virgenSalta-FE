@@ -1,7 +1,8 @@
 import { Pagination } from "antd";
 
 const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
-  const onShowSizeChange = (pageSize) => {
+  const onShowSizeChange = (page, pageSize) => {
+    console.log(pageSize)
     setLimit(pageSize);
   };
   return (
@@ -13,7 +14,7 @@ const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
         onShowSizeChange={onShowSizeChange}
         defaultPageSize={data?.foundRegisters}
         total={data?.totalRegister}
-        onChange={(page) => setPageSelected(page)}
+        onChange={(page, pageSize) => setPageSelected(page, pageSize)}
       />
       <br />
     </div>
