@@ -9,15 +9,17 @@ import MenuCategories from "../../../components/Admin/MenuCategories";
 import MenuAccount from "../../../components/Admin/MenuAccount";
 import { getUserById } from "../../../utils/queryAPI/user";
 import Unauthorized from "../../../components/Unauthorized";
+import { useParams } from "react-router-dom";
+import MenuSchedules from "../../../components/Admin/MenuSchedules";
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState([]);
   const [dataAuth, setDataAuth] = useState([]);
-  const [tab, setTab] = useState("Noticias");
   const [userData, setUserData] = useState([]);
-  const [newsData, setNewsData] = useState([]);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
+
+  const {idTab} = useParams()
 
   useEffect(() => {
     const tokenData = getToken();
@@ -26,7 +28,6 @@ const MenuAdmin = ({ userInfo }) => {
   }, []);
   useEffect(() => {
     dataUser();
-    dataNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
   const dataUser = async () => {
@@ -37,17 +38,13 @@ const MenuAdmin = ({ userInfo }) => {
     setUserData(data);
   };
 
-  const dataNews = async () => {
-    const data = await getNews();
-    setNewsData(data);
-  };
   return (
     <Container
       fluid
       className="container-admin p-0 d-flex justify-content-start"
     >
       <Sidebar
-        setTab={setTab}
+        // setTab={setTab}
         inactivo={inactivo}
         setInactivo={setInactivo}
         tokenAuth={tokenAuth}
@@ -55,31 +52,35 @@ const MenuAdmin = ({ userInfo }) => {
       />
       <Container fluid className='container-admin-data'>
 
-      {tab === "Noticias" && (
+      {idTab === "noticias" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
           <MenuNews
             tokenAuth={tokenAuth}
             dataAuth={userData}
-            setTab={setTab}
-            newsData={newsData}
           />
         </div>
       )}
-      {tab === "Categorias" && (
+      {idTab === "categorias" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuCategories
             tokenAuth={tokenAuth}
             dataAuth={userInfo}
-            setTab={setTab}
           />
         </div>
       )}
-      {tab === "Cuenta" && (
+      {idTab === "cuenta" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuAccount
             tokenAuth={tokenAuth}
             dataAuth={userData}
-            setTab={setTab}
+          />
+        </div>
+      )}
+      {idTab === "horarios" && (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuSchedules
+            tokenAuth={tokenAuth}
+            dataAuth={userData}
           />
         </div>
       )}

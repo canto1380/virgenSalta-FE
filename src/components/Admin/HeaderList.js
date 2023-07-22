@@ -3,14 +3,14 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { Button } from "react-bootstrap";
 
-const HeaderList = ({ title, form, setForm, loading, setLoading, formEdit, setFormEdit, funci }) => {
+const HeaderList = ({ title, formAdd, setFormAdd, loading, setLoading, formEdit, setFormEdit, resetValuesEdit }) => {
 
   const changeBand = ()=> {
-    setForm(!form)
+    setFormAdd(!formAdd)
   }
   const changeBandRetur =() => {
-    funci(null)
-    setForm(false)
+    resetValuesEdit(null)
+    setFormAdd(false)
     setFormEdit(false)
   }
   return (
@@ -19,7 +19,7 @@ const HeaderList = ({ title, form, setForm, loading, setLoading, formEdit, setFo
         <p className="fw-bolder mb-0">{formEdit ? 'Editar Categoría' : title}</p>
       </div>
       <div>
-        {!form && !formEdit ? (
+        {!formAdd && !formEdit ? (
           <Button
             onClick={changeBand}
             variant="outline"

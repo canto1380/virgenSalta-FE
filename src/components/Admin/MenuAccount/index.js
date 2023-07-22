@@ -86,7 +86,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
         setDataToken(newDataToken);
         setTimeout(() => {
           setLoading(false);
-          window.location.href = "/admin/home";
+          window.location.href = "/admin/home/cuenta";
         }, 3000);
         setTimeout(() => {
           setEditBand(false);
@@ -125,7 +125,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-          window.location.href = "/admin/home";
+          window.location.href = "/admin/home/cuenta";
         }, 3000);
         e.target.reset();
         setTimeout(() => {

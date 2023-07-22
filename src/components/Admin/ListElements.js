@@ -10,17 +10,18 @@ import { api } from "../../utils/api";
 import "./menus.css";
 import Unauthorized from "../Unauthorized";
 
-const ListElements = ({ data, userToken, band, setBand, funci }) => {
+const ListElements = ({ data, userToken, band, setBand, resetValuesEdit, routeAPI }) => {
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
+  const convertRoute = routeAPI[0].toUpperCase() + routeAPI.slice(1);
   const handleDelete = async (deleted, id) => {
     try {
       if (deleted) {
         const res = await api(
           "PATCH",
-          `newsCategory/restoreNewsCategory/${id}`,
+          `${routeAPI}/restore${convertRoute}/${id}`,
           null,
           userToken
         );
@@ -37,7 +38,7 @@ const ListElements = ({ data, userToken, band, setBand, funci }) => {
       } else {
         const res = await api(
           "PATCH",
-          `newsCategory/deleteNewsCategory/${id}`,
+          `${routeAPI}/delete${convertRoute}/${id}`,
           null,
           userToken
         );
@@ -55,10 +56,6 @@ const ListElements = ({ data, userToken, band, setBand, funci }) => {
     } catch (error) {}
   };
 
-  // const [aas, setAas] = useState([]);
-  // useEffect(() => {
-  //   setAas(data?.allNewsCategory);
-  // }, [data]);
   useEffect(() => {
     setInitLoading(false);
   }, []);
@@ -68,11 +65,11 @@ const ListElements = ({ data, userToken, band, setBand, funci }) => {
         className="demo-loadmore-list"
         loading={initLoading}
         itemLayout="horizontal"
-        dataSource={data?.allNewsCategory}
+        dataSource={data}
         renderItem={(item) => (
           <List.Item
             actions={[
-              <Button variant="outline" title="Editar" key="list-loadmore-edit" onClick={() => funci(item)}>
+              <Button variant="outline" title="Editar" key="list-loadmore-edit" onClick={() => resetValuesEdit(item)}>
                 <EditOutlined className="styleIcons" />
               </Button>,
               <Button
@@ -91,27 +88,13 @@ const ListElements = ({ data, userToken, band, setBand, funci }) => {
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                title={<p className="mb-0">{item?.nameCategory}</p>}
+                title={<p className="mb-0">{item?.nameCategory} {item?.title} {item?.eventName}</p>}
               />
             </Skeleton>
           </List.Item>
         )}
       />
-      {/* {aas &&
-        aas.length &&
-        aas.map((d) => {
 
-          const a = d.backdrop.split('/')
-          // console.log(a);
-          const len =a.length
-          // console.log(len)
-          const b = a[len -2]
-          return (
-            <div key={d._id}>
-              <img src={`https://drive.google.com/uc?id=${b}`} alt={d._id} />
-            </div>
-          );
-        })} */}
       {loading && (
         <div className="loadingSpin">
           <Spin />

@@ -69,7 +69,6 @@ const Login = ({ bandera, setBandera }) => {
         }, 3000);
       }
       if (res?.response?.status === 404) {
-        console.log(res);
         setDataError(true);
         setMsgDataError(res?.response?.data?.error);
         setTimeout(() => {

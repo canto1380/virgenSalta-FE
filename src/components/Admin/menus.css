@@ -18,8 +18,10 @@
 .ass {
   overflow: hidden;
 }
-.aas {
-  overflow: visible;
+
+.filterSchedules{
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 5px;
 }
 
 @media (max-width: 950px) {

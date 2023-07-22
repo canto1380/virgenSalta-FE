@@ -3,11 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../components";
 import Noticias from "../containers/Noticias";
 import SingleNews from "../containers/SingleNews";
-import { noticias } from "../utils/seeders";
 import LiveChapel from "../containers/LiveChapel";
 import PrayerRequest from "../containers/PrayerRequest";
 import Schedules from "../containers/Schedules";
 import MenuAdmin from "../containers/Admin/MenuAdmin/index";
+import Categories from "../containers/Categories";
+import SingleNewsCategory from "../containers/SingleNewsCategory";
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -17,16 +18,22 @@ const PrivateRoutes = ({ token }) => {
       <Route
         exact
         path="/noticias/:title"
-        element={<SingleNews data={noticias} />}
+        element={<SingleNews />}
+      />
+      <Route exact path='/categorias' element={<Categories />} />
+      <Route
+        exact
+        path="/categorias/:nameCategory"
+        element={<SingleNewsCategory />}
       />
       <Route exact path="/horarios" element={<Schedules />} />
       <Route exact path="/pedido-oracion" element={<PrayerRequest />} />
       <Route exact path="/vivo-capilla" element={<LiveChapel />} />
 
-      <Route exact path="/admin/home" element={<MenuAdmin />} />
+      <Route exact path="/admin/home/:idTab" element={<MenuAdmin />} />
 
       {token.length && window?.location?.pathname === "/admin/login" ? (
-        <Route path="*" element={<Navigate to="/admin/home" replace />} />
+        <Route path="*" element={<Navigate to="/admin/home/noticias" replace />} />
       ) : null}
 
       <Route path="*" element={<Navigate to="/admin/login" replace />} />

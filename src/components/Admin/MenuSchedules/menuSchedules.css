@@ -1,0 +1,26 @@
+.subTab{
+  font-weight: 700;
+  background-color: #2b9ac673 !important;
+  border-top-left-radius:5px !important;
+  border-top-right-radius:5px !important;
+}
+.aa{
+  height: 700px;
+  overflow-y: scroll;
+}
+.subTab div {
+  align-items: center !important;
+}
+.subTab-btn {
+  font-size: 14px !important;
+}
+.subTab-btn:hover{
+  background-color: transparent !important;
+  border: 2px solid white !important;
+}
+
+.menuSchedules {
+  margin: 20px 0px;
+  padding: 15px;
+  border-radius: 5px;
+}

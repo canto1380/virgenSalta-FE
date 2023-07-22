@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { Tabs } from "antd";
-import { dailyEvents } from "../../utils/seeders";
-import './Schedules.css'
+import "./Schedules.css";
 
-const DailyEvents = () => {
+const DailyEvents = ({ eventType, dailyEvent }) => {
   const [keyBtn, setKeyBtn] = useState(1);
+
+  let arraa = [];
+  eventType.forEach((data, i) => {
+      if(data.deleted === false) {
+        arraa.push([{ i: data.eventName }]);
+      }
+  });
+
   const tabSelect = () => {
     let filterForDay = [];
-    const dataEvents = dailyEvents();
+    const dataEvents = dailyEvent;
     switch (parseInt(keyBtn)) {
       case 1: {
         filterForDay = dataEvents.filter((d) => d.day === "Domingo");
@@ -22,7 +29,7 @@ const DailyEvents = () => {
         break;
       }
       case 4: {
-        filterForDay = dataEvents.filter((d) => d.day === "Miercoles");
+        filterForDay = dataEvents.filter((d) => d.day === "Miércoles");
         break;
       }
       case 5: {
@@ -34,7 +41,7 @@ const DailyEvents = () => {
         break;
       }
       case 7: {
-        filterForDay = dataEvents.filter((d) => d.day === "Sabado");
+        filterForDay = dataEvents.filter((d) => d.day === "Sábado");
         break;
       }
       default: {
@@ -42,42 +49,50 @@ const DailyEvents = () => {
       }
     }
 
-    const arr1 = filterForDay.filter((dat) => dat.eventType === 1)
-    const arr2 = filterForDay.filter((dat) => dat.eventType === 2)
+    filterForDay.forEach((d) => {
+      arraa.forEach((d1, i) => {
+        if (d.idEventType.eventName === d1[0].i) {
+          const resultado = d1.find((data) => data._id === d._id);
+          if (!resultado) {
+            d1.push(d);
+          }
+        }
+      });
+    });
+
+    // const arr1 = filterForDay.filter(
+    //   (dat) => dat.idEventType.eventName === "Misa"
+    // );
+
     return (
-      <div className="pt-3">
-        {arr1.length > 0 && (
-          <div className='pb-2'>
-          <h5 className='title-event-type'>Horarios de Misa</h5>
-          {
-          arr1.map((a, i) => (
-            <div key={i} className='pb-2'>
-            <div>
-            <span>{a.time} - {a.text}</span>
-            {a.additionalText && (
-              <p>{a.additionalText}</p>
-            )}
-            </div>
-            </div>
-          ))
-        }
-          </div>
-        )}
-        {arr2.length > 0 && (
-          <div className=''>
-          <h5 className='title-event-type'>Celebraciones</h5>
-          {
-          arr2.map((a, i) => (
-            <div key={i} className='pb-2'>
-            <div>
-            <span>{a.time} - {a.text}</span>
-            {a.additionalText && (
-              <p>{a.additionalText}</p>
-            )}
-            </div>
-            </div>
-          ))
-        }
+      <div className="">
+        {arraa && (
+          <div className="bg-ligth">
+            {arraa.map((data, i) => (
+              <div key={i}>
+                {data.length > 1 && (
+                  <>
+                    <h5 className="title-event-type">{data[0].i}</h5>
+                  </>
+                )}
+                {data.map((data1, i) => (
+                  <div key={i} className="">
+                    {data1.i ? null : (
+                      <>
+                        <div>
+                          <span>
+                            {data1.time} - {data1.text}
+                          </span>
+                          {data1.additionalText && (
+                            <p>{data1.additionalText}</p>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -126,8 +141,8 @@ const DailyEvents = () => {
 
   return (
     <div className="pt-3 container-event">
-      <h4 className='title-events'>Eventos cotidianos</h4>
-      <hr/>
+      <h4 className="title-events">Eventos cotidianos</h4>
+      <hr />
       <div>
         <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       </div>

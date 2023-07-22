@@ -9,7 +9,29 @@
   font-size: 18px;
   font-family:'Times New Roman', Times, serif
 }
+
 .image-news{
-  height: 500px;
+  height: 700px;
   /* object-fit: cover; */
+}
+
+.figure-body-news{
+  position: relative;
+  text-align: center;
+}
+.figure-body-news:before,
+.figure-body-news:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.img-body-news {
+  width: 40%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border-radius: 15px;
 }
