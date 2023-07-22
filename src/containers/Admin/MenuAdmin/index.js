@@ -8,7 +8,6 @@ import MenuNews from "../../../components/Admin/MenuNews";
 import MenuCategories from "../../../components/Admin/MenuCategories";
 import MenuAccount from "../../../components/Admin/MenuAccount";
 import { getUserById } from "../../../utils/queryAPI/user";
-import { getNews } from "../../../utils/queryAPI/news";
 import Unauthorized from "../../../components/Unauthorized";
 import { useParams } from "react-router-dom";
 import MenuSchedules from "../../../components/Admin/MenuSchedules";
