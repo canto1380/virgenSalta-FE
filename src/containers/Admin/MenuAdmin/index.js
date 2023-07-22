@@ -17,9 +17,7 @@ const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState([]);
   const [dataAuth, setDataAuth] = useState([]);
-  // const [tab, setTab] = useState("Noticias");
   const [userData, setUserData] = useState([]);
-  const [newsData, setNewsData] = useState([]);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   const {idTab} = useParams()
@@ -31,7 +29,6 @@ const MenuAdmin = ({ userInfo }) => {
   }, []);
   useEffect(() => {
     dataUser();
-    dataNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
   const dataUser = async () => {
@@ -42,10 +39,6 @@ const MenuAdmin = ({ userInfo }) => {
     setUserData(data);
   };
 
-  const dataNews = async () => {
-    const data = await getNews();
-    setNewsData(data);
-  };
   return (
     <Container
       fluid

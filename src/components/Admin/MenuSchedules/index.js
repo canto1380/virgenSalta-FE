@@ -72,6 +72,7 @@ const MenuSchedules = () => {
           newsRoute="news"
           data={eventType.allEvent}
           setIdEventType={setIdEventType}
+          setLimit={setLimit}
         />
         <ItemsCollapse
           title1={title1}
