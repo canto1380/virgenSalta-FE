@@ -54,6 +54,7 @@ const MenuCategories = () => {
               setSearch={setSearch}
               deleted={deleted}
               setDeleted={setDeleted}
+              setPageSelected={setPageSelected}
             />
             <HeaderList
               title="Listado de Categorías"
