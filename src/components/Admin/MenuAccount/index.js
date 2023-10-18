@@ -171,7 +171,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
         <Col xs={12} md={4} className={`btnAlign mt-3 text-end`}>
           <div className={`pt-4 pb-1 px-4`}>
             <Button
-              className={`section-btn ${editBand ? `aa` : ``}`}
+              className={`section-btn ${editBand ? `` : ``}`}
               onClick={() => setEditBand(!editBand)}
             >
               {" "}

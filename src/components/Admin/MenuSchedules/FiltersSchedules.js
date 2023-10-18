@@ -13,19 +13,21 @@ const FiltersSchedules = ({
   newsRoute,
   data,
   setIdEventType,
+  setIdImportantEventType,
+  typeBand
 }) => {
   const onChange = (e) => {
     setDeleted(e.target.value)
   }
   const changeIdNewsCategory = (e) => {
-    setIdEventType(e)
+    if(typeBand === 'Eventos') setIdEventType(e)
+    setIdImportantEventType(e)
   }
-
   let options = []
   data?.forEach((d) => {
     const option = {
       value: d._id,
-      label: d.eventName,
+      label: d.eventName ||d.name,
     }
     options.push(option)
   })
@@ -42,7 +44,7 @@ const FiltersSchedules = ({
       <div className='row d-flex justify-content-between align-items-center'>
         {newsRoute && (
           <Col xs={12} className='mb-3'>
-            <span className='me-4'>Eventos por tipo:</span>
+            <span className='me-4'>{typeBand} por tipo:</span>
             <Select
               onChange={changeIdNewsCategory}
               showSearch
@@ -63,7 +65,7 @@ const FiltersSchedules = ({
             />
           </Col>
         )}
-        <p className='mb-1 mt-4'>Filtros de eventos</p>
+        <p className='mb-1 mt-4'>Filtros de {typeBand}</p>
         <Col xs={12} lg={4} className='mb-3'>
           <Space direction='vertical' style={{ width: '100%' }}>
             <Search
@@ -77,7 +79,7 @@ const FiltersSchedules = ({
           </Space>
         </Col>
         <Col xs={12} lg={8} className='mb-3'>
-          <span className='me-4'>Eventos: </span>
+          <span className='me-4'>{typeBand}: </span>
           <Radio.Group onChange={onChange} value={deleted}>
             <Radio value={undefined}>Todos</Radio>
             <Radio value={true}>Eliminados</Radio>

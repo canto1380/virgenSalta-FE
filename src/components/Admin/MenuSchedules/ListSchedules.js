@@ -10,6 +10,7 @@ import { api } from '../../../utils/api'
 import '../menus.css'
 import Unauthorized from '../../Unauthorized'
 import ModalGeneric from '../../Modal'
+import moment from 'moment/moment'
 
 const ListSchedules = ({
   data,
@@ -23,9 +24,10 @@ const ListSchedules = ({
   dataRegisterEdit,
   setDataRegisterEdit,
   resetDataEdit,
-  // pageSelected,
-  // setPageSelected,
-  nameClass
+  nameClass,
+  title,
+  scheduleType,
+  data1,
 }) => {
   const [initLoading, setInitLoading] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -71,7 +73,6 @@ const ListSchedules = ({
       }
     } catch (error) {}
   }
-
   useEffect(() => {
     setInitLoading(false)
   }, [])
@@ -117,8 +118,18 @@ const ListSchedules = ({
                       </p>
                     ) : (
                       <p className='mb-0'>
-                        {item?.eventName} {item?.text} | {item?.day} -{' '}
-                        {item?.time}hs | {item?.idEventType?.eventName}
+                        {title === 'Eventos' ? (
+                          <span>
+                            {item?.eventName} {item?.text} | {item?.day} -{' '}
+                            {item?.time}hs | {item?.idEventType?.eventName}{' '}
+                          </span>
+                        ) : (
+                          <span>
+                            {item?.eventName} - {item?.description} |{' '}
+                            {item?.time}hs -{' '}
+                            {moment(item?.data).format('DD-MM-YYYY')}
+                          </span>
+                        )}
                       </p>
                     )}
                   </div>
@@ -151,6 +162,8 @@ const ListSchedules = ({
         userToken={userToken}
         band={band}
         setBand={setBand}
+        scheduleType={scheduleType}
+        data1={data1}
       />
     </div>
   )

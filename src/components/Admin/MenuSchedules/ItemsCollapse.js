@@ -19,10 +19,13 @@ const ItemsCollapse = ({
 }) => {
   const [visible, setVisible] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
+  const [scheduleType, setScheduleType] = useState('Tipos de eventos')
   const resetDataEdit = (item) => {
     setVisible(!visible)
     setDataRegisterEdit(item)
   }
+  console.log(title1)
+  console.log(title2)
   return (
     <div>
       <Collapse defaultActiveKey={['1']}>
@@ -30,12 +33,13 @@ const ItemsCollapse = ({
           header={title1}
           className='subTab'
           key='1'
-          extra={<HeaderPanel visible={visible} setVisible={setVisible} />}
+          extra={<HeaderPanel visible={visible} setVisible={setVisible} setScheduleType={setScheduleType} title={title1}/>}
         >
           <ListSchedules
-            data={data1.allEvent}
+            nameClass={'menuSchedules2'}
+            data={data1.allEvent || data1.allEventType}
             userToken={userToken}
-            routeAPI='eventType'
+            routeAPI={title1 === 'Tipos de eventos' ? 'eventType' : 'importantEventType' }
             keyType={true}
             band={band}
             setBand={setBand}
@@ -46,6 +50,8 @@ const ItemsCollapse = ({
             resetDataEdit={resetDataEdit}
             pageSelected={pageSelected}
             setPageSelected={setPageSelected}
+            title={title1}
+            scheduleType={scheduleType}
           />
 
         </Panel>
@@ -53,13 +59,14 @@ const ItemsCollapse = ({
           header={title2}
           className='subTab'
           key='2'
-          extra={<HeaderPanel visible={visible} setVisible={setVisible} />}
+          extra={<HeaderPanel visible={visible} setVisible={setVisible} setScheduleType={setScheduleType} title={title2}/>}
         >
           <ListSchedules
-            nameClass={'aa'}
-            data={data2.allDailyEvent}
+            nameClass={'menuSchedules2'}
+            data1={data1.allEvent || data1.allEventType}
+            data={data2.allDailyEvent || data2.allEvent}
             userToken={userToken}
-            routeAPI='dailyEvent'
+            routeAPI={title2 === 'Eventos' ? 'dailyEvent' : 'importantEvent' }
             keyType={false}
             band={band}
             setBand={setBand}
@@ -71,6 +78,8 @@ const ItemsCollapse = ({
             dataPag={data2}
             pageSelected={pageSelected}
             setPageSelected={setPageSelected}
+            title={title2}
+            scheduleType={scheduleType}
           />
         </Panel>
       </Collapse>
