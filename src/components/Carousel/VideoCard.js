@@ -11,7 +11,7 @@ const VideoCard = ({ data, i }) => {
         <iframe
           width="100%"
           height="200"
-          src="https://www.youtube.com/embed/YjBSl8v1u8w"
+          src="https://www.youtube.com/embed/YjBSl8v1u8w?origin=https://virgendesalta.netlify.app"
           title="Video de la Virgen de Salta"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
