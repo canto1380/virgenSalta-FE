@@ -48,7 +48,7 @@ const Home = () => {
         <hr className="my-5" />
         <PhotosGallery />
         <hr className="my-5" />
-        {/* <VideoGallery /> */}
+        <VideoGallery />
       </Container>
       <LayoutFoot />
     </div>
