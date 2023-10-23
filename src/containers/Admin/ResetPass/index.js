@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import { Button, Form, Input } from 'antd'
 import '../index.css'
@@ -10,7 +10,11 @@ const ResetPass = () => {
   const [errorServer, setErrorServer] = useState(false)
   const [errorValid, setErrorValid] = useState(false)
 
-  const handleSubmit = async () => {}
+  const handleSubmit = async () => {
+    setLoading(true)
+    setErrorServer(true)
+    setErrorValid(true)
+  }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
@@ -62,7 +66,6 @@ const ResetPass = () => {
                 )}
               </Form.Item>
             </Form>
-
           </Col>
         </Row>
         <Row className='justify-content-center align-items-center'>
