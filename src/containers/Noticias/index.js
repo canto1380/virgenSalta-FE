@@ -44,7 +44,7 @@ const Noticias = () => {
     const data = await getNewsCategory(params)
     setNewsCategoryData(data)
   }
-  
+
   return (
     <div className='bg-gradient-1'>
       <Layout />
@@ -63,11 +63,15 @@ const Noticias = () => {
             <div>
               <h5 className='text- pb-2'>Lista de Noticias</h5>
             </div>
-            {newsData?.map((noti, i) => (
-              <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
-                <CardNewsPage data={noti} />
-              </Col>
-            ))}
+            {newsData.length > 0 ? (
+              newsData?.map((noti, i) => (
+                <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
+                  <CardNewsPage data={noti} />
+                </Col>
+              ))
+            ) : (
+              <p className='text-danger fw-bold'>No hay noticias con los parametros buscados</p>
+            )}
             <Row>
               <Col>
                 <PaginationAdmin
@@ -80,7 +84,9 @@ const Noticias = () => {
             </Row>
           </Row>
         ) : (
-          <Spinner animation='grow' variant='info' />
+          <div className='text-center'>
+            <Spinner animation='grow' variant='info' />
+          </div>
         )}
       </Container>
       <LayoutFoot />

@@ -1,12 +1,11 @@
-import { Pagination } from "antd";
+import { Pagination } from 'antd'
 
 const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
   const onShowSizeChange = (page, pageSize) => {
-    console.log(pageSize)
-    setLimit(pageSize);
-  };
+    setLimit(pageSize)
+  }
   return (
-    <div className="menuContainer text-end">
+    <div className='menuContainer text-end'>
       <Pagination
         defaultCurrent={pageSelected}
         current={pageSelected}
@@ -18,6 +17,6 @@ const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {
       />
       <br />
     </div>
-  );
-};
-export default PaginationAdmin;
+  )
+}
+export default PaginationAdmin

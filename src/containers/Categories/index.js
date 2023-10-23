@@ -36,7 +36,6 @@ const Categories = () => {
           typeFlag='newsCategory'
           setSearch={setSearch}
           setPageSelected={setPageSelected}
-
         />
         {newsCategoryData ? (
           <Row className='mt-3 pb-5'>
@@ -60,7 +59,9 @@ const Categories = () => {
             </Row>
           </Row>
         ) : (
-          <Spinner animation="grow" variant="info" />
+          <div className='text-center'>
+            <Spinner animation='grow' variant='info' />
+          </div>
         )}
       </Container>
       <LayoutFoot />

@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import GenericCard from "./GenericCard";
-const NewCarousel = ({ data }) => {
+const NewCarousel = ({ data, type }) => {
   return (
     <div>
       <Swiper
@@ -31,7 +31,7 @@ const NewCarousel = ({ data }) => {
       >
         {data?.map((d, i) => (
           <SwiperSlide key={i}>
-            <GenericCard data={d} photos1={d.photos ? d?.photos[0] : d?.photo} />
+            <GenericCard data={d} photos1={d.photos ? d?.photos[0] : d?.photo} type={type}/>
           </SwiperSlide>
         ))}
       </Swiper>

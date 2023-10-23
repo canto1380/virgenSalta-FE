@@ -13,7 +13,6 @@ const VideoCard = ({ data, i }) => {
   const api_key = 'AIzaSyC530nKCd3axC0fxS2yaYAIwaPnC24guZ4'
   const url = `https://www.googleapis.com/youtube/v3/videos?key=${api_key}&id=${'YjBSl8v1u8w'}&part=snippet`
   const getVideoYoutube = async () => {
-    console.log(url)
     const res = await axios(url)
     setVideo(res?.data?.items[0]?.id)
   }
