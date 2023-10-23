@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getNewsCategory } from '../../utils/queryAPI/newsCategory'
 import Layout from '../../components/Layout/Layout'
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
@@ -13,8 +13,10 @@ import NewsFilter from '../Noticias/NewsFilter'
 
 const SingleNewsCategory = () => {
   const { nameCategory } = useParams()
+  const navigate = useNavigate()
 
   const [allNewsCategory, setAllNewsCategory] = useState([])
+  const [singleNewsCategory, setSingleNewsCategory] = useState()
   const [search, setSearch] = useState('')
   const [pageSelected, setPageSelected] = useState(1)
   const [news, setNews] = useState(null)
@@ -32,8 +34,16 @@ const SingleNewsCategory = () => {
     const params = { limit: 1000, deleted: false }
     const data = await getNewsCategory(params)
     setAllNewsCategory(data.allNewsCategory)
-   
+    const newsCategory = data.allNewsCategory.filter(
+      (d) => d.nameCategory.replace(/ /g, '-') === nameCategory
+    )
+    if (newsCategory.length === 0) {
+      navigate('/home')
+    } else {
+      setSingleNewsCategory(newsCategory[0]?.backdrop)
+    }
   }
+  console.log(singleNewsCategory)
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,7 +75,10 @@ const SingleNewsCategory = () => {
   return (
     <div className='bg-gradient-1'>
       <Layout />
-      <BackdropSections title={BORRAR_AL_DESARROLLAR} />
+      <BackdropSections
+        title={BORRAR_AL_DESARROLLAR}
+        img={singleNewsCategory}
+      />
       <Container className='mt-3 pt-5'>
         <NewsFilter
           typeFlag='newsCategory'

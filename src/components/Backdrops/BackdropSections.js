@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ImageBackdrop from "../../images/logo.jpg";
 import "../News/news.css";
-const BackdropSections = ({title}) => {
+const BackdropSections = ({title, img}) => {
   const [imageBackdrop, setImageBackdrop] = useState("");
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const BackdropSections = ({title}) => {
       {imageBackdrop !== "" ? (
         <Container
           fluid
-          style={{ backgroundImage: `url(${imageBackdrop})` }}
+          style={{ backgroundImage: `url(${img? img : imageBackdrop})` }}
           className="imgFondo"
         >
           <Row className="backdropNew">
