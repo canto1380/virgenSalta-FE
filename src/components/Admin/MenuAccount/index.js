@@ -394,7 +394,7 @@ const MenuAccount = ({ tokenAuth, dataAuth }) => {
                     role="status"
                     aria-hidden="true"
                   />
-                  <span className="ms-2">Updating</span>
+                  <span className="ms-2">Actualizando</span>
                 </Button>
               ) : (
                 <Button

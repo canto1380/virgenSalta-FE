@@ -94,7 +94,6 @@ const Login = ({ bandera, setBandera }) => {
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 17 }}
               initialValues={{ remember: true }}
-              // onSubmit={handleSubmit}
               onFinish={handleSubmit}
               onFinishFailed={onFinishFailed}
               autoComplete='off'

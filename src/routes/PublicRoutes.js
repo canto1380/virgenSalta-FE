@@ -10,6 +10,7 @@ import Login from '../containers/Admin/login'
 import Categories from '../containers/Categories'
 import SingleNewsCategory from '../containers/SingleNewsCategory'
 import ResetPass from '../containers/Admin/ResetPass'
+import ValidateToken from '../containers/Admin/ResetPass/FormValidateToken'
 
 const PublicRoutes = ({ bandera, setBandera, token }) => {
   return (
@@ -34,6 +35,7 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
         token={token}
       />
       <Route exact path='/admin/recuperar-clave' element={<ResetPass />} />
+      <Route exact path='/admin/resetear-clave/:email/:token' element={<ValidateToken />} />
       <Route path='*' element={<Navigate to='/home' replace />} />
     </Routes>
   )
