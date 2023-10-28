@@ -1,16 +1,19 @@
 .container-footer {
   background-color: rgb(49, 49, 49);
 }
+.ps-footer-section {
+  padding-left: 10vw !important;
+}
 
 .img-foot {
-  width: 9vw;
+  width: 14vw;
   height: auto;
 }
 
 .title-section-footer {
   font-size: 18px !important;
   color: rgb(216, 216, 216) !important;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .container-section a {
@@ -20,7 +23,7 @@
   font-weight: 600;
 }
 .container-section p {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   color: rgb(216, 216, 216);
 }
 
@@ -28,8 +31,42 @@
   color: rgb(216, 216, 216);
   font-size: 28px;
 }
+.icon-footer1 {
+  color: rgb(216, 216, 216);
+  font-size: 38px;
+}
 
 .text-contact-footer {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   color: rgb(216, 216, 216);
+}
+.link-location {
+  color: white;
+  text-decoration: none;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+}
+.link-location:hover {
+  color: white;
+  font-weight: 600 !important;
+}
+.img-foot-phone {
+  width: 18vw;
+  height: auto;
+}
+.img-foot-app {
+  width: 15vw;
+  height: auto;
+}
+
+@media (max-width: 576px) {
+  .ps-footer-section {
+    padding-left: 0px !important;
+  }
+  .img-foot-phone{
+    width: 30vw;
+  }
+  .img-foot-app {
+    width: 28vw;
+  }
 }

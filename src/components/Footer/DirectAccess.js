@@ -8,19 +8,19 @@ const DirectAccess = () => {
       </div>
       <div className='container-section'>
       <a href={'/'} className="">
-        <p>Historia Aparición</p>
+        <p>Pedidos de oración</p>
         </a>
         <a href={'/'} className="">
-        <p>Historia del Santuario</p>
+        <p>Horarios</p>
         </a>
         <a href={'/'} className="">
-        <p>Acceso 3</p>
+        <p>Capilla en vivo</p>
         </a>
         <a href={'/'} className="">
-        <p>Acceso 4</p>
+        <p>Instagram</p>
         </a>
         <a href={'/'} className="">
-        <p>Acceso 5</p>
+        <p>Youtube</p>
         </a>
       </div>
 
