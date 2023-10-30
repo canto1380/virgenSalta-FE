@@ -17,8 +17,8 @@ const ContactFooter = () => {
         >
           <img src={Logo} alt='Virgen Maria' className='img-foot' />
         </div>
-        <div className='d-flex justify-content-start'>
-          <ImLocation2 className='icon-footer1 me-2' />{' '}
+        <div className='d-flex justify-content-start pb-1'>
+          <ImLocation2 className='icon-footer me-2' />{' '}
           <p className='text-contact-footer'>
             <a
               href='https://maps.app.goo.gl/NqQMrtvWN4QE7pQg7'
@@ -28,11 +28,11 @@ const ContactFooter = () => {
             </a>
           </p>
         </div>
-        <div className='d-flex justify-content-start'>
+        <div className='d-flex justify-content-start pb-1'>
           <FiSmartphone className='icon-footer me-2' />{' '}
           <p className='text-contact-footer'>+5493874390030</p>
         </div>
-        <div className='d-flex justify-content-start'>
+        <div className='d-flex justify-content-start pb-1'>
           <HiOutlineMail className='icon-footer me-2' />{' '}
           <p className='text-contact-footer'>
             contacto@inmaculadamadre-salta.org
