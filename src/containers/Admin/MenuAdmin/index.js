@@ -11,6 +11,7 @@ import { getUserById } from "../../../utils/queryAPI/user";
 import Unauthorized from "../../../components/Unauthorized";
 import { useParams } from "react-router-dom";
 import MenuSchedules from "../../../components/Admin/MenuSchedules";
+import MenuCarousel from "../../../components/Admin/MenuCarousel";
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false);
@@ -51,7 +52,14 @@ const MenuAdmin = ({ userInfo }) => {
         dataAuth={dataAuth}
       />
       <Container fluid className='container-admin-data'>
-
+      {idTab === "carousel" && (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuCarousel
+            tokenAuth={tokenAuth}
+            dataAuth={userData}
+          />
+        </div>
+      )}
       {idTab === "noticias" && (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
           <MenuNews

@@ -1,30 +1,39 @@
-import React from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiArrowBack } from "react-icons/bi";
-import { Button } from "react-bootstrap";
+import React from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { BiArrowBack } from 'react-icons/bi'
+import { Button } from 'antd'
 
-const HeaderList = ({ title, formAdd, setFormAdd, loading, setLoading, formEdit, setFormEdit, resetValuesEdit }) => {
-
-  const changeBand = ()=> {
+const HeaderList = ({
+  title,
+  formAdd,
+  setFormAdd,
+  loading,
+  setLoading,
+  formEdit,
+  setFormEdit,
+  resetValuesEdit,
+}) => {
+  const changeBand = () => {
     setFormAdd(!formAdd)
   }
-  const changeBandRetur =() => {
+  const changeBandRetur = () => {
     resetValuesEdit(null)
     setFormAdd(false)
     setFormEdit(false)
   }
   return (
-    <div className="menuContainer mb-0 d-flex justify-content-between align-items-center">
+    <div className='menuContainer mb-0 d-flex justify-content-between align-items-center'>
       <div>
-        <p className="fw-bolder mb-0">{formEdit ? 'Editar Categoría' : title}</p>
+        <p className='fw-bolder mb-0'>
+          {formEdit ? 'Editar Categoría' : title}
+        </p>
       </div>
       <div>
         {!formAdd && !formEdit ? (
           <Button
             onClick={changeBand}
-            variant="outline"
-            to={"/"}
-            className="btn section-btn d-flex align-items-center"
+            // href={'/'}
+            className='btn section-btn d-flex align-items-center'
           >
             <AiOutlinePlus
               style={{
@@ -37,9 +46,11 @@ const HeaderList = ({ title, formAdd, setFormAdd, loading, setLoading, formEdit,
         ) : (
           <Button
             onClick={changeBandRetur}
-            variant="outline"
-            to={"/"}
-            className={`btn section-btn d-flex align-items-center ${loading && `enabledField`}`}
+            variant='outline'
+            to={'/'}
+            className={`btn section-btn d-flex align-items-center ${
+              loading && `enabledField`
+            }`}
           >
             <BiArrowBack
               style={{
@@ -52,7 +63,7 @@ const HeaderList = ({ title, formAdd, setFormAdd, loading, setLoading, formEdit,
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HeaderList;
+export default HeaderList

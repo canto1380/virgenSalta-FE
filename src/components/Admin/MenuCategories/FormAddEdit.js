@@ -12,7 +12,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   const [serverError, setServerError] = useState(false);
 
   const URL_FIREBASE_IMG = "img-categorias";
-
+  console.log(dataRegisterEdit)
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {

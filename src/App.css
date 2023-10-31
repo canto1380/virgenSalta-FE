@@ -21,7 +21,7 @@
   font-size: 20px;
 }
 .section-btn {
-  background-color: rgba(21, 64, 204, 0.705) !important;
+  background-color: #2b9ac6ba !important;
   border: 0 !important;
   font-weight: 500 !important;
   color: white !important;
@@ -112,6 +112,16 @@
 .preview-upload{
   width: 100px;
   height: 100px;
+}
+.preview-upload-video{
+  width: 150px;
+  height: 150px;
+}
+.btnUploadVideo{
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  border: 1px dashed rgb(123, 123, 123);
 }
 
 .container-preview{

@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app'
 // import { getAnalytics } from "firebase/analytics";
 import {
   getStorage,
@@ -7,8 +7,8 @@ import {
   uploadBytesResumable,
   listAll,
   deleteObject,
-} from "firebase/storage";
-import { v4 } from "uuid";
+} from 'firebase/storage'
+import { v4 } from 'uuid'
 
 const {
   REACT_APP_FIREBASE_API_KEY,
@@ -17,7 +17,7 @@ const {
   REACT_APP_FIREBASE_STORAGE_BUCKET,
   REACT_APP_FIREBASE_MESSAGING_SENDERING,
   REACT_APP_FIREBASE_APP_ID,
-  REACT_APP_FIREBASE_MEASUREMENT_ID
+  REACT_APP_FIREBASE_MEASUREMENT_ID,
 } = process.env
 const firebaseConfig = {
   apiKey: REACT_APP_FIREBASE_API_KEY,
@@ -27,60 +27,73 @@ const firebaseConfig = {
   messagingSenderId: REACT_APP_FIREBASE_MESSAGING_SENDERING,
   appId: REACT_APP_FIREBASE_APP_ID,
   measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID,
-};
+}
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app);
-export const storage = getStorage(app);
-
-
-// export const uploadFile = async(file) => {
-//   const storageRef = ref(storage, v4());
-//   await uploadBytes(storageRef, file);
-//   const url = await getDownloadURL(storageRef);
-//   return url
-// };
+export const storage = getStorage(app)
 
 export const uploadFile = async (url, file, updateCb) => {
-  const storageRef = ref(storage, `/${url}/`+v4());
-  const uploadFile = uploadBytesResumable(storageRef, file);
+  if (file.type.includes('video')) {
+    const storageRef = ref(storage, `/${url}/` + v4())
+    const uploadFile = uploadBytesResumable(storageRef, file)
+    return new Promise((res, rej) => {
+      return uploadFile.on(
+        'state_changed',
+        updateCb,
+        () => rej(null),
+        () => {
+          getDownloadURL(uploadFile.snapshot.ref).then((downloadURL) => {
+            res(downloadURL)
+          })
+        }
+      )
+    })
+  } else {
+    console.log('no es video')
+  }
+}
+export const uploadFileVideo = async (url, file, updateCb) => {
+  const storageRef = ref(storage, `/${url}/` + v4())
+  const uploadFile = uploadBytesResumable(storageRef, file)
   return new Promise((res, rej) => {
     return uploadFile.on(
-      "state_changed",
+      'state_changed',
       updateCb,
       () => rej(null),
       () => {
         getDownloadURL(uploadFile.snapshot.ref).then((downloadURL) => {
-          res(downloadURL);
-        });
+          res(downloadURL)
+        })
       }
-    );
-  });
-};
+    )
+  })
+}
 
 /** Devuelve las referencias de los archivos buscados por id */
 export const listFile = async (id) => {
-  let as = [];
-  const storageRef = ref(storage, "/");
+  let as = []
+  const storageRef = ref(storage, '/')
   return new Promise((res, rej) => {
     listAll(storageRef).then((d) => {
       d.items.forEach((data) => {
         id.forEach((idData) => {
           if (idData.includes(data.fullPath)) {
-            as.push(data);
+            as.push(data)
           }
-        });
-      });
-      res(as);
-    });
-  });
-};
-
-export const deleteFile = async(url) => {
-  const storageRef= ref(storage, url)
-  deleteObject(storageRef).then(() => {
-  }).catch((error) => {
-    console.log(error)
+        })
+      })
+      res(as)
+    })
   })
+}
+
+export const deleteFile = async (url) => {
+  const storageRef = ref(storage, url)
+  deleteObject(storageRef)
+    .then(() => {})
+    .catch((error) => {
+      console.log(error)
+    })
 }

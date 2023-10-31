@@ -5,7 +5,7 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
 } from "react-icons/bs";
-import { BiCategoryAlt, BiUserCircle, BiLogOut, BiTime } from "react-icons/bi";
+import { BiCategoryAlt, BiUserCircle, BiLogOut, BiTime, BiCarousel } from "react-icons/bi";
 import "../sidebar.css";
 import { deleteCookies, deleteToken } from "../../../helpers/helpers";
 import { Link } from "react-router-dom";
@@ -21,6 +21,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
   };
 
   const itemsSideBar = [
+    {
+      title: "carousel",
+      iconName: <BiCarousel className="sizeIcon" />,
+      name: "Carousel",
+    },
     {
       title: "noticias",
       iconName: <BsNewspaper className="sizeIcon" />,

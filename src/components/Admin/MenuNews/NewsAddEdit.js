@@ -26,7 +26,7 @@ const NewsAddEdit = ({
   const [serverError, setServerError] = useState(false)
 
   const URL_FIREBASE_IMG = 'img-noticias'
-
+  
   const getPreview = (file) => {
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)
