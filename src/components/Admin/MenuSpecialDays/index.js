@@ -1,50 +1,52 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import FiltersAdmin from "../FiltersAdmin";
-import HeaderList from "../HeaderList";
-import ListElements from "../ListElements";
-import { getNewsCategory } from "../../../utils/queryAPI/newsCategory";
-import { User } from "../../../context/userProvider";
-import FormAddEdit from "./FormAddEdit";
-import PaginationAdmin from "../Pagination";
-import HeaderBackdrop from "../HeaderBackdrop";
+import React, { useContext, useEffect, useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import FiltersAdmin from '../FiltersAdmin'
+import HeaderList from '../HeaderList'
+import ListElements from '../ListElements'
+import PaginationAdmin from '../Pagination'
+import { User } from '../../../context/userProvider'
+import { getSpecialDays } from '../../../utils/queryAPI/specialDays'
+import SpecialDaysAddEdit from './SpecialDayAddEdit'
+import HeaderBackdrop from '../HeaderBackdrop'
 
-const MenuCategories = ({idTab}) => {
-  const [search, setSearch] = useState("");
-  const [deleted, setDeleted] = useState(undefined);
+const MenuSpecialDays = ({ idTab }) => {
+  const [search, setSearch] = useState('')
+  const [deleted, setDeleted] = useState(undefined)
   const [limit, setLimit] = useState(10)
-  const [newsCategoryData, setNewsCategoryData] = useState([]);
-  const [band, setBand] = useState(false);
-  const [formAdd, setFormAdd] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [pageSelected, setPageSelected] = useState(1);
+  const [specialDaysData, setSpecialDaysData] = useState([])
+  const [band, setBand] = useState(false)
+  const [formAdd, setFormAdd] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [pageSelected, setPageSelected] = useState(1)
   const [formEdit, setFormEdit] = useState(false)
-  const [dataRegisterEdit, setDataRegisterEdit ] = useState(null)
+  const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
 
   const {
     state: { userToken },
-  } = useContext(User);
+  } = useContext(User)
 
   useEffect(() => {
-    dataNewsCategory();
+    dataSpecialDays()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected, limit]);
+  }, [search, deleted, pageSelected, band, limit])
 
-  const dataNewsCategory = async () => {
-    const params = { search, deleted, page: pageSelected, limit };
-    const data = await getNewsCategory(params);
-    setNewsCategoryData(data);
-  };
-  const resetValuesEdit =(valueEdit) => {
+  const dataSpecialDays = async () => {
+    const params = { search, deleted, page: pageSelected, limit }
+    const data = await getSpecialDays(params)
+    setSpecialDaysData(data)
+  }
+
+  const resetValuesEdit = (valueEdit) => {
     setDataRegisterEdit(valueEdit)
     setFormEdit(!formEdit)
   }
+
   return (
     <Container fluid>
       <Row>
-        <Col className="mt-3">
+        <Col className='mt-3'>
           <div className={`pt-4 pb-1 px-4`}>
-            <h3>Categorías</h3>
+            <h3>Jornadas Especiales</h3>
           </div>
         </Col>
       </Row>
@@ -59,7 +61,7 @@ const MenuCategories = ({idTab}) => {
             />
             <HeaderBackdrop title={'Foto Portada'} idTab={idTab} bandSelect={true}/>
             <HeaderList
-              title="Listado de Categorías"
+              title='Listado de jornadas'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -67,15 +69,15 @@ const MenuCategories = ({idTab}) => {
               resetValuesEdit={resetValuesEdit}
             />
             <ListElements
-              data={newsCategoryData?.allNewsCategory}
+              data={specialDaysData?.allSpecialDays}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='newsCategory'
+              routeAPI='specialDays'
             />
             <PaginationAdmin
-              data={newsCategoryData}
+              data={specialDaysData}
               pageSelected={pageSelected}
               setPageSelected={setPageSelected}
               setLimit={setLimit}
@@ -86,8 +88,8 @@ const MenuCategories = ({idTab}) => {
         <Row>
           <Col>
             <HeaderList
-              title="Nueva categoría"
-              titleEdit='Editar categoría'
+              title='Nueva jornada'
+              titleEdit='Editar jornada'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -96,7 +98,7 @@ const MenuCategories = ({idTab}) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <FormAddEdit
+            <SpecialDaysAddEdit
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
@@ -105,9 +107,8 @@ const MenuCategories = ({idTab}) => {
           </Col>
         </Row>
       )}
-
     </Container>
-  );
-};
+  )
+}
 
-export default MenuCategories;
+export default MenuSpecialDays

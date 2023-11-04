@@ -113,6 +113,11 @@
   width: 100px;
   height: 100px;
 }
+.preview-upload-backdrop{
+  border: 3px solid rgb(65, 93, 132);
+  width: 300px;
+  height: 300px;
+}
 .preview-upload-video{
   width: 150px;
   height: 150px;
@@ -141,4 +146,7 @@ color: black !important;
 }
 .btn-contianer-delete{
   position: relative;
+}
+.text-important{
+  font-size: 12px;
 }

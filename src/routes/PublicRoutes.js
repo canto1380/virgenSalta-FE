@@ -11,6 +11,8 @@ import Categories from '../containers/Categories'
 import SingleNewsCategory from '../containers/SingleNewsCategory'
 import ResetPass from '../containers/Admin/ResetPass'
 import ValidateToken from '../containers/Admin/ResetPass/FormValidateToken'
+import SpecialDaysPage from '../containers/SpecialDays'
+import SingleSpecialDays from '../containers/SingleSpecialDays'
 
 const PublicRoutes = ({ bandera, setBandera, token }) => {
   return (
@@ -27,6 +29,8 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
       <Route exact path='/horarios' element={<Schedules />} />
       <Route exact path='/pedido-oracion' element={<PrayerRequest />} />
       <Route exact path='/vivo-capilla' element={<LiveChapel />} />
+      <Route exact path='/jornadas' element={<SpecialDaysPage />} />
+      <Route exact path='/jornadas/:title' element={<SingleSpecialDays />} />
 
       <Route
         exact
@@ -35,7 +39,11 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
         token={token}
       />
       <Route exact path='/admin/recuperar-clave' element={<ResetPass />} />
-      <Route exact path='/admin/resetear-clave/:email/:token' element={<ValidateToken />} />
+      <Route
+        exact
+        path='/admin/resetear-clave/:email/:token'
+        element={<ValidateToken />}
+      />
       <Route path='*' element={<Navigate to='/home' replace />} />
     </Routes>
   )

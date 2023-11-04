@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import ReactPlayer from 'react-player'
 import { getCarousel } from '../../utils/queryAPI/carousel'
+import Spinn from '../Spinn/Spinn'
 
 const Cover = () => {
   const [carousel, setCarousel] = useState('')
@@ -10,7 +11,6 @@ const Cover = () => {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex)
   }
-  console.log(index)
 
   useEffect(() => {
     getData()
@@ -21,17 +21,18 @@ const Cover = () => {
     setCarousel(data)
   }
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} controls={false}>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
       {carousel ? (
         carousel.allCarousel.map((d) => (
           <Carousel.Item interval={4000} pause='hover'>
             <ReactPlayer
+              muted
+              playing
               url={d.file}
               width='100%'
               height='100%'
               pip={true}
               controls={true}
-              playing={true}
               progressInterval={1000}
               config={{
                 file: {
@@ -45,7 +46,9 @@ const Cover = () => {
           </Carousel.Item>
         ))
       ) : (
-        <>Cargando</>
+        <div style={{width: '100%', height:'500px'}}>
+          <Spinn type='data'/>
+        </div>
       )}
     </Carousel>
   )

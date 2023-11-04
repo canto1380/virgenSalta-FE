@@ -1,49 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, Select, Spin } from 'antd'
-import { api } from '../../../utils/api'
-import { deleteFile, uploadFile } from '../../../firebase/config'
+import { Form, Input, Button, Spin } from 'antd'
+import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
+import { uploadFile, deleteFile } from '../../../firebase/config'
+import { api } from '../../../utils/api'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-// import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
-
-const NewsAddEdit = ({
-  data,
-  dataRegisterEdit,
+const SpecialDaysAddEdit = ({
+  userToken,
   loading,
   setLoading,
-  userToken,
+  dataRegisterEdit,
 }) => {
-  const [description, setDescription] = useState()
   const [imgData, setImgData] = useState()
   const [preview, setPreview] = useState({
     preview: '',
     progress: 0,
   })
+  const [description, setDescription] = useState()
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  const URL_FIREBASE_IMG = 'img-noticias'
-  
+  const URL_FIREBASE_IMG = 'img-jornadas'
+
   const getPreview = (file) => {
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)
     return new Promise((res, rej) => {
-      fileReader.onload = () => {
-        res(fileReader.result)
-      }
+      fileReader.onloadend = () => res(fileReader.result)
     })
   }
+
   const handleMultiple = async (e) => {
     if (!e.target.files || !e.target.files.length) return
     const files = Array.from(e.target.files)
     setImgData(files)
   }
+
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {
-        /** Carga IMG en Firebase **/
         if (!imgData) {
           alert('Debe seleccionar una/s imagen/es para continuar')
           return
@@ -57,16 +53,15 @@ const NewsAddEdit = ({
           return uploadFile(URL_FIREBASE_IMG, file)
         })
         const ls = await Promise.all(promises)
-        /** Carga IMG en Firebase **/
 
         values.description = description
         values.photos = ls
-        const res = await api('POST', 'news', values, userToken)
+        const res = await api('POST', 'specialDays', values, userToken)
         if (res.status === 200) {
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = '/admin/home/noticias'
+            window.location.href = '/admin/home/jornadas'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -78,10 +73,6 @@ const NewsAddEdit = ({
           }, 3000)
         }
       } else {
-        /** Carga IMG en Firebase **/
-        /** Si no existe imgData o no tiene nada y preview tampoco */
-        console.log(imgData)
-        console.log(preview)
         if (
           (!imgData || imgData.length === 0) &&
           Object.keys(preview).length === 0
@@ -91,7 +82,6 @@ const NewsAddEdit = ({
         }
         let ls, dataImgUpdate
         let arr = []
-        /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
         if (imgData) {
           const objects = {}
           for (let file of imgData) {
@@ -121,33 +111,31 @@ const NewsAddEdit = ({
             deleteFile(d2)
           }
         })
-        /** Carga IMG en Firebase **/
-
         values.photos = dataImgUpdate
         values.description =
           description === undefined ? dataRegisterEdit.description : description
-        // const res = await api(
-        //   'PATCH',
-        //   `news/${dataRegisterEdit._id}`,
-        //   values,
-        //   userToken
-        // )
+        const res = await api(
+          'PATCH',
+          `specialDays/${dataRegisterEdit._id}`,
+          values,
+          userToken
+        )
 
-        // if (res.status === 200) {
-        //   setLoading(true)
-        //   setTimeout(() => {
-        //     setLoading(false)
-        //     window.location.href = '/admin/home/noticias'
-        //   }, 2500)
-        // }
-        // if (res?.response?.status === 400) {
-        //   const arraysError = res?.response?.data?.errors
-        //   setMessageError(arraysError)
-        //   setDataError(true)
-        //   setTimeout(() => {
-        //     setDataError(false)
-        //   }, 3000)
-        // }
+        if (res.status === 200) {
+          setLoading(true)
+          setTimeout(() => {
+            setLoading(false)
+            window.location.href = '/admin/home/jornadas'
+          }, 2500)
+        }
+        if (res?.response?.status === 400) {
+          const arraysError = res?.response?.data?.errors
+          setMessageError(arraysError)
+          setDataError(true)
+          setTimeout(() => {
+            setDataError(false)
+          }, 3000)
+        }
       }
     } catch (error) {
       setServerError(error)
@@ -156,6 +144,7 @@ const NewsAddEdit = ({
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
+
   const deleteImg = (e) => {
     const resultado = {}
     let resultado1 = {}
@@ -179,6 +168,7 @@ const NewsAddEdit = ({
       setImgData(resultado1)
     }
   }
+
   useEffect(() => {
     if (!imgData) {
       setPreview(undefined)
@@ -210,55 +200,42 @@ const NewsAddEdit = ({
   return (
     <div className='menuContainer'>
       <Form
-        labelCol={{
-          span: 22,
-        }}
-        wrapperCol={{
-          span: 22,
-        }}
-        layout='vertical'
-        style={{
-          marginLeft: '2vh',
-        }}
-        onFinish={handleSubmit}
-        onFinishFailed={onFinishFailed}
+        labelCol={{ span: 22 }}
+        wrapperCol={{ span: 22 }}
         initialValues={{
           title: dataRegisterEdit?.title,
           subtitle: dataRegisterEdit?.subtitle,
           description: dataRegisterEdit?.description,
-          idNewsCategory: dataRegisterEdit?.idNewsCategory?._id,
-          caption: dataRegisterEdit?.caption,
         }}
+        onFinish={handleSubmit}
+        onFinishFailed={onFinishFailed}
+        autoComplete='off'
+        layout='vertical'
+        style={{ marginLeft: '2vh' }}
       >
         <Form.Item
-          label='Título Noticia'
+          label='Título'
           name='title'
-          rules={[{ required: true, message: 'Debe ingresar un nombre' }]}
+          rules={[
+            {
+              required: true,
+              message: 'Debe ingresar un titulo entre 5 y 60 caracteres',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label='Subtítulo'
           name='subtitle'
-          rules={[{ required: true, message: 'Debe ingresar un texto' }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label='Categoría'
-          name='idNewsCategory'
           rules={[
-            { required: true, message: 'Debe seleccionar una categoría' },
+            {
+              required: true,
+              message: 'Debe ingresar un texto entre 5 y 150 caracteres',
+            },
           ]}
         >
-          <Select>
-            {data.map((d) => (
-              <Select.Option key={d?._id} value={d?._id}>
-                {d?.nameCategory}
-              </Select.Option>
-            ))}
-          </Select>
+          <Input />
         </Form.Item>
 
         <div>
@@ -275,6 +252,7 @@ const NewsAddEdit = ({
             setDescription(data)
           }}
         />
+
         <div className='mt-4'>
           <p>
             <span className='text-danger fw-bolder me-1'>*</span>Imágenes
@@ -318,14 +296,6 @@ const NewsAddEdit = ({
         </div>
 
         <Form.Item
-          label='Pie de foto principal (Primera foto seleccionada)'
-          name='caption'
-          rules={[{ required: true, message: 'Debe ingresar un texto' }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
           className='text-end'
           labelCol={{ span: 1 }}
           wrapperCol={{ span: 22 }}
@@ -358,4 +328,4 @@ const NewsAddEdit = ({
   )
 }
 
-export default NewsAddEdit
+export default SpecialDaysAddEdit

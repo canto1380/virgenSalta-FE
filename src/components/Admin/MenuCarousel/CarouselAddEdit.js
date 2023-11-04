@@ -17,7 +17,6 @@ const CarouselAddEdit = ({
   const [serverError, setServerError] = useState(false)
 
   const URL_FIREBASE_IMG = 'videos-carousel'
-
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {
@@ -32,7 +31,7 @@ const CarouselAddEdit = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = './carousel'
+            window.location.href = '/admin/home/carousel'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -70,7 +69,7 @@ const CarouselAddEdit = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = '/carousel'
+            window.location.href = '/admin/home/jornadas/carousel'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -114,7 +113,6 @@ const CarouselAddEdit = ({
     setPreview(dataRegisterEdit.file)
   }, [dataRegisterEdit])
 
-  console.log(dataRegisterEdit)
   return (
     <div className='menuContainer'>
       <Form
@@ -146,7 +144,7 @@ const CarouselAddEdit = ({
           {preview && (
             <div className='container-preview'>
               <video
-                src={dataRegisterEdit?.file || preview}
+                src={preview}
                 id='img-preview-news'
                 className='preview-upload-video me-4  border border-3'
                 alt='preview'

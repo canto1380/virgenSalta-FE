@@ -1,60 +1,67 @@
-import React, { useState, useEffect, useContext } from "react";
-import "./menuNews.css";
-import { Container, Row, Col } from "react-bootstrap";
-import { getNews } from "../../../utils/queryAPI/news";
-import FiltersAdmin from "../FiltersAdmin";
-import HeaderList from "../HeaderList";
-import ListElements from "../ListElements";
-import PaginationAdmin from "../Pagination";
-import { User } from "../../../context/userProvider";
-import { getNewsCategory } from "../../../utils/queryAPI/newsCategory";
-import NewsAddEdit from "./NewsAddEdit";
+import React, { useState, useEffect, useContext } from 'react'
+import './menuNews.css'
+import { Container, Row, Col } from 'react-bootstrap'
+import { getNews } from '../../../utils/queryAPI/news'
+import FiltersAdmin from '../FiltersAdmin'
+import HeaderList from '../HeaderList'
+import ListElements from '../ListElements'
+import PaginationAdmin from '../Pagination'
+import { User } from '../../../context/userProvider'
+import { getNewsCategory } from '../../../utils/queryAPI/newsCategory'
+import NewsAddEdit from './NewsAddEdit'
+import HeaderBackdrop from '../HeaderBackdrop'
 
-const MenuNews = () => {
-  const [search, setSearch] = useState("");
-  const [deleted, setDeleted] = useState(undefined);
+const MenuNews = ({ idTab }) => {
+  const [search, setSearch] = useState('')
+  const [deleted, setDeleted] = useState(undefined)
   const [idNewsCategory, setIdNewsCategory] = useState(undefined)
   const [limit, setLimit] = useState(10)
-  const [newsData, setNewsData] = useState([]);
-  const [newsCategoryData, setNewsCategoryData] = useState([]);
-  const [band, setBand] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [pageSelected, setPageSelected] = useState(1);
-  const [formAdd, setFormAdd] = useState(false);
-  const [formEdit, setFormEdit] = useState(false);
-  const [dataRegisterEdit, setDataRegisterEdit] = useState(null);
+  const [newsData, setNewsData] = useState([])
+  const [newsCategoryData, setNewsCategoryData] = useState([])
+  const [band, setBand] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [pageSelected, setPageSelected] = useState(1)
+  const [formAdd, setFormAdd] = useState(false)
+  const [formEdit, setFormEdit] = useState(false)
+  const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
 
   const {
     state: { userToken },
-  } = useContext(User);
+  } = useContext(User)
 
   useEffect(() => {
-    dataNews();
+    dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected, idNewsCategory, limit]);
+  }, [search, deleted, band, pageSelected, idNewsCategory, limit])
   const dataNews = async () => {
-    const params = { search, deleted, page: pageSelected, idNewsCategory, limit };
-    const data = await getNews(params);
-    setNewsData(data);
-  };
+    const params = {
+      search,
+      deleted,
+      page: pageSelected,
+      idNewsCategory,
+      limit,
+    }
+    const data = await getNews(params)
+    setNewsData(data)
+  }
 
   useEffect(() => {
-    dataNewsCategory();
-  }, []);
+    dataNewsCategory()
+  }, [])
   const dataNewsCategory = async () => {
-    const params = { limit: 1000 };
-    const data = await getNewsCategory(params);
-    setNewsCategoryData(data);
-  };
+    const params = { limit: 1000 }
+    const data = await getNewsCategory(params)
+    setNewsCategoryData(data)
+  }
 
   const resetValuesEdit = (valueEdit) => {
-    setDataRegisterEdit(valueEdit);
-    setFormEdit(!formEdit);
-  };
+    setDataRegisterEdit(valueEdit)
+    setFormEdit(!formEdit)
+  }
   return (
     <Container fluid>
       <Row>
-        <Col className="mt-3">
+        <Col className='mt-3'>
           <div className={`pt-4 pb-1 px-4`}>
             <h3>Noticias</h3>
           </div>
@@ -68,12 +75,13 @@ const MenuNews = () => {
               deleted={deleted}
               setDeleted={setDeleted}
               setIdNewsCategory={setIdNewsCategory}
-              newsRoute="news"
+              newsRoute='news'
               data={newsCategoryData?.allNewsCategory}
               setPageSelected={setPageSelected}
             />
+            <HeaderBackdrop title={'Foto Portada'} idTab={idTab} bandSelect={true}/>
             <HeaderList
-              title="Listado de Noticias"
+              title='Listado de Noticias'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -86,7 +94,7 @@ const MenuNews = () => {
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI="news"
+              routeAPI='news'
             />
             <PaginationAdmin
               data={newsData}
@@ -100,7 +108,8 @@ const MenuNews = () => {
         <Row>
           <Col>
             <HeaderList
-              title="Nueva noticia"
+              title='Nueva noticia'
+              titleEdit='Editar noticia'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -120,7 +129,7 @@ const MenuNews = () => {
         </Row>
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default MenuNews;
+export default MenuNews

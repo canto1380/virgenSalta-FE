@@ -11,7 +11,7 @@ import PaginationAdmin from "../../components/Admin/Pagination";
 const Categories = () => {
   const [search, setSearch] = useState("");
   const [pageSelected, setPageSelected] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(12);
   const [newsCategoryData, setNewsCategoryData] = useState([])
   const [newsCategoryInf, setNewsCategoryInf] = useState()
   const deleted = false
@@ -42,11 +42,14 @@ const Categories = () => {
             <div>
               <h5 className='pb-2'>Lista de Categorías</h5>
             </div>
-            {newsCategoryData?.map((data) => (
+            {newsCategoryData.length > 0 ? (
+            newsCategoryData?.map((data) => (
               <Col key={data._id} xs={12} md={6} lg={4} className="mb-4">
                 <CardNewsCategorypage data={data} />
               </Col>
-            ))}
+            ))) : (
+              <p className='text-danger fw-bold'>No se encontraron categorias</p>
+            )}
             <Row>
               <Col>
                 <PaginationAdmin

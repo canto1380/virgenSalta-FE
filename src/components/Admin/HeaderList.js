@@ -5,6 +5,7 @@ import { Button } from 'antd'
 
 const HeaderList = ({
   title,
+  titleEdit,
   formAdd,
   setFormAdd,
   loading,
@@ -25,14 +26,13 @@ const HeaderList = ({
     <div className='menuContainer mb-0 d-flex justify-content-between align-items-center'>
       <div>
         <p className='fw-bolder mb-0'>
-          {formEdit ? 'Editar Categoría' : title}
+          {formEdit ? titleEdit : title}
         </p>
       </div>
       <div>
         {!formAdd && !formEdit ? (
           <Button
             onClick={changeBand}
-            // href={'/'}
             className='btn section-btn d-flex align-items-center'
           >
             <AiOutlinePlus

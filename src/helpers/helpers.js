@@ -30,3 +30,7 @@ export const deleteCookies = () => {
   Cookies.remove('token')
   Cookies.remove('idUser')
 }
+
+export const quitarAcentos = (palabra) => {
+  return palabra.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+}

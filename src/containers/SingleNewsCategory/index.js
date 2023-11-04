@@ -43,7 +43,6 @@ const SingleNewsCategory = () => {
       setSingleNewsCategory(newsCategory[0]?.backdrop)
     }
   }
-  console.log(singleNewsCategory)
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -15,7 +15,6 @@ const PhotosGallery = () => {
 
     const { data } = await axios.get(url)
     setDataFeedInsta(data.data)
-    console.log(data.data)
   }
   useEffect(() => {
     getInstaFeed()

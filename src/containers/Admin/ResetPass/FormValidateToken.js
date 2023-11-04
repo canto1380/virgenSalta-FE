@@ -18,7 +18,6 @@ const ValidateToken = () => {
 
   const { email, token } = useParams()
   let navigate = useNavigate()
-  console.log(email, token)
   const handleSubmit = async (values) => {
     try {
       if (values.password === values.password1) {
@@ -54,7 +53,6 @@ const ValidateToken = () => {
         }, 3000);
       }
       if (res?.response?.status === 400) {
-        console.log(res)
         setMsgEmailInvalid(res.response?.data?.message)
         setTokenInvalid(true)
         setTimeout(() => {

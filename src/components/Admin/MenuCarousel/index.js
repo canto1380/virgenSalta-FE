@@ -71,7 +71,7 @@ const MenuCarousel = () => {
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='newsCategory'
+              routeAPI='carousel'
             />
             <PaginationAdmin
               data={carouselData}
@@ -86,6 +86,7 @@ const MenuCarousel = () => {
           <Col>
             <HeaderList
               title='Nuevo slider'
+              titleEdit='Editar silder'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}

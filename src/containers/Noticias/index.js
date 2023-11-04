@@ -13,7 +13,7 @@ const Noticias = () => {
   const [search, setSearch] = useState('')
   const [idNewsCategory, setIdNewsCategory] = useState(undefined)
   const [pageSelected, setPageSelected] = useState(1)
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(12)
   const [newsData, setNewsData] = useState([])
   const [newsInf, setNewsInf] = useState([])
   const [newsCategoryData, setNewsCategoryData] = useState([])
@@ -57,7 +57,6 @@ const Noticias = () => {
           setPageSelected={setPageSelected}
           data={newsCategoryData?.allNewsCategory}
         />
-        {/* <Search  onChange={(e) => setSearch(e.target.value)}/> */}
         {newsData ? (
           <Row className='mt-3 pb-5'>
             <div>
@@ -66,11 +65,11 @@ const Noticias = () => {
             {newsData.length > 0 ? (
               newsData?.map((noti, i) => (
                 <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
-                  <CardNewsPage data={noti} />
+                  <CardNewsPage data={noti} pathUrl='noticias'/>
                 </Col>
               ))
             ) : (
-              <p className='text-danger fw-bold'>No hay noticias con los parametros buscados</p>
+              <p className='text-danger fw-bold'>No se encontraron noticias</p>
             )}
             <Row>
               <Col>

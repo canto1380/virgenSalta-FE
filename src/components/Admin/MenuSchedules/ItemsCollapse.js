@@ -24,8 +24,6 @@ const ItemsCollapse = ({
     setVisible(!visible)
     setDataRegisterEdit(item)
   }
-  console.log(title1)
-  console.log(title2)
   return (
     <div>
       <Collapse defaultActiveKey={['1']}>

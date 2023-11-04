@@ -1,58 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useState, useEffect } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import {
   BsFillCaretRightFill,
   BsFillCaretLeftFill,
   BsNewspaper,
-} from "react-icons/bs";
-import { BiCategoryAlt, BiUserCircle, BiLogOut, BiTime, BiCarousel } from "react-icons/bi";
-import "../sidebar.css";
-import { deleteCookies, deleteToken } from "../../../helpers/helpers";
-import { Link } from "react-router-dom";
+  BsCalendarDate,
+} from 'react-icons/bs'
+import {
+  BiCategoryAlt,
+  BiUserCircle,
+  BiLogOut,
+  BiTime,
+  BiCarousel,
+} from 'react-icons/bi'
+import '../sidebar.css'
+import { deleteCookies, deleteToken } from '../../../helpers/helpers'
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
-  const [initial, setInitial] = useState("");
-  const [initialSurname, setInitialSurname] = useState("");
+  const [initial, setInitial] = useState('')
+  const [initialSurname, setInitialSurname] = useState('')
 
   const cerrarSesion = async (e) => {
-    deleteToken();
-    deleteCookies();
-    window.location.href = "/admin/login";
-  };
+    deleteToken()
+    deleteCookies()
+    window.location.href = '/admin/login'
+  }
 
   const itemsSideBar = [
     {
-      title: "carousel",
-      iconName: <BiCarousel className="sizeIcon" />,
-      name: "Carousel",
+      title: 'carousel',
+      iconName: <BiCarousel className='sizeIcon' />,
+      name: 'Carousel',
     },
     {
-      title: "noticias",
-      iconName: <BsNewspaper className="sizeIcon" />,
-      name: "Noticias",
+      title: 'noticias',
+      iconName: <BsNewspaper className='sizeIcon' />,
+      name: 'Noticias',
     },
     {
-      title: "categorias",
-      iconName: <BiCategoryAlt className="sizeIcon" />,
-      name: "Categorias",
+      title: 'categorias',
+      iconName: <BiCategoryAlt className='sizeIcon' />,
+      name: 'Categorias',
     },
     {
-      title: "horarios",
-      iconName: <BiTime className="sizeIcon" />,
-      name: "Horarios",
+      title: 'horarios',
+      iconName: <BiTime className='sizeIcon' />,
+      name: 'Horarios',
     },
     {
-      title: "cuenta",
-      iconName: <BiUserCircle className="sizeIcon" />,
-      name: "Cuenta",
+      title: 'jornadas',
+      iconName: <BsCalendarDate className='sizeIcon' />,
+      name: 'Jornadas',
     },
-  ];
+    {
+      title: 'cuenta',
+      iconName: <BiUserCircle className='sizeIcon' />,
+      name: 'Cuenta',
+    },
+  ]
   useEffect(() => {
-    const a = dataAuth?.name?.toUpperCase();
-    const b = dataAuth?.surname?.toUpperCase();
-    setInitial(a?.substr(0, 1));
-    setInitialSurname(b?.substr(0, 1));
-  }, [dataAuth]);
+    const a = dataAuth?.name?.toUpperCase()
+    const b = dataAuth?.surname?.toUpperCase()
+    setInitial(a?.substr(0, 1))
+    setInitialSurname(b?.substr(0, 1))
+  }, [dataAuth])
 
   return (
     <div
@@ -65,8 +77,8 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       <Row
         className={`${
           inactivo
-            ? "pt-4 pb-2 d-flex justify-content-center align-items-center m-0"
-            : "pt-4 pb-2 d-flex justify-content-center align-items-center m-0"
+            ? 'pt-4 pb-2 d-flex justify-content-center align-items-center m-0'
+            : 'pt-4 pb-2 d-flex justify-content-center align-items-center m-0'
         }`}
       >
         <Col
@@ -82,8 +94,8 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
             {initialSurname}
           </div>
         </Col>
-        <Col xs={6} className="px-1">
-          <p className={`${inactivo ? `inactivo` : "mb-0"}`}>
+        <Col xs={6} className='px-1'>
+          <p className={`${inactivo ? `inactivo` : 'mb-0'}`}>
             {dataAuth?.nickname}
           </p>
         </Col>
@@ -96,7 +108,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
           >
             {
               <BsFillCaretRightFill
-                title="Desplegar"
+                title='Desplegar'
                 className={`sizeIcon cursorPointer`}
               />
             }
@@ -109,19 +121,19 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
           >
             {
               <BsFillCaretLeftFill
-                title="Minimizar"
-                className="sizeIcon cursorPointer"
+                title='Minimizar'
+                className='sizeIcon cursorPointer'
               />
             }
           </Col>
         )}
       </Row>
       <hr />
-      <ul className="text-decoration-none list-unstyled sidebarList">
+      <ul className='text-decoration-none list-unstyled sidebarList'>
         {itemsSideBar.map((items, i) => (
           <Link
             key={i}
-            className="text-white text-decoration-none"
+            className='text-white text-decoration-none'
             to={`/admin/home/${items.title}`}
           >
             <li
@@ -133,8 +145,8 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
                   : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
               }`}
             >
-              <div className="">{items.iconName}</div>
-              <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>
+              <div className=''>{items.iconName}</div>
+              <div className={` ${inactivo ? `inactivo` : 'ms-3'}`}>
                 {items.name}
               </div>
             </li>
@@ -143,21 +155,21 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
 
         <li
           onClick={() => cerrarSesion()}
-          title="Salir"
+          title='Salir'
           className={`${
             inactivo
               ? `sidebarListRow d-flex justify-content-center align-items-center`
               : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
           }`}
         >
-          <div className="">
-            <BiLogOut className="sizeIcon" />
+          <div className=''>
+            <BiLogOut className='sizeIcon' />
           </div>
-          <div className={` ${inactivo ? `inactivo` : "ms-3"}`}>Salir</div>
+          <div className={` ${inactivo ? `inactivo` : 'ms-3'}`}>Salir</div>
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

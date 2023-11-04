@@ -1,24 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import ImageBackdrop from "../../images/logo.jpg";
-import "../News/news.css";
-const BackdropSections = ({title, img}) => {
-  const [imageBackdrop, setImageBackdrop] = useState("");
+import React, { useEffect, useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import ImageBackdrop from '../../images/logo.jpg'
+import '../News/news.css'
+import { getBackdrop } from '../../utils/queryAPI/backdrop'
+import { quitarAcentos } from '../../helpers/helpers'
+const BackdropSections = ({ title }) => {
+  const [imageBackdrop, setImageBackdrop] = useState('')
+  const [imageBackdropDefault, setImageBackdropDefault] = useState('')
 
   useEffect(() => {
-    setImageBackdrop(ImageBackdrop);
-  }, []);
+    setImageBackdropDefault(ImageBackdrop)
+  }, [])
+  useEffect(() => {
+    backdropData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title])
+
+  const backdropData = async () => {
+    const titleSinAcento = quitarAcentos(title)
+    const params = { search: titleSinAcento }
+    const data = await getBackdrop(params)
+    setImageBackdrop(data?.allBackdrops[0]?.backdrop)
+  }
   return (
     <div>
-      {imageBackdrop !== "" ? (
+      {imageBackdrop !== '' ? (
         <Container
           fluid
-          style={{ backgroundImage: `url(${img? img : imageBackdrop})` }}
-          className="imgFondo"
+          style={{
+            backgroundImage: `url(${
+              imageBackdrop ? imageBackdrop : imageBackdropDefault
+            })`,
+          }}
+          className='imgFondo'
         >
-          <Row className="backdropNew">
+          <Row className='backdropNew'>
             <Col>
-              <p className="title m-0 text-center">{title}</p>
+              <p className='title m-0 text-center'>{title}</p>
             </Col>
           </Row>
         </Container>
@@ -26,17 +44,17 @@ const BackdropSections = ({title, img}) => {
         <Container
           fluid
           style={{ backgroundImage: `url("images/imgDefecto.jpg")` }}
-          className="imgFondo"
+          className='imgFondo'
         >
-          <Row className="backdropNew">
+          <Row className='backdropNew'>
             <Col>
-              <p className="title m-0 text-center">{title}</p>
+              <p className='title m-0 text-center'>{title}</p>
             </Col>
           </Row>
         </Container>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default BackdropSections;
+export default BackdropSections

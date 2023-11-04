@@ -17,8 +17,6 @@ const BodyNews = ({ data, photos }) => {
     const bodyText = document.querySelector(".ida");
     let numberInsertImg = 0;
 
-    console.log(lengthArr, lengthPhotos, numberInsertText);
-
     arr.forEach((d, i) => {
       bodyText.innerHTML += `${d}`;
       if (
@@ -32,7 +30,6 @@ const BodyNews = ({ data, photos }) => {
     });
     if (numberInsertImg === 0) {
       photos.shift()
-      console.log(photos)
       photos.forEach((p, i) => {
         bodyText.innerHTML += `<figure class='figure-body-news'><img class='img-body-news my-3' src=${p}/></figure>`;
       });

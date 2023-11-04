@@ -3,14 +3,20 @@ import { Row } from 'react-bootstrap'
 import HeaderSections from '../Title/HeaderSections'
 import GenericCarousel from '../Carousel/GenericCarousel'
 import { jornadas } from '../../utils/seeders'
+import { getSpecialDays } from '../../utils/queryAPI/specialDays'
 
 const SpecialDays = () => {
   const [specialDay, setSpecialDay] = useState()
 
   useEffect(() => {
-    const filterSpecialDay = jornadas.slice(0, 6)
-    setSpecialDay(filterSpecialDay)
+    dataSpecialDays()
   }, [])
+
+  const dataSpecialDays = async () => {
+    const params = { limit: 6, deleted: false }
+    const data = await getSpecialDays(params)
+    setSpecialDay(data)
+  }
   return (
     <div>
       <Row className='ps-4'>
@@ -21,7 +27,7 @@ const SpecialDays = () => {
         />
       </Row>
       <Row className='mt-3 mb-5 ps-4 pe-4'>
-        <GenericCarousel data={specialDay} type='specialDay'/>
+        <GenericCarousel data={specialDay?.allSpecialDays} type='specialDay' />
       </Row>
     </div>
   )

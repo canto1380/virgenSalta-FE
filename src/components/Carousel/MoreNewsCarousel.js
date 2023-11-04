@@ -8,6 +8,7 @@ import MoreNewsCard from "./MoreNewsCard";
 import { Container } from "react-bootstrap";
 
 const MoreNewsCarousel = ({ data, typeFlag, title }) => {
+  console.log(data)
   const sliceData = data.slice(0,6)
   return (
     <div className='px-5 pb-5'>

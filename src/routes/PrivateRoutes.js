@@ -9,6 +9,9 @@ import Schedules from '../containers/Schedules'
 import MenuAdmin from '../containers/Admin/MenuAdmin/index'
 import Categories from '../containers/Categories'
 import SingleNewsCategory from '../containers/SingleNewsCategory'
+import SpecialDaysPage from '../containers/SpecialDays'
+import SingleSpecialDays from '../containers/SingleSpecialDays'
+import BackdropSection from '../containers/Admin/BackropSection.js'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -25,8 +28,11 @@ const PrivateRoutes = ({ token }) => {
       <Route exact path='/horarios' element={<Schedules />} />
       <Route exact path='/pedido-oracion' element={<PrayerRequest />} />
       <Route exact path='/vivo-capilla' element={<LiveChapel />} />
+      <Route exact path='/jornadas' element={<SpecialDaysPage />} />
+      <Route exact path='/jornadas/:title' element={<SingleSpecialDays />} />
 
       <Route exact path='/admin/home/:idTab' element={<MenuAdmin />} />
+      <Route exact path='/admin/home/:idTab/backdrop' element={<BackdropSection />} />
 
       {token.length && window?.location?.pathname === '/admin/login' ? (
         <Route

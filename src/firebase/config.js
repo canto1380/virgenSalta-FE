@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 
 export const uploadFile = async (url, file, updateCb) => {
-  if (file.type.includes('video')) {
+  // if (file.type.includes('video')) {
     const storageRef = ref(storage, `/${url}/` + v4())
     const uploadFile = uploadBytesResumable(storageRef, file)
     return new Promise((res, rej) => {
@@ -50,9 +50,7 @@ export const uploadFile = async (url, file, updateCb) => {
         }
       )
     })
-  } else {
-    console.log('no es video')
-  }
+  // }
 }
 export const uploadFileVideo = async (url, file, updateCb) => {
   const storageRef = ref(storage, `/${url}/` + v4())
