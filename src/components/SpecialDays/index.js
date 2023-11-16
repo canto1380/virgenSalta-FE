@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Row } from 'react-bootstrap'
 import HeaderSections from '../Title/HeaderSections'
 import GenericCarousel from '../Carousel/GenericCarousel'
-import { jornadas } from '../../utils/seeders'
 import { getSpecialDays } from '../../utils/queryAPI/specialDays'
 
 const SpecialDays = () => {

@@ -13,7 +13,6 @@ import ResetPass from '../containers/Admin/ResetPass'
 import ValidateToken from '../containers/Admin/ResetPass/FormValidateToken'
 import SpecialDaysPage from '../containers/SpecialDays'
 import SingleSpecialDays from '../containers/SingleSpecialDays'
-import SingleHistory from '../containers/SingleHistories'
 
 const PublicRoutes = ({ bandera, setBandera, token }) => {
   return (
@@ -32,7 +31,6 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
       <Route exact path='/vivo-capilla' element={<LiveChapel />} />
       <Route exact path='/jornadas' element={<SpecialDaysPage />} />
       <Route exact path='/jornadas/:title' element={<SingleSpecialDays />} />
-      {/* <Route exact path='/historias/:title' element={<SingleHistory />} /> */}
 
       <Route
         exact

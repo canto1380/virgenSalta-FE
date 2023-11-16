@@ -12,7 +12,6 @@ import SingleNewsCategory from '../containers/SingleNewsCategory'
 import SpecialDaysPage from '../containers/SpecialDays'
 import SingleSpecialDays from '../containers/SingleSpecialDays'
 import BackdropSection from '../containers/Admin/BackropSection.js'
-import SingleHistory from '../containers/SingleHistories/index.js'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -31,7 +30,6 @@ const PrivateRoutes = ({ token }) => {
       <Route exact path='/vivo-capilla' element={<LiveChapel />} />
       <Route exact path='/jornadas' element={<SpecialDaysPage />} />
       <Route exact path='/jornadas/:title' element={<SingleSpecialDays />} />
-      <Route exact path='/historias/:title' element={<SingleHistory/>} />
 
       <Route exact path='/admin/home/:idTab' element={<MenuAdmin />} />
       <Route exact path='/admin/home/:idTab/backdrop' element={<BackdropSection />} />

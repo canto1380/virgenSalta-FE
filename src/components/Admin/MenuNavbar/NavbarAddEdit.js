@@ -19,7 +19,6 @@ const NavbarAddEdit = ({
   const [serverError, setServerError] = useState(false)
   const [switchDeleted, setSwitchDeleted] = useState(true)
   const [switchWindow, setSwitchWindow] = useState(true)
-  const [pathUrl, setPathUrl] = useState(undefined)
 
   const handleSwitchWindow = (e) => {
     setSwitchWindow(e)
