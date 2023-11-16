@@ -13,6 +13,8 @@ import { useParams } from 'react-router-dom'
 import MenuSchedules from '../../../components/Admin/MenuSchedules'
 import MenuCarousel from '../../../components/Admin/MenuCarousel'
 import MenuSpecialDays from '../../../components/Admin/MenuSpecialDays'
+import MenuHistory from '../../../components/Admin/MenuHistory'
+import MenuNavbar from '../../../components/Admin/MenuNavbar'
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false)
@@ -51,9 +53,19 @@ const MenuAdmin = ({ userInfo }) => {
         dataAuth={dataAuth}
       />
       <Container fluid className='container-admin-data'>
+      {idTab === 'menu-principal' && (
+          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+            <MenuNavbar idTab={idTab} />
+          </div>
+        )}
         {idTab === 'carousel' && (
           <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
             <MenuCarousel idTab={idTab} />
+          </div>
+        )}
+        {idTab === 'historia' && (
+          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+            <MenuHistory idTab={idTab} />
           </div>
         )}
         {idTab === 'noticias' && (

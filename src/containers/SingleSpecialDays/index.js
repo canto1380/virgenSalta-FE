@@ -40,7 +40,7 @@ const SingleSpecialDays = () => {
       <Container>
         <Row className='mx-3 pt-2 pb-5'>
           <Col xs={12} className='pt-5'>
-            <HeaderNews data={singleSpecialDays} />
+            <HeaderNews data={singleSpecialDays} sectionType='specialDays' />
           </Col>
           <hr className='pb-3' />
           <Col xs={12} className='pb-5'>

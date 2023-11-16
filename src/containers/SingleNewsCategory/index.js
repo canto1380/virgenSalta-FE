@@ -94,7 +94,7 @@ const SingleNewsCategory = () => {
             {news.length > 0 ? (
               news?.map((not, i) => (
                 <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
-                  <CardNewsPage data={not} />
+                  <CardNewsPage data={not} pathUrl='noticias' />
                 </Col>
               ))
             ) : (

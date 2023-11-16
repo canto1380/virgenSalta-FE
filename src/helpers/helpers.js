@@ -34,3 +34,7 @@ export const deleteCookies = () => {
 export const quitarAcentos = (palabra) => {
   return palabra.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
 }
+export const convertirAPrimitiva = (palabra) => {
+  let p = quitarAcentos(palabra)
+  return p.toLowerCase()
+}

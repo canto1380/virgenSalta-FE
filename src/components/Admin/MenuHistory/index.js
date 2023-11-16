@@ -1,40 +1,43 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import FiltersAdmin from '../FiltersAdmin'
+import React, { useContext, useState, useEffect } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 import HeaderList from '../HeaderList'
 import ListElements from '../ListElements'
-import { getNewsCategory } from '../../../utils/queryAPI/newsCategory'
-import { User } from '../../../context/userProvider'
-import FormAddEdit from './FormAddEdit'
 import PaginationAdmin from '../Pagination'
-import HeaderBackdrop from '../HeaderBackdrop'
+import { User } from '../../../context/userProvider'
+import { getHistory } from '../../../utils/queryAPI/history'
+import HistoryAddEdit from './historyAddEdit'
+import FiltersAdmin from '../FiltersAdmin'
 
-const MenuCategories = ({ idTab }) => {
-  const [search, setSearch] = useState('')
-  const [deleted, setDeleted] = useState(undefined)
-  const [limit, setLimit] = useState(10)
-  const [newsCategoryData, setNewsCategoryData] = useState([])
-  const [band, setBand] = useState(false)
+const MenuHistory = () => {
   const [formAdd, setFormAdd] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [pageSelected, setPageSelected] = useState(1)
   const [formEdit, setFormEdit] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [historyData, setHistoryData] = useState([])
+  const [limit, setLimit] = useState(10)
+  const [deleted, setDeleted] = useState(undefined)
+  const [band, setBand] = useState(false)
+  const [pageSelected, setPageSelected] = useState(1)
+  const [search, setSearch] = useState('')
 
   const {
     state: { userToken },
   } = useContext(User)
 
   useEffect(() => {
-    dataNewsCategory()
+    dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, deleted, band, pageSelected, limit])
-
-  const dataNewsCategory = async () => {
-    const params = { search, deleted, page: pageSelected, limit }
-    const data = await getNewsCategory(params)
-    setNewsCategoryData(data)
+  const dataNews = async () => {
+    const params = {
+      deleted,
+      page: 1,
+      limit,
+    }
+    const data = await getHistory(params)
+    setHistoryData(data)
   }
+
   const resetValuesEdit = (valueEdit) => {
     setDataRegisterEdit(valueEdit)
     setFormEdit(!formEdit)
@@ -44,7 +47,7 @@ const MenuCategories = ({ idTab }) => {
       <Row>
         <Col className='mt-3'>
           <div className={`pt-4 pb-1 px-4`}>
-            <h3>Categorías</h3>
+            <h3>Historia</h3>
           </div>
         </Col>
       </Row>
@@ -55,15 +58,11 @@ const MenuCategories = ({ idTab }) => {
               setSearch={setSearch}
               deleted={deleted}
               setDeleted={setDeleted}
+              newsRoute='news'
               setPageSelected={setPageSelected}
             />
-            <HeaderBackdrop
-              title={'Foto Portada'}
-              idTab={idTab}
-              bandSelect={true}
-            />
             <HeaderList
-              title='Listado de Categorías'
+              title='Listado de Historias'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -71,15 +70,15 @@ const MenuCategories = ({ idTab }) => {
               resetValuesEdit={resetValuesEdit}
             />
             <ListElements
-              data={newsCategoryData?.allNewsCategory}
+              data={historyData?.allHistory}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='newsCategory'
+              routeAPI='history'
             />
             <PaginationAdmin
-              data={newsCategoryData}
+              data={historyData}
               pageSelected={pageSelected}
               setPageSelected={setPageSelected}
               setLimit={setLimit}
@@ -90,8 +89,8 @@ const MenuCategories = ({ idTab }) => {
         <Row>
           <Col>
             <HeaderList
-              title='Nueva categoría'
-              titleEdit='Editar categoría'
+              title='Nueva historia'
+              titleEdit='Editar historia'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -100,11 +99,12 @@ const MenuCategories = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <FormAddEdit
+            <HistoryAddEdit
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
               dataRegisterEdit={dataRegisterEdit}
+              data={historyData?.allHistory}
             />
           </Col>
         </Row>
@@ -113,4 +113,4 @@ const MenuCategories = ({ idTab }) => {
   )
 }
 
-export default MenuCategories
+export default MenuHistory

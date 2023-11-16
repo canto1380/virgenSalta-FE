@@ -3,7 +3,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { BiArrowBack } from 'react-icons/bi'
 import { Button } from 'antd'
 
-const HeaderList = ({
+const HeaderNavbar = ({
   title,
   titleEdit,
   formAdd,
@@ -13,13 +13,19 @@ const HeaderList = ({
   setFormEdit,
   resetValuesEdit,
   bandType,
+  setRouteAPI,
 }) => {
   const changeBand = () => {
+    setRouteAPI('itemNavCategory')
     setFormAdd(!formAdd)
   }
-
+  const changeBandItem = () => {
+    setRouteAPI('itemNav')
+    setFormAdd(!formAdd)
+  }
   const changeBandRetur = () => {
-    resetValuesEdit(null)
+    setRouteAPI('')
+    resetValuesEdit(null, '')
     setFormAdd(false)
     setFormEdit(false)
   }
@@ -34,18 +40,32 @@ const HeaderList = ({
       </div>
       <div>
         {!formAdd && !formEdit ? (
-          <Button
-            onClick={changeBand}
-            className='btn section-btn d-flex align-items-center'
-          >
-            <AiOutlinePlus
-              style={{
-                fontSize: 20,
-                marginRight: 5,
-              }}
-            />
-            Sección
-          </Button>
+          <div className='d-flex'>
+            <Button
+              onClick={changeBand}
+              className='btn section-btn d-flex align-items-center me-3'
+            >
+              <AiOutlinePlus
+                style={{
+                  fontSize: 20,
+                  marginRight: 5,
+                }}
+              />
+              Sección
+            </Button>
+            <Button
+              onClick={changeBandItem}
+              className='btn section-btn d-flex align-items-center'
+            >
+              <AiOutlinePlus
+                style={{
+                  fontSize: 20,
+                  marginRight: 5,
+                }}
+              />
+              Item
+            </Button>
+          </div>
         ) : (
           <Button
             onClick={changeBandRetur}
@@ -69,4 +89,4 @@ const HeaderList = ({
   )
 }
 
-export default HeaderList
+export default HeaderNavbar

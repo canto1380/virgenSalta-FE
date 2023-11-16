@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, Select, Spin } from 'antd'
+import { Button, Form, Input, Spin } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-// import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 
-const NewsAddEdit = ({
-  data,
+const HistoryAddEdit = ({
   dataRegisterEdit,
   loading,
   setLoading,
@@ -24,8 +22,8 @@ const NewsAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  const URL_FIREBASE_IMG = 'img-noticias'
-  
+  const URL_FIREBASE_IMG = 'img-historias'
+
   const getPreview = (file) => {
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)
@@ -44,29 +42,32 @@ const NewsAddEdit = ({
     try {
       if (!dataRegisterEdit) {
         /** Carga IMG en Firebase **/
-        if (!imgData) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
-        }
+        // if (!imgData) {
+        //   alert('Debe seleccionar una/s imagen/es para continuar')
+        //   return
+        // }
         const objects = {}
-        for (let file of imgData) {
-          const preview = await getPreview(file)
-          objects[file.name] = { preview }
+        let ls = undefined
+        if (imgData) {
+          for (let file of imgData) {
+            const preview = await getPreview(file)
+            objects[file.name] = { preview }
+          }
+          const promises = imgData.map((file) => {
+            return uploadFile(URL_FIREBASE_IMG, file)
+          })
+          ls = await Promise.all(promises)
         }
-        const promises = imgData.map((file) => {
-          return uploadFile(URL_FIREBASE_IMG, file)
-        })
-        const ls = await Promise.all(promises)
         /** Carga IMG en Firebase **/
 
         values.description = description
         values.photos = ls
-        const res = await api('POST', 'news', values, userToken)
+        const res = await api('POST', 'history', values, userToken)
         if (res.status === 200) {
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = '/admin/home/noticias'
+            window.location.href = '/admin/home/historia'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -80,15 +81,13 @@ const NewsAddEdit = ({
       } else {
         /** Carga IMG en Firebase **/
         /** Si no existe imgData o no tiene nada y preview tampoco */
-        console.log(imgData)
-        console.log(preview)
-        if (
-          (!imgData || imgData.length === 0) &&
-          Object.keys(preview).length === 0
-        ) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
-        }
+        // if (
+        //   (!imgData || imgData.length === 0) &&
+        //   Object.keys(preview).length === 0
+        // ) {
+        //   alert('Debe seleccionar una/s imagen/es para continuar')
+        //   return
+        // }
         let ls, dataImgUpdate
         let arr = []
         /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
@@ -128,7 +127,7 @@ const NewsAddEdit = ({
           description === undefined ? dataRegisterEdit.description : description
         const res = await api(
           'PATCH',
-          `news/${dataRegisterEdit._id}`,
+          `history/${dataRegisterEdit._id}`,
           values,
           userToken
         )
@@ -137,7 +136,7 @@ const NewsAddEdit = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = '/admin/home/noticias'
+            window.location.href = '/admin/home/historia'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -151,6 +150,9 @@ const NewsAddEdit = ({
       }
     } catch (error) {
       setServerError(error)
+      setTimeout(() => {
+        setServerError(undefined)
+      }, 3000)
     }
   }
   const onFinishFailed = (errorInfo) => {
@@ -231,38 +233,16 @@ const NewsAddEdit = ({
         }}
       >
         <Form.Item
-          label='Título Noticia'
+          label='Título Historia'
           name='title'
-          rules={[{ required: true, message: 'Debe ingresar un nombre' }]}
+          rules={[{ required: true, message: 'Debe ingresar un título' }]}
         >
           <Input />
-        </Form.Item>
-        <Form.Item
-          label='Subtítulo'
-          name='subtitle'
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label='Categoría'
-          name='idNewsCategory'
-          rules={[
-            { required: true, message: 'Debe seleccionar una categoría' },
-          ]}
-        >
-          <Select>
-            {data.map((d) => (
-              <Select.Option key={d?._id} value={d?._id}>
-                {d?.nameCategory}
-              </Select.Option>
-            ))}
-          </Select>
         </Form.Item>
 
         <div>
           <p>
-            <span className='text-danger fw-bolder'>*</span>Descripción
+            <span className='text-danger fw-bolder'>*</span>Descripción historia
           </p>
         </div>
         <CKEditor
@@ -319,7 +299,12 @@ const NewsAddEdit = ({
         <Form.Item
           label='Pie de foto principal (Primera foto seleccionada)'
           name='caption'
-          rules={[{ required: true, message: 'Debe ingresar un texto' }]}
+          rules={[
+            {
+              required: preview ? true : false,
+              message: 'Debe ingresar un texto',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -357,4 +342,4 @@ const NewsAddEdit = ({
   )
 }
 
-export default NewsAddEdit
+export default HistoryAddEdit

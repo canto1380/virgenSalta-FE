@@ -38,6 +38,7 @@ const ModalGeneric = ({
             setLoading(false)
             setBand(!band)
             setVisible(false)
+            
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -199,11 +200,12 @@ const ModalGeneric = ({
               ]}
             >
               <Select>
-                {data1 !== undefined && data1?.map((d) => (
-                  <Select.Option key={d?._id} value={d?._id}>
-                    {d.eventName}a
-                  </Select.Option>
-                ))}
+                {data1 !== undefined &&
+                  data1?.map((d) => (
+                    <Select.Option key={d?._id} value={d?._id}>
+                      {d.eventName}a
+                    </Select.Option>
+                  ))}
               </Select>
             </Form.Item>
             <Form.Item

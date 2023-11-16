@@ -5,6 +5,8 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
   BsCalendarDate,
+  BsBodyText,
+  BsMenuButtonWideFill,
 } from 'react-icons/bs'
 import {
   BiCategoryAlt,
@@ -29,9 +31,19 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
 
   const itemsSideBar = [
     {
+      title: 'menu-principal',
+      iconName: <BsMenuButtonWideFill className='sizeIcon' />,
+      name: 'NavBar',
+    },
+    {
       title: 'carousel',
       iconName: <BiCarousel className='sizeIcon' />,
       name: 'Carousel',
+    },
+    {
+      title: 'historia',
+      iconName: <BsBodyText className='sizeIcon' />,
+      name: 'Historia',
     },
     {
       title: 'noticias',

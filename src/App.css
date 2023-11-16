@@ -95,9 +95,15 @@
 .c-green {
   color:green
 }
+.c-green:hover{
+  color: rgb(5, 232, 5)
+}
 
 .c-red {
   color:red
+}
+.c-red:hover {
+  color:rgb(252, 73, 73)
 }
 
 #id-btn-upload {
@@ -148,5 +154,6 @@ color: black !important;
   position: relative;
 }
 .text-important{
-  font-size: 12px;
+  font-size: 14px;
+  font-style: oblique;
 }

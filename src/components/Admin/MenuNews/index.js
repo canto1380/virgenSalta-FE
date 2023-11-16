@@ -79,7 +79,11 @@ const MenuNews = ({ idTab }) => {
               data={newsCategoryData?.allNewsCategory}
               setPageSelected={setPageSelected}
             />
-            <HeaderBackdrop title={'Foto Portada'} idTab={idTab} bandSelect={true}/>
+            <HeaderBackdrop
+              title={'Foto Portada'}
+              idTab={idTab}
+              bandSelect={true}
+            />
             <HeaderList
               title='Listado de Noticias'
               formAdd={formAdd}

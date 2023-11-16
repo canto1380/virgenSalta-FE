@@ -14,6 +14,7 @@ const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
     const dateConvert = new Date(data.createdAt)
     setDateRegister(dateConvert)
   }, [data])
+
   return (
     <>
       <Card className='cardNewsPage'>

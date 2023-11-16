@@ -7,6 +7,13 @@
 .styleIcons {
   font-size: 20px !important;
 }
+.btnMenuItem {
+  border: 0px !important;
+}
+.btnMenuItem:hover {
+  background-color: transparent !important;
+  color: rgb(123, 123, 123) !important;
+}
 
 .loadingSpin {
   position: absolute;
@@ -19,19 +26,19 @@
   overflow: hidden;
 }
 
-.filterSchedules{
+.filterSchedules {
   border: 1px solid rgb(186, 186, 186);
   border-radius: 5px;
 }
 
 @media (max-width: 950px) {
-  .menuContainer{
+  .menuContainer {
     margin: 20px;
   }
 }
 
-@media(max-width: 576px) {
-  .menuContainer{
+@media (max-width: 576px) {
+  .menuContainer {
     padding: 0px;
   }
 }
