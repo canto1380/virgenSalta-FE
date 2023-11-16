@@ -61,7 +61,6 @@ const MenuNavbar = () => {
     const data1 = await getItemNavCategoryById(idItemNavCategory)
     setItemNavCategoryDataCollapse(data1)
   }
-  console.log(itemNavData)
   useEffect(() => {
     dataRedirection()
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -3,7 +3,7 @@ import '../News/news.css'
 
 const CardModel = ({ data: { photos, img, title, _id }, photos1, type }) => {
   return (
-    <div className='card-container'>
+    <div className='card-container' key={_id}>
       <a
         href={`/${type === 'news' ? 'noticias' : 'jornadas'}/${title.replace(
           / /g,

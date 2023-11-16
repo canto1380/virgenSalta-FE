@@ -23,8 +23,8 @@ const Cover = () => {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       {carousel ? (
-        carousel.allCarousel.map((d) => (
-          <Carousel.Item interval={4000} pause='hover'>
+        carousel.allCarousel.map((d, i) => (
+          <Carousel.Item interval={4000} pause='hover' key={i}>
             <ReactPlayer
               muted
               playing
@@ -46,8 +46,8 @@ const Cover = () => {
           </Carousel.Item>
         ))
       ) : (
-        <div style={{width: '100%', height:'500px'}}>
-          <Spinn type='data'/>
+        <div style={{ width: '100%', height: '500px' }}>
+          <Spinn type='data' />
         </div>
       )}
     </Carousel>

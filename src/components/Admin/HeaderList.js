@@ -44,7 +44,7 @@ const HeaderList = ({
                 marginRight: 5,
               }}
             />
-            Sección
+            Agregar
           </Button>
         ) : (
           <Button
