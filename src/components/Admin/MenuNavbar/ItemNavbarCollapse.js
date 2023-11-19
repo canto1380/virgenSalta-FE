@@ -41,7 +41,6 @@ const ItemsNavbarCollapse = ({
   const handleDragStart = (event, index) => {
     event.dataTransfer.setData('text/plain', index)
   }
-
   const handleDragOver = (event) => {
     event.preventDefault()
   }

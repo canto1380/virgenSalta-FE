@@ -112,7 +112,8 @@ const MenuNavbar = () => {
               />
               <p className='text-important'>
                 <span className='text-danger fw-bolder'>*</span>Para cambiar el
-                orden de las secciones, arrastre al lugar deseado
+                orden, selecciona un/os caracteres del item y
+                arrastre al lugar deseado
               </p>
               <ItemsNavbarCollapse
                 data1={itemNavData?.allItemNav}

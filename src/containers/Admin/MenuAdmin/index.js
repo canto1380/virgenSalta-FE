@@ -21,6 +21,7 @@ const MenuAdmin = ({ userInfo }) => {
   const [tokenAuth, setTokenAuth] = useState([])
   const [dataAuth, setDataAuth] = useState([])
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
+  const [dataUser, setDataUser] = useState([])
 
   const { idTab } = useParams()
 
@@ -28,16 +29,87 @@ const MenuAdmin = ({ userInfo }) => {
     const tokenData = getToken()
     setTokenAuth(tokenData)
     setDataAuth(getDataToken)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
-    dataUser()
+    getDataUser()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth])
-  const dataUser = async () => {
+  const getDataUser = async () => {
     const data = await getUserById(dataAuth?._id, tokenAuth)
     if (data === false) {
       setModalUnauthorized(true)
+    } else {
+      setDataUser(data)
     }
+  }
+
+  let html
+  switch (idTab) {
+    case 'menu-principal':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuNavbar idTab={idTab} />
+        </div>
+      )
+      break
+    case 'carousel':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuCarousel idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'historia':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuHistory idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'noticias':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuNews idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'categorias':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuCategories idTab={idTab} />
+        </div>
+      )
+      break
+    case 'cuenta':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuAccount idTab={idTab} dataUser={dataUser} />
+        </div>
+      )
+      break
+
+    case 'horarios':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuSchedules idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'jornadas':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuSpecialDays idTab={idTab} />
+        </div>
+      )
+      break
+
+    default:
+      window.location.href = '/admin/home/noticias'
   }
 
   return (
@@ -46,54 +118,13 @@ const MenuAdmin = ({ userInfo }) => {
       className='container-admin p-0 d-flex justify-content-start'
     >
       <Sidebar
-        // setTab={setTab}
         inactivo={inactivo}
         setInactivo={setInactivo}
         tokenAuth={tokenAuth}
         dataAuth={dataAuth}
       />
       <Container fluid className='container-admin-data'>
-      {idTab === 'menu-principal' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-            <MenuNavbar idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'carousel' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-            <MenuCarousel idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'historia' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-            <MenuHistory idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'noticias' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-            <MenuNews idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'categorias' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-            <MenuCategories idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'cuenta' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-            <MenuAccount idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'horarios' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-            <MenuSchedules idTab={idTab} />
-          </div>
-        )}
-        {idTab === 'jornadas' && (
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-            <MenuSpecialDays idTab={idTab} />
-          </div>
-        )}
-
+        {html}
         {modalUnauthorized && (
           <div className=''>
             <Unauthorized />

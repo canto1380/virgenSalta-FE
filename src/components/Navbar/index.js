@@ -24,10 +24,11 @@ const NavbarPrimary = ({ home }) => {
     const dataItemNav = await getItemNav(params)
     setItemNav(dataItemNav.allItemNav)
 
-    const params1 = {visible: true, limit: 5}
+    const params1 = { visible: true, limit: 5 }
     const dataItemNavCategory = await getItemNavCategory(params1)
     setItemNavCategory(dataItemNavCategory.allItemNavCategory)
   }
+  console.log(itemNavCategory)
 
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>

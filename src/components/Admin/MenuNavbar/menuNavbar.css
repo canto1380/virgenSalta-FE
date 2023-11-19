@@ -28,3 +28,17 @@
   height: auto;
   overflow-y: scroll;
 }
+.asasa {
+  cursor: move !important;
+  color: blue !important;
+}
+
+/** COLLAPSE **/
+.ant-collapse-content-box {
+  padding: 8px 0px !important;
+}
+.ant-list-item {
+  padding: 7px !important;
+}
+/* .ant-collapse-header {
+} */

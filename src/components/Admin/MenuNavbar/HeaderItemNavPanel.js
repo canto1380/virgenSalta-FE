@@ -61,7 +61,7 @@ const HeaderItemNavPanel = ({
   }
 
   return (
-    <div>
+    <div className=''>
       <Button
         variant='outline'
         title='Editar'

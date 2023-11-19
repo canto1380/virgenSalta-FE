@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Carousel from 'react-bootstrap/Carousel'
 import ReactPlayer from 'react-player'
+import Carousel from 'react-bootstrap/Carousel'
 import { getCarousel } from '../../utils/queryAPI/carousel'
 import Spinn from '../Spinn/Spinn'
 
@@ -20,14 +20,15 @@ const Cover = () => {
     const data = await getCarousel(params)
     setCarousel(data)
   }
+
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       {carousel ? (
         carousel.allCarousel.map((d, i) => (
-          <Carousel.Item interval={4000} pause='hover' key={i}>
+          <Carousel.Item interval={10000} pause='hover' key={i}>
             <ReactPlayer
               muted
-              playing
+              playing={true}
               url={d.file}
               width='100%'
               height='100%'
@@ -42,7 +43,6 @@ const Cover = () => {
                 },
               }}
             />
-            )
           </Carousel.Item>
         ))
       ) : (
