@@ -1,0 +1,12 @@
+.cover-title {
+  /* background-color: rgba(174, 174, 174, 0.514); */
+  padding: 4px 8px;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 100px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.729);
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
+}

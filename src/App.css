@@ -1,11 +1,17 @@
 -cover {
   height: 40vw;
 }
-.cursorPointer{
+.container-cover {
+  position: relative;
+  width: 100%;
+  height: 550px !important;
+}
+
+.cursorPointer {
   cursor: pointer;
 }
 .img-cover {
-  background-image: url("../src/images/logo.jpg");
+  background-image: url('../src/images/logo.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -13,11 +19,11 @@
 }
 
 .page-section-title {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 38px;
 }
 .section-title {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 20px;
 }
 .section-btn {
@@ -28,7 +34,7 @@
 }
 
 .phrase1 {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 3.2vw;
   font-weight: 600;
 }
@@ -74,86 +80,97 @@
 .ant-btn {
   background-color: #2b9ac6ba !important;
 }
-.navbar-container{
+.navbar-container {
   z-index: 1000;
   position: sticky;
   top: 0;
   width: 100%;
 }
 
-.title-recent-news{
+.title-recent-news {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 26px;
 }
-.bg-gradient-1{
+.bg-gradient-1 {
   background: linear-gradient(to top, #1d333ccb, 70%, #2b9ac6ba);
 }
-.bg-gradient-2{
+.bg-gradient-2 {
   background: linear-gradient(to top, #15262ccb, 70%, #2d4e5bba);
 }
 
 .c-green {
-  color:green
+  color: green;
 }
-.c-green:hover{
-  color: rgb(5, 232, 5)
+.c-green:hover {
+  color: rgb(5, 232, 5);
 }
 
 .c-red {
-  color:red
+  color: red;
 }
 .c-red:hover {
-  color:rgb(252, 73, 73)
+  color: rgb(252, 73, 73);
 }
 
 #id-btn-upload {
   display: none;
 }
-.btnUpload{
+.btnUpload {
   cursor: pointer;
   width: 100px;
   height: 100px;
   border: 1px dashed rgb(123, 123, 123);
 }
-.preview-upload{
+.preview-upload {
   width: 100px;
   height: 100px;
 }
-.preview-upload-backdrop{
+.preview-upload-backdrop {
   border: 3px solid rgb(65, 93, 132);
   width: 300px;
   height: 300px;
 }
-.preview-upload-video{
+.preview-upload-video {
   width: 150px;
   height: 150px;
 }
-.btnUploadVideo{
+.btnUploadVideo {
   cursor: pointer;
   width: 150px;
   height: 150px;
   border: 1px dashed rgb(123, 123, 123);
 }
 
-.container-preview{
+.container-preview {
   position: relative;
 }
 .btn-delete-img {
-position: absolute;
-top: 0;
-right: 24px;
-width: 25px;
-height: 25px;
-color: black !important;
+  position: absolute;
+  top: 0;
+  right: 24px;
+  width: 25px;
+  height: 25px;
+  color: black !important;
 }
 .btn-delete-img:hover {
   background-color: rgba(196, 0, 0, 0.575) !important;
-  color: white !important
+  color: white !important;
 }
-.btn-contianer-delete{
+.btn-contianer-delete {
   position: relative;
 }
-.text-important{
+.text-important {
   font-size: 14px;
   font-style: oblique;
+}
+
+@media (max-width: 1100px) {
+  .container-cover {
+    height: 450px !important;
+  }
+}
+@media (max-width: 991px) {
+  .container-cover {
+    height: 400px !important;
+  }
 }

@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import ReactPlayer from 'react-player'
-import Carousel from 'react-bootstrap/Carousel'
 import { getCarousel } from '../../utils/queryAPI/carousel'
 import Spinn from '../Spinn/Spinn'
+import './cover.css'
 
 const Cover = () => {
   const [carousel, setCarousel] = useState('')
-  const [index, setIndex] = useState(0)
-
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex)
-  }
 
   useEffect(() => {
     getData()
@@ -18,39 +12,27 @@ const Cover = () => {
   const getData = async () => {
     const params = { deleted: false, limit: 6 }
     const data = await getCarousel(params)
-    setCarousel(data)
+    setCarousel(data.allCarousel[0])
   }
-
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+    <>
       {carousel ? (
-        carousel.allCarousel.map((d, i) => (
-          <Carousel.Item interval={10000} pause='hover' key={i}>
-            <ReactPlayer
-              muted
-              playing={true}
-              url={d.file}
-              width='100%'
-              height='100%'
-              pip={true}
-              controls={true}
-              progressInterval={1000}
-              config={{
-                file: {
-                  attributes: {
-                    controlsList: 'nodownload', // Desactiva la opción de descarga nativa del navegador
-                  },
-                },
-              }}
-            />
-          </Carousel.Item>
-        ))
+        <>
+          <video width='100%' height='100%' autoPlay muted>
+            <source src={carousel.file} type='video/mp4' />
+          </video>
+          <p className='mb-0 phrase cover-title'>
+            "Yo Soy La Inmaculada Madre Del Divino <br/>
+            Corazón Eucarístico de Jesús"
+          </p>
+        </>
       ) : (
         <div style={{ width: '100%', height: '500px' }}>
           <Spinn type='data' />
         </div>
       )}
-    </Carousel>
+    </>
+    // </Carousel>
   )
 }
 
