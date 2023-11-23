@@ -24,7 +24,7 @@ const SingleNewsCategory = () => {
   const [newsInf, setNewsInf] = useState([])
 
   let deleted = false
-  const BORRAR_AL_DESARROLLAR = nameCategory.replace(/-/g, ' ')
+  const TITLE_CATEGORY = nameCategory.replace(/-/g, ' ')
   useEffect(() => {
     dataNewsCategory()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,10 +74,7 @@ const SingleNewsCategory = () => {
   return (
     <div className='bg-gradient-1'>
       <Layout />
-      <BackdropSections
-        title={BORRAR_AL_DESARROLLAR}
-        img={singleNewsCategory}
-      />
+      <BackdropSections title={TITLE_CATEGORY} img={singleNewsCategory} />
       <Container className='mt-3 pt-5'>
         <NewsFilter
           typeFlag='newsCategory'
@@ -87,9 +84,7 @@ const SingleNewsCategory = () => {
         {news ? (
           <Row className='mt-3 pb-5'>
             <div>
-              <h5 className='pb-2'>
-                Noticias de la categoría {BORRAR_AL_DESARROLLAR}
-              </h5>
+              <h5 className='pb-2'>{TITLE_CATEGORY}</h5>
             </div>
             {news.length > 0 ? (
               news?.map((not, i) => (
