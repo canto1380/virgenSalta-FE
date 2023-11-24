@@ -92,10 +92,13 @@
   font-size: 26px;
 }
 .bg-gradient-1 {
-  background: linear-gradient(to top, #1d333ccb, 70%, #2b9ac6ba);
+  background: linear-gradient(to top, #1d333ccb, 70%, #4b98d3);
 }
 .bg-gradient-2 {
   background: linear-gradient(to top, #15262ccb, 70%, #2d4e5bba);
+}
+.bg-gradient-3{
+  background: linear-gradient(to top, rgb(193, 218, 255), 40%, #81a7d3);
 }
 
 .c-green {

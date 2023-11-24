@@ -13,7 +13,7 @@ const DirectAccess = () => {
         <a href={'/horarios'} className=''>
           <p>Horarios</p>
         </a>
-        <a href={'/'} className=''>
+        <a href={'/vivo-capilla'} className=''>
           <p>Capilla en vivo</p>
         </a>
         <a

@@ -28,7 +28,6 @@ const NavbarPrimary = ({ home }) => {
     const dataItemNavCategory = await getItemNavCategory(params1)
     setItemNavCategory(dataItemNavCategory.allItemNavCategory)
   }
-  console.log(itemNavCategory)
 
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>

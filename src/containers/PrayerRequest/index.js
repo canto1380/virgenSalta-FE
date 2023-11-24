@@ -1,17 +1,25 @@
-import React from 'react';
-import Layout from '../../components/Layout/Layout';
-import LayoutFoot from '../../components/Layout/LayoutFoot';
+import React from 'react'
+import Layout from '../../components/Layout/Layout'
+import LayoutFoot from '../../components/Layout/LayoutFoot'
+import { Container, Row } from 'react-bootstrap'
+import FormPrayerRequest from '../../components/PrayerRequest/FormPrayerRequest'
+import HeaderPrayerRequest from '../../components/PrayerRequest/HeaderPrayerRequest'
 
 const PrayerRequest = () => {
   return (
-    <>
-    <Layout/>
-    <div>
-      Container para la pagina de PEDIDO DE ORACION
+    <div className='bg-gradient-3'>
+      <Layout />
+      <Container className='mt-3 pt-5'>
+        <Row className='pb-4'>
+          <HeaderPrayerRequest />
+        </Row>
+        <Row>
+          <FormPrayerRequest />
+        </Row>
+      </Container>
+      <LayoutFoot />
     </div>
-    <LayoutFoot />
-    </>
-  );
-};
+  )
+}
 
-export default PrayerRequest;
+export default PrayerRequest
