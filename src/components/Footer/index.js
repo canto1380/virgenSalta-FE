@@ -7,14 +7,18 @@ import AppPhone from './AppPhone'
 const Footer = () => {
   return (
     <Container fluid className='container-footer'>
-      <Row className='px-5'>
-        <Col xs={12} md={4} className=' py-5'>
+      <Row className='asd'>
+        <Col xs={12} md={4} className='py-5 '>
           <ContactFooter />
         </Col>
-        <Col xs={12} md={4} className='py-5 ps-footer-section'>
+        <Col
+          xs={12}
+          md={4}
+          className='py-5 ps-footer-section '
+        >
           <DirectAccess />
         </Col>
-        <Col xs={12} md={4} className='py-5'>
+        <Col xs={12} md={4} className='py-5 '>
           <AppPhone />
         </Col>
       </Row>
