@@ -16,7 +16,6 @@ const BodyNews = ({ data, photos }) => {
     const numberInsertText = Math.floor(lengthArr / lengthPhotos)
     const bodyText = document.querySelector('.ida')
     let numberInsertImg = 0
-    console.log(arr)
     arr.forEach((d, i) => {
       bodyText.innerHTML += `${d}`
       if (

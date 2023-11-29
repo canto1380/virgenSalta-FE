@@ -32,7 +32,7 @@ const FiltersSchedules = ({
     options.push(option)
   })
   options.unshift({
-    value: null,
+    value: '',
     label: 'Todas',
   })
 

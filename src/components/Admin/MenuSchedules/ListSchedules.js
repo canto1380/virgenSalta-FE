@@ -90,7 +90,18 @@ const ListSchedules = ({
                 variant='outline'
                 title='Editar'
                 key='list-loadmore-edit'
-                onClick={() => resetDataEdit(item)}
+                onClick={() =>
+                  resetDataEdit(
+                    item,
+                    item.idEventType
+                      ? 'Eventos'
+                      : item.idImportantEventType
+                      ? 'Celebraciones'
+                      : item.eventName
+                      ? 'Tipos de eventos'
+                      : 'Tipos de celebraciones'
+                  )
+                }
               >
                 <EditOutlined className='styleIcons' />
               </Button>,
@@ -127,7 +138,7 @@ const ListSchedules = ({
                           <span>
                             {item?.eventName} - {item?.description} |{' '}
                             {item?.time}hs -{' '}
-                            {moment(item?.data).format('DD-MM-YYYY')}
+                            {moment(item?.date).format('DD/MM/YYYY')}
                           </span>
                         )}
                       </p>
@@ -139,10 +150,6 @@ const ListSchedules = ({
           </List.Item>
         )}
       />
-      {/* <PaginationAdmin
-        pageSelected={pageSelected}
-        setPageSelected={setPageSelected}
-      /> */}
       {loading && (
         <div className='loadingSpin'>
           <Spin />

@@ -46,7 +46,7 @@ const SingleNews = () => {
           <Col xs={12} className='pt-5'>
             <HeaderNews data={singleNews} />
           </Col>
-          <hr className='pb-3' />
+          
           <Col xs={12} className='pb-5'>
             <BodyNews
               data={singleNews?.description}

@@ -12,9 +12,9 @@ import {
   BiCategoryAlt,
   BiUserCircle,
   BiLogOut,
-  BiTime,
   BiCarousel,
 } from 'react-icons/bi'
+import { FaCalendarAlt } from "react-icons/fa";
 import '../sidebar.css'
 import { deleteCookies, deleteToken } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
@@ -57,8 +57,8 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
     },
     {
       title: 'horarios',
-      iconName: <BiTime className='sizeIcon' />,
-      name: 'Horarios',
+      iconName: <FaCalendarAlt className='sizeIcon' />,
+      name: 'Calendario',
     },
     {
       title: 'jornadas',

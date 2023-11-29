@@ -25,7 +25,7 @@ const NewsAddEdit = ({
   const [serverError, setServerError] = useState(false)
 
   const URL_FIREBASE_IMG = 'img-noticias'
-  
+
   const getPreview = (file) => {
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)
@@ -44,55 +44,28 @@ const NewsAddEdit = ({
     try {
       if (!dataRegisterEdit) {
         /** Carga IMG en Firebase **/
-        if (!imgData) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
-        }
-        const objects = {}
-        for (let file of imgData) {
-          const preview = await getPreview(file)
-          objects[file.name] = { preview }
-        }
-        const promises = imgData.map((file) => {
-          return uploadFile(URL_FIREBASE_IMG, file)
-        })
-        const ls = await Promise.all(promises)
-        /** Carga IMG en Firebase **/
-
         values.description = description
-        values.photos = ls
-        const res = await api('POST', 'news', values, userToken)
-        if (res.status === 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            window.location.href = '/admin/home/noticias'
-          }, 2500)
-        }
-        if (res?.response?.status === 400) {
-          const arraysError = res?.response?.data?.errors
-          setMessageError(arraysError)
-          setDataError(true)
-          setTimeout(() => {
-            setDataError(false)
-          }, 3000)
-        }
-      } else {
-        /** Carga IMG en Firebase **/
-        /** Si no existe imgData o no tiene nada y preview tampoco */
-        console.log(imgData)
-        console.log(preview)
-        if (
-          (!imgData || imgData.length === 0) &&
-          Object.keys(preview).length === 0
-        ) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
-        }
-        let ls, dataImgUpdate
-        let arr = []
-        /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
-        if (imgData) {
+        if (!imgData) {
+          // alert('Debe seleccionar una/s imagen/es para continuar')
+          // return
+
+          const res = await api('POST', 'news', values, userToken)
+          if (res.status === 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              window.location.href = '/admin/home/noticias'
+            }, 2500)
+          }
+          if (res?.response?.status === 400) {
+            const arraysError = res?.response?.data?.errors
+            setMessageError(arraysError)
+            setDataError(true)
+            setTimeout(() => {
+              setDataError(false)
+            }, 3000)
+          }
+        } else {
           const objects = {}
           for (let file of imgData) {
             const preview = await getPreview(file)
@@ -101,52 +74,118 @@ const NewsAddEdit = ({
           const promises = imgData.map((file) => {
             return uploadFile(URL_FIREBASE_IMG, file)
           })
-          ls = await Promise.all(promises)
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
+          const ls = await Promise.all(promises)
+          /** Carga IMG en Firebase **/
+          values.photos = ls
+          const res = await api('POST', 'news', values, userToken)
+          if (res.status === 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              window.location.href = '/admin/home/noticias'
+            }, 2500)
           }
-          dataImgUpdate = arr.concat(ls)
-        } else {
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
+          if (res?.response?.status === 400) {
+            const arraysError = res?.response?.data?.errors
+            setMessageError(arraysError)
+            setDataError(true)
+            setTimeout(() => {
+              setDataError(false)
+            }, 3000)
           }
-          dataImgUpdate = arr
         }
-        dataRegisterEdit.photos.forEach((d2) => {
-          if (!dataImgUpdate.includes(d2)) {
-            deleteFile(d2)
-          }
-        })
-        /** Carga IMG en Firebase **/
-
-        values.photos = dataImgUpdate
+      } else {
         values.description =
           description === undefined ? dataRegisterEdit.description : description
-        const res = await api(
-          'PATCH',
-          `news/${dataRegisterEdit._id}`,
-          values,
-          userToken
-        )
+        /** Carga IMG en Firebase **/
+        /** Si no existe imgData o no tiene nada y preview tampoco */
+        console.log(imgData)
+        console.log(preview)
+        if (
+          (!imgData || imgData.length === 0) &&
+          (!preview || Object.keys(preview).length === 0)
+        ) {
+          console.log('1111')
+          values.photos = []
+          const res = await api(
+            'PATCH',
+            `news/${dataRegisterEdit._id}`,
+            values,
+            userToken
+          )
 
-        if (res.status === 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            window.location.href = '/admin/home/noticias'
-          }, 2500)
-        }
-        if (res?.response?.status === 400) {
-          const arraysError = res?.response?.data?.errors
-          setMessageError(arraysError)
-          setDataError(true)
-          setTimeout(() => {
-            setDataError(false)
-          }, 3000)
+          if (res.status === 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              window.location.href = '/admin/home/noticias'
+            }, 2500)
+          }
+          if (res?.response?.status === 400) {
+            const arraysError = res?.response?.data?.errors
+            setMessageError(arraysError)
+            setDataError(true)
+            setTimeout(() => {
+              setDataError(false)
+            }, 3000)
+          }
+        } else {
+          let ls, dataImgUpdate
+          let arr = []
+          /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
+          if (imgData) {
+            const objects = {}
+            for (let file of imgData) {
+              const preview = await getPreview(file)
+              objects[file.name] = { preview }
+            }
+            const promises = imgData.map((file) => {
+              return uploadFile(URL_FIREBASE_IMG, file)
+            })
+            ls = await Promise.all(promises)
+            for (const url in preview) {
+              if (!preview[url].includes('blob')) {
+                arr.push(preview[url])
+              }
+            }
+            dataImgUpdate = arr.concat(ls)
+          } else {
+            for (const url in preview) {
+              if (!preview[url].includes('blob')) {
+                arr.push(preview[url])
+              }
+            }
+            dataImgUpdate = arr
+          }
+          dataRegisterEdit.photos.forEach((d2) => {
+            if (!dataImgUpdate.includes(d2)) {
+              deleteFile(d2)
+            }
+          })
+          /** Carga IMG en Firebase **/
+          values.photos = dataImgUpdate
+          const res = await api(
+            'PATCH',
+            `news/${dataRegisterEdit._id}`,
+            values,
+            userToken
+          )
+
+          if (res.status === 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              window.location.href = '/admin/home/noticias'
+            }, 2500)
+          }
+          if (res?.response?.status === 400) {
+            const arraysError = res?.response?.data?.errors
+            setMessageError(arraysError)
+            setDataError(true)
+            setTimeout(() => {
+              setDataError(false)
+            }, 3000)
+          }
         }
       }
     } catch (error) {
@@ -233,13 +272,33 @@ const NewsAddEdit = ({
         <Form.Item
           label='Título Noticia'
           name='title'
-          rules={[{ required: true, message: 'Debe ingresar un nombre' }]}
+          rules={[
+            { required: true, message: 'Debe ingresar un nombre' },
+            {
+              min: 5,
+              message: 'No puede tener menos de 5 caracteres',
+            },
+            {
+              max: 150,
+              message: 'No puede tener mas de 150 caracteres',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label='Subtítulo'
           name='subtitle'
+          rules={[
+            {
+              min: 5,
+              message: 'No puede tener menos de 5 caracteres',
+            },
+            {
+              max: 150,
+              message: 'No puede tener mas de 150 caracteres',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -275,9 +334,7 @@ const NewsAddEdit = ({
           }}
         />
         <div className='mt-4'>
-          <p>
-            <span className='text-danger fw-bolder me-1'>*</span>Imágenes
-          </p>
+          <p>Imágenes</p>
         </div>
         <div className='d-flex mb-3'>
           {preview &&
@@ -319,7 +376,12 @@ const NewsAddEdit = ({
         <Form.Item
           label='Pie de foto principal (Primera foto seleccionada)'
           name='caption'
-          rules={[{ required: true, message: 'Debe ingresar un texto' }]}
+          rules={[
+            {
+              max: 100,
+              message: 'No puede tener mas de 100 caracteres',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
