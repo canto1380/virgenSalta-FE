@@ -110,11 +110,12 @@ const MenuNavbar = () => {
                 bandType='itemNavbar'
                 setRouteAPI={setRouteAPI}
               />
-              <p className='text-important'>
-                <span className='text-danger fw-bolder'>*</span>Para cambiar el
-                orden, selecciona un/os caracteres del item y
-                arrastre al lugar deseado
-              </p>
+                <p className='text-important'>
+                  <span className='text-danger fw-bolder'>*</span>Para cambiar
+                  el orden, selecciona un/os caracteres del item y arrastre al
+                  lugar deseado
+                </p>
+
               <ItemsNavbarCollapse
                 data1={itemNavData?.allItemNav}
                 data2={

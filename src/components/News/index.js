@@ -11,7 +11,7 @@ const News = () => {
     dataNews()
   }, [])
   const dataNews = async () => {
-    const params = { limit: 6, deleted: false }
+    const params = { deleted: false, visible: true }
     const data = await getNews(params)
     setNews(data)
   }

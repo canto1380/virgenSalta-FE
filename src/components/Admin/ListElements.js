@@ -5,6 +5,7 @@ import {
   DeleteOutlined,
   RollbackOutlined,
 } from '@ant-design/icons'
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { Button } from 'react-bootstrap'
 import { api } from '../../utils/api'
 import './menus.css'
@@ -18,12 +19,37 @@ const ListElements = ({
   setBand,
   resetValuesEdit,
   routeAPI,
+  btnVisible,
 }) => {
   const [initLoading, setInitLoading] = useState(true)
   const [loading, setLoading] = useState(false)
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
 
   const convertRoute = routeAPI[0].toUpperCase() + routeAPI.slice(1)
+
+  const handleVisibility = async (id, visibleData) => {
+    try {
+      const visible = { visible: !visibleData }
+      console.log(visible)
+      const res = await api(
+        'PATCH',
+        `${routeAPI}/updateVisibility/${id}`,
+        visible,
+        userToken
+      )
+      if (res.status === 200) {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+          setBand(!band)
+        }, 2500)
+      }
+      console.log(res)
+      if (res.response.status === 401) {
+        setModalUnauthorized(true)
+      }
+    } catch (error) {}
+  }
   const handleDelete = async (deleted, id) => {
     try {
       if (deleted) {
@@ -82,6 +108,21 @@ const ListElements = ({
           renderItem={(item) => (
             <List.Item
               actions={[
+                btnVisible && (
+                  <Button
+                    variant='outline'
+                    title={item?.visible ? 'Ocultar' : 'Mostrar'}
+                    key='list-loadmore-edit'
+                    onClick={() => handleVisibility(item._id, item.visible)}
+                  >
+                    {item?.visible === true ? (
+                      <IoEyeOutline className='styleIcons c-red' />
+                    ) : (
+                      <IoEyeOffOutline className='styleIcons c-green' />
+                    )}
+                  </Button>
+                ),
+
                 <Button
                   variant='outline'
                   title='Editar'

@@ -92,6 +92,13 @@ const MenuNews = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
+            {/* <div className='px-5'> */}
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>El botón de
+              visible permite mostrar/ocultar las noticias en la página
+              principal
+            </p>
+            {/* </div> */}
             <ListElements
               data={newsData?.allNews}
               userToken={userToken}
@@ -99,6 +106,7 @@ const MenuNews = ({ idTab }) => {
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
               routeAPI='news'
+              btnVisible={true}
             />
             <PaginationAdmin
               data={newsData}

@@ -19,13 +19,16 @@ const Cover = () => {
     <>
       {carousel ? (
         <>
-          <video width='100%' height='100%' autoPlay muted poster={FondoGris}>
+          <video
+            width='100%'
+            height='100%'
+            autoPlay
+            muted
+            poster={FondoGris}
+            loop
+          >
             <source src={carousel.file} type='video/mp4' />
           </video>
-          <p className='mb-0 phrase cover-title'>
-            "Yo Soy La Inmaculada Madre Del Divino <br />
-            Corazón Eucarístico de Jesús"
-          </p>
         </>
       ) : (
         <div className='d-flex justify-content-center'>

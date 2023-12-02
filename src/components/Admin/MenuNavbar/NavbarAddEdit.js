@@ -41,6 +41,13 @@ const NavbarAddEdit = ({
     }
   }
   const handleCreate = async (values) => {
+    let urlRedirect = ''
+    if (values.urlRedirect === undefined) {
+      urlRedirect = ''
+    } else {
+      urlRedirect = values.urlRedirect
+    }
+    values.urlRedirect = urlRedirect
     const replaceURL = values?.url
     values.url = replaceURL && replaceURL.replace(/ /g, '-')
 
@@ -82,7 +89,7 @@ const NavbarAddEdit = ({
       (d) => values.url === d.value.replace(/ /g, '-')
     )
     values.pathUrl = optionsSelected.length > 0 && optionsSelected[0].pathUrl
-    
+
     const res = await api(
       'PATCH',
       `${routeAPI}/${dataRegisterEdit._id}`,
@@ -109,7 +116,15 @@ const NavbarAddEdit = ({
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
-  let options = []
+  let options = [],
+    optionsRedirect = []
+
+  optionsRedirect.push({
+    value: '',
+    label: 'Ninguna',
+    pathUrl: '',
+  })
+
   dataNews?.forEach((d) => {
     const option = {
       value: d.title,
@@ -117,6 +132,7 @@ const NavbarAddEdit = ({
       pathUrl: 'noticias',
     }
     options.push(option)
+    optionsRedirect.push(option)
   })
   dataSpecialDay?.forEach((d) => {
     const option = {
@@ -125,6 +141,18 @@ const NavbarAddEdit = ({
       pathUrl: 'jornadas',
     }
     options.push(option)
+    optionsRedirect.push(option)
+  })
+  options.unshift({
+    value: 'horarios',
+    label: 'Calendario',
+    pathUrl: 'horarios',
+  })
+
+  optionsRedirect.unshift({
+    value: 'horarios',
+    label: 'Calendario',
+    pathUrl: 'horarios',
   })
   return (
     <div className='menuContainer'>
@@ -148,6 +176,7 @@ const NavbarAddEdit = ({
           url: dataRegisterEdit?.url,
           idItemNavCategory: dataRegisterEdit?.idItemNavCategory?._id,
           openWindows: dataRegisterEdit?.openWindows,
+          urlRedirect: dataRegisterEdit?.urlRedirect,
         }}
       >
         {routeAPI === 'itemNavCategory' && (
@@ -158,6 +187,29 @@ const NavbarAddEdit = ({
               rules={[{ required: true, message: 'Debe ingresar un nombre' }]}
             >
               <Input />
+            </Form.Item>
+            <Form.Item
+              label='Elija una nota a la cual redirigir'
+              name='urlRedirect'
+            >
+              <Select
+                showSearch
+                style={{
+                  width: '100%',
+                }}
+                defaultValue={'Ninguna'}
+                placeholder='Busque o seleccione'
+                optionFilterProp='children'
+                filterOption={(input, option) =>
+                  (option?.label ?? '').includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? '')
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? '').toLowerCase())
+                }
+                options={optionsRedirect}
+              />
             </Form.Item>
             <Form.Item label='Visible' valuePropName='checked' name='visible'>
               <Switch onChange={handleSwitch} defaultChecked />
