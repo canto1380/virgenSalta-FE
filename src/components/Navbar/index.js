@@ -42,40 +42,39 @@ const NavbarPrimary = ({ home }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='me-auto'>
+          <Nav className='me-auto' key='1'>
             {itemNavCategory &&
-              itemNavCategory?.map((d) => {
-                if (d.urlRedirect === '') {
-                  return (
-                    <NavDropdown
-                      title={d.itemNavCategory.toUpperCase()}
-                      id={d._id}
-                      key={d._id}
-                      className='container-dd'
-                    >
-                      {itemNav?.map((d1) => {
-                        if (d1?.idItemNavCategory?._id === d._id) {
-                          return (
-                            <NavDropdown.Item href={`/${d1.pathUrl}/${d1.url}`}>
-                              {d1.title}
-                            </NavDropdown.Item>
-                          )
-                        } else {
-                          return null
-                        }
-                      })}
-                    </NavDropdown>
-                  )
-                } else {
-                  return (
-                    <Nav.Link href={`/${d.urlRedirect}`}>
-                      {d.itemNavCategory.toUpperCase()}
-                    </Nav.Link>
-                  )
-                }
-              })}
+              itemNavCategory?.map((d) =>
+                d.urlRedirect === '' ? (
+                  <NavDropdown
+                    title={d.itemNavCategory.toUpperCase()}
+                    id={d._id}
+                    key={d._id}
+                    className='container-dd'
+                  >
+                    {itemNav?.map((d1) => {
+                      if (d1?.idItemNavCategory?._id === d._id) {
+                        return (
+                          <NavDropdown.Item
+                            key={d1._id}
+                            href={`/${d1.pathUrl}/${d1.url}`}
+                          >
+                            {d1.title}
+                          </NavDropdown.Item>
+                        )
+                      } else {
+                        return null
+                      }
+                    })}
+                  </NavDropdown>
+                ) : (
+                  <Nav.Link key={d._id} href={`/${d.urlRedirect}`}>
+                    {d.itemNavCategory.toUpperCase()}{' '}
+                  </Nav.Link>
+                )
+              )}
           </Nav>
-          <Nav className='nav-section2'>
+          <Nav className='nav-section2' key='2'>
             <Button variant='outline-light' className='btn-language px-2'>
               es
             </Button>
