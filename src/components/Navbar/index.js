@@ -68,7 +68,7 @@ const NavbarPrimary = ({ home }) => {
                     })}
                   </NavDropdown>
                 ) : (
-                  <Nav.Link key={d._id} href={`/${d.urlRedirect}`}>
+                  <Nav.Link key={d._id} href={`/${d.urlRedirect}`} className='title-text'>
                     {d.itemNavCategory.toUpperCase()}{' '}
                   </Nav.Link>
                 )

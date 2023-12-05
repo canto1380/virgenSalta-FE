@@ -4,45 +4,48 @@
 }
 
 .nav-section2 {
-  border-left: 1.5px solid #000000E6;
+  border-left: 1.5px solid #000000e6;
 }
-.nav-section2:first-child{
+.nav-section2:first-child {
   padding-left: 100px;
 }
-.btn-language{
-  color: #0000008C !important;
+.btn-language {
+  color: #0000008c !important;
   font-weight: 500 !important;
 }
-.btn-language:hover{
-  color: #000000E6 !important;
+.btn-language:hover {
+  color: #000000e6 !important;
 }
 
-.container-dd{
-  font-family: Georgia, "Times New Roman", Times, serif;
+.container-dd {
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 14px;
 }
-.container-dd div{
+.container-dd div {
   padding: 0px;
   border-radius: 10px;
   border: 1px solid #1540cc52 !important;
-  font-family: "Times New Roman", Times, serif;
-
+  font-family: 'Times New Roman', Times, serif;
 }
 
-.container-dd div a{
+.container-dd div a {
   border-radius: 10px;
   padding: 7px 16px !important;
 }
 /* .container-dd div a:first-child {
   margin-top: 7px !important;
 } */
-.container-dd div a:hover{
+.container-dd div a:hover {
   background-color: #1540cc52 !important;
   border-radius: 10px;
 }
+.title-text {
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 14px !important;
+}
 
-@media(max-width: 992px) {
-  .nav-section2{
+@media (max-width: 992px) {
+  .nav-section2 {
     border-left: 0px;
   }
   .nav-section2 button {
