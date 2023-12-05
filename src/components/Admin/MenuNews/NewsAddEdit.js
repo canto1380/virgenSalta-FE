@@ -99,13 +99,10 @@ const NewsAddEdit = ({
           description === undefined ? dataRegisterEdit.description : description
         /** Carga IMG en Firebase **/
         /** Si no existe imgData o no tiene nada y preview tampoco */
-        console.log(imgData)
-        console.log(preview)
         if (
           (!imgData || imgData.length === 0) &&
           (!preview || Object.keys(preview).length === 0)
         ) {
-          console.log('1111')
           values.photos = []
           const res = await api(
             'PATCH',

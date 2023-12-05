@@ -30,7 +30,6 @@ const ListElements = ({
   const handleVisibility = async (id, visibleData) => {
     try {
       const visible = { visible: !visibleData }
-      console.log(visible)
       const res = await api(
         'PATCH',
         `${routeAPI}/updateVisibility/${id}`,
@@ -44,7 +43,6 @@ const ListElements = ({
           setBand(!band)
         }, 2500)
       }
-      console.log(res)
       if (res.response.status === 401) {
         setModalUnauthorized(true)
       }

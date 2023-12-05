@@ -43,7 +43,6 @@ const MenuAccount = ({ dataUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log(name)
     setDataUpdated({ ...dataUpdated, [name]: value })
   }
 
@@ -57,7 +56,6 @@ const MenuAccount = ({ dataUser }) => {
   }
   const updateUser = async (e) => {
     try {
-      console.log(dataUpdated)
       const res = await api(
         'PATCH',
         `users/${dataUser._id}`,
