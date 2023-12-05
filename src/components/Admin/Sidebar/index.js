@@ -33,12 +33,12 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
     {
       title: 'menu-principal',
       iconName: <BsMenuButtonWideFill className='sizeIcon' />,
-      name: 'NavBar',
+      name: 'Menú',
     },
     {
-      title: 'carousel',
+      title: 'video',
       iconName: <BiCarousel className='sizeIcon' />,
-      name: 'Carousel',
+      name: 'Video portada',
     },
     {
       title: 'historia',
@@ -48,7 +48,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
     {
       title: 'noticias',
       iconName: <BsNewspaper className='sizeIcon' />,
-      name: 'Noticias',
+      name: 'Noticias y contenido',
     },
     {
       title: 'categorias',
