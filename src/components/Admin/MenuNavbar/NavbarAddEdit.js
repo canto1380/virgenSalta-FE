@@ -18,7 +18,7 @@ const NavbarAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [switchDeleted, setSwitchDeleted] = useState(true)
-  const [switchWindow, setSwitchWindow] = useState(true)
+  const [switchWindow, setSwitchWindow] = useState(false)
 
   const handleSwitchWindow = (e) => {
     setSwitchWindow(e)
@@ -42,10 +42,13 @@ const NavbarAddEdit = ({
   }
   const handleCreate = async (values) => {
     let urlRedirect = ''
-    if (values.urlRedirect === undefined) {
+    const optionsSelected1 = optionsRedirect.filter(
+      (d) => values.urlRedirect === d.value
+    )
+    if (values.urlRedirect === undefined || values.urlRedirect === '') {
       urlRedirect = ''
     } else {
-      urlRedirect = values.urlRedirect
+      urlRedirect = optionsSelected1[0].pathUrl
     }
     values.urlRedirect = urlRedirect
     const replaceURL = values?.url
@@ -132,7 +135,7 @@ const NavbarAddEdit = ({
       pathUrl: 'noticias',
     }
     options.push(option)
-    optionsRedirect.push(option)
+    // optionsRedirect.push(option)
   })
   dataSpecialDay?.forEach((d) => {
     const option = {
@@ -141,12 +144,7 @@ const NavbarAddEdit = ({
       pathUrl: 'jornadas',
     }
     options.push(option)
-    optionsRedirect.push(option)
-  })
-  options.unshift({
-    value: 'horarios',
-    label: 'Calendario',
-    pathUrl: 'horarios',
+    // optionsRedirect.push(option)
   })
 
   optionsRedirect.unshift({
@@ -197,7 +195,6 @@ const NavbarAddEdit = ({
                 style={{
                   width: '100%',
                 }}
-                defaultValue={'Ninguna'}
                 placeholder='Busque o seleccione'
                 optionFilterProp='children'
                 filterOption={(input, option) =>

@@ -36,7 +36,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       name: 'Menú',
     },
     {
-      title: 'video',
+      title: 'carousel',
       iconName: <BiCarousel className='sizeIcon' />,
       name: 'Video portada',
     },

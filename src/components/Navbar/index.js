@@ -28,7 +28,7 @@ const NavbarPrimary = ({ home }) => {
     const dataItemNavCategory = await getItemNavCategory(params1)
     setItemNavCategory(dataItemNavCategory.allItemNavCategory)
   }
-
+  console.log(itemNav)
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
       <Container fluid>
@@ -58,6 +58,7 @@ const NavbarPrimary = ({ home }) => {
                           <NavDropdown.Item
                             key={d1._id}
                             href={`/${d1.pathUrl}/${d1.url}`}
+                            target={d1.openWindows && '_blank'}
                           >
                             {d1.title}
                           </NavDropdown.Item>
@@ -68,7 +69,11 @@ const NavbarPrimary = ({ home }) => {
                     })}
                   </NavDropdown>
                 ) : (
-                  <Nav.Link key={d._id} href={`/${d.urlRedirect}`} className='title-text'>
+                  <Nav.Link
+                    key={d._id}
+                    href={`/${d.urlRedirect}`}
+                    className='title-text'
+                  >
                     {d.itemNavCategory.toUpperCase()}{' '}
                   </Nav.Link>
                 )
