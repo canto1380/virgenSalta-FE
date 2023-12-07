@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Cover from './Cover'
 import News from './News'
@@ -11,10 +11,57 @@ import VideoGallery from './VideoGallery'
 import FastAccess from './FastAccess'
 import Layout from './Layout/Layout'
 import LayoutFoot from './Layout/LayoutFoot'
+import axios from 'axios'
+import LiveVideo from './LiveChannel/LiveVideo'
 const Home = () => {
+  const [videosBack, setVideosBack] = useState()
+  const [videoLive, setVideoLive] = useState()
+  const { REACT_APP_CHANNEL_ID_YOUTUBE, REACT_APP_API_KEY_YOUTUBE } =
+    process.env
+
+  useEffect(() => {
+    fetchVideos()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const fetchVideos = async () => {
+    try {
+      const response = await axios.get(
+        'https://www.googleapis.com/youtube/v3/search',
+        {
+          params: {
+            key: 'AIzaSyC530nKCd3axC0fxS2yaYAIwaPnC24guZ4',
+            channelId: 'UC75zxCREJTq9odfMlj-iMnA',
+            part: 'snippet',
+            type: 'video',
+            maxResults: 1000,
+          },
+        }
+      )
+      const data = response.data.items
+      const videosNoLive = data.filter(
+        (d) => d.snippet.liveBroadcastContent === 'none'
+      )
+
+      const videosLive = data.filter(
+        (d) => d.snippet.liveBroadcastContent === 'live'
+      )
+
+      setVideosBack(videosNoLive.slice(0, 8))
+      setVideoLive(videosLive)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  // useEffect(() => {
+
+  // },[videosBack])
+  console.log(videosBack)
+  console.log(videoLive)
+
   return (
     <div>
       <Layout />
+      {videoLive && videoLive.length > 0 && <LiveVideo videoLive={videoLive} />}
       <Title />
       <Container fluid className='px-0 container-cover'>
         <Cover />
@@ -48,7 +95,7 @@ const Home = () => {
         <hr className='my-5' />
         <PhotosGallery />
         <hr className='my-5' />
-        <VideoGallery />
+        <VideoGallery videosBack={videosBack} />
       </Container>
       <LayoutFoot />
     </div>
