@@ -29,8 +29,8 @@ const Home = () => {
         'https://www.googleapis.com/youtube/v3/search',
         {
           params: {
-            key: 'AIzaSyC530nKCd3axC0fxS2yaYAIwaPnC24guZ4',
-            channelId: 'UC75zxCREJTq9odfMlj-iMnA',
+            key: REACT_APP_API_KEY_YOUTUBE,
+            channelId: REACT_APP_CHANNEL_ID_YOUTUBE,
             part: 'snippet',
             type: 'video',
             maxResults: 1000,
