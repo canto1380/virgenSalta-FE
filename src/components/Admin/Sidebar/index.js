@@ -5,7 +5,7 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
   BsCalendarDate,
-  BsBodyText,
+  // BsBodyText,
   BsMenuButtonWideFill,
 } from 'react-icons/bs'
 import {
@@ -14,7 +14,7 @@ import {
   BiLogOut,
   BiCarousel,
 } from 'react-icons/bi'
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaStream } from 'react-icons/fa'
 import '../sidebar.css'
 import { deleteCookies, deleteToken } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
@@ -40,11 +40,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       iconName: <BiCarousel className='sizeIcon' />,
       name: 'Video portada',
     },
-    {
-      title: 'historia',
-      iconName: <BsBodyText className='sizeIcon' />,
-      name: 'Historia',
-    },
+    // {
+    //   title: 'historia',
+    //   iconName: <BsBodyText className='sizeIcon' />,
+    //   name: 'Historia',
+    // },
     {
       title: 'noticias',
       iconName: <BsNewspaper className='sizeIcon' />,
@@ -64,6 +64,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       title: 'jornadas',
       iconName: <BsCalendarDate className='sizeIcon' />,
       name: 'Jornadas',
+    },
+    {
+      title: 'acceso-rápido',
+      iconName: <FaStream className='sizeIcon' />,
+      name: 'Acceso Rápido',
     },
     {
       title: 'cuenta',

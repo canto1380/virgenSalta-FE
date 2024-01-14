@@ -10,11 +10,7 @@ const ContactFooter = () => {
       <div className='pb-4'>
         <h4 className='title-section-footer'> CONTACTO</h4>
       </div>
-      <div
-        xs={12}
-        sm={4}
-        className='container-img-foot-icon pb-3'
-      >
+      <div xs={12} sm={4} className='container-img-foot-icon pb-3'>
         <img src={Logo} alt='Virgen Maria' className='img-foot' />
       </div>
 
@@ -27,6 +23,8 @@ const ContactFooter = () => {
             <a
               href='https://maps.app.goo.gl/NqQMrtvWN4QE7pQg7'
               className='link-location'
+              rel='noreferrer'
+              target='_blank'
             >
               Santuario Inmaculada Madre del Divino Corazón Eucarístico de Jesús
             </a>

@@ -47,7 +47,7 @@ const MenuHistory = () => {
       <Row>
         <Col className='mt-3'>
           <div className={`pt-4 pb-1 px-4`}>
-            <h3>Historia</h3>
+            <h3>sHistoria</h3>
           </div>
         </Col>
       </Row>

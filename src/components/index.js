@@ -55,8 +55,6 @@ const Home = () => {
   // useEffect(() => {
 
   // },[videosBack])
-  console.log(videosBack)
-  console.log(videoLive)
 
   return (
     <div>
