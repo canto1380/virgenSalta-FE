@@ -1,14 +1,12 @@
-import { Form, Select, Input, Button, Spin } from 'antd'
+import { Form, Input, Button, Spin } from 'antd'
 import React, { useState } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { api } from '../../../utils/api'
 
-const FormFastAccess = ({
+const FormStatistics = ({
   userToken,
   loading,
   setLoading,
-  dataCategories,
-  dataSpecialDay,
   dataRegisterEdit,
   routeAPI,
 }) => {
@@ -29,14 +27,12 @@ const FormFastAccess = ({
   }
 
   const handleCreate = async (values) => {
-    const replaceTitle = values.pathUrl.replace(/ /g, '-')
-    values.url = replaceTitle
     const res = await api('POST', routeAPI, values, userToken)
     if (res.status === 200) {
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
-        window.location.href = '/admin/home/acceso-rápido'
+        window.location.href = '/admin/home/estadisticas'
       }, 2500)
     }
     if (res?.response?.status === 400) {
@@ -49,8 +45,6 @@ const FormFastAccess = ({
     }
   }
   const handleUpdated = async (values) => {
-    const replaceTitle = values.pathUrl.replace(/ /g, '-')
-    values.url = replaceTitle
     const res = await api(
       'PATCH',
       `${routeAPI}/${dataRegisterEdit._id}`,
@@ -61,7 +55,7 @@ const FormFastAccess = ({
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
-        window.location.href = '/admin/home/acceso-rápido'
+        window.location.href = '/admin/home/estadisticas'
       }, 2500)
     }
     if (res?.response?.status === 400) {
@@ -73,40 +67,9 @@ const FormFastAccess = ({
       }, 3000)
     }
   }
-
   const onFinishFailed = (errorInfo) => {
     console.log('Failed: ', errorInfo)
   }
-
-  let options = []
-  dataCategories?.forEach((d) => {
-    const replaceTitle = d.nameCategory.replace(/ /g, '-')
-    const option = {
-      value: `categorias/${d.nameCategory}`,
-      label: d.nameCategory,
-      // pathUrl: `categorias/${replaceTitle}`,
-    }
-    options.push(option)
-  })
-  dataSpecialDay?.forEach((d) => {
-    const replaceTitle = d.title.replace(/ /g, '-')
-    const option = {
-      value: `jornadas/${d.title}`,
-      label: d.title,
-      pathUrl: `jornadas/${replaceTitle}`,
-    }
-    options.push(option)
-  })
-  options.unshift({
-    value: 'pedido-oracion',
-    label: 'Pedidos de Oración',
-    pathUrl: 'pedido-oracion',
-  })
-  options.unshift({
-    value: 'vivo-capilla',
-    label: 'Capilla en Vivo',
-    pathUrl: 'vivo-capilla',
-  })
 
   return (
     <div className='menuContainer'>
@@ -115,7 +78,7 @@ const FormFastAccess = ({
         wrapperCol={{ span: 22 }}
         initialValues={{
           title: dataRegisterEdit?.title,
-          pathUrl: dataRegisterEdit?.pathUrl,
+          description: dataRegisterEdit?.description,
         }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
@@ -131,32 +94,11 @@ const FormFastAccess = ({
           <Input />
         </Form.Item>
         <Form.Item
-          label='Elija una categoriía a la cual redirigir'
-          name='pathUrl'
-          rules={[
-            {
-              required: true,
-              message: 'Debe seleccionar una categoráa a la cual redireccionar',
-            },
-          ]}
+          label='Descripción'
+          name='description'
+          rules={[{ required: true, message: 'Debe ingresar una descripción' }]}
         >
-          <Select
-            showSearch
-            style={{
-              width: '100%',
-            }}
-            placeholder='Busque o seleccione'
-            optionFilterProp='children'
-            filterOption={(input, option) =>
-              (option?.label ?? '').includes(input)
-            }
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? '')
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? '').toLowerCase())
-            }
-            options={options}
-          />
+          <Input />
         </Form.Item>
         <Form.Item
           className='text-end'
@@ -189,4 +131,4 @@ const FormFastAccess = ({
   )
 }
 
-export default FormFastAccess
+export default FormStatistics

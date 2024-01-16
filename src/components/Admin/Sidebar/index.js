@@ -15,6 +15,7 @@ import {
   BiCarousel,
 } from 'react-icons/bi'
 import { FaCalendarAlt, FaStream } from 'react-icons/fa'
+import { FcStatistics } from 'react-icons/fc'
 import '../sidebar.css'
 import { deleteCookies, deleteToken } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
@@ -69,6 +70,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       title: 'acceso-rápido',
       iconName: <FaStream className='sizeIcon' />,
       name: 'Acceso Rápido',
+    },
+    {
+      title: 'estadisticas',
+      iconName: <FcStatistics className='sizeIcon' />,
+      name: 'Estadísticas',
     },
     {
       title: 'cuenta',

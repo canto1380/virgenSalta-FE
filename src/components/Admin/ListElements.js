@@ -85,7 +85,9 @@ const ListElements = ({
           setModalUnauthorized(true)
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      
+    }
   }
 
   useEffect(() => {

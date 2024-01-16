@@ -1,25 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
-import HeaderList from '../HeaderList'
-import ListElements from '../ListElements'
-import { User } from '../../../context/userProvider'
-import { getFastAccess } from '../../../utils/queryAPI/fastAccess'
-import FormFastAccess from './FormFastAccess'
-import { getNewsCategory } from '../../../utils/queryAPI/newsCategory'
-import { getSpecialDays } from '../../../utils/queryAPI/specialDays'
+import React, { useState, useEffect, useContext } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import FiltersAdmin from '../FiltersAdmin'
+import HeaderList from '../HeaderList'
+import { User } from '../../../context/userProvider'
+import { getStatistics } from '../../../utils/queryAPI/statistics.js'
+import ListStatistics from './ListStatistics.js'
+import FormStatistics from './FormStatistics.js'
 
-const MenuFastAccess = ({ idTab }) => {
+const MenuStatistics = () => {
   const [search, setSearch] = useState('')
   const [deleted, setDeleted] = useState(undefined)
   const [formAdd, setFormAdd] = useState(false)
   const [formEdit, setFormEdit] = useState(false)
-  const [fastAccessData, setFastAccessData] = useState([])
+  const [statisticsData, setStatisticsData] = useState([])
   const [band, setBand] = useState(false)
   const [loading, setLoading] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
-  const [allCategories, setAllCategories] = useState([])
-  const [allSpecialDays, setAllSpecialDays] = useState([])
   const [pageSelected, setPageSelected] = useState(1)
 
   const {
@@ -27,37 +23,27 @@ const MenuFastAccess = ({ idTab }) => {
   } = useContext(User)
 
   useEffect(() => {
-    dataFastAccess()
+    dataStatistics()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected])
-  const dataFastAccess = async () => {
+  }, [band, deleted, search])
+
+  const dataStatistics = async () => {
     const params = { deleted, search }
-    const data = await getFastAccess(params)
-    setFastAccessData(data)
+    const data = await getStatistics(params)
+    setStatisticsData(data)
   }
-
-  useEffect(() => {
-    dataRedirection()
-  }, [])
-
-  const dataRedirection = async () => {
-    const params = { limit: 10000, deleted: false }
-    const dataCategories = await getNewsCategory(params)
-    setAllCategories(dataCategories.allNewsCategory)
-    const dataSpecialDay = await getSpecialDays(params)
-    setAllSpecialDays(dataSpecialDay.allSpecialDays)
-  }
-
   const resetValuesEdit = (valuesEdit) => {
     setDataRegisterEdit(valuesEdit)
     setFormEdit(!formEdit)
+    console.log(pageSelected)
   }
+
   return (
     <Container fluid>
       <Row>
         <Col className='mt-3'>
           <div className='pt-4 pb-1 px-4'>
-            <h3>Accesos Rápidos</h3>
+            <h3>Estadísticas</h3>
           </div>
         </Col>
       </Row>
@@ -71,29 +57,34 @@ const MenuFastAccess = ({ idTab }) => {
               setPageSelected={setPageSelected}
             />
             <HeaderList
-              title='Botones de acceso rápido'
+              title='Estadísticas'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <p className='px-5 mb-1 text-important mb-'>
-              <span className='text-danger fw-bolder'>*</span> En tamaño PC, se
-              alinean 4 botones por fila. En dispositivo celular, un botón por
-              fila
+            <p className='px-5 text-important mb-1'>
+              <span className='text-danger fw-bolder'>*</span>Se muestran 5
+              estadísticas en la pantalla. Puede ordenarlas desplazando una
+              arriba de otra.
             </p>
-            <p className='px-5 text-important mb-'>
-              <span className='text-danger fw-bolder'>*</span> Un acceso directo
-              eliminado no se mostrará en la pantalla
+            <p className='px-5 text-important mb-1'>
+              <span className='text-danger fw-bolder'>*</span>Una estadistica
+              eliminada no va a ser visible.
             </p>
-            <ListElements
-              data={fastAccessData?.allFastAccess}
+            <p className='px-5 text-important'>
+              <span className='text-danger fw-bolder'>*</span>Arrastre las filas
+              para ordenarlas.
+            </p>
+
+            <ListStatistics
+              data={statisticsData?.allStatistics}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='fastAccess'
+              routeAPI='statistics'
             />
           </Col>
         </Row>
@@ -101,8 +92,8 @@ const MenuFastAccess = ({ idTab }) => {
         <Row>
           <Col>
             <HeaderList
-              title='Nuevo acceso rápido'
-              titleEdit='Editar acceso rápido'
+              title='Nueva estadística'
+              titleEdit='Editar estadística'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -111,14 +102,12 @@ const MenuFastAccess = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <FormFastAccess
+            <FormStatistics
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
-              dataCategories={allCategories}
-              dataSpecialDay={allSpecialDays}
               dataRegisterEdit={dataRegisterEdit}
-              routeAPI='fastAccess'
+              routeAPI='statistics'
             />
           </Col>
         </Row>
@@ -127,4 +116,4 @@ const MenuFastAccess = ({ idTab }) => {
   )
 }
 
-export default MenuFastAccess
+export default MenuStatistics

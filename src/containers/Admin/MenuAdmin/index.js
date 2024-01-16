@@ -16,6 +16,7 @@ import MenuSpecialDays from '../../../components/Admin/MenuSpecialDays'
 // import MenuHistory from '../../../components/Admin/MenuHistory'
 import MenuNavbar from '../../../components/Admin/MenuNavbar'
 import MenuFastAccess from '../../../components/Admin/MenuFastAccess'
+import MenuStatistics from '../../../components/Admin/MenuStatistics.js'
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false)
@@ -113,6 +114,14 @@ const MenuAdmin = ({ userInfo }) => {
       html = (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuFastAccess idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'estadisticas':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuStatistics idTab={idTab} />
         </div>
       )
       break
