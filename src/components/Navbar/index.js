@@ -57,7 +57,7 @@ const NavbarPrimary = ({ home }) => {
                           <NavDropdown.Item
                             key={d1._id}
                             href={`/${d1.pathUrl}/${d1.url}`}
-                            target={d1.openWindows && '_blank'}
+                            target={`${d1.openWindows === true ? '_blank' : '_self'}`}
                           >
                             {d1.title}
                           </NavDropdown.Item>

@@ -7,6 +7,7 @@ import {
   BsCalendarDate,
   // BsBodyText,
   BsMenuButtonWideFill,
+  BsMenuDown
 } from 'react-icons/bs'
 import {
   BiCategoryAlt,
@@ -75,6 +76,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       title: 'estadisticas',
       iconName: <FcStatistics className='sizeIcon' />,
       name: 'Estadísticas',
+    },
+    {
+      title: 'footer',
+      iconName: <BsMenuDown  className='sizeIcon' />,
+      name: 'Pie de página',
     },
     {
       title: 'cuenta',

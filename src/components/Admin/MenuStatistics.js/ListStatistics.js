@@ -27,12 +27,13 @@ const ListStatistics = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
+  const convertRoute = routeAPI[0].toUpperCase() + routeAPI.slice(1)
   const handleDelete = async (deleted, id) => {
     try {
       if (deleted) {
         const res = await api(
           'PATCH',
-          `${routeAPI}/restoreStatistics/${id}`,
+          `${routeAPI}/restore${convertRoute}/${id}`,
           null,
           userToken
         )
@@ -49,7 +50,7 @@ const ListStatistics = ({
       } else {
         const res = await api(
           'PATCH',
-          `${routeAPI}/deleteStatistics/${id}`,
+          `${routeAPI}/delete${convertRoute}/${id}`,
           null,
           userToken
         )
@@ -95,7 +96,7 @@ const ListStatistics = ({
         const values = { id: d._id, order: i + 1 }
         const res = await api(
           'PATCH',
-          `statistics/updateOrderNumber`,
+          `${routeAPI}/updateOrderNumber`,
           values,
           userToken
         )
@@ -103,6 +104,7 @@ const ListStatistics = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
+            setBand(!band)
           }, 2500)
         }
         if (res?.response?.status === 400) {

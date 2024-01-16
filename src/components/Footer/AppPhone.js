@@ -1,5 +1,5 @@
 import React from 'react'
-import AppPhoneImg from '../../images/appPhone.png'
+import AppPhoneImg from '../../images/appPhone1.png'
 import AppStore from '../../images/appStpre.png'
 import GooglePlay from '../../images/googlePlay.png'
 import './footer.css'

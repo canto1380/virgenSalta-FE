@@ -52,10 +52,6 @@ const Home = () => {
       console.error(error)
     }
   }
-  // useEffect(() => {
-
-  // },[videosBack])
-
   return (
     <div>
       <Layout />

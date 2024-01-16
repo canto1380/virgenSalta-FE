@@ -80,7 +80,6 @@ const FormFastAccess = ({
 
   let options = []
   dataCategories?.forEach((d) => {
-    const replaceTitle = d.nameCategory.replace(/ /g, '-')
     const option = {
       value: `categorias/${d.nameCategory}`,
       label: d.nameCategory,
@@ -105,6 +104,11 @@ const FormFastAccess = ({
   options.unshift({
     value: 'vivo-capilla',
     label: 'Capilla en Vivo',
+    pathUrl: 'vivo-capilla',
+  })
+  options.unshift({
+    value: 'horarios',
+    label: 'Horarios',
     pathUrl: 'vivo-capilla',
   })
 
