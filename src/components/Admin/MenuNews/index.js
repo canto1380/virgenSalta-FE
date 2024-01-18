@@ -91,6 +91,7 @@ const MenuNews = ({ idTab }) => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             {/* <div className='px-5'> */}
             <p className='px-5 text-important mb-0'>

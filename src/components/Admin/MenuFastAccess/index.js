@@ -77,6 +77,7 @@ const MenuFastAccess = ({ idTab }) => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             <p className='px-5 mb-1 text-important mb-'>
               <span className='text-danger fw-bolder'>*</span> En tamaño PC, se

@@ -63,6 +63,7 @@ const MenuStatistics = () => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             <p className='px-5 text-important mb-1'>
               <span className='text-danger fw-bolder'>*</span>Se muestran 5

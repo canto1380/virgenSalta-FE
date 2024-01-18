@@ -18,6 +18,7 @@ import MenuNavbar from '../../../components/Admin/MenuNavbar'
 import MenuFastAccess from '../../../components/Admin/MenuFastAccess'
 import MenuStatistics from '../../../components/Admin/MenuStatistics.js'
 import MenuFooter from '../../../components/Admin/MenuFooter/index.js'
+import MenuConfigurations from '../../../components/Admin/MenuConfigurations/index.js'
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false)
@@ -131,6 +132,14 @@ const MenuAdmin = ({ userInfo }) => {
       html = (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
           <MenuFooter idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'configuracion':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+          <MenuConfigurations idTab={idTab} />
         </div>
       )
       break

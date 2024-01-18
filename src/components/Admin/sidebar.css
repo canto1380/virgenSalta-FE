@@ -1,11 +1,11 @@
 .textSidebar {
-  font-family: "Lobster", cursive;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Lobster', cursive;
+  font-family: 'Rubik', sans-serif;
 }
 
 .sidebar {
   height: 770px;
-  width: 15%;
+  width: 20%;
   background-color: rgb(46, 53, 63);
 }
 .sidebarInactivo {
@@ -66,10 +66,8 @@
 /** Media **/
 @media (max-width: 992px) {
   .sidebar {
-    /* position: absolute;
-    top: 57px; */
     height: 795px;
-    width: 23%;
+    width: 28%;
   }
   .parte2 {
     /* width: 77%; */
@@ -89,7 +87,7 @@
 @media (max-width: 768px) {
   .sidebar {
     height: 970px;
-    width: 25%;
+    width: 30%;
   }
   .parte2 {
     /* width: 75%; */

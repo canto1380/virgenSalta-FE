@@ -1,83 +1,101 @@
-import React from 'react'
-import AppPhoneImg from '../../images/appPhone1.png'
-import AppStore from '../../images/appStpre.png'
-import GooglePlay from '../../images/googlePlay.png'
+import React, { useEffect, useState } from 'react'
 import './footer.css'
 import { Col, Row } from 'react-bootstrap'
+import { getConfigurations } from '../../utils/queryAPI/configurations'
 
 const AppPhone = () => {
-  return (
-    <div className='footer-section-phone'>
-      <Row>
-        <Col>
-          <div className='container-img-foot'>
-            <img src={AppPhoneImg} alt='App' className='img-foot-phone' />
-          </div>
-        </Col>
-      </Row>
-      <Row className='container-app '>
-        <Col
-          xs={12}
-          // sm={6}
-          className='pb-2 pe-0 col-img-app'
-        >
-          <a
-            href='https://apps.apple.com/ve/app/obra-imcej-y-sacej/id1610015797'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <img src={AppStore} alt='App' className='img-foot-app' />
-          </a>
-        </Col>
-        <Col
-          xs={12}
-          // sm={6}
-          className='pb-2 pe-0 col-img-app'
-        >
-          <a
-            href='https://play.google.com/store/apps/details?id=com.app.vercel51s'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <img src={GooglePlay} alt='App' className='img-foot-app' />
-          </a>
-        </Col>
-      </Row>
-    </div>
-    //  <div className='footer-section-phone'>
-    //     <div xs={12} sm={4} className='container-img-foot pb-3'>
-    //       <img src={AppPhoneImg} alt='App' className='img-foot-phone' />
-    //     </div>
+  const [allConfigurations, setAllConfigurations] = useState(undefined)
+  const [imgAppStore, setImgAppStore] = useState(undefined)
+  const [urlAppStore, setUrlAppStore] = useState(undefined)
+  const [imgGooglePlay, setImgGooglePlay] = useState(undefined)
+  const [urlGooglePlay, setUrlGooglePlay] = useState(undefined)
 
-    //     <div className='container-app'>
-    //       <div
-    //         xs={12}
-    //         sm={4}
-    //         className='d-flex align-items-start justify-content-end  pb-3 '
-    //       >
-    //         <a
-    //           href='https://apps.apple.com/ve/app/obra-imcej-y-sacej/id1610015797'
-    //           target='_blank'
-    //           rel='noopener noreferrer'
-    //         >
-    //           <img src={AppStore} alt='App' className='img-foot-app' />
-    //         </a>
-    //       </div>
-    //       <div
-    //         xs={12}
-    //         sm={4}
-    //         className='d-flex align-items-start justify-content-end  pb-3 ps-3'
-    //       >
-    //         <a
-    //           href='https://play.google.com/store/apps/details?id=com.app.vercel51s'
-    //           target='_blank'
-    //           rel='noopener noreferrer'
-    //         >
-    //           <img src={GooglePlay} alt='App' className='img-foot-app' />
-    //         </a>
-    //       </div>
-    //     </div>
-    //   </div>
+  useEffect(() => {
+    dataConfig()
+  }, [])
+  const dataConfig = async () => {
+    const params = { deleted: false }
+    const data = await getConfigurations(params)
+    setAllConfigurations(data.allConfigurations)
+  }
+
+  useEffect(() => {
+    dataAppStore()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allConfigurations])
+
+  const dataAppStore = async () => {
+    const img = allConfigurations?.find((d) => d.title === 'Imagen AppStore')
+    const url = allConfigurations?.find((d) => d.title === 'AppStore')
+    const img1 = allConfigurations?.find(
+      (d) => d.title === 'Imagen Google Play'
+    )
+    const url1 = allConfigurations?.find((d) => d.title === 'Google Play')
+
+    setImgAppStore(img)
+    setUrlAppStore(url)
+    setImgGooglePlay(img1)
+    setUrlGooglePlay(url1)
+  }
+
+  return (
+    <>
+      {!allConfigurations ? null : (
+        <div className='footer-section-phone'>
+          {allConfigurations.map((d) => {
+            let data
+            if (d.title === 'Imagen celular pie de página') {
+              return (
+                <Row>
+                  <Col>
+                    <div className='container-img-foot'>
+                      <img
+                        src={d.mixedField}
+                        alt='App'
+                        className='img-foot-phone'
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              )
+            }
+            return data
+          })}
+          <Row className='container-app '>
+            {imgAppStore && urlAppStore && (
+              <Col xs={12} className='pb-2 pe-0 col-img-app'>
+                <a
+                  href={urlAppStore.mixedField}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <img
+                    src={imgAppStore.mixedField}
+                    alt='App'
+                    className='img-foot-app'
+                  />
+                </a>
+              </Col>
+            )}
+            {imgGooglePlay && urlGooglePlay && (
+              <Col xs={12} className='pb-2 pe-0 col-img-app'>
+                <a
+                  href={urlGooglePlay.mixedField}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <img
+                    src={imgGooglePlay.mixedField}
+                    alt='App'
+                    className='img-foot-app'
+                  />
+                </a>
+              </Col>
+            )}
+          </Row>
+        </div>
+      )}
+    </>
   )
 }
 

@@ -69,6 +69,7 @@ const MenuCategories = ({ idTab }) => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             <ListElements
               data={newsCategoryData?.allNewsCategory}

@@ -13,7 +13,6 @@ const DirectAccess = () => {
     const dataSlice = data?.allDirectAccessFooter
     setAllDirectAccess(dataSlice.slice(0, 7))
   }
-  console.log(allDirectAccess)
   return (
     <div>
       <div className='pb-4'>

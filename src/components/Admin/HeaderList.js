@@ -13,6 +13,7 @@ const HeaderList = ({
   setFormEdit,
   resetValuesEdit,
   bandType,
+  btnAdd,
 }) => {
   const changeBand = () => {
     setFormAdd(!formAdd)
@@ -34,18 +35,20 @@ const HeaderList = ({
       </div>
       <div>
         {!formAdd && !formEdit ? (
-          <Button
-            onClick={changeBand}
-            className='btn section-btn d-flex align-items-center'
-          >
-            <AiOutlinePlus
-              style={{
-                fontSize: 20,
-                marginRight: 5,
-              }}
-            />
-            Agregar
-          </Button>
+          btnAdd === true && (
+            <Button
+              onClick={changeBand}
+              className='btn section-btn d-flex align-items-center'
+            >
+              <AiOutlinePlus
+                style={{
+                  fontSize: 20,
+                  marginRight: 5,
+                }}
+              />
+              Agregar
+            </Button>
+          )
         ) : (
           <Button
             onClick={changeBandRetur}

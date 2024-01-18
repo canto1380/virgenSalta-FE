@@ -7,7 +7,7 @@ import {
   BsCalendarDate,
   // BsBodyText,
   BsMenuButtonWideFill,
-  BsMenuDown
+  BsMenuDown,
 } from 'react-icons/bs'
 import {
   BiCategoryAlt,
@@ -16,7 +16,7 @@ import {
   BiCarousel,
 } from 'react-icons/bi'
 import { FaCalendarAlt, FaStream } from 'react-icons/fa'
-import { FcStatistics } from 'react-icons/fc'
+import { FcStatistics, FcDataConfiguration  } from 'react-icons/fc'
 import '../sidebar.css'
 import { deleteCookies, deleteToken } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
@@ -79,8 +79,13 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
     },
     {
       title: 'footer',
-      iconName: <BsMenuDown  className='sizeIcon' />,
+      iconName: <BsMenuDown className='sizeIcon' />,
       name: 'Pie de página',
+    },
+    {
+      title: 'configuracion',
+      iconName: <FcDataConfiguration  className='sizeIcon' />,
+      name: 'Configuración',
     },
     {
       title: 'cuenta',

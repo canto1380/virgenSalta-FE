@@ -13,9 +13,15 @@ import Layout from './Layout/Layout'
 import LayoutFoot from './Layout/LayoutFoot'
 import axios from 'axios'
 import LiveVideo from './LiveChannel/LiveVideo'
+import { getConfigurations } from '../utils/queryAPI/configurations'
 const Home = () => {
   const [videosBack, setVideosBack] = useState()
   const [videoLive, setVideoLive] = useState()
+  const [allConfigurations, setAllConfigurations] = useState(undefined)
+  const [frase1, setFrase1] = useState(undefined)
+  const [frase2, setFrase2] = useState(undefined)
+  const [sitioOficial, setSitioOficial] = useState(undefined)
+
   const { REACT_APP_CHANNEL_ID_YOUTUBE, REACT_APP_API_KEY_YOUTUBE } =
     process.env
 
@@ -52,6 +58,33 @@ const Home = () => {
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    dataConfig()
+  }, [])
+  const dataConfig = async () => {
+    const params = { deleted: false }
+    const data = await getConfigurations(params)
+    setAllConfigurations(data.allConfigurations)
+  }
+
+  useEffect(() => {
+    dataAppStore()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allConfigurations])
+
+  const dataAppStore = async () => {
+    const dataFrase1 = allConfigurations?.find((d) => d.title === 'Frase 1')
+    const dataFrase2 = allConfigurations?.find((d) => d.title === 'Frase 2')
+    const dataSitioOficial = allConfigurations?.find(
+      (d) => d.title === 'Sitio oficial'
+    )
+
+    setFrase1(dataFrase1)
+    setFrase2(dataFrase2)
+    setSitioOficial(dataSitioOficial)
+  }
+
   return (
     <div>
       <Layout />
@@ -62,21 +95,22 @@ const Home = () => {
       </Container>
       <Container className='py-5'>
         <News />
-        <div className='text-center'>
-          <p className='phrase1 mb-0'>
-            "Hay que juntar el rebaño antes que oscurezca"
-          </p>
-          <p className='phrase1 mb-4'>
-            "No he venido a criticar ni a destruir, sino a Construir"
-          </p>
-        </div>
-        <div className='text-center'>
-          <p className='section-title'>
-            Sitio Oficial del Santuario de las Apariciones de la Santísima
-            Virgen María y de Nuestro Señor Jesucristo
-          </p>
-          <p className='section-title'>SALTA - ARGENTINA</p>
-        </div>
+        {!allConfigurations ? (
+          <div className='my-5 py-4'></div>
+        ) : (
+          <>
+            <div className='text-center pt-4'>
+              <p className='phrase1 mb-0'>{frase1 && frase1.mixedField}</p>
+              <p className='phrase1 mb-4'>{frase2 && frase2.mixedField}</p>
+            </div>
+            <div className='text-center pb-3'>
+              <p className='section-title'>
+                {sitioOficial && sitioOficial.mixedField}
+              </p>
+              <p className='section-title'>SALTA - ARGENTINA</p>
+            </div>
+          </>
+        )}
         <hr className='my-5' />
         <Categories />
         <FastAccess />

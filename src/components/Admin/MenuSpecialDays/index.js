@@ -67,6 +67,7 @@ const MenuSpecialDays = ({ idTab }) => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             <ListElements
               data={specialDaysData?.allSpecialDays}

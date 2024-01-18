@@ -2,49 +2,48 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import FiltersAdmin from '../FiltersAdmin'
 import HeaderList from '../HeaderList'
-import ListElements from '../ListElements'
 import { User } from '../../../context/userProvider'
-import { getCarousel } from '../../../utils/queryAPI/carousel'
-import PaginationAdmin from '../Pagination'
-import CarouselAddEdit from './CarouselAddEdit'
+import { getConfigurations } from '../../../utils/queryAPI/configurations.js'
+import ListElements from '../ListElements.js'
+import FormConfigurations from './FormConfigurations.js'
 
-const MenuCarousel = () => {
+const MenuConfigurations = () => {
   const [search, setSearch] = useState('')
   const [deleted, setDeleted] = useState(undefined)
-  const [limit, setLimit] = useState(10)
-  const [carouselData, setCarouselData] = useState([])
-  const [band, setBand] = useState(false)
   const [formAdd, setFormAdd] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [pageSelected, setPageSelected] = useState(1)
   const [formEdit, setFormEdit] = useState(false)
+  const [configurationsData, setConfigurationsData] = useState([])
+  const [band, setBand] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
+  const [pageSelected, setPageSelected] = useState(1)
 
   const {
     state: { userToken },
   } = useContext(User)
 
   useEffect(() => {
-    dataCarousel()
+    dataConfigurations()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected, limit])
-
-  const dataCarousel = async () => {
-    const params = { search, deleted, page: pageSelected, limit }
-    const data = await getCarousel(params)
-    setCarouselData(data)
+  }, [band, deleted, band, setPageSelected, search])
+  const dataConfigurations = async () => {
+    const params = { deleted, search }
+    const data = await getConfigurations(params)
+    setConfigurationsData(data)
   }
 
-  const resetValuesEdit = (valueEdit) => {
-    setDataRegisterEdit(valueEdit)
+  const resetValuesEdit = (valuesEdit) => {
+    setDataRegisterEdit(valuesEdit)
     setFormEdit(!formEdit)
+    console.log(pageSelected)
   }
+
   return (
     <Container fluid>
       <Row>
         <Col className='mt-3'>
-          <div className={`pt-4 pb-1 px-4`}>
-            <h3>Carousel</h3>
+          <div className='pt-4 pb-1 px-4'>
+            <h3>Configuraciones</h3>
           </div>
         </Col>
       </Row>
@@ -58,7 +57,7 @@ const MenuCarousel = () => {
               setPageSelected={setPageSelected}
             />
             <HeaderList
-              title='Items Carousel'
+              title='Configuraciones'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -66,19 +65,18 @@ const MenuCarousel = () => {
               resetValuesEdit={resetValuesEdit}
               btnAdd={true}
             />
+            <p className='px-5 text-important mb-1'>
+              <span className='text-danger fw-bolder'>*</span>Las nuevas
+              configuraciones van a estar disponible para acceso rápido del
+              footer
+            </p>
             <ListElements
-              data={carouselData?.allCarousel}
+              data={configurationsData?.allConfigurations}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='carousel'
-            />
-            <PaginationAdmin
-              data={carouselData}
-              pageSelected={pageSelected}
-              setPageSelected={setPageSelected}
-              setLimit={setLimit}
+              routeAPI='configuration'
             />
           </Col>
         </Row>
@@ -86,8 +84,8 @@ const MenuCarousel = () => {
         <Row>
           <Col>
             <HeaderList
-              title='Nuevo slider'
-              titleEdit='Editar silder'
+              title='Nueva configuración'
+              titleEdit='Editar configuración'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -96,11 +94,12 @@ const MenuCarousel = () => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <CarouselAddEdit
+            <FormConfigurations
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
               dataRegisterEdit={dataRegisterEdit}
+              routeAPI='configuration'
             />
           </Col>
         </Row>
@@ -109,4 +108,4 @@ const MenuCarousel = () => {
   )
 }
 
-export default MenuCarousel
+export default MenuConfigurations

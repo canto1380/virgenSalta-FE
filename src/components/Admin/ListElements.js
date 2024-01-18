@@ -85,9 +85,7 @@ const ListElements = ({
           setModalUnauthorized(true)
         }
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -151,6 +149,13 @@ const ListElements = ({
                     <p className='mb-0'>
                       {item?.nameCategory} {item?.title} {item?.eventName}{' '}
                       {item?.nameItem}
+                      {item.typeField && (
+                        <span className='textConfigurations'>
+                          {' '}
+                          &nbsp;&nbsp; | &nbsp;&nbsp;{' '}
+                          {item.mixedField.slice(0, 60)}
+                        </span>
+                      )}
                     </p>
                   }
                 />

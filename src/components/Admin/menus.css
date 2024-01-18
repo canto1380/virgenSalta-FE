@@ -30,6 +30,12 @@
   border: 1px solid rgb(186, 186, 186);
   border-radius: 5px;
 }
+.textConfigurations {
+  font-weight: 400;
+  font-style: oblique;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
 @media (max-width: 950px) {
   .menuContainer {

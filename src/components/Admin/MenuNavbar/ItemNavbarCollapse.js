@@ -86,7 +86,6 @@ const ItemsNavbarCollapse = ({
       }, 3000)
     }
   }
-  console.log(dataItems)
   return (
     <div>
       {!data1 || !data2 ? (

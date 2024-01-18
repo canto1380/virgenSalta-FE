@@ -11,13 +11,23 @@ import './navbar.css'
 import ImageLogo from '../../images/logo-corazon.jpg'
 import { getItemNav } from '../../utils/queryAPI/navbar'
 import { getItemNavCategory } from '../../utils/queryAPI/navbarCategory'
+import { getConfigurations } from '../../utils/queryAPI/configurations'
 const NavbarPrimary = ({ home }) => {
   const [itemNavCategory, setItemNavCategory] = useState(undefined)
   const [itemNav, setItemNav] = useState(undefined)
+  const [imgLogoNav, setImgLogoNav] = useState(undefined)
 
   useEffect(() => {
     getDataNavbar()
   }, [])
+  useEffect(() => {
+    dataConfig()
+  }, [])
+  const dataConfig = async () => {
+    const params = { deleted: false, search: 'Logo menú principal' }
+    const data = await getConfigurations(params)
+    setImgLogoNav(data.allConfigurations)
+  }
 
   const getDataNavbar = async () => {
     const params = { visible: true, limit: 100000000 }
@@ -31,14 +41,25 @@ const NavbarPrimary = ({ home }) => {
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
       <Container fluid>
-        <Navbar.Brand href='/home'>
-          <Image
-            fluid
-            src={ImageLogo}
-            className='img-logo'
-            alt='Imagen de la Virgen'
-          />
-        </Navbar.Brand>
+        {imgLogoNav ? (
+          <Navbar.Brand href='/home'>
+            <Image
+              fluid
+              src={imgLogoNav[0].mixedField}
+              className='img-logo'
+              alt='Imagen de la Virgen'
+            />
+          </Navbar.Brand>
+        ) : (
+          <Navbar.Brand href='/home'>
+            <Image
+              fluid
+              src={ImageLogo}
+              className='img-logo'
+              alt='Imagen de la Virgen'
+            />
+          </Navbar.Brand>
+        )}
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto' key='1'>
@@ -57,7 +78,9 @@ const NavbarPrimary = ({ home }) => {
                           <NavDropdown.Item
                             key={d1._id}
                             href={`/${d1.pathUrl}/${d1.url}`}
-                            target={`${d1.openWindows === true ? '_blank' : '_self'}`}
+                            target={`${
+                              d1.openWindows === true ? '_blank' : '_self'
+                            }`}
                           >
                             {d1.title}
                           </NavDropdown.Item>

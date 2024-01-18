@@ -68,6 +68,7 @@ const MenuHistory = () => {
               formEdit={formEdit}
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
+              btnAdd={true}
             />
             <ListElements
               data={historyData?.allHistory}
