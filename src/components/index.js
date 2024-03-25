@@ -121,9 +121,9 @@ const Home = () => {
       <Container className='py-5'>
         <Statics />
         <hr className='my-5' />
-        <PhotosGallery />
+        {/* <PhotosGallery /> */}
         <hr className='my-5' />
-        <VideoGallery videosBack={videosBack} />
+        {/* <VideoGallery videosBack={videosBack} /> */}
       </Container>
       <LayoutFoot />
     </div>

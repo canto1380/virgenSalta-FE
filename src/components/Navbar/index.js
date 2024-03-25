@@ -45,7 +45,7 @@ const NavbarPrimary = ({ home }) => {
           <Navbar.Brand href='/home'>
             <Image
               fluid
-              src={imgLogoNav[0].mixedField}
+              src={imgLogoNav[0]?.mixedField}
               className='img-logo'
               alt='Imagen de la Virgen'
             />
