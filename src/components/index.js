@@ -6,7 +6,7 @@ import Categories from './Categories'
 import Title from './Title'
 import SpecialDays from './SpecialDays'
 import Statics from './Statics'
-import PhotosGallery from './PhotosGallery'
+// import PhotosGallery from './PhotosGallery'
 import VideoGallery from './VideoGallery'
 import FastAccess from './FastAccess'
 import Layout from './Layout/Layout'
@@ -123,7 +123,7 @@ const Home = () => {
         <hr className='my-5' />
         {/* <PhotosGallery /> */}
         <hr className='my-5' />
-        {/* <VideoGallery videosBack={videosBack} /> */}
+        <VideoGallery videosBack={videosBack} />
       </Container>
       <LayoutFoot />
     </div>
