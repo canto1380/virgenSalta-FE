@@ -8,7 +8,7 @@ const HeaderNews = ({ data }) => {
   let month = date.getMonth() + 1
   let year = date.getFullYear()
   let hour = date.getHours()
-  const minuts = date.getMinutes()
+  const minuts = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
   return (
     <div>
       <h1 className='single-news-title'>{data?.title}</h1>

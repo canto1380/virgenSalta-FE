@@ -3,28 +3,56 @@ import { Col, Row } from 'react-bootstrap'
 import HeaderSections from '../Title/HeaderSections'
 import axios from 'axios'
 import './feedInstagram.css'
+import { getConfigurations } from '../../utils/queryAPI/configurations'
 
 const PhotosGallery = () => {
   const [dataFeedInsta, setDataFeedInsta] = useState()
+  const [tokenRefresh, setTokenRefresh] = useState(undefined)
+  const [urlInsta, setUrlInsta] = useState(undefined)
+
+  useEffect(() => {
+    getTokenRefresh()
+  }, [])
+  const getTokenRefresh = async () => {
+    const token = process.env.REACT_APP_INSTAGRAM
+
+    const dd = await axios.get(
+      `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${token}`
+    )
+    setTokenRefresh(dd?.data?.access_token)
+  }
 
   const getInstaFeed = async () => {
-    const token = process.env.REACT_APP_INSTAGRAM
     const fields =
       'thumbnail_url,media_url,media_type,caption,permalink,limit=6'
-    const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&limit=6`
+    const url = `https://graph.instagram.com/me/media?access_token=${tokenRefresh}&fields=${fields}&limit=6`
 
-    const { data } = await axios.get(url)
-    setDataFeedInsta(data.data)
+    if (tokenRefresh !== undefined) {
+      const { data } = await axios.get(url)
+      setDataFeedInsta(data.data)
+    }
   }
   useEffect(() => {
     getInstaFeed()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenRefresh])
+
+  useEffect(() => {
+    dataInstagram()
   }, [])
+  const dataInstagram = async () => {
+    const params = { deleted: false, search: 'Instagram' }
+    const urlInstagram = await getConfigurations(params)
+    if (urlInstagram.allConfigurations.length !== 0) {
+      setUrlInsta(urlInstagram.allConfigurations[0].mixedField)
+    }
+  }
 
   return (
     <div>
       <HeaderSections
         title={'Instagram'}
-        linkRef={'https://www.instagram.com/obra.imcej.sacej/'}
+        linkRef={urlInsta && urlInsta}
         blank
         titleBtn={'Ver Instagram'}
       />

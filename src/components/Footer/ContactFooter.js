@@ -16,23 +16,28 @@ const ContactFooter = () => {
     const data = await getConfigurations(params)
     setAllContactData(data.allConfigurations)
   }
+
+
   return (
     <>
       <div className='pb-4'>
         <h4 className='title-section-footer'> CONTACTO</h4>
       </div>
       <div xs={12} sm={4} className='container-img-foot-icon pb-3'>
+
         {!allContactData
           ? null
-          : allContactData.map((d) => {
+          : allContactData.map((d, i) => {
               if (d.title === 'Logo pie de página' && d.mixedField !== '') {
                 return (
-                  <img
-                    key={d._id}
-                    src={d.mixedField}
-                    alt='Virgen Maria'
-                    className='img-foot'
-                  />
+                  <div key={i}>
+                    <img
+                      // key={d._id}
+                      src={d.mixedField}
+                      alt='Virgen Maria'
+                      className='img-foot'
+                    />
+                  </div>
                 )
               }
               return null
@@ -43,7 +48,7 @@ const ContactFooter = () => {
         : allContactData.map((d) => {
             if (d.title === 'Ubicación' && d.mixedField !== '') {
               return (
-                <Row className='container-contact pb-1'>
+                <Row key={d._id} className='container-contact pb-1'>
                   <Col sm={12} md={1}>
                     <ImLocation2 className='icon-footer' />{' '}
                   </Col>
@@ -71,7 +76,7 @@ const ContactFooter = () => {
         : allContactData.map((d) => {
             if (d.title === 'Teléfono') {
               return (
-                <Row className='container-contact pb-1'>
+                <Row key={d._id} className='container-contact pb-1'>
                   <Col sm={12} md={1}>
                     <FiSmartphone className='icon-footer' />{' '}
                   </Col>
@@ -89,7 +94,7 @@ const ContactFooter = () => {
         : allContactData.map((d) => {
             if (d.title === 'Email') {
               return (
-                <Row className='container-contact pb-1'>
+                <Row key={d._id} className='container-contact pb-1'>
                   <Col sm={12} md={1}>
                     <HiOutlineMail className='icon-footer' />{' '}
                   </Col>

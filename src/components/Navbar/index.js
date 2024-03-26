@@ -24,7 +24,7 @@ const NavbarPrimary = ({ home }) => {
     dataConfig()
   }, [])
   const dataConfig = async () => {
-    const params = { deleted: false, search: 'Logo menú principal' }
+    const params = { deleted: false, search: 'Logo Navbar' }
     const data = await getConfigurations(params)
     setImgLogoNav(data.allConfigurations)
   }

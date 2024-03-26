@@ -37,7 +37,6 @@ const SingleNews = () => {
       setNameCategory(convertirAPrimitiva(news[0].idNewsCategory?.nameCategory))
     }
   }
-
   return (
     <>
       <Layout />
@@ -46,7 +45,7 @@ const SingleNews = () => {
           <Col xs={12} className='pt-5'>
             <HeaderNews data={singleNews} />
           </Col>
-          
+
           <Col xs={12} className='pb-5'>
             <BodyNews
               data={singleNews?.description}
@@ -56,7 +55,9 @@ const SingleNews = () => {
           <hr />
         </Row>
       </Container>
-      {nameCategory.includes('historia') ? null : (
+      {nameCategory.includes('historia') ? (
+        !null
+      ) : (
         <Container fluid className=''>
           <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
             <MoreNewsCarousel

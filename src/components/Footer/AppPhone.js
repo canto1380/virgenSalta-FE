@@ -25,10 +25,10 @@ const AppPhone = () => {
   }, [allConfigurations])
 
   const dataAppStore = async () => {
-    const img = allConfigurations?.find((d) => d.title === 'Imagen AppStore')
+    const img = allConfigurations?.find((d) => d.title === 'Imágen AppStore')
     const url = allConfigurations?.find((d) => d.title === 'AppStore')
     const img1 = allConfigurations?.find(
-      (d) => d.title === 'Imagen Google Play'
+      (d) => d.title === 'Imágen Google Play'
     )
     const url1 = allConfigurations?.find((d) => d.title === 'Google Play')
 
@@ -44,9 +44,9 @@ const AppPhone = () => {
         <div className='footer-section-phone'>
           {allConfigurations.map((d) => {
             let data
-            if (d.title === 'Imagen celular pie de página') {
+            if (d.title === 'Imágen celular pie de página') {
               return (
-                <Row>
+                <Row key={d._id}>
                   <Col>
                     <div className='container-img-foot'>
                       <img

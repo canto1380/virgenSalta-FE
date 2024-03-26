@@ -6,7 +6,7 @@ import Categories from './Categories'
 import Title from './Title'
 import SpecialDays from './SpecialDays'
 import Statics from './Statics'
-// import PhotosGallery from './PhotosGallery'
+import PhotosGallery from './PhotosGallery'
 import VideoGallery from './VideoGallery'
 import FastAccess from './FastAccess'
 import Layout from './Layout/Layout'
@@ -24,7 +24,7 @@ const Home = () => {
 
   const { REACT_APP_CHANNEL_ID_YOUTUBE, REACT_APP_API_KEY_YOUTUBE } =
     process.env
-
+  console.log(REACT_APP_API_KEY_YOUTUBE)
   useEffect(() => {
     fetchVideos()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,14 +35,15 @@ const Home = () => {
         'https://www.googleapis.com/youtube/v3/search',
         {
           params: {
-            key: REACT_APP_API_KEY_YOUTUBE,
+            key: 'AIzaSyBkpEefoSY36KX747e0qh5zjTNzC_8t7gA',
             channelId: REACT_APP_CHANNEL_ID_YOUTUBE,
             part: 'snippet',
             type: 'video',
-            maxResults: 1000,
+            maxResults: 10,
           },
         }
       )
+      console.log(response)
       const data = response.data.items
       const videosNoLive = data.filter(
         (d) => d.snippet.liveBroadcastContent === 'none'
@@ -121,7 +122,7 @@ const Home = () => {
       <Container className='py-5'>
         <Statics />
         <hr className='my-5' />
-        {/* <PhotosGallery /> */}
+        <PhotosGallery />
         <hr className='my-5' />
         <VideoGallery videosBack={videosBack} />
       </Container>

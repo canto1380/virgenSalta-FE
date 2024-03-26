@@ -66,9 +66,8 @@ const MenuConfigurations = () => {
               btnAdd={true}
             />
             <p className='px-5 text-important mb-1'>
-              <span className='text-danger fw-bolder'>*</span>Las nuevas
-              configuraciones van a estar disponible para acceso rápido del
-              footer
+              <span className='text-danger fw-bolder'>*</span>Configuraciones
+              globales de la página
             </p>
             <ListElements
               data={configurationsData?.allConfigurations}
