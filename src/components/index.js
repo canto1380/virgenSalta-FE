@@ -35,7 +35,7 @@ const Home = () => {
         'https://www.googleapis.com/youtube/v3/search',
         {
           params: {
-            key: 'AIzaSyBkpEefoSY36KX747e0qh5zjTNzC_8t7gA',
+            key: REACT_APP_API_KEY_YOUTUBE,
             channelId: REACT_APP_CHANNEL_ID_YOUTUBE,
             part: 'snippet',
             type: 'video',
@@ -43,7 +43,6 @@ const Home = () => {
           },
         }
       )
-      console.log(response)
       const data = response.data.items
       const videosNoLive = data.filter(
         (d) => d.snippet.liveBroadcastContent === 'none'
