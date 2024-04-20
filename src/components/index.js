@@ -24,7 +24,6 @@ const Home = () => {
 
   const { REACT_APP_CHANNEL_ID_YOUTUBE, REACT_APP_API_KEY_YOUTUBE } =
     process.env
-  console.log(REACT_APP_API_KEY_YOUTUBE)
   useEffect(() => {
     fetchVideos()
     // eslint-disable-next-line react-hooks/exhaustive-deps

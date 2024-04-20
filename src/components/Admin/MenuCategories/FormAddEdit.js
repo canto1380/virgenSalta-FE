@@ -197,7 +197,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           )}
         </Form.Item>
         {dataError
-          ? messageError.map((e, i) => <MsgError key={i} text2={e.msg} />)
+          ? messageError?.map((e, i) => <MsgError key={i} text2={e.msg} />)
           : null}
         {serverError ? <MsgError text2='Server internal Error' /> : null}
       </Form>

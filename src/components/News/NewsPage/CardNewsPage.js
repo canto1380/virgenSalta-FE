@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import '../news.css'
+import fotoDefault from '../../../images/logo-corazon.jpg'
+
 const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
   const [titleParams, setTitleParams] = useState(title)
 
@@ -8,13 +10,12 @@ const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
     setTitleParams(title.replace(/ /g, '-'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
-
   return (
     <>
       <Card className='cardNewsPage'>
         <Card.Img
           variant='top'
-          src={data?.photos[0]}
+          src={data.photos.length > 0 ? data.photos[0] : fotoDefault}
           className='cardNewsPage-img'
         />
         <Card.Body className='cardNewPage-body'>

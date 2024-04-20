@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import FiltersAdmin from '../FiltersAdmin'
 import HeaderList from '../HeaderList'
-import ListElements from '../ListElements'
 import { getNewsCategory } from '../../../utils/queryAPI/newsCategory'
 import { User } from '../../../context/userProvider'
 import FormAddEdit from './FormAddEdit'
 import PaginationAdmin from '../Pagination'
 import HeaderBackdrop from '../HeaderBackdrop'
+import ListStatistics from '../MenuStatistics.js/ListStatistics'
 
 const MenuCategories = ({ idTab }) => {
   const [search, setSearch] = useState('')
@@ -71,7 +71,15 @@ const MenuCategories = ({ idTab }) => {
               resetValuesEdit={resetValuesEdit}
               btnAdd={true}
             />
-            <ListElements
+            {/* <ListElements
+              data={newsCategoryData?.allNewsCategory}
+              userToken={userToken}
+              band={band}
+              setBand={setBand}
+              resetValuesEdit={resetValuesEdit}
+              routeAPI='newsCategory'
+            /> */}
+            <ListStatistics
               data={newsCategoryData?.allNewsCategory}
               userToken={userToken}
               band={band}
@@ -101,6 +109,9 @@ const MenuCategories = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato fotos: Horizontal 420x250
+            </p>
             <FormAddEdit
               userToken={userToken}
               loading={loading}

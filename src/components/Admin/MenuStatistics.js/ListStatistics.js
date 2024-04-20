@@ -76,7 +76,6 @@ const ListStatistics = ({
   const handleDragOver = (event) => {
     event.preventDefault()
   }
-
   useEffect(() => {
     setDataItems(data)
   }, [data])
@@ -144,7 +143,9 @@ const ListStatistics = ({
                 >
                   <div className='d-flex align-items-center'>
                     <span>
-                      <strong>{d.title} </strong>
+                      <strong>
+                        {d.title} {d?.nameCategory}
+                      </strong>
                     </span>
                     <span> &nbsp;</span>
                     <span>{d.description}</span>

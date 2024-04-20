@@ -23,7 +23,11 @@ const DirectAccess = () => {
           allDirectAccess.map((d) => (
             <a
               key={d._id}
-              href={`/${d.urlRedirect}`}
+              href={
+                d.typeField === 'SecciónInterna'
+                  ? `/${d.urlRedirect.replace(/ /g, '-')}`
+                  : d.urlRedirect
+              }
               className=''
               target={`${d.newWindows === true ? '_blank' : '_self'}`}
               rel='noopener noreferrer'

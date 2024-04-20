@@ -6,29 +6,22 @@ import Layout from '../../components/Layout/Layout'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
 import { getNews } from '../../utils/queryAPI/news'
 import PaginationAdmin from '../../components/Admin/Pagination'
-import NewsFilter from './NewsFilter'
-import { getNewsCategory } from '../../utils/queryAPI/newsCategory'
 
 const Noticias = () => {
-  const [search, setSearch] = useState('')
-  const [idNewsCategory, setIdNewsCategory] = useState(undefined)
   const [pageSelected, setPageSelected] = useState(1)
   const [limit, setLimit] = useState(12)
   const [newsData, setNewsData] = useState([])
   const [newsInf, setNewsInf] = useState([])
-  const [newsCategoryData, setNewsCategoryData] = useState([])
   let deleted = false
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, pageSelected, idNewsCategory, limit])
+  }, [ deleted, pageSelected, limit])
 
   const dataNews = async () => {
     const params = {
-      search,
       deleted: false,
       page: pageSelected,
-      idNewsCategory,
       limit,
     }
     const data = await getNews(params)
@@ -36,27 +29,13 @@ const Noticias = () => {
     setNewsInf(data)
   }
 
-  useEffect(() => {
-    dataNewsCategory()
-  }, [])
-  const dataNewsCategory = async () => {
-    const params = { limit: 1000 }
-    const data = await getNewsCategory(params)
-    setNewsCategoryData(data)
-  }
 
   return (
     <div className='bg-gradient-1'>
       <Layout />
       <BackdropSections title='Noticias' />
       <Container className='mt-3 pt-5'>
-        <NewsFilter
-          typeFlag='news'
-          setSearch={setSearch}
-          setIdNewsCategory={setIdNewsCategory}
-          setPageSelected={setPageSelected}
-          data={newsCategoryData?.allNewsCategory}
-        />
+
         {newsData ? (
           <Row className='mt-3 pb-5'>
             <div>

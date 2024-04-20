@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, Select, Spin } from 'antd'
+import { Button, Form, Input, Select, Spin, Switch } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
@@ -23,6 +23,7 @@ const NewsAddEdit = ({
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
+  const [switchHome, setSwitchHome] = useState(false)
 
   const URL_FIREBASE_IMG = 'img-noticias'
 
@@ -35,12 +36,18 @@ const NewsAddEdit = ({
       }
     })
   }
+
+  const handleHomeVisible = (e) => {
+    setSwitchHome(e)
+  }
+
   const handleMultiple = async (e) => {
     if (!e.target.files || !e.target.files.length) return
     const files = Array.from(e.target.files)
     setImgData(files)
   }
   const handleSubmit = async (values) => {
+    values.home = switchHome
     try {
       if (!dataRegisterEdit) {
         /** Carga IMG en Firebase **/
@@ -264,6 +271,7 @@ const NewsAddEdit = ({
           description: dataRegisterEdit?.description,
           idNewsCategory: dataRegisterEdit?.idNewsCategory?._id,
           caption: dataRegisterEdit?.caption,
+          home: dataRegisterEdit?.home,
         }}
       >
         <Form.Item
@@ -381,6 +389,13 @@ const NewsAddEdit = ({
           ]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item
+          label='Visible en inicio'
+          valuePropName='checked'
+          name='home'
+        >
+          <Switch onChange={handleHomeVisible} />
         </Form.Item>
 
         <Form.Item

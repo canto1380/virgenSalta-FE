@@ -9,7 +9,6 @@ import { getNews } from '../../utils/queryAPI/news'
 import CardNewsPage from '../../components/News/NewsPage/CardNewsPage'
 import PaginationAdmin from '../../components/Admin/Pagination'
 import BackdropSections from '../../components/Backdrops/BackdropSections'
-import NewsFilter from '../Noticias/NewsFilter'
 
 const SingleNewsCategory = () => {
   const { nameCategory } = useParams()
@@ -17,7 +16,6 @@ const SingleNewsCategory = () => {
 
   const [allNewsCategory, setAllNewsCategory] = useState([])
   const [singleNewsCategory, setSingleNewsCategory] = useState()
-  const [search, setSearch] = useState('')
   const [pageSelected, setPageSelected] = useState(1)
   const [news, setNews] = useState(null)
   const [limit, setLimit] = useState(12)
@@ -46,7 +44,8 @@ const SingleNewsCategory = () => {
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, pageSelected, limit])
+  }, [ deleted, pageSelected, limit])
+  
   const dataCategoryActual = async () => {
     const paramsCategory = {
       limit,
@@ -62,7 +61,6 @@ const SingleNewsCategory = () => {
     const categoryFilter = await dataCategoryActual()
     const params = {
       limit,
-      search: search,
       idNewsCategory: categoryFilter[0]?._id,
       page: pageSelected,
     }
@@ -76,11 +74,7 @@ const SingleNewsCategory = () => {
       <Layout />
       <BackdropSections title={TITLE_CATEGORY} img={singleNewsCategory} />
       <Container className='mt-3 pt-5'>
-        <NewsFilter
-          typeFlag='newsCategory'
-          setSearch={setSearch}
-          setPageSelected={setPageSelected}
-        />
+
         {news ? (
           <Row className='mt-3 pb-5'>
             <div>

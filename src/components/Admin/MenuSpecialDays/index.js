@@ -59,7 +59,11 @@ const MenuSpecialDays = ({ idTab }) => {
               setDeleted={setDeleted}
               setPageSelected={setPageSelected}
             />
-            <HeaderBackdrop title={'Foto Portada'} idTab={idTab} bandSelect={true}/>
+            <HeaderBackdrop
+              title={'Foto Portada'}
+              idTab={idTab}
+              bandSelect={true}
+            />
             <HeaderList
               title='Listado de jornadas'
               formAdd={formAdd}
@@ -99,6 +103,10 @@ const MenuSpecialDays = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato fotos:
+              Cuadrada 1:1
+            </p>
             <SpecialDaysAddEdit
               userToken={userToken}
               loading={loading}

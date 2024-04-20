@@ -1,5 +1,5 @@
 import { Form, Input, Button, Spin, Select, Switch } from 'antd'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { api } from '../../../utils/api'
 
@@ -9,6 +9,7 @@ const FormFooter = ({
   setLoading,
   dataCategories,
   dataSpecialDay,
+  dataNews,
   dataRegisterEdit,
   routeAPI,
 }) => {
@@ -16,6 +17,12 @@ const FormFooter = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [switchWindow, setSwitchWindow] = useState(false)
+  const [selectType, setSelectType] = useState(undefined)
+
+  useEffect(() => {
+    setSelectType(dataRegisterEdit?.typeField || undefined)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSwitchWindow = (e) => {
     setSwitchWindow(e)
@@ -77,6 +84,19 @@ const FormFooter = ({
   const onFinishFailed = (errorInfo) => {
     console.log('Failed: ', errorInfo)
   }
+  const optionsRedirect = [
+    {
+      value: 'SecciónInterna',
+      label: 'Sección interna',
+    },
+    {
+      value: 'urlExterno',
+      label: 'url externo',
+    },
+  ]
+  const changeSelect = (e) => {
+    setSelectType(e)
+  }
 
   let options = []
   dataCategories?.forEach((d) => {
@@ -96,6 +116,16 @@ const FormFooter = ({
     }
     options.push(option)
   })
+  dataNews?.forEach((d) => {
+    const replaceTitle = d.title.replace(/ /g, '-')
+    const option = {
+      value: `noticias/${d.title}`,
+      label: d.title,
+      pathUrl: `noticias/${replaceTitle}`,
+    }
+    options.push(option)
+  })
+
   options.unshift({
     value: 'pedido-oracion',
     label: 'Pedidos de Oración',
@@ -131,6 +161,7 @@ const FormFooter = ({
           title: dataRegisterEdit?.title,
           urlRedirect: dataRegisterEdit?.urlRedirect,
           newWindows: dataRegisterEdit?.newWindows,
+          typeField: dataRegisterEdit?.typeField,
         }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
@@ -146,17 +177,19 @@ const FormFooter = ({
           <Input />
         </Form.Item>
         <Form.Item
-          label='Elija una sección a la cual redirigir'
-          name='urlRedirect'
+          label='Elija el tipo de redirección'
+          name='typeField'
           rules={[
             {
               required: true,
-              message: 'Debe seleccionar una sección a la cual redireccionar',
+              message: 'Debe seleccionar un tipo',
             },
           ]}
         >
           <Select
             showSearch
+            onChange={changeSelect}
+            disabled={dataRegisterEdit === null ? false : true}
             style={{
               width: '100%',
             }}
@@ -170,9 +203,48 @@ const FormFooter = ({
                 .toLowerCase()
                 .localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            options={options}
+            options={optionsRedirect}
           />
         </Form.Item>
+        {selectType === 'SecciónInterna' ? (
+          <Form.Item
+            label='Elija una sección a la cual redirigir'
+            name='urlRedirect'
+            rules={[
+              {
+                required: true,
+                message: 'Debe seleccionar una sección a la cual redireccionar',
+              },
+            ]}
+          >
+            <Select
+              showSearch
+              style={{
+                width: '100%',
+              }}
+              placeholder='Busque o seleccione'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option?.label ?? '').includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '')
+                  .toLowerCase()
+                  .localeCompare((optionB?.label ?? '').toLowerCase())
+              }
+              options={options}
+            />
+          </Form.Item>
+        ) : (
+          <Form.Item
+            label='Url externa'
+            name='urlRedirect'
+            rules={[{ required: true, message: 'Debe ingresar una url' }]}
+          >
+            <Input />
+          </Form.Item>
+        )}
+
         <Form.Item
           label='Abrir en una ventana nueva'
           valuePropName='checked'

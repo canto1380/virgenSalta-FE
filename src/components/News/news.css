@@ -1,13 +1,13 @@
 .card-container {
   width: 100% !important;
-  height: 500px !important;
+  height: 412px !important;
   border-radius: 15px !important;
 }
 .card-img {
   height: 100%;
   border-radius: 15px !important;
 }
-.card-title1{
+.card-title1 {
   background-color: rgba(174, 174, 174, 0.514);
   padding: 4px 8px;
   width: 100%;
@@ -46,7 +46,7 @@
   filter: saturate(3);
 }
 .title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 7.5vw;
   color: white;
   font-weight: 500;
@@ -60,10 +60,10 @@
 .cardNewsPage:hover {
   border: 2px solid rgb(221, 221, 221) !important;
 }
-.cardNewPage-body{
+.cardNewPage-body {
   display: flex;
   flex-direction: column;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 .cardNewsPage-img {
   width: 100%;
@@ -71,13 +71,13 @@
   border-radius: 3px !important;
 }
 .cardNewsPage-title {
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300 !important;
 }
 .cardNewsPage-subtitle {
   color: rgb(97, 97, 97) !important;
 }
-.cardNewsPage-subtitle1{
+.cardNewsPage-subtitle1 {
   display: flex;
   align-items: center;
 }

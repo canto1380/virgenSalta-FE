@@ -7,6 +7,7 @@ import ListStatistics from '../MenuStatistics.js/ListStatistics.js'
 import FormFooter from './FormFooter.js'
 import { getNewsCategory } from '../../../utils/queryAPI/newsCategory.js'
 import { getSpecialDays } from '../../../utils/queryAPI/specialDays.js'
+import { getNews } from '../../../utils/queryAPI/news.js'
 
 const MenuFooter = () => {
   const [formAdd, setFormAdd] = useState(false)
@@ -17,6 +18,7 @@ const MenuFooter = () => {
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
   const [allCategories, setAllCategories] = useState([])
   const [allSpecialDays, setAllSpecialDays] = useState([])
+  const [allNews, setAllNews] = useState([])
 
   const {
     state: { userToken },
@@ -41,6 +43,8 @@ const MenuFooter = () => {
     setAllCategories(dataCategories.allNewsCategory)
     const dataSpecialDay = await getSpecialDays(params)
     setAllSpecialDays(dataSpecialDay.allSpecialDays)
+    const dataNews = await getNews(params)
+    setAllNews(dataNews.allNews)
   }
 
   const resetValuesEdit = (valuesEdit) => {
@@ -112,6 +116,7 @@ const MenuFooter = () => {
               setLoading={setLoading}
               dataCategories={allCategories}
               dataSpecialDay={allSpecialDays}
+              dataNews={allNews}
               dataRegisterEdit={dataRegisterEdit}
               routeAPI='footer'
             />
