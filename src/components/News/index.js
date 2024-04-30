@@ -18,7 +18,7 @@ const News = () => {
   return (
     <>
       <HeaderSections title={'Noticias'} linkRef={'/noticias'} />
-      <Row className='my-5 px-3'>
+      <Row className='my-5'>
         <GenericCarousel data={news?.allNews} type='news' />
       </Row>
     </>

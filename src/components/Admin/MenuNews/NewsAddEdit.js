@@ -27,6 +27,12 @@ const NewsAddEdit = ({
 
   const URL_FIREBASE_IMG = 'img-noticias'
 
+  useEffect(() => {
+    if (dataRegisterEdit) {
+      setSwitchHome(dataRegisterEdit.home)
+    }
+  }, [dataRegisterEdit])
+
   const getPreview = (file) => {
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)

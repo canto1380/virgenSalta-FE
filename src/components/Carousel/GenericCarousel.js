@@ -23,7 +23,7 @@ const NewCarousel = ({ data, type }) => {
   return (
     <div className='d-flex justify-content-between'>
       <div className='prev-button alignVert' onClick={goPrev}>
-        <GrPrevious className='sizeIconSlider mx-3' />
+        <GrPrevious className='sizeIconSlider me-3' />
       </div>
       <Swiper
         ref={swiperRef}
@@ -36,15 +36,15 @@ const NewCarousel = ({ data, type }) => {
         breakpoints={{
           0: {
             slidesPerView: 1,
-            spaceBetween: 55,
+            spaceBetween: 40,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 55,
+            spaceBetween: 40,
           },
           992: {
             slidesPerView: 3,
-            spaceBetween: 55,
+            spaceBetween: 40,
           },
         }}
       >
@@ -59,7 +59,7 @@ const NewCarousel = ({ data, type }) => {
         ))}
       </Swiper>
       <div className='next-button alignVert' onClick={goNext}>
-        <GrNext className='sizeIconSlider mx-3' />
+        <GrNext className='sizeIconSlider ms-3' />
       </div>
     </div>
   )
