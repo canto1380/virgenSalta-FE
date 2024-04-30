@@ -46,11 +46,12 @@
   border-radius: 15px !important;
 }
 .cardG-container:hover {
-  border: 1px solid rgb(221, 221, 221) !important;
+  filter: saturate(2.5);
 }
 .cardG-img {
   height: 250px;
   border-radius: 15px !important;
+  object-fit: cover;
 }
 .cardG-title {
   background-color: rgba(174, 174, 174, 0.514);
@@ -107,6 +108,9 @@
 .bg-gradient-3 {
   background: linear-gradient(to top, rgb(193, 218, 255), 40%, #81a7d3);
 }
+/* .bg-transparent {
+  background-color:transparent !important;
+} */
 
 .c-green {
   color: green;

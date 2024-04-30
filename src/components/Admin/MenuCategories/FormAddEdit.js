@@ -3,6 +3,7 @@ import { Form, Input, Button, Spin } from 'antd'
 import { api } from '../../../utils/api'
 import { uploadFile, deleteFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
+import Resizer from 'react-image-file-resizer'
 
 const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   const [imgData, setImgData] = useState()
@@ -11,6 +12,22 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    // Redimensionar y convertir a WebP
+    Resizer.imageFileResizer(
+      file,
+      500,
+      500,
+      'WEBP',
+      100,
+      0,
+      (resizedImage) => {
+        setImgData(resizedImage)
+      },
+      'blob'
+    )
+  }
   const URL_FIREBASE_IMG = 'img-categorias'
   const handleSubmit = async (values) => {
     try {
@@ -163,7 +180,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
             type='file'
             name=''
             id='id-btn-upload'
-            onChange={(e) => setImgData(e.target.files[0])}
+            onChange={handleImageChange}
           />
           <label
             htmlFor='id-btn-upload'

@@ -4,7 +4,7 @@ import fotoDefault from '../../images/logo-corazon.jpg'
 
 const CardModel = ({ data: { photos, img, title, _id }, photos1, type }) => {
   return (
-    <div className='card-container' key={_id}>
+    <div className='card-container text-center' key={_id}>
       <a
         href={`/${type === 'news' ? 'noticias' : 'jornadas'}/${title.replace(
           / /g,

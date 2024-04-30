@@ -129,11 +129,17 @@ const MenuNews = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <p className='px-5 text-important mb-0'>
+            {/* <p className='px-5 text-important mb-0'>
               <span className='text-danger fw-bolder'>*</span>Formato fotos: Cuadrada
               1:1
-            </p><p className='px-5 text-important mb-0'>
-              <span className='text-danger fw-bolder'>*</span>La primera foto seleccionada es la foto principal
+            </p> */}
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato fotos:
+              Horizontal 410x250
+            </p>
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>La primera foto
+              seleccionada es la foto principal
             </p>
             <NewsAddEdit
               userToken={userToken}

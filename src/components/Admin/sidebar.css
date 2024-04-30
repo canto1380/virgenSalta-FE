@@ -29,6 +29,17 @@
   font-size: 20px;
 }
 
+.alignVert {
+  align-content: center;
+}
+.sizeIconSlider {
+  font-size: 30px !important;
+  cursor: pointer;
+}
+.sizeIconSlider polyline {
+  stroke: #2b9ac6ba !important;
+}
+
 .imgContainer {
   /* padding-left: 1.3vw !important; */
   width: 100% !important;

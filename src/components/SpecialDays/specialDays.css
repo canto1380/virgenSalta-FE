@@ -1,0 +1,41 @@
+.cardContainer {
+  width: 38vh !important;
+  height: 45vh !important;
+  border-radius: 15px !important;
+}
+.cardLink {
+  text-decoration: none;
+}
+
+.cardImg {
+  height: 38vh;
+  width: 100%;
+  border-radius: 15px !important;
+  text-decoration: none;
+}
+.cardImg {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.cardBody {
+  padding: 0px !important;
+  text-align: center;
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
+  align-content: center;
+  color: #2b9ac68e;
+}
+
+.cardTitle {
+  /* background-color: rgba(174, 174, 174, 0.514); */
+  padding: 20px 8px 10px 8px;
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-weight: 600;
+  /* position: absolute;
+  text-align: center;
+  bottom: 0px;
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important; */
+}

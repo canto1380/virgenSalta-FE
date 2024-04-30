@@ -5,6 +5,7 @@ import { uploadFile, deleteFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
+
 const SpecialDaysAddEdit = ({
   userToken,
   loading,
@@ -31,111 +32,138 @@ const SpecialDaysAddEdit = ({
     })
   }
 
+  const eliminarImgRepetidas = (objImg) => {
+    let imgUnicas = {}
+    let resultado = objImg.filter((d) => {
+      if (!imgUnicas.hasOwnProperty(d.name)) {
+        imgUnicas[d.name] = true
+        return true
+      }
+      return false
+    })
+    return resultado
+  }
+
   const handleMultiple = async (e) => {
     if (!e.target.files || !e.target.files.length) return
     const files = Array.from(e.target.files)
-    setImgData(files)
+    if (!imgData) {
+      setImgData(files)
+    } else {
+      setImgData(imgData.concat(files))
+    }
   }
-
   const handleSubmit = async (values) => {
+    if (!dataRegisterEdit) {
+      handleCrear(values)
+    } else {
+      handleActualizar(values)
+    }
+  }
+  const handleCrear = async (values) => {
     try {
-      if (!dataRegisterEdit) {
-        if (!imgData) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
-        }
+      if (!imgData) {
+        alert('Debe seleccionar una/s imagen/es para continuar')
+        return
+      }
+      const objects = {}
+      const imgDataSinRepetir = eliminarImgRepetidas(imgData)
+      for (let file of imgDataSinRepetir) {
+        const preview = await getPreview(file)
+        objects[file.name] = { preview }
+      }
+      const promises = imgDataSinRepetir.map((file) => {
+        return uploadFile(URL_FIREBASE_IMG, file)
+      })
+      const ls = await Promise.all(promises)
+
+      values.description = description
+      values.photos = ls
+      const res = await api('POST', 'specialDays', values, userToken)
+      if (res.status === 200) {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+          window.location.href = '/admin/home/jornadas'
+        }, 2500)
+      }
+      if (res?.response?.status === 400) {
+        const arraysError = res?.response?.data?.errors
+        setMessageError(arraysError)
+        setDataError(true)
+        setTimeout(() => {
+          setDataError(false)
+        }, 3000)
+      }
+    } catch (error) {
+      setServerError(error)
+    }
+  }
+  const handleActualizar = async (values) => {
+    try {
+      if (
+        (!imgData || imgData.length === 0) &&
+        Object.keys(preview).length === 0
+      ) {
+        alert('Debe seleccionar una/s imagen/es para continuar')
+        return
+      }
+      let ls, dataImgUpdate
+      let arr = []
+      if (imgData) {
         const objects = {}
-        for (let file of imgData) {
+        const imgDataSinRepetir = eliminarImgRepetidas(imgData)
+        for (let file of imgDataSinRepetir) {
           const preview = await getPreview(file)
           objects[file.name] = { preview }
         }
-        const promises = imgData.map((file) => {
+        const promises = imgDataSinRepetir.map((file) => {
           return uploadFile(URL_FIREBASE_IMG, file)
         })
-        const ls = await Promise.all(promises)
-
-        values.description = description
-        values.photos = ls
-        const res = await api('POST', 'specialDays', values, userToken)
-        if (res.status === 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            window.location.href = '/admin/home/jornadas'
-          }, 2500)
+        ls = await Promise.all(promises)
+        for (const url in preview) {
+          if (!preview[url].includes('blob')) {
+            arr.push(preview[url])
+          }
         }
-        if (res?.response?.status === 400) {
-          const arraysError = res?.response?.data?.errors
-          setMessageError(arraysError)
-          setDataError(true)
-          setTimeout(() => {
-            setDataError(false)
-          }, 3000)
-        }
+        dataImgUpdate = arr.concat(ls)
       } else {
-        if (
-          (!imgData || imgData.length === 0) &&
-          Object.keys(preview).length === 0
-        ) {
-          alert('Debe seleccionar una/s imagen/es para continuar')
-          return
+        for (const url in preview) {
+          if (!preview[url].includes('blob')) {
+            arr.push(preview[url])
+          }
         }
-        let ls, dataImgUpdate
-        let arr = []
-        if (imgData) {
-          const objects = {}
-          for (let file of imgData) {
-            const preview = await getPreview(file)
-            objects[file.name] = { preview }
-          }
-          const promises = imgData.map((file) => {
-            return uploadFile(URL_FIREBASE_IMG, file)
-          })
-          ls = await Promise.all(promises)
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
-          }
-          dataImgUpdate = arr.concat(ls)
-        } else {
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
-          }
-          dataImgUpdate = arr
+        dataImgUpdate = arr
+      }
+      dataRegisterEdit.photos.forEach((d2) => {
+        if (!dataImgUpdate.includes(d2)) {
+          deleteFile(d2)
         }
-        dataRegisterEdit.photos.forEach((d2) => {
-          if (!dataImgUpdate.includes(d2)) {
-            deleteFile(d2)
-          }
-        })
-        values.photos = dataImgUpdate
-        values.description =
-          description === undefined ? dataRegisterEdit.description : description
-        const res = await api(
-          'PATCH',
-          `specialDays/${dataRegisterEdit._id}`,
-          values,
-          userToken
-        )
+      })
+      values.photos = dataImgUpdate
+      values.description =
+        description === undefined ? dataRegisterEdit.description : description
+      const res = await api(
+        'PATCH',
+        `specialDays/${dataRegisterEdit._id}`,
+        values,
+        userToken
+      )
 
-        if (res.status === 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            window.location.href = '/admin/home/jornadas'
-          }, 2500)
-        }
-        if (res?.response?.status === 400) {
-          const arraysError = res?.response?.data?.errors
-          setMessageError(arraysError)
-          setDataError(true)
-          setTimeout(() => {
-            setDataError(false)
-          }, 3000)
-        }
+      if (res.status === 200) {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+          window.location.href = '/admin/home/jornadas'
+        }, 2500)
+      }
+      if (res?.response?.status === 400) {
+        const arraysError = res?.response?.data?.errors
+        setMessageError(arraysError)
+        setDataError(true)
+        setTimeout(() => {
+          setDataError(false)
+        }, 3000)
       }
     } catch (error) {
       setServerError(error)

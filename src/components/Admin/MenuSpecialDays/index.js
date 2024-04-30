@@ -105,7 +105,7 @@ const MenuSpecialDays = ({ idTab }) => {
             />
             <p className='px-5 text-important mb-0'>
               <span className='text-danger fw-bolder'>*</span>Formato fotos:
-              Cuadrada 1:1
+              Horizontal 410x250
             </p>
             <SpecialDaysAddEdit
               userToken={userToken}

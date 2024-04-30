@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
+import Resizer from 'react-image-file-resizer'
 
 const FormConfigurations = ({
   userToken,
@@ -41,6 +42,22 @@ const FormConfigurations = ({
       label: 'texto',
     },
   ]
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    // Redimensionar y convertir a WebP
+    Resizer.imageFileResizer(
+      file,
+      500,
+      500,
+      'WEBP',
+      100,
+      0,
+      (resizedImage) => {
+        setImgData(resizedImage)
+      },
+      'blob'
+    )
+  }
 
   const handleSubmit = async (values) => {
     try {
@@ -282,7 +299,7 @@ const FormConfigurations = ({
                 type='file'
                 name=''
                 id='id-btn-upload'
-                onChange={(e) => setImgData(e.target.files[0])}
+                onChange={handleImageChange}
               />
               <label
                 htmlFor='id-btn-upload'

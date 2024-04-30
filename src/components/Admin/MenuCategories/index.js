@@ -71,14 +71,6 @@ const MenuCategories = ({ idTab }) => {
               resetValuesEdit={resetValuesEdit}
               btnAdd={true}
             />
-            {/* <ListElements
-              data={newsCategoryData?.allNewsCategory}
-              userToken={userToken}
-              band={band}
-              setBand={setBand}
-              resetValuesEdit={resetValuesEdit}
-              routeAPI='newsCategory'
-            /> */}
             <ListStatistics
               data={newsCategoryData?.allNewsCategory}
               userToken={userToken}
@@ -110,7 +102,8 @@ const MenuCategories = ({ idTab }) => {
               resetValuesEdit={resetValuesEdit}
             />
             <p className='px-5 text-important mb-0'>
-              <span className='text-danger fw-bolder'>*</span>Formato fotos: Horizontal 420x250
+              <span className='text-danger fw-bolder'>*</span>Formato fotos:
+              Horizontal 410x250
             </p>
             <FormAddEdit
               userToken={userToken}
