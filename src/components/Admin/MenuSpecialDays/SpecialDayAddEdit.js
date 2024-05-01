@@ -5,6 +5,7 @@ import { uploadFile, deleteFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
+import Resizer from 'react-image-file-resizer'
 
 const SpecialDaysAddEdit = ({
   userToken,
@@ -21,6 +22,7 @@ const SpecialDaysAddEdit = ({
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   const URL_FIREBASE_IMG = 'img-jornadas'
 
@@ -32,27 +34,43 @@ const SpecialDaysAddEdit = ({
     })
   }
 
-  const eliminarImgRepetidas = (objImg) => {
-    let imgUnicas = {}
-    let resultado = objImg.filter((d) => {
-      if (!imgUnicas.hasOwnProperty(d.name)) {
-        imgUnicas[d.name] = true
-        return true
-      }
-      return false
-    })
-    return resultado
-  }
+  // const handleMultiple = async (e) => {
+  //   if (!e.target.files || !e.target.files.length) return
+  //   const files = Array.from(e.target.files)
+  //   if (!imgData) {
+  //     setImgData(files)
+  //   } else {
+  //     setImgData(imgData.concat(files))
+  //   }
+  // }
 
-  const handleMultiple = async (e) => {
-    if (!e.target.files || !e.target.files.length) return
-    const files = Array.from(e.target.files)
-    if (!imgData) {
-      setImgData(files)
-    } else {
-      setImgData(imgData.concat(files))
+  const handleImageChange = (event) => {
+    const files = event.target.files
+    let arr = []
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      Resizer.imageFileResizer(
+        file,
+        500,
+        500,
+        'WEBP',
+        100,
+        0,
+        (resizedImage) => {
+          arr.push(resizedImage)
+          if (arr.length === files.length) {
+            if (!imgData) {
+              setImgData(arr)
+            } else {
+              setImgData(imgData.concat(arr))
+            }
+          }
+        },
+        'blob'
+      )
     }
   }
+
   const handleSubmit = async (values) => {
     if (!dataRegisterEdit) {
       handleCrear(values)
@@ -66,13 +84,14 @@ const SpecialDaysAddEdit = ({
         alert('Debe seleccionar una/s imagen/es para continuar')
         return
       }
+      setUploading(true)
+      setLoading(true)
       const objects = {}
-      const imgDataSinRepetir = eliminarImgRepetidas(imgData)
-      for (let file of imgDataSinRepetir) {
+      for (let file of imgData) {
         const preview = await getPreview(file)
         objects[file.name] = { preview }
       }
-      const promises = imgDataSinRepetir.map((file) => {
+      const promises = imgData.map((file) => {
         return uploadFile(URL_FIREBASE_IMG, file)
       })
       const ls = await Promise.all(promises)
@@ -81,9 +100,9 @@ const SpecialDaysAddEdit = ({
       values.photos = ls
       const res = await api('POST', 'specialDays', values, userToken)
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/jornadas'
         }, 2500)
       }
@@ -93,6 +112,8 @@ const SpecialDaysAddEdit = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setUploading(false)
+          setLoading(false)
         }, 3000)
       }
     } catch (error) {
@@ -108,16 +129,18 @@ const SpecialDaysAddEdit = ({
         alert('Debe seleccionar una/s imagen/es para continuar')
         return
       }
+      setUploading(true)
+      setLoading(true)
       let ls, dataImgUpdate
       let arr = []
       if (imgData) {
         const objects = {}
-        const imgDataSinRepetir = eliminarImgRepetidas(imgData)
-        for (let file of imgDataSinRepetir) {
+        // const imgDataSinRepetir = eliminarImgRepetidas(imgData)
+        for (let file of imgData) {
           const preview = await getPreview(file)
           objects[file.name] = { preview }
         }
-        const promises = imgDataSinRepetir.map((file) => {
+        const promises = imgData.map((file) => {
           return uploadFile(URL_FIREBASE_IMG, file)
         })
         ls = await Promise.all(promises)
@@ -151,9 +174,9 @@ const SpecialDaysAddEdit = ({
       )
 
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/jornadas'
         }, 2500)
       }
@@ -163,6 +186,8 @@ const SpecialDaysAddEdit = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setLoading(false)
+          setUploading(false)
         }, 3000)
       }
     } catch (error) {
@@ -206,7 +231,7 @@ const SpecialDaysAddEdit = ({
       const objectUrl = URL.createObjectURL(file)
       setPreview((url) => ({
         ...url,
-        [file.name]: objectUrl,
+        [file.size]: objectUrl,
       }))
     }
   }, [imgData])
@@ -228,6 +253,7 @@ const SpecialDaysAddEdit = ({
   return (
     <div className='menuContainer'>
       <Form
+        disabled={uploading ? true : false}
         labelCol={{ span: 22 }}
         wrapperCol={{ span: 22 }}
         initialValues={{
@@ -272,6 +298,7 @@ const SpecialDaysAddEdit = ({
           </p>
         </div>
         <CKEditor
+          disabled={uploading ? true : false}
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
           onReady={(editor) => {}}
@@ -312,12 +339,14 @@ const SpecialDaysAddEdit = ({
             type='file'
             name=''
             id='id-btn-upload'
+            disabled={uploading ? true : false}
             multiple
-            onChange={handleMultiple}
+            onChange={handleImageChange}
           />
           <label
             htmlFor='id-btn-upload'
-            className='d-flex text-center align-items-center btnUpload'
+            className='d-flex text-center align-items-center btnUpload disabled'
+            disabled={uploading ? true : false}
           >
             Agregar imagen
           </label>

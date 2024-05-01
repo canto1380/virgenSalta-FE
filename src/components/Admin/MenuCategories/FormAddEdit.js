@@ -11,9 +11,11 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
+    console.log(file)
     // Redimensionar y convertir a WebP
     Resizer.imageFileResizer(
       file,
@@ -36,31 +38,37 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           alert('Debe seleccionar una imagen para continuar')
           return
         }
+        setUploading(true)
+        setLoading(true)
+        console.log(imgData)
         const url = await uploadFile(URL_FIREBASE_IMG, imgData)
         values.backdrop = url
 
-        const res = await api('POST', 'newsCategory', values, userToken)
+        // const res = await api('POST', 'newsCategory', values, userToken)
 
-        if (res.status === 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            window.location.href = '/admin/home/categorias'
-          }, 2500)
-        }
-        if (res?.response?.status === 400) {
-          const arraysError = res?.response?.data?.errors
-          setMessageError(arraysError)
-          setDataError(true)
-          setTimeout(() => {
-            setDataError(false)
-          }, 3000)
-        }
+        // if (res.status === 200) {
+        //   setTimeout(() => {
+        //     setLoading(false)
+        //     setUploading(false)
+        //     window.location.href = '/admin/home/categorias'
+        //   }, 2500)
+        // }
+        // if (res?.response?.status === 400) {
+        //   const arraysError = res?.response?.data?.errors
+        //   setMessageError(arraysError)
+        //   setDataError(true)
+        //   setTimeout(() => {
+        //     setDataError(false)
+        //     setUploading(false)
+        //   }, 3000)
+        // }
       } else {
         if (!imgData && !preview) {
           alert('Debe seleccionar una imagen para continuar')
           return
         }
+        setUploading(true)
+        setLoading(true)
         let url
         if (imgData) {
           url = await uploadFile(URL_FIREBASE_IMG, imgData)
@@ -80,9 +88,9 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         )
 
         if (res.status === 200) {
-          setLoading(true)
           setTimeout(() => {
             setLoading(false)
+            setUploading(false)
             window.location.href = '/admin/home/categorias'
           }, 2500)
         }
@@ -92,6 +100,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           setDataError(true)
           setTimeout(() => {
             setDataError(false)
+            setUploading(false)
           }, 3000)
         }
       }
@@ -130,6 +139,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   return (
     <div className='menuContainer'>
       <Form
+        disabled={uploading ? true : false}
         labelCol={{ span: 22 }}
         wrapperCol={{ span: 22 }}
         initialValues={{
@@ -180,11 +190,13 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
             type='file'
             name=''
             id='id-btn-upload'
+            disabled={uploading ? true : false}
             onChange={handleImageChange}
           />
           <label
             htmlFor='id-btn-upload'
             className='d-flex text-center align-items-center btnUpload'
+            disabled={uploading ? true : false}
           >
             Agregar imagen
           </label>

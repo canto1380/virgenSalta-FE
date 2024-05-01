@@ -5,7 +5,7 @@ import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-// import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+import Resizer from 'react-image-file-resizer'
 
 const NewsAddEdit = ({
   data,
@@ -24,6 +24,7 @@ const NewsAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [switchHome, setSwitchHome] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   const URL_FIREBASE_IMG = 'img-noticias'
 
@@ -42,28 +43,34 @@ const NewsAddEdit = ({
       }
     })
   }
-  const eliminarImgRepetidas = (objImg) => {
-    let imgUnicas = {}
-    let resultado = objImg.filter((d) => {
-      if (!imgUnicas.hasOwnProperty(d.name)) {
-        imgUnicas[d.name] = true
-        return true
-      }
-      return false
-    })
-    return resultado
-  }
 
   const handleHomeVisible = (e) => {
     setSwitchHome(e)
   }
-  const handleMultiple = async (e) => {
-    if (!e.target.files || !e.target.files.length) return
-    const files = Array.from(e.target.files)
-    if (!imgData) {
-      setImgData(files)
-    } else {
-      setImgData(imgData.concat(files))
+  const handleImageChange = async (event) => {
+    const files = event.target.files
+    let arr = []
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      Resizer.imageFileResizer(
+        file,
+        500,
+        500,
+        'WEBP',
+        100,
+        0,
+        (resizedImage) => {
+          arr.push(resizedImage)
+          if (arr.length === files.length) {
+            if (!imgData) {
+              setImgData(arr)
+            } else {
+              setImgData(imgData.concat(arr))
+            }
+          }
+        },
+        'blob'
+      )
     }
   }
   const handleSubmit = async (values) => {
@@ -80,12 +87,14 @@ const NewsAddEdit = ({
       /** Carga IMG en Firebase **/
       values.description = description
       if (!imgData) {
+        setUploading(true)
+        setLoading(true)
         // alert('Debe seleccionar una/s imagen/es para continuar')
         // return
         const res = await api('POST', 'news', values, userToken)
         if (res.status === 200) {
-          setLoading(true)
           setTimeout(() => {
+            setUploading(false)
             setLoading(false)
             window.location.href = '/admin/home/noticias'
           }, 2500)
@@ -95,17 +104,20 @@ const NewsAddEdit = ({
           setMessageError(arraysError)
           setDataError(true)
           setTimeout(() => {
+            setUploading(false)
             setDataError(false)
+            setLoading(false)
           }, 3000)
         }
       } else {
+        setUploading(true)
+        setLoading(true)
         const objects = {}
-        const imgDataSinRepetir = eliminarImgRepetidas(imgData)
-        for (let file of imgDataSinRepetir) {
+        for (let file of imgData) {
           const preview = await getPreview(file)
           objects[file.name] = { preview }
         }
-        const promises = imgDataSinRepetir.map((file) => {
+        const promises = imgData.map((file) => {
           return uploadFile(URL_FIREBASE_IMG, file)
         })
         const ls = await Promise.all(promises)
@@ -113,8 +125,8 @@ const NewsAddEdit = ({
         values.photos = ls
         const res = await api('POST', 'news', values, userToken)
         if (res.status === 200) {
-          setLoading(true)
           setTimeout(() => {
+            setUploading(false)
             setLoading(false)
             window.location.href = '/admin/home/noticias'
           }, 2500)
@@ -124,7 +136,9 @@ const NewsAddEdit = ({
           setMessageError(arraysError)
           setDataError(true)
           setTimeout(() => {
+            setUploading(false)
             setDataError(false)
+            setLoading(false)
           }, 3000)
         }
       }
@@ -143,6 +157,8 @@ const NewsAddEdit = ({
         (!imgData || imgData.length === 0) &&
         (!preview || Object.keys(preview).length === 0)
       ) {
+        setUploading(true)
+        setLoading(true)
         values.photos = []
         const res = await api(
           'PATCH',
@@ -152,9 +168,9 @@ const NewsAddEdit = ({
         )
 
         if (res.status === 200) {
-          setLoading(true)
           setTimeout(() => {
             setLoading(false)
+            setUploading(false)
             window.location.href = '/admin/home/noticias'
           }, 2500)
         }
@@ -164,20 +180,23 @@ const NewsAddEdit = ({
           setDataError(true)
           setTimeout(() => {
             setDataError(false)
+            setUploading(false)
+            setLoading(false)
           }, 3000)
         }
       } else {
         let ls, dataImgUpdate
         let arr = []
+        setUploading(true)
+        setLoading(true)
         /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
         if (imgData) {
-          const imgDataSinRepetir = eliminarImgRepetidas(imgData)
           const objects = {}
-          for (let file of imgDataSinRepetir) {
+          for (let file of imgData) {
             const preview = await getPreview(file)
             objects[file.name] = { preview }
           }
-          const promises = imgDataSinRepetir.map((file) => {
+          const promises = imgData.map((file) => {
             return uploadFile(URL_FIREBASE_IMG, file)
           })
           ls = await Promise.all(promises)
@@ -210,9 +229,9 @@ const NewsAddEdit = ({
         )
 
         if (res.status === 200) {
-          setLoading(true)
           setTimeout(() => {
             setLoading(false)
+            setUploading(false)
             window.location.href = '/admin/home/noticias'
           }, 2500)
         }
@@ -221,7 +240,9 @@ const NewsAddEdit = ({
           setMessageError(arraysError)
           setDataError(true)
           setTimeout(() => {
+            setUploading(false)
             setDataError(false)
+            setLoading(false)
           }, 3000)
         }
       }
@@ -265,7 +286,7 @@ const NewsAddEdit = ({
       const objectUrl = URL.createObjectURL(file)
       setPreview((url) => ({
         ...url,
-        [file.name]: objectUrl,
+        [file.size]: objectUrl,
       }))
     }
   }, [imgData])
@@ -286,6 +307,7 @@ const NewsAddEdit = ({
   return (
     <div className='menuContainer'>
       <Form
+        disabled={uploading ? true : false}
         labelCol={{
           span: 22,
         }}
@@ -363,6 +385,7 @@ const NewsAddEdit = ({
           </p>
         </div>
         <CKEditor
+          disabled={uploading ? true : false}
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
           onReady={(editor) => {}}
@@ -397,11 +420,12 @@ const NewsAddEdit = ({
 
           <input
             className='btnUpload'
+            disabled={uploading ? true : false}
             type='file'
             name=''
             id='id-btn-upload'
             multiple
-            onChange={handleMultiple}
+            onChange={handleImageChange}
           />
           <label
             htmlFor='id-btn-upload'

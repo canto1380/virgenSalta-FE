@@ -18,6 +18,8 @@ const FormConfigurations = ({
   const [preview, setPreview] = useState()
   const [selectType, setSelectType] = useState(undefined)
   const [imgData, setImgData] = useState()
+  const [uploading, setUploading] = useState(false)
+
   const URL_FIREBASE_IMG = 'img-configuraciones'
 
   useEffect(() => {
@@ -80,13 +82,15 @@ const FormConfigurations = ({
         alert('Debe seleccionar una imagen para continuar')
         return
       }
+      setUploading(true)
+      setLoading(true)
       const url = await uploadFile(URL_FIREBASE_IMG, imgData)
       values.mixedField = url
       const res = await api('POST', routeAPI, values, userToken)
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/configuracion'
         }, 2500)
       }
@@ -96,14 +100,17 @@ const FormConfigurations = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setUploading(false)
         }, 3000)
       }
     } else {
       const res = await api('POST', routeAPI, values, userToken)
+      setLoading(true)
+      setUploading(true)
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/configuracion'
         }, 2500)
       }
@@ -113,11 +120,14 @@ const FormConfigurations = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setUploading(false)
         }, 3000)
       }
     }
   }
   const handleUpdated = async (values) => {
+    setUploading(true)
+    setLoading(true)
     if (selectType === 'imagen') {
       if (!imgData) {
         alert('Debe seleccionar una imagen para continuar')
@@ -140,9 +150,9 @@ const FormConfigurations = ({
         userToken
       )
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/configuracion'
         }, 2500)
       }
@@ -152,6 +162,7 @@ const FormConfigurations = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setUploading(false)
         }, 3000)
       }
     } else {
@@ -162,9 +173,9 @@ const FormConfigurations = ({
         userToken
       )
       if (res.status === 200) {
-        setLoading(true)
         setTimeout(() => {
           setLoading(false)
+          setUploading(false)
           window.location.href = '/admin/home/configuracion'
         }, 2500)
       }
@@ -174,6 +185,7 @@ const FormConfigurations = ({
         setDataError(true)
         setTimeout(() => {
           setDataError(false)
+          setUploading(false)
         }, 3000)
       }
     }
@@ -208,6 +220,7 @@ const FormConfigurations = ({
   return (
     <div className='menuContainer'>
       <Form
+        disabled={uploading ? true : false}
         labelCol={{ span: 22 }}
         wrapperCol={{ span: 22 }}
         initialValues={{
@@ -300,10 +313,12 @@ const FormConfigurations = ({
                 name=''
                 id='id-btn-upload'
                 onChange={handleImageChange}
+                disabled={uploading ? true : false}
               />
               <label
                 htmlFor='id-btn-upload'
                 className='d-flex text-center align-items-center btnUpload'
+                disabled={uploading ? true : false}
               >
                 Agregar imagen
               </label>
