@@ -1,5 +1,5 @@
 import React from 'react'
-import fotoDefault from '../../images/logo-corazon.jpg'
+import fotoDefault from '../../images/logo-corazon.webp'
 import { Card } from 'react-bootstrap'
 const CardSpecialDay = ({ data: { title }, photos, styleAdd }) => {
   return (

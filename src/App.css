@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 .img-cover {
-  background-image: url('../src/images/logo.jpg');
+  background-image: url('../src/images/logo.webp');
   background-size: cover;
   background-position: center;
   width: 100%;

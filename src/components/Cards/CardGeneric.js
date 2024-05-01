@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
-import ImgPrueba from '../../images/logo.jpg'
+import ImgPrueba from '../../images/logo.webp'
 
 const CardGeneric = ({
   info: { nameCategory, backdrop },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import ImageBackdrop from '../../images/logo.jpg'
+import ImageBackdrop from '../../images/logo.webp'
 import '../News/news.css'
 
 const BackdropSections = ({ title, img }) => {
@@ -28,7 +28,7 @@ const BackdropSections = ({ title, img }) => {
       ) : (
         <Container
           fluid
-          style={{ backgroundImage: `url("images/imgDefecto.jpg")` }}
+          style={{ backgroundImage: `url("images/imgDefecto.webp")` }}
           className='imgFondo'
         >
           <Row className='backdropNew'>

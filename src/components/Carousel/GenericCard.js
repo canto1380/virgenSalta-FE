@@ -1,6 +1,6 @@
 import React from 'react'
 import '../News/news.css'
-import fotoDefault from '../../images/logo-corazon.jpg'
+import fotoDefault from '../../images/logo-corazon.webp'
 
 const CardModel = ({ data: { photos, img, title, _id }, photos1, type }) => {
   return (

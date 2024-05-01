@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import '../news.css'
-import fotoDefault from '../../../images/logo-corazon.jpg'
+import fotoDefault from '../../../images/logo-corazon.webp'
 
 const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
   const [titleParams, setTitleParams] = useState(title)
