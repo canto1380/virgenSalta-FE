@@ -21,7 +21,7 @@ const SingleNews = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const dataNews = async () => {
-    const params = { limit: 1000, deleted: false, home: true }
+    const params = { limit: 1000, deleted: false }
     const data = await getNews(params)
     setMoreNews(data.allNews)
 
