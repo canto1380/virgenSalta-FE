@@ -68,6 +68,7 @@ const ItemsNavbarCollapse = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
+            setBand(!band)
           }, 2500)
         }
         if (res?.response?.status === 400) {

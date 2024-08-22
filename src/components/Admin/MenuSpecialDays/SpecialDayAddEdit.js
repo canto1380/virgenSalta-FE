@@ -54,7 +54,7 @@ const SpecialDaysAddEdit = ({
         500,
         500,
         'WEBP',
-        100,
+        400,
         0,
         (resizedImage) => {
           arr.push(resizedImage)

@@ -21,7 +21,7 @@ const CardMore = ({ data }) => {
   return (
     <div className='mb-5 mx-3'>
       <a className='link-decoration' href={`/noticias/${titleParams}`}>
-        <Card style={{}}>
+        <Card style={{}} className='container-card'>
           <Card.Img variant='top' src={data?.photos[0]} />
           <Card.Body>
             <Card.Title className='single-news-subtitle'>

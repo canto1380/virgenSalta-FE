@@ -52,7 +52,7 @@ const FormConfigurations = ({
       500,
       500,
       'WEBP',
-      100,
+      400,
       0,
       (resizedImage) => {
         setImgData(resizedImage)

@@ -64,14 +64,6 @@ const MenuAdmin = ({ userInfo }) => {
       )
       break
 
-    // case 'historia':
-    //   html = (
-    //     <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-    //       <MenuHistory idTab={idTab} />
-    //     </div>
-    //   )
-    //   break
-
     case 'noticias':
       html = (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>

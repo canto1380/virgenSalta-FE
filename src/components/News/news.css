@@ -23,9 +23,13 @@
   border-bottom-left-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
 }
-
+.card-container:hover {
+  transform: scale(0.9);
+  border-radius: 15px !important;
+}
 .card-container a img:hover {
   filter: saturate(150%);
+  border-radius: 15px !important;
 }
 
 .aa > p:hover {

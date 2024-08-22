@@ -15,11 +15,12 @@ const NewsAddEdit = ({
   userToken,
 }) => {
   const [description, setDescription] = useState()
-  const [imgData, setImgData] = useState()
-  const [preview, setPreview] = useState({
-    preview: '',
-    progress: 0,
-  })
+  const [imgData, setImgData] = useState([])
+  // const [preview, setPreview] = useState({
+  //   preview: '',
+  //   progress: 0,
+  // })
+  const [preview, setPreview] = useState([])
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
@@ -47,32 +48,42 @@ const NewsAddEdit = ({
   const handleHomeVisible = (e) => {
     setSwitchHome(e)
   }
+
   const handleImageChange = async (event) => {
-    const files = event.target.files
-    let arr = []
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
-      Resizer.imageFileResizer(
-        file,
-        500,
-        500,
-        'WEBP',
-        100,
-        0,
-        (resizedImage) => {
-          arr.push(resizedImage)
-          if (arr.length === files.length) {
-            if (!imgData) {
-              setImgData(arr)
-            } else {
-              setImgData(imgData.concat(arr))
-            }
-          }
-        },
-        'blob'
-      )
-    }
+    // const files = event.target.files
+    // let arr = []
+
+    // for (let i = 0; i < files.length; i++) {
+    //   const file = files[i]
+    //   Resizer.imageFileResizer(
+    //     file,
+    //     500,
+    //     500,
+    //     'WEBP',
+    //     500,
+    //     0,
+    //     (resizedImage) => {
+    //       arr.push(resizedImage)
+    //       if (arr.length === files.length) {
+    //         if (!imgData) {
+    //           setImgData(arr)
+    //         } else {
+    //           setImgData(imgData.concat(arr))
+    //         }
+    //       }
+    //     },
+    //     'blob'
+    //   )
+    // }
+    const files = Array.from(event.target.files)
+
+    setImgData((prevImages) => [...prevImages, ...files])
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file))
+    setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
   }
+  console.log(preview)
+  console.log(imgData)
   const handleSubmit = async (values) => {
     if (!dataRegisterEdit) {
       handleCrear(values)
@@ -110,8 +121,6 @@ const NewsAddEdit = ({
           }, 3000)
         }
       } else {
-        setUploading(true)
-        setLoading(true)
         const objects = {}
         for (let file of imgData) {
           const preview = await getPreview(file)
@@ -121,7 +130,6 @@ const NewsAddEdit = ({
           return uploadFile(URL_FIREBASE_IMG, file)
         })
         const ls = await Promise.all(promises)
-        /** Carga IMG en Firebase **/
         values.photos = ls
         const res = await api('POST', 'news', values, userToken)
         if (res.status === 200) {
@@ -191,11 +199,11 @@ const NewsAddEdit = ({
         setLoading(true)
         /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
         if (imgData) {
-          const objects = {}
-          for (let file of imgData) {
-            const preview = await getPreview(file)
-            objects[file.name] = { preview }
-          }
+          // const objects = {}
+          // for (let file of imgData) {
+          //   const preview = await getPreview(file)
+          //   objects[file.name] = { preview }
+          // }
           const promises = imgData.map((file) => {
             return uploadFile(URL_FIREBASE_IMG, file)
           })
@@ -248,61 +256,91 @@ const NewsAddEdit = ({
       }
     } catch (error) {
       setServerError(error)
+      console.log(error)
     }
   }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
-  const deleteImg = (e) => {
-    const resultado = {}
-    let resultado1 = {}
-    let resultado2 = {}
 
-    if (!imgData) {
-      for (const [chave, valor] of Object.entries(preview)) {
-        if (!valor.includes(e)) {
-          resultado2[chave] = valor
-        }
-      }
-      setPreview(resultado2)
-    } else {
-      for (const [chave, valor] of Object.entries(preview)) {
-        resultado1 = imgData.filter((d) => d.name !== chave)
-        if (valor.includes(e)) {
-        } else {
-          resultado[chave] = valor
-        }
-      }
-      setPreview(resultado)
-      setImgData(resultado1)
-    }
+  // const deleteImg = (e) => {
+  //   const resultado = {}
+  //   let resultado1 = {}
+  //   let resultado2 = {}
+  //   if (!imgData) {
+  //     for (const [chave, valor] of Object.entries(preview)) {
+  //       if (!valor.includes(e)) {
+  //         resultado2[chave] = valor
+  //       }
+  //     }
+  //     setPreview(resultado2)
+  //   } else {
+  //     for (const [chave, valor] of Object.entries(preview)) {
+  //       resultado1 = imgData.filter((d) => d.name !== chave)
+  //       if (valor.includes(e)) {
+  //       } else {
+  //         resultado[chave] = valor
+  //       }
+  //     }
+  //     console.log(resultado)
+  //     setPreview(resultado)
+  //     setImgData(resultado1)
+  //   }
+  // }
+  const deleteImg = (index) => {
+    console.log(index)
+    const newImages = [...imgData]
+    const newPreviews = [...preview]
+
+    newImages.splice(index, 1)
+    newPreviews.splice(index, 1)
+
+    setImgData(newImages)
+    setPreview(newPreviews)
+
   }
-  useEffect(() => {
-    if (!imgData) {
-      setPreview(undefined)
-      return
-    }
-    for (let file of imgData) {
-      const objectUrl = URL.createObjectURL(file)
-      setPreview((url) => ({
-        ...url,
-        [file.size]: objectUrl,
-      }))
-    }
-  }, [imgData])
+
+  // useEffect(() => {
+  //   if (!imgData) {
+  //     setPreview([])
+  //     return
+  //   }
+
+  //   const previews = imgData.map((file) => {
+  //     return URL.createObjectURL(file)
+  //   })
+  //   setPreview(previews)
+  //   return () => {
+  //     previews.forEach((url) => URL.revokeObjectURL(url))
+  //   }
+  //   // for (let file of imgData) {
+  //   //   console.log(file)
+  //   //   const objectUrl = URL.createObjectURL(file)
+  //   //   console.log(objectUrl)
+  //   //   setPreview((url) => ({
+  //   //     ...url,
+  //   //     [file.size]: objectUrl,
+  //   //   }))
+  //   // }
+  // }, [imgData])
 
   useEffect(() => {
     if (!dataRegisterEdit) {
       return
     }
-    let arr = []
-    for (let file of dataRegisterEdit.photos) {
-      arr.push(file)
-      setPreview((url) => ({
-        ...url,
-        [file]: file,
-      }))
-    }
+    setImgData(() =>[...dataRegisterEdit.photos])
+    // let arr = []
+    // for (let file of dataRegisterEdit.photos) {
+    //   arr.push(file)
+    //   setPreview((url) => ({
+    //     ...url,
+    //     [file]: file,
+    //   }))
+    // }
+    // let arr = []
+    // arr = dataRegisterEdit.photos
+    // console.log(arr)
+    setPreview((prevPreview) => [...dataRegisterEdit.photos])
   }, [dataRegisterEdit])
   return (
     <div className='menuContainer'>
@@ -409,10 +447,10 @@ const NewsAddEdit = ({
                 />
                 <div className='btn btn-delete-img'>
                   <div
-                    onClick={() => deleteImg(ob)}
-                    className='btn-contianer-delete d-flex justify-content-center align-items-center'
+                    onClick={() => deleteImg(i)}
+                    className='btn-contianer-delete'
                   >
-                    <p className='pb-2 mb-2'>x</p>
+                    <p className='mb-0'>x</p>
                   </div>
                 </div>
               </div>

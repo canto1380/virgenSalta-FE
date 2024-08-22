@@ -39,6 +39,7 @@ const MenuCarousel = () => {
     setDataRegisterEdit(valueEdit)
     setFormEdit(!formEdit)
   }
+  console.log(carouselData)
   return (
     <Container fluid>
       <Row>
@@ -66,6 +67,14 @@ const MenuCarousel = () => {
               resetValuesEdit={resetValuesEdit}
               btnAdd={true}
             />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato del video:
+              Horizontal 16:9 (1280x720 | 1920x1080)
+            </p>
+            <p className='px-5 text-important'>
+              <span className='text-danger fw-bolder'>*</span>Calidad del video:
+              mp4
+            </p>
             <ListElements
               data={carouselData?.allCarousel}
               userToken={userToken}
@@ -96,6 +105,14 @@ const MenuCarousel = () => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato del video:
+              Horizontal 16:9 (1280x720 | 1920x1080)
+            </p>
+            <p className='px-5 text-important'>
+              <span className='text-danger fw-bolder'>*</span>Calidad del video:
+              mp4
+            </p>
             <CarouselAddEdit
               userToken={userToken}
               loading={loading}

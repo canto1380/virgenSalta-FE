@@ -15,14 +15,13 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
-    console.log(file)
     // Redimensionar y convertir a WebP
     Resizer.imageFileResizer(
       file,
       500,
       500,
       'WEBP',
-      100,
+      400,
       0,
       (resizedImage) => {
         setImgData(resizedImage)
@@ -38,30 +37,26 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           alert('Debe seleccionar una imagen para continuar')
           return
         }
-        setUploading(true)
-        setLoading(true)
-        console.log(imgData)
         const url = await uploadFile(URL_FIREBASE_IMG, imgData)
         values.backdrop = url
 
-        // const res = await api('POST', 'newsCategory', values, userToken)
-
-        // if (res.status === 200) {
-        //   setTimeout(() => {
-        //     setLoading(false)
-        //     setUploading(false)
-        //     window.location.href = '/admin/home/categorias'
-        //   }, 2500)
-        // }
-        // if (res?.response?.status === 400) {
-        //   const arraysError = res?.response?.data?.errors
-        //   setMessageError(arraysError)
-        //   setDataError(true)
-        //   setTimeout(() => {
-        //     setDataError(false)
-        //     setUploading(false)
-        //   }, 3000)
-        // }
+        const res = await api('POST', 'newsCategory', values, userToken)
+        if (res.status === 200) {
+          setTimeout(() => {
+            setLoading(false)
+            setUploading(false)
+            window.location.href = '/admin/home/categorias'
+          }, 2500)
+        }
+        if (res?.response?.status === 400) {
+          const arraysError = res?.response?.data?.errors
+          setMessageError(arraysError)
+          setDataError(true)
+          setTimeout(() => {
+            setDataError(false)
+            setUploading(false)
+          }, 3000)
+        }
       } else {
         if (!imgData && !preview) {
           alert('Debe seleccionar una imagen para continuar')

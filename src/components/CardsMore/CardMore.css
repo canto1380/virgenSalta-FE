@@ -1,4 +1,4 @@
-.single-news-subtitle{
+.single-news-subtitle {
   color: black;
   font-size: 15px !important;
 }
@@ -8,4 +8,13 @@
 }
 .link-decoration {
   text-decoration: none;
+}
+.container-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
+}
+.container-card:hover {
+  filter: brightness(80%);
+  transform: scale(1.1);
 }

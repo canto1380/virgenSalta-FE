@@ -23,7 +23,6 @@ const FastAccess = () => {
               </a>
             </div>
           ))}
-
     </div>
   )
 }
