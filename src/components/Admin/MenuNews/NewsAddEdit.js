@@ -5,7 +5,7 @@ import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-import Resizer from 'react-image-file-resizer'
+// import Resizer from 'react-image-file-resizer'
 
 const NewsAddEdit = ({
   data,
@@ -297,7 +297,6 @@ const NewsAddEdit = ({
 
     setImgData(newImages)
     setPreview(newPreviews)
-
   }
 
   // useEffect(() => {
@@ -328,7 +327,7 @@ const NewsAddEdit = ({
     if (!dataRegisterEdit) {
       return
     }
-    setImgData(() =>[...dataRegisterEdit.photos])
+    setImgData(() => [...dataRegisterEdit.photos])
     // let arr = []
     // for (let file of dataRegisterEdit.photos) {
     //   arr.push(file)
