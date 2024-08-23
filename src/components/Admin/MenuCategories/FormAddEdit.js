@@ -42,6 +42,8 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
 
         const res = await api('POST', 'newsCategory', values, userToken)
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setLoading(false)
             setUploading(false)
@@ -62,8 +64,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           alert('Debe seleccionar una imagen para continuar')
           return
         }
-        setUploading(true)
-        setLoading(true)
+
         let url
         if (imgData) {
           url = await uploadFile(URL_FIREBASE_IMG, imgData)
@@ -83,6 +84,8 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         )
 
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setLoading(false)
             setUploading(false)

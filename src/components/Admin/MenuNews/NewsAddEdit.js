@@ -5,7 +5,7 @@ import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-// import Resizer from 'react-image-file-resizer'
+import imageCompression from 'browser-image-compression'
 
 const NewsAddEdit = ({
   data,
@@ -16,16 +16,13 @@ const NewsAddEdit = ({
 }) => {
   const [description, setDescription] = useState()
   const [imgData, setImgData] = useState([])
-  // const [preview, setPreview] = useState({
-  //   preview: '',
-  //   progress: 0,
-  // })
   const [preview, setPreview] = useState([])
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [switchHome, setSwitchHome] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [newImages, setNewImages] = useState([]) // Nuevas imágenes a subir
 
   const URL_FIREBASE_IMG = 'img-noticias'
 
@@ -50,40 +47,50 @@ const NewsAddEdit = ({
   }
 
   const handleImageChange = async (event) => {
-    // const files = event.target.files
-    // let arr = []
-
-    // for (let i = 0; i < files.length; i++) {
-    //   const file = files[i]
-    //   Resizer.imageFileResizer(
-    //     file,
-    //     500,
-    //     500,
-    //     'WEBP',
-    //     500,
-    //     0,
-    //     (resizedImage) => {
-    //       arr.push(resizedImage)
-    //       if (arr.length === files.length) {
-    //         if (!imgData) {
-    //           setImgData(arr)
-    //         } else {
-    //           setImgData(imgData.concat(arr))
-    //         }
-    //       }
-    //     },
-    //     'blob'
-    //   )
-    // }
+    /** CONVERTIR A WEBP **/
     const files = Array.from(event.target.files)
+    const compressedFiles = []
 
-    setImgData((prevImages) => [...prevImages, ...files])
+    // Opciones de compresión y conversión
+    const options = {
+      maxSizeMB: 0.1, // Tamaño máximo del archivo en MB
+      maxWidthOrHeight: 1080, // Dimensiones máximas
+      useWebWorker: true, // Usar Web Workers para mejorar la performance
+      fileType: 'image/webp', // Convertir a formato webp
+    }
 
-    const newPreviews = files.map((file) => URL.createObjectURL(file))
-    setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
+    for (let file of files) {
+      try {
+        const compressedFile = await imageCompression(file, options)
+        compressedFiles.push(compressedFile)
+      } catch (error) {
+        console.error('Error al comprimir la imagen:', error)
+      }
+    }
+    /******/
+
+    /*** SI ES UNA NOTICIA NUEVA ***/
+    if (!dataRegisterEdit || dataRegisterEdit.photos.length === 0) {
+      // const files = Array.from(event.target.files)
+
+      setImgData((prevImages) => [...prevImages, ...compressedFiles])
+
+      const newPreviews = compressedFiles.map((file) =>
+        URL.createObjectURL(file)
+      )
+      setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
+    } else {
+      /*** SI ES UNA NOTICIA A EDITAR ***/
+      // const files = Array.from(event.target.files)
+
+      setNewImages((prevImages) => [...prevImages, ...compressedFiles])
+
+      const newPreviews = compressedFiles.map((file) =>
+        URL.createObjectURL(file)
+      )
+      setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
+    }
   }
-  console.log(preview)
-  console.log(imgData)
   const handleSubmit = async (values) => {
     if (!dataRegisterEdit) {
       handleCrear(values)
@@ -98,12 +105,12 @@ const NewsAddEdit = ({
       /** Carga IMG en Firebase **/
       values.description = description
       if (!imgData) {
-        setUploading(true)
-        setLoading(true)
         // alert('Debe seleccionar una/s imagen/es para continuar')
         // return
         const res = await api('POST', 'news', values, userToken)
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setUploading(false)
             setLoading(false)
@@ -111,6 +118,8 @@ const NewsAddEdit = ({
           }, 2500)
         }
         if (res?.response?.status === 400) {
+          setUploading(true)
+          setLoading(true)
           const arraysError = res?.response?.data?.errors
           setMessageError(arraysError)
           setDataError(true)
@@ -133,6 +142,8 @@ const NewsAddEdit = ({
         values.photos = ls
         const res = await api('POST', 'news', values, userToken)
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setUploading(false)
             setLoading(false)
@@ -140,6 +151,8 @@ const NewsAddEdit = ({
           }, 2500)
         }
         if (res?.response?.status === 400) {
+          setUploading(true)
+          setLoading(true)
           const arraysError = res?.response?.data?.errors
           setMessageError(arraysError)
           setDataError(true)
@@ -165,8 +178,6 @@ const NewsAddEdit = ({
         (!imgData || imgData.length === 0) &&
         (!preview || Object.keys(preview).length === 0)
       ) {
-        setUploading(true)
-        setLoading(true)
         values.photos = []
         const res = await api(
           'PATCH',
@@ -176,6 +187,8 @@ const NewsAddEdit = ({
         )
 
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setLoading(false)
             setUploading(false)
@@ -193,42 +206,30 @@ const NewsAddEdit = ({
           }, 3000)
         }
       } else {
-        let ls, dataImgUpdate
-        let arr = []
-        setUploading(true)
-        setLoading(true)
-        /** Si existe una nueva img seleccionada, se obtiene la url y se la agrega al arr ls que guardamos en la DB */
-        if (imgData) {
-          // const objects = {}
-          // for (let file of imgData) {
-          //   const preview = await getPreview(file)
-          //   objects[file.name] = { preview }
-          // }
-          const promises = imgData.map((file) => {
+        let ls = [],
+          ls1 = []
+
+        if (newImages.length === 0) {
+          /** NO SE DEBE CARGAR NINGUNA IMAGEN **/
+          ls = imgData
+        } else {
+          const uploadNewImages = newImages.map((file) => {
             return uploadFile(URL_FIREBASE_IMG, file)
           })
-          ls = await Promise.all(promises)
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
-          }
-          dataImgUpdate = arr.concat(ls)
-        } else {
-          for (const url in preview) {
-            if (!preview[url].includes('blob')) {
-              arr.push(preview[url])
-            }
-          }
-          dataImgUpdate = arr
+          ls = imgData
+          ls1 = await Promise.all(uploadNewImages)
         }
-        dataRegisterEdit.photos.forEach((d2) => {
-          if (!dataImgUpdate.includes(d2)) {
-            deleteFile(d2)
-          }
-        })
+        if (dataRegisterEdit.photos.length === 0) {
+          const uploadImages = imgData.map((file) => {
+            return uploadFile(URL_FIREBASE_IMG, file)
+          })
+          ls = await Promise.all(uploadImages)
+        }
+
         /** Carga IMG en Firebase **/
-        values.photos = dataImgUpdate
+        const updatedImages = [...ls, ...ls1]
+        values.photos = updatedImages
+
         const res = await api(
           'PATCH',
           `news/${dataRegisterEdit._id}`,
@@ -237,6 +238,8 @@ const NewsAddEdit = ({
         )
 
         if (res.status === 200) {
+          setUploading(true)
+          setLoading(true)
           setTimeout(() => {
             setLoading(false)
             setUploading(false)
@@ -244,6 +247,8 @@ const NewsAddEdit = ({
           }, 2500)
         }
         if (res?.response?.status === 400) {
+          setUploading(true)
+          setLoading(true)
           const arraysError = res?.response?.data?.errors
           setMessageError(arraysError)
           setDataError(true)
@@ -263,32 +268,10 @@ const NewsAddEdit = ({
     console.log('Failed:', errorInfo)
   }
 
-  // const deleteImg = (e) => {
-  //   const resultado = {}
-  //   let resultado1 = {}
-  //   let resultado2 = {}
-  //   if (!imgData) {
-  //     for (const [chave, valor] of Object.entries(preview)) {
-  //       if (!valor.includes(e)) {
-  //         resultado2[chave] = valor
-  //       }
-  //     }
-  //     setPreview(resultado2)
-  //   } else {
-  //     for (const [chave, valor] of Object.entries(preview)) {
-  //       resultado1 = imgData.filter((d) => d.name !== chave)
-  //       if (valor.includes(e)) {
-  //       } else {
-  //         resultado[chave] = valor
-  //       }
-  //     }
-  //     console.log(resultado)
-  //     setPreview(resultado)
-  //     setImgData(resultado1)
-  //   }
-  // }
   const deleteImg = (index) => {
-    console.log(index)
+    if (dataRegisterEdit && dataRegisterEdit.photos.length > 0) {
+      deleteFile(imgData[index])
+    }
     const newImages = [...imgData]
     const newPreviews = [...preview]
 
@@ -299,46 +282,11 @@ const NewsAddEdit = ({
     setPreview(newPreviews)
   }
 
-  // useEffect(() => {
-  //   if (!imgData) {
-  //     setPreview([])
-  //     return
-  //   }
-
-  //   const previews = imgData.map((file) => {
-  //     return URL.createObjectURL(file)
-  //   })
-  //   setPreview(previews)
-  //   return () => {
-  //     previews.forEach((url) => URL.revokeObjectURL(url))
-  //   }
-  //   // for (let file of imgData) {
-  //   //   console.log(file)
-  //   //   const objectUrl = URL.createObjectURL(file)
-  //   //   console.log(objectUrl)
-  //   //   setPreview((url) => ({
-  //   //     ...url,
-  //   //     [file.size]: objectUrl,
-  //   //   }))
-  //   // }
-  // }, [imgData])
-
   useEffect(() => {
     if (!dataRegisterEdit) {
       return
     }
     setImgData(() => [...dataRegisterEdit.photos])
-    // let arr = []
-    // for (let file of dataRegisterEdit.photos) {
-    //   arr.push(file)
-    //   setPreview((url) => ({
-    //     ...url,
-    //     [file]: file,
-    //   }))
-    // }
-    // let arr = []
-    // arr = dataRegisterEdit.photos
-    // console.log(arr)
     setPreview((prevPreview) => [...dataRegisterEdit.photos])
   }, [dataRegisterEdit])
   return (
@@ -517,7 +465,7 @@ const NewsAddEdit = ({
           )}
         </Form.Item>
         {dataError
-          ? messageError.map((e, i) => <MsgError key={i} text2={e.msg} />)
+          ? messageError?.map((e, i) => <MsgError key={i} text2={e.msg} />)
           : null}
         {serverError ? <MsgError text2='Server internal Error' /> : null}
       </Form>
