@@ -28,7 +28,7 @@ const NewCarousel = ({ data, type }) => {
       <Swiper
         ref={swiperRef}
         freeMode={true}
-        slidesPerView={1}
+        slidesPerView={Math.min(data?.length, 3)}
         grabCursor={true}
         modules={[FreeMode, Navigation]}
         // navigation={true}

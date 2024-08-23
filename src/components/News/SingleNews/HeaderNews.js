@@ -11,13 +11,13 @@ const HeaderNews = ({ data }) => {
       {data && data.photos.length > 0 ? (
         <>
           <div className='pt-1 pb-3 containerImg'>
-            {<CarouselSingleNews photos={data?.photos}/>}
+            {<CarouselSingleNews photos={data?.photos} />}
             <p className='text-secondary lead ps-2 mb-0'>{data?.caption}</p>
           </div>
           <hr className='pb-3' />
         </>
       ) : (
-        <div className='pb-5'></div>
+        <hr className='pb-3' />
       )}
     </div>
   )

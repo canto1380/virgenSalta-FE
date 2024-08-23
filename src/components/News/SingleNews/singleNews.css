@@ -13,13 +13,15 @@
 }
 .containerImg {
   width: 100%;
-  height: 5vh;
+  aspect-ratio: 5 / 3;
+  /* height: 60vw; */
+  overflow: hidden;
+  /* border: 5px solid red; */
 }
 .image-news {
-  height: 80vh;
+  height: 100%;
   width: 100%;
   object-fit: cover;
-
   border-radius: 20px !important;
 }
 

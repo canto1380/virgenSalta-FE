@@ -13,9 +13,11 @@ const CardMore = ({ data }) => {
 
   const subtituliCortado = () => {
     const puntos = '...'
-    const subt = data?.subtitle.substr(0, 83)
+    const subt = data?.subtitle?.substr(0, 83)
     const asdd =
-      data.subtitle.length > 80 ? subt.concat(' ', puntos) : data.subtitle
+      data.subtitle && data?.subtitle.length > 80
+        ? subt.concat(' ', puntos)
+        : data?.subtitle
     setSubtitle(asdd)
   }
   return (
