@@ -47,28 +47,28 @@ const NewsAddEdit = ({
     setSwitchHome(e)
   }
 
-  const handleEditorReady = (editor) => {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-      return MyUploadAdapter(loader)
-    }
-  }
+  // const handleEditorReady = (editor) => {
+  //   editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+  //     return MyUploadAdapter(loader)
+  //   }
+  // }
 
-  const MyUploadAdapter = (loader) => {
-    return {
-      upload: () => {
-        return new Promise((resolve, reject) => {
-          const data = new FormData()
-          loader.file.then((file) => {
-            data.append('file', file)
-            uploadFile(URL_FIREBASE_IMG, file)
-          })
-        })
-      },
-      abort: () => {
-        // Aquí puedes manejar la cancelación de la subida si es necesario
-      },
-    }
-  }
+  // const MyUploadAdapter = (loader) => {
+  //   return {
+  //     upload: () => {
+  //       return new Promise((resolve, reject) => {
+  //         const data = new FormData()
+  //         loader.file.then((file) => {
+  //           data.append('file', file)
+  //           uploadFile(URL_FIREBASE_IMG, file)
+  //         })
+  //       })
+  //     },
+  //     abort: () => {
+  //       // Aquí puedes manejar la cancelación de la subida si es necesario
+  //     },
+  //   }
+  // }
 
   const handleImageChange = async (event) => {
     /** CONVERTIR A WEBP **/
