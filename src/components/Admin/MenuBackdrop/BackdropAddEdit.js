@@ -11,8 +11,10 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const estado = process.env.REACT_APP_API
-  const URL_FIREBASE_IMG = estado ? 'img-backdrops-dev' : 'img-backdrops'
+
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const URL_FIREBASE_IMG = estado !== null ? 'img-backdrops-dev' : 'img-backdrops'
+  
   const handleSubmit = async (values) => {
     try {
       if (data?.allBackdrops.length === 0) {

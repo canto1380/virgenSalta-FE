@@ -24,8 +24,8 @@ const SpecialDaysAddEdit = ({
   const [serverError, setServerError] = useState(false)
   const [uploading, setUploading] = useState(false)
 
-  const estado = process.env.REACT_APP_API
-  const URL_FIREBASE_IMG = estado ? 'img-jornadas-dev' : 'img-jornadas'
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
 
   const getPreview = (file) => {
     const fileReader = new FileReader()

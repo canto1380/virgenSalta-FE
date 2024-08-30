@@ -30,9 +30,9 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
     )
   }
 
-  const estado = process.env.REACT_APP_API
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
   const URL_FIREBASE_IMG =
-    estado ? 'img-categorias-dev' : 'img-categorias'
+    estado !== null ? 'img-categorias-dev' : 'img-categorias'
 
   const handleSubmit = async (values) => {
     try {
