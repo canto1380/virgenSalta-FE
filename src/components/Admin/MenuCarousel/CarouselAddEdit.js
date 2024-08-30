@@ -16,7 +16,9 @@ const CarouselAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  const URL_FIREBASE_IMG = 'videos-carousel'
+  const estado = process.env.REACT_APP_API
+  const URL_FIREBASE_IMG =
+    estado === 'http://localhost:4001' ? 'videos-carousel-dev' : 'videos-carousel'
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {

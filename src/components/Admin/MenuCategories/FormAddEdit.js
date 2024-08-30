@@ -29,7 +29,11 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
       'blob'
     )
   }
-  const URL_FIREBASE_IMG = 'img-categorias'
+
+  const estado = process.env.REACT_APP_API
+  const URL_FIREBASE_IMG =
+    estado === 'http://localhost:4001' ? 'img-categorias-dev' : 'img-categorias'
+
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {

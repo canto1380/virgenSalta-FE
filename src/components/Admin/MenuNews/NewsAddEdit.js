@@ -3,10 +3,8 @@ import { Button, Form, Input, Select, Spin, Switch } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
 import imageCompression from 'browser-image-compression'
-
+import App from '../../../ckeditor5/Ckeditor'
 const NewsAddEdit = ({
   data,
   dataRegisterEdit,
@@ -24,7 +22,9 @@ const NewsAddEdit = ({
   const [uploading, setUploading] = useState(false)
   const [newImages, setNewImages] = useState([]) // Nuevas imágenes a subir
 
-  const URL_FIREBASE_IMG = 'img-noticias'
+  const estado = process.env.REACT_APP_API
+  const URL_FIREBASE_IMG =
+    estado === 'http://localhost:4001' ? 'img-noticias-dev' : 'img-noticias'
 
   useEffect(() => {
     if (dataRegisterEdit) {
@@ -44,6 +44,29 @@ const NewsAddEdit = ({
 
   const handleHomeVisible = (e) => {
     setSwitchHome(e)
+  }
+
+  const handleEditorReady = (editor) => {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return MyUploadAdapter(loader)
+    }
+  }
+
+  const MyUploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const data = new FormData()
+          loader.file.then((file) => {
+            data.append('file', file)
+            uploadFile(URL_FIREBASE_IMG, file)
+          })
+        })
+      },
+      abort: () => {
+        // Aquí puedes manejar la cancelación de la subida si es necesario
+      },
+    }
   }
 
   const handleImageChange = async (event) => {
@@ -289,6 +312,7 @@ const NewsAddEdit = ({
     setImgData(() => [...dataRegisterEdit.photos])
     setPreview((prevPreview) => [...dataRegisterEdit.photos])
   }, [dataRegisterEdit])
+
   return (
     <div className='menuContainer'>
       <Form
@@ -369,16 +393,23 @@ const NewsAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción
           </p>
         </div>
-        <CKEditor
+        {/* <CKEditor
           disabled={uploading ? true : false}
           editor={ClassicEditor}
+          config={editorConfiguration}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
-          onReady={(editor) => {}}
+          onReady={handleEditorReady}
           onChange={(event, editor) => {
             const data = editor.getData()
             setDescription(data)
           }}
+        /> */}
+        <App
+          setDescription={setDescription}
+          handleEditorReady={handleEditorReady}
+          data={dataRegisterEdit ? dataRegisterEdit.description : ''}
         />
+
         <div className='mt-4'>
           <p>Imágenes</p>
         </div>

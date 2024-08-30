@@ -3,8 +3,8 @@ import { Button, Form, Input, Spin } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import { CKEditor } from '@ckeditor/ckeditor5-react'
 
 const HistoryAddEdit = ({
   dataRegisterEdit,
@@ -22,7 +22,10 @@ const HistoryAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  const URL_FIREBASE_IMG = 'img-historias'
+  const estado = process.env.REACT_APP_API
+  const URL_FIREBASE_IMG =
+    estado === 'http://localhost:4001' ? 'img-historias-dev' : 'img-historias'
+
 
   const getPreview = (file) => {
     const fileReader = new FileReader()
@@ -245,7 +248,7 @@ const HistoryAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción historia
           </p>
         </div>
-        <CKEditor
+        {/* <CKEditor
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
           onReady={(editor) => {}}
@@ -253,7 +256,7 @@ const HistoryAddEdit = ({
             const data = editor.getData()
             setDescription(data)
           }}
-        />
+        /> */}
         <div className='mt-4'>
           <p>
             <span className='text-danger fw-bolder me-1'>*</span>Imágenes
