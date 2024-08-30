@@ -21,8 +21,9 @@ const FormConfigurations = ({
   const [uploading, setUploading] = useState(false)
 
   const estado = process.env.REACT_APP_API
-  const URL_FIREBASE_IMG =
-    estado === 'http://localhost:4001' ? 'img-configuraciones-dev' : 'img-configuraciones'
+  const URL_FIREBASE_IMG = estado
+    ? 'img-configuraciones-dev'
+    : 'img-configuraciones'
 
   useEffect(() => {
     setSelectType(dataRegisterEdit?.typeField || undefined)
