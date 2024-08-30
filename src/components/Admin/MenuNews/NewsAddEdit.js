@@ -405,11 +405,11 @@ const NewsAddEdit = ({
             setDescription(data)
           }}
         /> */}
-        <App
+        {/* <App
           setDescription={setDescription}
           handleEditorReady={handleEditorReady}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
-        />
+        /> */}
 
         <div className='mt-4'>
           <p>Imágenes</p>
