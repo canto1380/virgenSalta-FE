@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { uploadFile, deleteFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-// import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
 import Resizer from 'react-image-file-resizer'
 
 const SpecialDaysAddEdit = ({
@@ -24,9 +24,9 @@ const SpecialDaysAddEdit = ({
   const [serverError, setServerError] = useState(false)
   const [uploading, setUploading] = useState(false)
 
-  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  // const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
-  const URL_FIREBASE_IMG = 'img-jornadas'
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
+  // const URL_FIREBASE_IMG = 'img-jornadas'
 
   const getPreview = (file) => {
     const fileReader = new FileReader()
@@ -299,7 +299,7 @@ const SpecialDaysAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción
           </p>
         </div>
-        {/* <CKEditor
+        <CKEditor
           disabled={uploading ? true : false}
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
@@ -308,7 +308,7 @@ const SpecialDaysAddEdit = ({
             const data = editor.getData()
             setDescription(data)
           }}
-        /> */}
+        />
 
         <div className='mt-4'>
           <p>
