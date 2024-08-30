@@ -49,6 +49,6 @@
     border-left: 0px;
   }
   .nav-section2 button {
-    text-align: start !important;
+    text-align: flex-start !important;
   }
 }
