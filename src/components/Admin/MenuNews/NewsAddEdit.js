@@ -4,7 +4,7 @@ import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import imageCompression from 'browser-image-compression'
-// import App from '../../../ckeditor5/Ckeditor'
+import App from '../../../ckeditor5/Ckeditor'
 const NewsAddEdit = ({
   data,
   dataRegisterEdit,
@@ -12,7 +12,7 @@ const NewsAddEdit = ({
   setLoading,
   userToken,
 }) => {
-  // const [description, setDescription] = useState()
+  const [description, setDescription] = useState()
   const [imgData, setImgData] = useState([])
   const [preview, setPreview] = useState([])
   const [dataError, setDataError] = useState(false)
@@ -22,10 +22,10 @@ const NewsAddEdit = ({
   const [uploading, setUploading] = useState(false)
   const [newImages, setNewImages] = useState([]) // Nuevas imágenes a subir
 
-  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  // console.log(estado)
-  // const URL_FIREBASE_IMG = estado !== null ? 'img-noticias-dev' : 'img-noticias'
-  const URL_FIREBASE_IMG = 'img-noticias'
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  console.log(estado)
+  const URL_FIREBASE_IMG = estado !== null ? 'img-noticias-dev' : 'img-noticias'
+  // const URL_FIREBASE_IMG = 'img-noticias'
 
   useEffect(() => {
     if (dataRegisterEdit) {
@@ -47,28 +47,28 @@ const NewsAddEdit = ({
     setSwitchHome(e)
   }
 
-  // const handleEditorReady = (editor) => {
-  //   editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-  //     return MyUploadAdapter(loader)
-  //   }
-  // }
+  const handleEditorReady = (editor) => {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return MyUploadAdapter(loader)
+    }
+  }
 
-  // const MyUploadAdapter = (loader) => {
-  //   return {
-  //     upload: () => {
-  //       return new Promise((resolve, reject) => {
-  //         const data = new FormData()
-  //         loader.file.then((file) => {
-  //           data.append('file', file)
-  //           uploadFile(URL_FIREBASE_IMG, file)
-  //         })
-  //       })
-  //     },
-  //     abort: () => {
-  //       // Aquí puedes manejar la cancelación de la subida si es necesario
-  //     },
-  //   }
-  // }
+  const MyUploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const data = new FormData()
+          loader.file.then((file) => {
+            data.append('file', file)
+            uploadFile(URL_FIREBASE_IMG, file)
+          })
+        })
+      },
+      abort: () => {
+        // Aquí puedes manejar la cancelación de la subida si es necesario
+      },
+    }
+  }
 
   const handleImageChange = async (event) => {
     /** CONVERTIR A WEBP **/
@@ -127,7 +127,7 @@ const NewsAddEdit = ({
     try {
       values.home = switchHome
       /** Carga IMG en Firebase **/
-      // values.description = description
+      values.description = description
       if (!imgData) {
         // alert('Debe seleccionar una/s imagen/es para continuar')
         // return
@@ -194,8 +194,8 @@ const NewsAddEdit = ({
   const handleActualizar = async (values) => {
     try {
       values.home = switchHome
-      // values.description =
-      //   description === undefined ? dataRegisterEdit.description : description
+      values.description =
+        description === undefined ? dataRegisterEdit.description : description
       /** Carga IMG en Firebase **/
       /** Si no existe imgData o no tiene nada y preview tampoco */
       if (
@@ -405,11 +405,11 @@ const NewsAddEdit = ({
             setDescription(data)
           }}
         /> */}
-        {/* <App
+        <App
           setDescription={setDescription}
           handleEditorReady={handleEditorReady}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
-        /> */}
+        />
 
         <div className='mt-4'>
           <p>Imágenes</p>
