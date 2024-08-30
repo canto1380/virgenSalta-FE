@@ -22,10 +22,10 @@ const HistoryAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  const URL_FIREBASE_IMG =
-    estado !== null ? 'img-historias-dev' : 'img-historias'
-  // const URL_FIREBASE_IMG = 'img-historias'
+  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  // const URL_FIREBASE_IMG =
+  //   estado !== null ? 'img-historias-dev' : 'img-historias'
+  const URL_FIREBASE_IMG = 'img-historias'
 
   const getPreview = (file) => {
     const fileReader = new FileReader()

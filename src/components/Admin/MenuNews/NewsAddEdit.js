@@ -22,10 +22,10 @@ const NewsAddEdit = ({
   const [uploading, setUploading] = useState(false)
   const [newImages, setNewImages] = useState([]) // Nuevas imágenes a subir
 
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  console.log(estado)
-  const URL_FIREBASE_IMG = estado !== null ? 'img-noticias-dev' : 'img-noticias'
-  // const URL_FIREBASE_IMG = 'img-noticias'
+  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  // console.log(estado)
+  // const URL_FIREBASE_IMG = estado !== null ? 'img-noticias-dev' : 'img-noticias'
+  const URL_FIREBASE_IMG = 'img-noticias'
 
   useEffect(() => {
     if (dataRegisterEdit) {
