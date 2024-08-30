@@ -3,8 +3,8 @@ import { Button, Form, Input, Spin } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import { CKEditor } from '@ckeditor/ckeditor5-react'
 
 const HistoryAddEdit = ({
   dataRegisterEdit,
@@ -12,7 +12,7 @@ const HistoryAddEdit = ({
   setLoading,
   userToken,
 }) => {
-  const [description, setDescription] = useState()
+  // const [description, setDescription] = useState()
   const [imgData, setImgData] = useState()
   const [preview, setPreview] = useState({
     preview: '',
@@ -63,7 +63,7 @@ const HistoryAddEdit = ({
         }
         /** Carga IMG en Firebase **/
 
-        values.description = description
+        // values.description = description
         values.photos = ls
         const res = await api('POST', 'history', values, userToken)
         if (res.status === 200) {
@@ -126,8 +126,8 @@ const HistoryAddEdit = ({
         /** Carga IMG en Firebase **/
 
         values.photos = dataImgUpdate
-        values.description =
-          description === undefined ? dataRegisterEdit.description : description
+        // values.description =
+        // description === undefined ? dataRegisterEdit.description : description
         const res = await api(
           'PATCH',
           `history/${dataRegisterEdit._id}`,
@@ -248,7 +248,7 @@ const HistoryAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción historia
           </p>
         </div>
-        <CKEditor
+        {/* <CKEditor
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
           onReady={(editor) => {}}
@@ -256,7 +256,7 @@ const HistoryAddEdit = ({
             const data = editor.getData()
             setDescription(data)
           }}
-        />
+        /> */}
         <div className='mt-4'>
           <p>
             <span className='text-danger fw-bolder me-1'>*</span>Imágenes

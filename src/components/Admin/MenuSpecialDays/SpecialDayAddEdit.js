@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { uploadFile, deleteFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import { CKEditor } from '@ckeditor/ckeditor5-react'
 import Resizer from 'react-image-file-resizer'
 
 const SpecialDaysAddEdit = ({
@@ -18,7 +18,7 @@ const SpecialDaysAddEdit = ({
     preview: '',
     progress: 0,
   })
-  const [description, setDescription] = useState()
+  // const [description, setDescription] = useState()
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
@@ -98,7 +98,7 @@ const SpecialDaysAddEdit = ({
       })
       const ls = await Promise.all(promises)
 
-      values.description = description
+      // values.description = description
       values.photos = ls
       const res = await api('POST', 'specialDays', values, userToken)
       if (res.status === 200) {
@@ -166,8 +166,8 @@ const SpecialDaysAddEdit = ({
         }
       })
       values.photos = dataImgUpdate
-      values.description =
-        description === undefined ? dataRegisterEdit.description : description
+      // values.description =
+        // description === undefined ? dataRegisterEdit.description : description
       const res = await api(
         'PATCH',
         `specialDays/${dataRegisterEdit._id}`,
@@ -299,7 +299,7 @@ const SpecialDaysAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción
           </p>
         </div>
-        <CKEditor
+        {/* <CKEditor
           disabled={uploading ? true : false}
           editor={ClassicEditor}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
@@ -308,7 +308,7 @@ const SpecialDaysAddEdit = ({
             const data = editor.getData()
             setDescription(data)
           }}
-        />
+        /> */}
 
         <div className='mt-4'>
           <p>
