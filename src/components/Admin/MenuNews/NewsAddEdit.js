@@ -4,7 +4,7 @@ import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import imageCompression from 'browser-image-compression'
-import App from '../../../ckeditor5/Ckeditor'
+// import App from '../../../ckeditor5/Ckeditor'
 const NewsAddEdit = ({
   data,
   dataRegisterEdit,
@@ -12,7 +12,7 @@ const NewsAddEdit = ({
   setLoading,
   userToken,
 }) => {
-  const [description, setDescription] = useState()
+  // const [description, setDescription] = useState()
   const [imgData, setImgData] = useState([])
   const [preview, setPreview] = useState([])
   const [dataError, setDataError] = useState(false)
@@ -127,7 +127,7 @@ const NewsAddEdit = ({
     try {
       values.home = switchHome
       /** Carga IMG en Firebase **/
-      values.description = description
+      // values.description = description
       if (!imgData) {
         // alert('Debe seleccionar una/s imagen/es para continuar')
         // return
@@ -194,8 +194,8 @@ const NewsAddEdit = ({
   const handleActualizar = async (values) => {
     try {
       values.home = switchHome
-      values.description =
-        description === undefined ? dataRegisterEdit.description : description
+      // values.description =
+      //   description === undefined ? dataRegisterEdit.description : description
       /** Carga IMG en Firebase **/
       /** Si no existe imgData o no tiene nada y preview tampoco */
       if (
