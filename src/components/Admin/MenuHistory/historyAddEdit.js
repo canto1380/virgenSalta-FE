@@ -125,7 +125,7 @@ const HistoryAddEdit = ({
 
         values.photos = dataImgUpdate
         values.description =
-        description === undefined ? dataRegisterEdit.description : description
+          description === undefined ? dataRegisterEdit.description : description
         const res = await api(
           'PATCH',
           `history/${dataRegisterEdit._id}`,
@@ -255,7 +255,7 @@ const HistoryAddEdit = ({
             setDescription(data)
           }}
         /> */}
-        <App 
+        <App
           setDescription={setDescription}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
         />
