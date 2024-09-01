@@ -100,7 +100,6 @@ const CKBOX_TOKEN_URL =
   'https://117070.cke-cs.com/token/dev/d7yW03KXH8fremOe3Gq2vRaWQjYmHicxgQmA?limit=10'
 
 export default function App({ setDescription, handleEditorReady, data }) {
-  console.log(data)
   const editorContainerRef = useRef(null)
   const editorRef = useRef(null)
   const [isLayoutReady, setIsLayoutReady] = useState(false)

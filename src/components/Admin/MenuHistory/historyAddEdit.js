@@ -3,8 +3,7 @@ import { Button, Form, Input, Spin } from 'antd'
 import { api } from '../../../utils/api'
 import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-// import { CKEditor } from '@ckeditor/ckeditor5-react'
+import App from '../../../ckeditor5/Ckeditor'
 
 const HistoryAddEdit = ({
   dataRegisterEdit,
@@ -12,7 +11,7 @@ const HistoryAddEdit = ({
   setLoading,
   userToken,
 }) => {
-  // const [description, setDescription] = useState()
+  const [description, setDescription] = useState()
   const [imgData, setImgData] = useState()
   const [preview, setPreview] = useState({
     preview: '',
@@ -22,10 +21,9 @@ const HistoryAddEdit = ({
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
 
-  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  // const URL_FIREBASE_IMG =
-  //   estado !== null ? 'img-historias-dev' : 'img-historias'
-  const URL_FIREBASE_IMG = 'img-historias'
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const URL_FIREBASE_IMG =
+    estado !== null ? 'img-historias-dev' : 'img-historias'
 
   const getPreview = (file) => {
     const fileReader = new FileReader()
@@ -63,7 +61,7 @@ const HistoryAddEdit = ({
         }
         /** Carga IMG en Firebase **/
 
-        // values.description = description
+        values.description = description
         values.photos = ls
         const res = await api('POST', 'history', values, userToken)
         if (res.status === 200) {
@@ -126,8 +124,8 @@ const HistoryAddEdit = ({
         /** Carga IMG en Firebase **/
 
         values.photos = dataImgUpdate
-        // values.description =
-        // description === undefined ? dataRegisterEdit.description : description
+        values.description =
+        description === undefined ? dataRegisterEdit.description : description
         const res = await api(
           'PATCH',
           `history/${dataRegisterEdit._id}`,
@@ -257,6 +255,10 @@ const HistoryAddEdit = ({
             setDescription(data)
           }}
         /> */}
+        <App 
+          setDescription={setDescription}
+          data={dataRegisterEdit ? dataRegisterEdit.description : ''}
+        />
         <div className='mt-4'>
           <p>
             <span className='text-danger fw-bolder me-1'>*</span>Imágenes

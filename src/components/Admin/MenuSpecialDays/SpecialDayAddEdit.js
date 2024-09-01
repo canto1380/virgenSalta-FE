@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { uploadFile, deleteFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-// import { CKEditor } from '@ckeditor/ckeditor5-react'
-import Resizer from 'react-image-file-resizer'
+import App from '../../../ckeditor5/Ckeditor'
+import imageCompression from 'browser-image-compression'
 
 const SpecialDaysAddEdit = ({
   userToken,
@@ -13,20 +12,17 @@ const SpecialDaysAddEdit = ({
   setLoading,
   dataRegisterEdit,
 }) => {
-  const [imgData, setImgData] = useState()
-  const [preview, setPreview] = useState({
-    preview: '',
-    progress: 0,
-  })
-  // const [description, setDescription] = useState()
+  const [imgData, setImgData] = useState([])
+  const [preview, setPreview] = useState([])
+  const [description, setDescription] = useState()
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [newImages, setNewImages] = useState([])
 
-  // const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  // const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
-  const URL_FIREBASE_IMG = 'img-jornadas'
+  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
 
   const getPreview = (file) => {
     const fileReader = new FileReader()
@@ -36,40 +32,46 @@ const SpecialDaysAddEdit = ({
     })
   }
 
-  // const handleMultiple = async (e) => {
-  //   if (!e.target.files || !e.target.files.length) return
-  //   const files = Array.from(e.target.files)
-  //   if (!imgData) {
-  //     setImgData(files)
-  //   } else {
-  //     setImgData(imgData.concat(files))
-  //   }
-  // }
+  const handleImageChange = async (event) => {
+    const files = Array.from(event.target.files)
+    const compressedFiles = []
 
-  const handleImageChange = (event) => {
-    const files = event.target.files
-    let arr = []
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
-      Resizer.imageFileResizer(
-        file,
-        500,
-        500,
-        'WEBP',
-        400,
-        0,
-        (resizedImage) => {
-          arr.push(resizedImage)
-          if (arr.length === files.length) {
-            if (!imgData) {
-              setImgData(arr)
-            } else {
-              setImgData(imgData.concat(arr))
-            }
-          }
-        },
-        'blob'
+    const options = {
+      maxSizeMB: 1.0, // Tamaño máximo del archivo en MB
+      maxWidthOrHeight: 1080, // Dimensiones máximas
+      useWebWorker: true, // Usar Web Workers para mejorar la performance
+      fileType: 'image/webp', // Convertir a formato webp
+    }
+
+    for (let file of files) {
+      try {
+        const compressedFile = await imageCompression(file, options)
+        compressedFiles.push(compressedFile)
+      } catch (error) {
+        console.error('Error al comprimir la imagen:', error)
+      }
+    }
+
+    /*** SI ES UNA NOTICIA NUEVA ***/
+    if (!dataRegisterEdit || dataRegisterEdit.photos.length === 0) {
+      // const files = Array.from(event.target.files)
+
+      setImgData((prevImages) => [...prevImages, ...compressedFiles])
+
+      const newPreviews = compressedFiles.map((file) =>
+        URL.createObjectURL(file)
       )
+      setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
+    } else {
+      /*** SI ES UNA NOTICIA A EDITAR ***/
+      // const files = Array.from(event.target.files)
+
+      setNewImages((prevImages) => [...prevImages, ...compressedFiles])
+
+      const newPreviews = compressedFiles.map((file) =>
+        URL.createObjectURL(file)
+      )
+      setPreview((prevPreviews) => [...prevPreviews, ...newPreviews])
     }
   }
 
@@ -86,8 +88,7 @@ const SpecialDaysAddEdit = ({
         alert('Debe seleccionar una/s imagen/es para continuar')
         return
       }
-      setUploading(true)
-      setLoading(true)
+
       const objects = {}
       for (let file of imgData) {
         const preview = await getPreview(file)
@@ -98,10 +99,12 @@ const SpecialDaysAddEdit = ({
       })
       const ls = await Promise.all(promises)
 
-      // values.description = description
+      values.description = description
       values.photos = ls
       const res = await api('POST', 'specialDays', values, userToken)
       if (res.status === 200) {
+        setUploading(true)
+        setLoading(true)
         setTimeout(() => {
           setLoading(false)
           setUploading(false)
@@ -109,6 +112,8 @@ const SpecialDaysAddEdit = ({
         }, 2500)
       }
       if (res?.response?.status === 400) {
+        setUploading(true)
+        setLoading(true)
         const arraysError = res?.response?.data?.errors
         setMessageError(arraysError)
         setDataError(true)
@@ -124,6 +129,8 @@ const SpecialDaysAddEdit = ({
   }
   const handleActualizar = async (values) => {
     try {
+      values.description =
+        description === undefined ? dataRegisterEdit.description : description
       if (
         (!imgData || imgData.length === 0) &&
         Object.keys(preview).length === 0
@@ -131,43 +138,29 @@ const SpecialDaysAddEdit = ({
         alert('Debe seleccionar una/s imagen/es para continuar')
         return
       }
-      setUploading(true)
-      setLoading(true)
-      let ls, dataImgUpdate
-      let arr = []
-      if (imgData) {
-        const objects = {}
-        // const imgDataSinRepetir = eliminarImgRepetidas(imgData)
-        for (let file of imgData) {
-          const preview = await getPreview(file)
-          objects[file.name] = { preview }
-        }
-        const promises = imgData.map((file) => {
+
+      let ls = [],
+        ls1 = []
+
+      if (newImages.length === 0) {
+        /** NO SE DEBE CARGAR NINGUNA IMAGEN **/
+        ls = imgData
+      } else {
+        const uploadNewImages = newImages.map((file) => {
           return uploadFile(URL_FIREBASE_IMG, file)
         })
-        ls = await Promise.all(promises)
-        for (const url in preview) {
-          if (!preview[url].includes('blob')) {
-            arr.push(preview[url])
-          }
-        }
-        dataImgUpdate = arr.concat(ls)
-      } else {
-        for (const url in preview) {
-          if (!preview[url].includes('blob')) {
-            arr.push(preview[url])
-          }
-        }
-        dataImgUpdate = arr
+        ls = imgData
+        ls1 = await Promise.all(uploadNewImages)
       }
-      dataRegisterEdit.photos.forEach((d2) => {
-        if (!dataImgUpdate.includes(d2)) {
-          deleteFile(d2)
-        }
-      })
-      values.photos = dataImgUpdate
-      // values.description =
-        // description === undefined ? dataRegisterEdit.description : description
+      if (dataRegisterEdit.photos.length === 0) {
+        const uploadImages = imgData.map((file) => {
+          return uploadFile(URL_FIREBASE_IMG, file)
+        })
+        ls = await Promise.all(uploadImages)
+      }
+      /** Carga IMG en Firebase **/
+      const updatedImages = [...ls, ...ls1]
+      values.photos = updatedImages
       const res = await api(
         'PATCH',
         `specialDays/${dataRegisterEdit._id}`,
@@ -176,6 +169,8 @@ const SpecialDaysAddEdit = ({
       )
 
       if (res.status === 200) {
+        setUploading(true)
+        setLoading(true)
         setTimeout(() => {
           setLoading(false)
           setUploading(false)
@@ -183,6 +178,8 @@ const SpecialDaysAddEdit = ({
         }, 2500)
       }
       if (res?.response?.status === 400) {
+        setUploading(true)
+        setLoading(true)
         const arraysError = res?.response?.data?.errors
         setMessageError(arraysError)
         setDataError(true)
@@ -200,56 +197,40 @@ const SpecialDaysAddEdit = ({
     console.log('Failed:', errorInfo)
   }
 
-  const deleteImg = (e) => {
-    const resultado = {}
-    let resultado1 = {}
-    let resultado2 = {}
-    if (!imgData) {
-      for (const [chave, valor] of Object.entries(preview)) {
-        if (!valor.includes(e)) {
-          resultado2[chave] = valor
-        }
-      }
-      setPreview(resultado2)
-    } else {
-      for (const [chave, valor] of Object.entries(preview)) {
-        resultado1 = imgData.filter((d) => d.name !== chave)
-        if (valor.includes(e)) {
-        } else {
-          resultado[chave] = valor
-        }
-      }
-      setPreview(resultado)
-      setImgData(resultado1)
+  const deleteImg = (index) => {
+    if (dataRegisterEdit && dataRegisterEdit.photos.length > 0) {
+      deleteFile(imgData[index])
     }
+    const newImages = [...imgData]
+    const newPreviews = [...preview]
+
+    newImages.splice(index, 1)
+    newPreviews.splice(index, 1)
+
+    setImgData(newImages)
+    setPreview(newPreviews)
   }
 
-  useEffect(() => {
-    if (!imgData) {
-      setPreview(undefined)
-      return
-    }
-    for (let file of imgData) {
-      const objectUrl = URL.createObjectURL(file)
-      setPreview((url) => ({
-        ...url,
-        [file.size]: objectUrl,
-      }))
-    }
-  }, [imgData])
+  // useEffect(() => {
+  //   if (!imgData) {
+  //     setPreview(undefined)
+  //     return
+  //   }
+  //   for (let file of imgData) {
+  //     const objectUrl = URL.createObjectURL(file)
+  //     setPreview((url) => ({
+  //       ...url,
+  //       [file.size]: objectUrl,
+  //     }))
+  //   }
+  // }, [imgData])
 
   useEffect(() => {
     if (!dataRegisterEdit) {
       return
     }
-    let arr = []
-    for (let file of dataRegisterEdit.photos) {
-      arr.push(file)
-      setPreview((url) => ({
-        ...url,
-        [file]: file,
-      }))
-    }
+    setImgData(() => [...dataRegisterEdit.photos])
+    setPreview((prevPreview) => [...dataRegisterEdit.photos])
   }, [dataRegisterEdit])
 
   return (
@@ -309,6 +290,10 @@ const SpecialDaysAddEdit = ({
             setDescription(data)
           }}
         /> */}
+        <App
+          setDescription={setDescription}
+          data={dataRegisterEdit ? dataRegisterEdit.description : ''}
+        />
 
         <div className='mt-4'>
           <p>
@@ -327,7 +312,7 @@ const SpecialDaysAddEdit = ({
                 />
                 <div className='btn btn-delete-img'>
                   <div
-                    onClick={() => deleteImg(ob)}
+                    onClick={() => deleteImg(i)}
                     className='btn-contianer-delete d-flex justify-content-center align-items-center'
                   >
                     <p className='pb-2 mb-2'>x</p>

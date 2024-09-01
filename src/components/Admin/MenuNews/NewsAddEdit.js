@@ -5,6 +5,7 @@ import { deleteFile, uploadFile } from '../../../firebase/config'
 import MsgError from '../../Messages/MsgError'
 import imageCompression from 'browser-image-compression'
 import App from '../../../ckeditor5/Ckeditor'
+
 const NewsAddEdit = ({
   data,
   dataRegisterEdit,
@@ -23,7 +24,6 @@ const NewsAddEdit = ({
   const [newImages, setNewImages] = useState([]) // Nuevas imágenes a subir
 
   const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  console.log(estado)
   const URL_FIREBASE_IMG = estado !== null ? 'img-noticias-dev' : 'img-noticias'
   // const URL_FIREBASE_IMG = 'img-noticias'
 
@@ -47,6 +47,7 @@ const NewsAddEdit = ({
     setSwitchHome(e)
   }
 
+  /** ADAPTADOR DE CARGA DE IMAGENES EN ELSERVIDOR PROPIO **/
   const handleEditorReady = (editor) => {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       return MyUploadAdapter(loader)
@@ -69,6 +70,7 @@ const NewsAddEdit = ({
       },
     }
   }
+  /************************************************************/
 
   const handleImageChange = async (event) => {
     /** CONVERTIR A WEBP **/
@@ -77,7 +79,7 @@ const NewsAddEdit = ({
 
     // Opciones de compresión y conversión
     const options = {
-      maxSizeMB: 0.1, // Tamaño máximo del archivo en MB
+      maxSizeMB: 0.6, // Tamaño máximo del archivo en MB
       maxWidthOrHeight: 1080, // Dimensiones máximas
       useWebWorker: true, // Usar Web Workers para mejorar la performance
       fileType: 'image/webp', // Convertir a formato webp
