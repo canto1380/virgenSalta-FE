@@ -9,6 +9,7 @@
   background-size: cover;
   background-position: center;
   object-fit: cover;
+  background-color: white;
 }
 .card-title1 {
   background-color: rgba(174, 174, 174, 0.514);
@@ -28,7 +29,7 @@
   border-radius: 15px !important;
 }
 .card-container a img:hover {
-  filter: saturate(150%);
+  /* filter: saturate(150%); */
   border-radius: 15px !important;
 }
 

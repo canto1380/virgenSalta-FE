@@ -16,7 +16,7 @@ const Noticias = () => {
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ deleted, pageSelected, limit])
+  }, [deleted, pageSelected, limit])
 
   const dataNews = async () => {
     const params = {
@@ -29,22 +29,20 @@ const Noticias = () => {
     setNewsInf(data)
   }
 
-
   return (
     <div className='bg-gradient-1'>
       <Layout />
       <BackdropSections title='Noticias' />
-      <Container className='mt-3 pt-5'>
-
+      <Container className='mt-3 pt-3'>
         {newsData ? (
           <Row className='mt-3 pb-5'>
-            <div>
+            <div className='mb-4'>
               <h5 className='text- pb-2'>Lista de Noticias</h5>
             </div>
             {newsData.length > 0 ? (
               newsData?.map((noti, i) => (
                 <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
-                  <CardNewsPage data={noti} pathUrl='noticias'/>
+                  <CardNewsPage data={noti} pathUrl='noticias' />
                 </Col>
               ))
             ) : (

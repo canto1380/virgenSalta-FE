@@ -59,7 +59,7 @@ const PhotosGallery = () => {
 
       <Row>
         {dataFeedInsta?.map((d) => (
-          <Col key={d.id} xs={12} md={4} className='py-3'>
+          <Col key={d.id} xs={12} md={4} className='py-3 aas'>
             <a
               href={`${d.permalink}`}
               target='_blank'

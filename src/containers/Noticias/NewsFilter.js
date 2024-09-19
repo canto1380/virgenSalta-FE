@@ -36,7 +36,7 @@ const NewsFilter = ({
   return (
     <div className=''>
       <div>
-        <h5 className='text-'>Filtros</h5>
+        <p className='fw-bolder mb-0'>Filtros</p>
       </div>
       <div className='row d-flex justify-content-start align-items-top'>
         {typeFlag === 'news' && (
