@@ -1,41 +1,45 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import HeaderList from '../HeaderList'
-import ListElements from '../ListElements'
-import PaginationAdmin from '../Pagination'
-import { User } from '../../../context/userProvider'
-import { getHistory } from '../../../utils/queryAPI/history'
-import HistoryAddEdit from './historyAddEdit'
-import FiltersAdmin from '../FiltersAdmin'
+import HeaderList from '../../HeaderList'
+import ListElements from '../../ListElements'
+import PaginationAdmin from '../../Pagination'
+import { User } from '../../../../context/userProvider'
+import { getMessageVirgen } from '../../../../utils/queryAPI/messageVirgen.js'
+import MsgVirgenAddEdit from './MsgVirgenAddEdit.js'
+import MsgFilters from '../MsgFilters'
+import HeaderBackdrop from '../../HeaderBackdrop.js'
 
-const MenuHistory = () => {
+const MenuMsgVirgen = ({ idTab }) => {
   const [formAdd, setFormAdd] = useState(false)
   const [formEdit, setFormEdit] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [historyData, setHistoryData] = useState([])
+  const [messageVirgen, setMessageVirgen] = useState([])
   const [limit, setLimit] = useState(10)
   const [deleted, setDeleted] = useState(undefined)
   const [band, setBand] = useState(false)
   const [pageSelected, setPageSelected] = useState(1)
   const [search, setSearch] = useState('')
+  const [year, setYear] = useState('Todos')
 
   const {
     state: { userToken },
   } = useContext(User)
 
   useEffect(() => {
-    dataNews()
+    dataMessageVirgen()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, deleted, band, pageSelected, limit])
-  const dataNews = async () => {
+  }, [search, deleted, band, pageSelected, limit, year])
+  const dataMessageVirgen = async () => {
     const params = {
       deleted,
+      search,
       page: 1,
       limit,
+      year,
     }
-    const data = await getHistory(params)
-    setHistoryData(data)
+    const data = await getMessageVirgen(params)
+    setMessageVirgen(data)
   }
 
   const resetValuesEdit = (valueEdit) => {
@@ -47,22 +51,31 @@ const MenuHistory = () => {
       <Row>
         <Col className='mt-3'>
           <div className={`pt-4 pb-1 px-4`}>
-            <h3>sHistoria</h3>
+            <h3>Mensajes De La Santísima Virgen María</h3>
           </div>
         </Col>
       </Row>
       {!formAdd && !formEdit ? (
         <Row>
           <Col>
-            <FiltersAdmin
+            <MsgFilters
               setSearch={setSearch}
               deleted={deleted}
               setDeleted={setDeleted}
-              newsRoute='news'
               setPageSelected={setPageSelected}
+              setYear={setYear}
             />
+            <HeaderBackdrop
+              title={'Foto Portada'}
+              idTab={idTab}
+              bandSelect={true}
+            />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato fotos:
+              Vertical 500x450
+            </p>
             <HeaderList
-              title='Listado de Historias'
+              title='Listado de Mensajes de la Virgen'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -71,15 +84,15 @@ const MenuHistory = () => {
               btnAdd={true}
             />
             <ListElements
-              data={historyData?.allHistory}
+              data={messageVirgen?.allMessage}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='history'
+              routeAPI='messageVirgen'
             />
             <PaginationAdmin
-              data={historyData}
+              data={messageVirgen}
               pageSelected={pageSelected}
               setPageSelected={setPageSelected}
               setLimit={setLimit}
@@ -90,8 +103,8 @@ const MenuHistory = () => {
         <Row>
           <Col>
             <HeaderList
-              title='Nueva historia'
-              titleEdit='Editar historia'
+              title='Nuevo Mensaje de la Virgen'
+              titleEdit='Editar Mensaje de la Virgen'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -100,12 +113,12 @@ const MenuHistory = () => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <HistoryAddEdit
+            <MsgVirgenAddEdit
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
               dataRegisterEdit={dataRegisterEdit}
-              data={historyData?.allHistory}
+              data={messageVirgen?.allHistory}
             />
           </Col>
         </Row>
@@ -114,4 +127,4 @@ const MenuHistory = () => {
   )
 }
 
-export default MenuHistory
+export default MenuMsgVirgen

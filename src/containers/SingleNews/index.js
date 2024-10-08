@@ -15,6 +15,21 @@ const SingleNews = () => {
 
   const [singleNews, setSingleNews] = useState()
   const [moreNews, setMoreNews] = useState([])
+  const [fontSize, setFontSize] = useState(14)
+
+  const aumentarTexto = () => {
+    console.log(fontSize)
+    setFontSize((prevSize) => prevSize + 2)
+    console.log(fontSize)
+    // console.log(`aumenta a ${fontSize}`)
+  }
+
+  const reducirTexto = () => {
+    console.log(fontSize)
+    setFontSize((prevSize) => (prevSize > 10 ? prevSize - 2 : prevSize)) // Evita que sea demasiado pequeño
+    console.log(fontSize)
+    // console.log(`disminuye a ${fontSize}`)
+  }
 
   useEffect(() => {
     dataNews()
@@ -40,10 +55,15 @@ const SingleNews = () => {
       <Container>
         <Row className='mx-0 pt-2 pb-5'>
           <Col xs={8} className='pt-5'>
+            <div>
+              <button onClick={aumentarTexto}>Aumentar</button>
+              <button onClick={reducirTexto}>Reducir</button>
+            </div>
             <HeaderNews data={singleNews} />
             <BodyNews
               data={singleNews?.description}
               photos={singleNews?.photos}
+              fontSize={fontSize}
             />
           </Col>
 

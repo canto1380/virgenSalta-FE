@@ -3,6 +3,7 @@ import { deleteFile, uploadFile } from '../../../firebase/config'
 import { api } from '../../../utils/api'
 import { Form, Button, Spin } from 'antd'
 import MsgError from '../../Messages/MsgError'
+import Resizer from 'react-image-file-resizer'
 
 const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
   const [imgData, setImgData] = useState()
@@ -11,6 +12,23 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    // Redimensionar y convertir a WebP
+    Resizer.imageFileResizer(
+      file,
+      500,
+      500,
+      'WEBP',
+      400,
+      0,
+      (resizedImage) => {
+        setImgData(resizedImage)
+      },
+      'blob'
+    )
+  }
 
   const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
   const URL_FIREBASE_IMG =
@@ -102,10 +120,9 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
     }
     const objectUrl = URL.createObjectURL(imgData)
     setPreview(objectUrl)
-
-    // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [imgData])
+
   useEffect(() => {
     if (!data || data?.length === 0 || data?.allBackdrops?.length === 0) {
       return
@@ -127,38 +144,23 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
         layout='vertical'
         style={{ marginLeft: '2vh' }}
       >
-        <div className='menuContainer d-flex justify-content-between align-items-center'>
-          <div>
-            <p className='fw-bolder mb-1'>Seleccionar foto</p>
+        <div className='menuContainer d-flex mb-0'>
+          <div className=''>
+            <p className='fw-bolder'>Seleccionar foto</p>
             <p className='text-important'>
               <span className='fw-bold text-danger '>*</span>Solo se puede
               seleccionar una foto
             </p>
           </div>
         </div>
-        <div className='menuContainer d-flex justify-content-between align-items-center'>
-          <input
-            className='btnUpload'
-            type='file'
-            name=''
-            id='id-btn-upload'
-            onChange={(e) => setImgData(e.target.files[0])}
-          />
-          <label
-            htmlFor='id-btn-upload'
-            className='d-flex text-center align-items-center btnUpload'
-          >
-            Agregar imagen
-          </label>
-        </div>
-        <div className='menuContainer d-flex justify-content-between align-items-center'>
-          <div className='d-flex'>
+        <div className='menuContainer mt-0'>
+          <div>
             {preview && (
               <div className='container-preview'>
                 <img
                   src={preview}
                   id='img-preview-news'
-                  className='preview-upload-backdrop me-4'
+                  className='preview-upload-backdrop'
                   alt='preview'
                 />
                 <div className='btn btn-delete-img'>
@@ -171,32 +173,52 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
                 </div>
               </div>
             )}
-          </div>
-          <div>
-            {loading ? (
-              <Button disabled type='primary' htmlType='submit'>
-                <Spin
-                  as='span'
-                  animation='border'
-                  size='sm'
-                  role='status'
-                  aria-hidden='true'
+            {!preview && (
+              <>
+                <input
+                  className='btnUpload'
+                  type='file'
+                  name=''
+                  id='id-btn-upload'
+                  // onChange={(e) => setImgData(e.target.files[0])}
+                  onChange={handleImageChange}
                 />
-                <span className='ms-2'>
-                  {data?.length !== 0 || data?.allBackdrops.length !== 0
-                    ? 'Actualizando'
-                    : 'Agregando'}
-                </span>
-              </Button>
-            ) : (
-              <Button type='primary' htmlType='submit'>
-                {data?.length !== 0 && data?.allBackdrops.length !== 0
-                  ? 'Actualizar'
-                  : 'Agregar'}
-              </Button>
+                <label
+                  htmlFor='id-btn-upload'
+                  className='d-flex text-center align-items-center btnUpload'
+                >
+                  Agregar imagen
+                </label>
+              </>
             )}
           </div>
         </div>
+
+        <div className='text-end me-4'>
+          {loading ? (
+            <Button disabled type='primary' htmlType='submit'>
+              <Spin
+                as='span'
+                animation='border'
+                size='sm'
+                role='status'
+                aria-hidden='true'
+              />
+              <span className='ms-2'>
+                {data?.length !== 0 || data?.allBackdrops.length !== 0
+                  ? 'Actualizando'
+                  : 'Agregando'}
+              </span>
+            </Button>
+          ) : (
+            <Button type='primary' htmlType='submit'>
+              {data?.length !== 0 && data?.allBackdrops.length !== 0
+                ? 'Actualizar'
+                : 'Agregar'}
+            </Button>
+          )}
+        </div>
+        {/* </div> */}
         {dataError
           ? messageError.map((e, i) => <MsgError key={i} text2={e.msg} />)
           : null}

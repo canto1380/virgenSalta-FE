@@ -18,6 +18,9 @@ import MenuFastAccess from '../../../components/Admin/MenuFastAccess'
 import MenuStatistics from '../../../components/Admin/MenuStatistics.js'
 import MenuFooter from '../../../components/Admin/MenuFooter/index.js'
 import MenuConfigurations from '../../../components/Admin/MenuConfigurations/index.js'
+import MenuMsgVirgen from '../../../components/Admin/MenuMessages/MsgVirgen/MsgVirgen.js'
+import MenuMsgJesucristo from '../../../components/Admin/MenuMessages/MsgJesucristo/MsgJesucristo.js'
+import MenuMsgGeneral from '../../../components/Admin/MenuMessages/MsgGeneral/MsgGeneral.js'
 
 const MenuAdmin = ({ userInfo }) => {
   const [inactivo, setInactivo] = useState(false)
@@ -60,6 +63,30 @@ const MenuAdmin = ({ userInfo }) => {
       html = (
         <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
           <MenuCarousel idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'mensajesDeLaVirgen':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuMsgVirgen idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'mensajesDeJesucristo':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuMsgJesucristo idTab={idTab} />
+        </div>
+      )
+      break
+
+    case 'mensajesCentral':
+      html = (
+        <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <MenuMsgGeneral idTab={idTab} />
         </div>
       )
       break

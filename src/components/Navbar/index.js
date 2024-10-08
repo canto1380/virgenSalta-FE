@@ -63,6 +63,7 @@ const NavbarPrimary = ({ home }) => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto' key='1'>
+            <NavDropdown className='container-dd'>MENSAJES</NavDropdown>
             {itemNavCategory &&
               itemNavCategory?.map((d) =>
                 d.urlRedirect === '' ? (

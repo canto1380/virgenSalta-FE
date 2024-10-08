@@ -133,6 +133,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [imgData])
+  
   useEffect(() => {
     if (!dataRegisterEdit) return
     setPreview(dataRegisterEdit.backdrop)

@@ -35,7 +35,9 @@ const BackdropSection = () => {
   }
 
   useEffect(() => {
-    setTitle(idTab[0].toUpperCase() + idTab.slice(1))
+    idTab === 'mensajesDeLaVirgen'
+      ? setTitle('Mensajes De La Santísima Virgen María')
+      : setTitle(idTab[0].toUpperCase() + idTab.slice(1))
   }, [idTab])
   return (
     <Container

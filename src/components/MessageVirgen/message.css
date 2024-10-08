@@ -1,0 +1,44 @@
+.container-backdrop-msg {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  width: 450px;
+  height: 500px;
+}
+.img-backdrop-msg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.titleGen-msg-virgen {
+  font-size: 22px;
+  text-align: center;
+}
+
+.text1-msg-virgen {
+  font-size: 20px;
+  text-align: center;
+  color: white;
+}
+.text2-msg-virgen {
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+.text3-msg-virgen {
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+
+.title-msg-virgen {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+.hor-line {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: white;
+}
+.text-msg {
+  color: white;
+}

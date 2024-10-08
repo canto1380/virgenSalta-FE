@@ -5,7 +5,7 @@ import {
   BsFillCaretLeftFill,
   BsNewspaper,
   BsCalendarDate,
-  // BsBodyText,
+  BsBodyText,
   BsMenuButtonWideFill,
   BsMenuDown,
 } from 'react-icons/bs'
@@ -16,7 +16,7 @@ import {
   BiCarousel,
 } from 'react-icons/bi'
 import { FaCalendarAlt, FaStream } from 'react-icons/fa'
-import { FcStatistics, FcDataConfiguration  } from 'react-icons/fc'
+import { FcStatistics, FcDataConfiguration } from 'react-icons/fc'
 import '../sidebar.css'
 import { deleteCookies, deleteToken } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
@@ -42,11 +42,21 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
       iconName: <BiCarousel className='sizeIcon' />,
       name: 'Video portada',
     },
-    // {
-    //   title: 'historia',
-    //   iconName: <BsBodyText className='sizeIcon' />,
-    //   name: 'Historia',
-    // },
+    {
+      title: 'mensajesDeLaVirgen',
+      iconName: <BsBodyText className='sizeIcon' />,
+      name: 'Mensajes de la Virgen',
+    },
+    {
+      title: 'mensajesDeJesucristo',
+      iconName: <BsBodyText className='sizeIcon' />,
+      name: 'Mensajes de Jesús',
+    },
+    {
+      title: 'mensajesCentral',
+      iconName: <BsBodyText className='sizeIcon' />,
+      name: 'Mensaje central',
+    },
     {
       title: 'noticias',
       iconName: <BsNewspaper className='sizeIcon' />,
@@ -84,7 +94,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth }) => {
     },
     {
       title: 'configuracion',
-      iconName: <FcDataConfiguration  className='sizeIcon' />,
+      iconName: <FcDataConfiguration className='sizeIcon' />,
       name: 'Configuración',
     },
     {
