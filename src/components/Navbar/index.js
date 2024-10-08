@@ -63,7 +63,15 @@ const NavbarPrimary = ({ home }) => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto' key='1'>
-            <NavDropdown className='container-dd'>MENSAJES</NavDropdown>
+            <NavDropdown className='container-dd' title='MENSAJES'>
+              <NavDropdown.Item
+                key={1}
+                href={`/mensajes-de-la-virgen`}
+                target='_blank'
+              >
+                Mensaje de la Virgen
+              </NavDropdown.Item>
+            </NavDropdown>
             {itemNavCategory &&
               itemNavCategory?.map((d) =>
                 d.urlRedirect === '' ? (
