@@ -34,7 +34,7 @@ const Title = () => {
       {!allConfigurations ? null : (
         <div className='text-center pt-5 pb-3 container-title'>
           <p className='title1'>{title && title.mixedField}</p>
-          <p className='phrase'>{slogan && slogan.mixedField}</p>
+          <p className='px-2 phrase'>{slogan && slogan.mixedField}</p>
         </div>
       )}
     </>

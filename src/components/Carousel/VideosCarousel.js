@@ -7,8 +7,7 @@ import 'swiper/css/navigation'
 import VideoCard from './VideoCard'
 import Spinn from '../Spinn/Spinn'
 
-const VideosCarousel = ({videosBack}) => {
-
+const VideosCarousel = ({ videosBack }) => {
   return (
     <div>
       {!videosBack ? (

@@ -92,7 +92,7 @@ const Home = () => {
       <Container fluid className='px-0 container-cover'>
         <Cover />
       </Container>
-      <Container className='py-5'>
+      <Container className='pb-5'>
         <News />
         {!allConfigurations ? (
           <div className='my-5 py-4'></div>

@@ -18,10 +18,10 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
     // Redimensionar y convertir a WebP
     Resizer.imageFileResizer(
       file,
-      500,
-      500,
+      410,
+      250,
       'WEBP',
-      400,
+      480,
       0,
       (resizedImage) => {
         setImgData(resizedImage)

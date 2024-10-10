@@ -21,7 +21,7 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
       500,
       500,
       'WEBP',
-      400,
+      80,
       0,
       (resizedImage) => {
         setImgData(resizedImage)

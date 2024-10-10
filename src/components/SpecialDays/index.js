@@ -26,16 +26,9 @@ const SpecialDays = () => {
             styleAdd={'text-white'}
           />
         </Row>
-        <Row className='mt-5 mb-3 px-5'>
+        <Row className='mt-5 mb-3 cont-row-categ'>
           {specialDay?.map((d, i) => (
-            <Col
-              key={i}
-              xs={12}
-              sm={6}
-              md={6}
-              lg={4}
-              className='mb-4'
-            >
+            <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
               <CardSpecialDay data={d} photos={d?.photos[0]} />
             </Col>
           ))}

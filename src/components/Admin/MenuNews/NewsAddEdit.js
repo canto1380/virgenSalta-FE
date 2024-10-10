@@ -79,7 +79,7 @@ const NewsAddEdit = ({
 
     // Opciones de compresión y conversión
     const options = {
-      maxSizeMB: 0.6, // Tamaño máximo del archivo en MB
+      maxSizeMB: 1, // Tamaño máximo del archivo en MB
       maxWidthOrHeight: 1080, // Dimensiones máximas
       useWebWorker: true, // Usar Web Workers para mejorar la performance
       fileType: 'image/webp', // Convertir a formato webp

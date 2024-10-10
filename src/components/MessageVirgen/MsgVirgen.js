@@ -4,7 +4,7 @@ import FilterMsgVirgen from './FilterMsgVirgen'
 
 const MsgVirgen = ({ msgVirgen, setYear }) => {
   return (
-    <div>
+    <div className='pb-5'>
       <div className='px-5'>
         <p className='text1-msg-virgen mb-0'>
           Mensajes dados por La Santísima Virgen
@@ -14,11 +14,15 @@ const MsgVirgen = ({ msgVirgen, setYear }) => {
       <FilterMsgVirgen setYear={setYear} />
       <div className='px-5'>
         {msgVirgen.length > 0 ? (
-          msgVirgen?.map((data) => (
-            <MsgVirgenBody title={data?.title} message={data?.message} />
+          msgVirgen?.map((data, i) => (
+            <MsgVirgenBody
+              title={data?.title}
+              message={data?.message}
+              key={i}
+            />
           ))
         ) : (
-          <p className='text-danger fw-bold'>No se encontraron mensajes</p>
+          <p className='text-danger fw-bold px-5'>No se encontraron mensajes</p>
         )}
       </div>
     </div>

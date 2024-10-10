@@ -51,10 +51,10 @@ const FormConfigurations = ({
     // Redimensionar y convertir a WebP
     Resizer.imageFileResizer(
       file,
-      500,
-      500,
+      410,
+      250,
       'WEBP',
-      400,
+      80,
       0,
       (resizedImage) => {
         setImgData(resizedImage)

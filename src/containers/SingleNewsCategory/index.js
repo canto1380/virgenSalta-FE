@@ -44,8 +44,8 @@ const SingleNewsCategory = () => {
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ deleted, pageSelected, limit])
-  
+  }, [deleted, pageSelected, limit])
+
   const dataCategoryActual = async () => {
     const paramsCategory = {
       limit,
@@ -74,7 +74,6 @@ const SingleNewsCategory = () => {
       <Layout />
       <BackdropSections title={TITLE_CATEGORY} img={singleNewsCategory} />
       <Container className='mt-3 pt-5'>
-
         {news ? (
           <Row className='mt-3 pb-5'>
             <div>
@@ -82,7 +81,13 @@ const SingleNewsCategory = () => {
             </div>
             {news.length > 0 ? (
               news?.map((not, i) => (
-                <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
+                <Col
+                  key={i}
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  className='mb-4 cont-row-categ'
+                >
                   <CardNewsPage data={not} pathUrl='noticias' />
                 </Col>
               ))

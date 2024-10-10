@@ -41,7 +41,13 @@ const Noticias = () => {
             </div>
             {newsData.length > 0 ? (
               newsData?.map((noti, i) => (
-                <Col key={i} xs={12} md={6} lg={4} className='mb-4'>
+                <Col
+                  key={i}
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  className='mb-4 cont-row-categ'
+                >
                   <CardNewsPage data={noti} pathUrl='noticias' />
                 </Col>
               ))
