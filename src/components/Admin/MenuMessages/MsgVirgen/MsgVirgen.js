@@ -119,6 +119,8 @@ const MenuMsgVirgen = ({ idTab }) => {
               setLoading={setLoading}
               dataRegisterEdit={dataRegisterEdit}
               data={messageVirgen?.allHistory}
+              routeAPI='messageVirgen'
+              routeRedirect='mensajesDeLaVirgen'
             />
           </Col>
         </Row>

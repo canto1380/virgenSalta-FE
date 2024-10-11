@@ -70,7 +70,7 @@ const SingleNewsCategory = () => {
   }
 
   return (
-    <div className='bg-gradient-1'>
+    <div className='bg-gradient-4'>
       <Layout />
       <BackdropSections title={TITLE_CATEGORY} img={singleNewsCategory} />
       <Container className='mt-3 pt-5'>

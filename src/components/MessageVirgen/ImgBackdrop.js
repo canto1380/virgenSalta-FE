@@ -15,10 +15,11 @@ const ImgBackdrop = ({ type }) => {
     const data = res?.allBackdrops[0]?.backdrop
     setimgBackdropMsg(data)
   }
+  console.log(imgBackdropMsg)
 
   return (
     <div className='pt-5 d-flex justify-content-center'>
-      {imgBackdropMsg !== '' && (
+      {imgBackdropMsg && imgBackdropMsg !== '' && (
         <div className='text-center container-backdrop-msg'>
           <img
             src={imgBackdropMsg}

@@ -52,7 +52,7 @@ const SingleNews = () => {
       <Container>
         <Row className='mx-0 pt-2 pb-5'>
           <Col xs={8} className='pt-5'>
-            <div>
+            <div className='d-flex'>
               <button className='btn-size-letter me-2' onClick={aumentarTexto}>
                 <FaFont
                   title='Aumentar tamaño fuente'

@@ -11,34 +11,35 @@
 .titleGen-msg-virgen {
   font-size: 22px;
   text-align: center;
+  color: black;
 }
 
 .text1-msg-virgen {
   font-size: 20px;
   text-align: center;
-  color: white;
+  color: black;
 }
 .text2-msg-virgen {
   font-size: 18px;
   text-align: center;
-  color: white;
+  color: black;
 }
 .text3-msg-virgen {
   font-size: 18px;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 .title-msg-virgen {
   font-size: 16px;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 .hor-line {
   margin-top: 0;
   margin-bottom: 5px;
-  color: white;
+  color: black;
 }
 .text-msg {
-  color: white;
+  color: black !important;
 }

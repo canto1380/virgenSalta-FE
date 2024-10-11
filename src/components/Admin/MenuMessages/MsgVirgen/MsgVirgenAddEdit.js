@@ -9,6 +9,8 @@ const MsgVirgenAddEdit = ({
   loading,
   setLoading,
   userToken,
+  routeAPI,
+  routeRedirect,
 }) => {
   const [message, setMessage] = useState()
 
@@ -170,13 +172,12 @@ const MsgVirgenAddEdit = ({
   const handleCrear = async (values) => {
     try {
       values.message = message
-      console.log(values)
-      const res = await api('POST', 'messageVirgen', values, userToken)
+      const res = await api('POST', routeAPI, values, userToken)
       if (res.status === 200) {
         setLoading(true)
         setTimeout(() => {
           setLoading(false)
-          window.location.href = '/admin/home/mensajesDeLaVirgen'
+          window.location.href = `/admin/home/${routeRedirect}`
         }, 2500)
       }
       if (res?.response?.status === 400) {
@@ -202,7 +203,7 @@ const MsgVirgenAddEdit = ({
         message === undefined ? dataRegisterEdit?.message : message
       const res = await api(
         'PATCH',
-        `messageVirgen/${dataRegisterEdit._id}`,
+        `${routeAPI}/${dataRegisterEdit._id}`,
         values,
         userToken
       )
@@ -211,7 +212,7 @@ const MsgVirgenAddEdit = ({
         setLoading(true)
         setTimeout(() => {
           setLoading(false)
-          window.location.href = '/admin/home/mensajesDeLaVirgen'
+          window.location.href = `/admin/home/${routeRedirect}`
         }, 2500)
       }
       if (res?.response?.status === 400) {

@@ -29,7 +29,7 @@ const SpecialDaysPage = () => {
 
   return (
     <>
-      <div className='bg-gradient-1'>
+      <div className='bg-gradient-4'>
         <Layout />
         <BackdropSections title='Jornadas' />
         <Container className='mt-3 pt-5'>

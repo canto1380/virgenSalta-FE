@@ -14,6 +14,8 @@ import ValidateToken from '../containers/Admin/ResetPass/FormValidateToken'
 import SpecialDaysPage from '../containers/SpecialDays'
 import SingleSpecialDays from '../containers/SingleSpecialDays'
 import MessageVirgen from '../containers/MessageVirgen'
+import MessageJesus from '../containers/MessageJesus'
+import MessageGeneral from '../containers/MessageGeneral'
 
 const PublicRoutes = ({ bandera, setBandera, token }) => {
   return (
@@ -33,6 +35,12 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
       <Route exact path='/jornadas' element={<SpecialDaysPage />} />
       <Route exact path='/jornadas/:title' element={<SingleSpecialDays />} />
       <Route exact path='/mensajes-de-la-virgen' element={<MessageVirgen />} />
+      <Route
+        exact
+        path='/mensajes-de-nuestro-señor-jesucristo'
+        element={<MessageJesus />}
+      />
+      <Route exact path='/mensaje-central' element={<MessageGeneral />} />
       <Route
         exact
         path='/admin/login'

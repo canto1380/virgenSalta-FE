@@ -25,7 +25,7 @@ const MessageVirgen = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='bg-gradient-2'>
+      <Container fluid className='bg-gradient-4'>
         <ImgBackdrop type={'MensajesDeLaVirgen'} />
         <div className='container'>
           <Row className='mx-5 pt-4 pb-5'>
@@ -38,7 +38,13 @@ const MessageVirgen = () => {
             </Col>
           </Row>
         </div>
-        <MsgVirgen msgVirgen={msgVirgen} setYear={setYear} />
+        <MsgVirgen
+          msg={msgVirgen}
+          setYear={setYear}
+          text1='Mensajes dados por La Santísima Virgen'
+          text2='Salta - Argentina'
+          filter={true}
+        />
       </Container>
       <LayoutFoot />
     </>

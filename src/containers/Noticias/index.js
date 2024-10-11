@@ -30,7 +30,7 @@ const Noticias = () => {
   }
 
   return (
-    <div className='bg-gradient-1'>
+    <div className='bg-gradient-4'>
       <Layout />
       <BackdropSections title='Noticias' />
       <Container className='mt-3 pt-3'>
