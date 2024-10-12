@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
 import { uploadFile, uploadFileVideo } from '../../../firebase/config'
 import { api } from '../../../utils/api'
+import './menuCarousel.css'
 
 const CarouselAddEdit = ({
   userToken,
@@ -17,7 +18,8 @@ const CarouselAddEdit = ({
   const [serverError, setServerError] = useState(false)
 
   const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
-  const URL_FIREBASE_IMG = estado !== null ? 'videos-carousel-dev' : 'videos-carousel'
+  const URL_FIREBASE_IMG =
+    estado !== null ? 'videos-carousel-dev' : 'videos-carousel'
 
   const handleSubmit = async (values) => {
     try {
@@ -71,7 +73,7 @@ const CarouselAddEdit = ({
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            window.location.href = '/admin/home/jornadas/carousel'
+            window.location.href = '/admin/home/carousel'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -143,41 +145,43 @@ const CarouselAddEdit = ({
           </p>
         </div>
         <div className='d-flex'>
-          {preview && (
-            <div className='container-preview'>
+          {preview ? (
+            <div className='container-preview-video'>
               <video
                 src={preview}
                 id='img-preview-news'
-                className='preview-upload-video me-4  border border-3'
+                className='preview-upload-video me-4 border border-3'
                 alt='preview'
                 controls
               />
-              <div className='btn btn-delete-img'>
+              <div className='btn btn-delete-video'>
                 <div
                   onClick={() => deleteFile(preview)}
-                  className='btn-contianer-delete d-flex justify-content-center align-items-center'
+                  className='btn-contianer-delete-video d-flex justify-content-center align-items-center'
                 >
                   <p className='pb-2 mb-2'>x</p>
                 </div>
               </div>
             </div>
+          ) : (
             // <img src={preview} className="preview-upload me-4" alt="preview" />
+            <>
+              <input
+                className='btnUploadVideo'
+                type='file'
+                accept='video/*'
+                name=''
+                id='id-btn-upload'
+                onChange={(e) => setImgData(e.target.files[0])}
+              />
+              <label
+                htmlFor='id-btn-upload'
+                className='d-flex justify-content-center align-items-center btnUploadVideo'
+              >
+                Agregar archivo
+              </label>
+            </>
           )}
-
-          <input
-            className='btnUploadVideo'
-            type='file'
-            accept='video/*'
-            name=''
-            id='id-btn-upload'
-            onChange={(e) => setImgData(e.target.files[0])}
-          />
-          <label
-            htmlFor='id-btn-upload'
-            className='d-flex justify-content-center align-items-center btnUploadVideo'
-          >
-            Agregar archivo
-          </label>
         </div>
         <Form.Item
           className='text-end'

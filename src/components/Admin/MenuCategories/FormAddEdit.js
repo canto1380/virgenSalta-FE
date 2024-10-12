@@ -133,7 +133,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl)
   }, [imgData])
-  
+
   useEffect(() => {
     if (!dataRegisterEdit) return
     setPreview(dataRegisterEdit.backdrop)
@@ -168,7 +168,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           </p>
         </div>
         <div className='d-flex'>
-          {preview && (
+          {preview ? (
             <div className='container-preview'>
               <img
                 src={preview}
@@ -185,24 +185,26 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
                 </div>
               </div>
             </div>
+          ) : (
             // <img src={preview} className="preview-upload me-4" alt="preview" />
+            <>
+              <input
+                className='btnUpload'
+                type='file'
+                name=''
+                id='id-btn-upload'
+                disabled={uploading ? true : false}
+                onChange={handleImageChange}
+              />
+              <label
+                htmlFor='id-btn-upload'
+                className='d-flex text-center align-items-center btnUpload'
+                disabled={uploading ? true : false}
+              >
+                Agregar imagen
+              </label>
+            </>
           )}
-
-          <input
-            className='btnUpload'
-            type='file'
-            name=''
-            id='id-btn-upload'
-            disabled={uploading ? true : false}
-            onChange={handleImageChange}
-          />
-          <label
-            htmlFor='id-btn-upload'
-            className='d-flex text-center align-items-center btnUpload'
-            disabled={uploading ? true : false}
-          >
-            Agregar imagen
-          </label>
         </div>
         <Form.Item
           className='text-end'

@@ -178,7 +178,6 @@
   object-fit: cover;
 }
 .preview-upload-backdrop {
-  border: 3px solid rgb(65, 93, 132);
   width: 168px;
   height: 168px;
 }

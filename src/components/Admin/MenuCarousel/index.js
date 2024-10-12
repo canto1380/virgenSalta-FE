@@ -39,7 +39,6 @@ const MenuCarousel = () => {
     setDataRegisterEdit(valueEdit)
     setFormEdit(!formEdit)
   }
-  console.log(carouselData)
   return (
     <Container fluid>
       <Row>

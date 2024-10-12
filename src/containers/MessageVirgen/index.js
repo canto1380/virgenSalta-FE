@@ -18,6 +18,8 @@ const MessageVirgen = () => {
   const getData = async () => {
     const params = {
       year,
+      limit: 100000,
+      deleted: false
     }
     const res = await getMessageVirgen(params)
     setMsgVirgen(res?.allMessage)

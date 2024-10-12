@@ -1,0 +1,30 @@
+.container-preview-video {
+  position: relative;
+  width: 250px;
+  height: 142px;
+}
+.preview-upload-video {
+  width: 250px;
+  height: 142px;
+}
+.btn-contianer-delete-video {
+  position: relative;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.btn-delete-video {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 35px;
+  height: 35px;
+  color: black !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-delete-video:hover {
+  background-color: rgba(196, 0, 0, 0.575) !important;
+  color: white !important;
+}

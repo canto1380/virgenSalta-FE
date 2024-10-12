@@ -27,6 +27,11 @@ const Cover = () => {
         <div className='d-flex justify-content-center'>
           <Spinn type='data' />
         </div>
+        // <>
+        //   <video width='100%' autoPlay muted poster={FondoGris} loop>
+        //     <source src={carousel?.file} type='video/mp4' />
+        //   </video>
+        // </>
       )}
     </>
   )

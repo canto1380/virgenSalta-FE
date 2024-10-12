@@ -15,7 +15,7 @@ const MenuMsgJesucristo = ({ idTab }) => {
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
   const [loading, setLoading] = useState(false)
   const [messageJesus, setMessageJesus] = useState([])
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(12)
   const [deleted, setDeleted] = useState(undefined)
   const [band, setBand] = useState(false)
   const [pageSelected, setPageSelected] = useState(1)
@@ -34,7 +34,7 @@ const MenuMsgJesucristo = ({ idTab }) => {
     const params = {
       deleted,
       search,
-      page: 1,
+      page: pageSelected,
       limit,
       year,
     }

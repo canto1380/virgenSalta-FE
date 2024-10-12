@@ -38,10 +38,11 @@ const NavbarPrimary = ({ home }) => {
     const dataItemNavCategory = await getItemNavCategory(params1)
     setItemNavCategory(dataItemNavCategory.allItemNavCategory)
   }
+  console.log(imgLogoNav)
   return (
     <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
       <Container fluid>
-        {imgLogoNav ? (
+        {imgLogoNav && imgLogoNav.length > 0 ? (
           <Navbar.Brand href='/home'>
             <Image
               fluid

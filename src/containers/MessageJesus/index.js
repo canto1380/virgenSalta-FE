@@ -18,6 +18,8 @@ const MessageJesus = () => {
   const getData = async () => {
     const params = {
       year,
+      limit: 100000,
+      deleted: false,
     }
     const res = await getMessageJesus(params)
     setMsgJesus(res?.allMessage)

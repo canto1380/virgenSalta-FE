@@ -31,6 +31,7 @@ const NewCarousel = ({ data, type }) => {
         slidesPerView={Math.min(data?.length, 3)}
         grabCursor={true}
         modules={[FreeMode, Navigation]}
+        centeredSlides={data?.length < 3 ? true : false}
         // navigation={true}
         className={`mySwipper`}
         breakpoints={{
@@ -43,13 +44,13 @@ const NewCarousel = ({ data, type }) => {
             spaceBetween: 40,
           },
           992: {
-            slidesPerView: 3,
+            slidesPerView: Math.min(data?.length, 3),
             spaceBetween: 40,
           },
         }}
       >
         {data?.map((d, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} style={{ maxWidth: '33.33%' }}>
             <GenericCard
               data={d}
               photos1={d.photos ? d?.photos[0] : d?.photo}
