@@ -18,10 +18,14 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
     // Redimensionar y convertir a WebP
     Resizer.imageFileResizer(
       file,
-      500,
-      500,
+      title === 'Noticias' || title === 'Categorias' || title === 'Jornadas'
+        ? 500
+        : 2500,
+      title === 'Noticias' || title === 'Categorias' || title === 'Jornadas'
+        ? 450
+        : 780,
       'WEBP',
-      80,
+      90,
       0,
       (resizedImage) => {
         setImgData(resizedImage)
@@ -156,11 +160,25 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
         <div className='menuContainer mt-0'>
           <div>
             {preview && (
-              <div className='container-preview'>
+              <div
+                className={
+                  title === 'Noticias' ||
+                  title === 'Categorias' ||
+                  title === 'Jornadas'
+                    ? 'container-preview'
+                    : 'container-preview-msg'
+                }
+              >
                 <img
                   src={preview}
                   id='img-preview-news'
-                  className='preview-upload-backdrop'
+                  className={
+                    title === 'Noticias' ||
+                    title === 'Categorias' ||
+                    title === 'Jornadas'
+                      ? 'preview-upload-backdrop'
+                      : 'preview-upload-backdrop-msg'
+                  }
                   alt='preview'
                 />
                 <div className='btn btn-delete-img'>

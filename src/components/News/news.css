@@ -42,7 +42,7 @@
 .imgFondo {
   background-size: cover;
   background-position: center;
-  object-fit: fill;
+  object-fit: cover;
   width: 100wh;
   height: 30vw;
 }

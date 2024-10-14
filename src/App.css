@@ -178,8 +178,12 @@
   object-fit: cover;
 }
 .preview-upload-backdrop {
-  width: 168px;
-  height: 168px;
+  width: 250px;
+  height: 78px;
+}
+.preview-upload-backdrop-msg {
+  width: 250px;
+  height: 225px;
 }
 .preview-upload-video {
   width: 150px;
@@ -197,6 +201,12 @@
   position: relative;
   width: 168px;
   height: 100px;
+}
+.container-preview-msg {
+  margin-right: 10px;
+  position: relative;
+  width: 250px;
+  height: 225px;
 }
 .btn-delete-img {
   position: absolute;

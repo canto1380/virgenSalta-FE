@@ -32,7 +32,7 @@ const MessageJesus = () => {
         <MsgVirgen
           msg={msgJesus}
           setYear={setYear}
-          text1='Mensaje Central'
+          text1='Mensaje de Nuestro Señor Jesucristo'
           text2='Salta - Argentina'
           filter={true}
         />
