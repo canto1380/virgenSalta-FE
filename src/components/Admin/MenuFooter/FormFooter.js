@@ -58,6 +58,8 @@ const FormFooter = ({
     }
   }
   const handleUpdated = async (values) => {
+    console.log(values)
+    console.log(switchWindow)
     values.newWindows = switchWindow
     const res = await api(
       'PATCH',
@@ -189,7 +191,7 @@ const FormFooter = ({
           <Select
             showSearch
             onChange={changeSelect}
-            disabled={dataRegisterEdit === null ? false : true}
+            // disabled={dataRegisterEdit === null ? false : true}
             style={{
               width: '100%',
             }}
@@ -250,7 +252,10 @@ const FormFooter = ({
           valuePropName='checked'
           name='newWindows'
         >
-          <Switch onChange={handleSwitchWindow} />
+          <Switch
+            onChange={handleSwitchWindow}
+            checked={dataRegisterEdit?.newWindows}
+          />
         </Form.Item>
         <Form.Item
           className='text-end'
