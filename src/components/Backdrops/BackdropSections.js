@@ -4,7 +4,6 @@ import '../News/news.css'
 import { getBackdrop } from '../../utils/queryAPI/backdrop'
 
 const BackdropSections = ({ title, img }) => {
-  console.log(title)
   const [imageBackdropDefault, setImageBackdropDefault] = useState('')
 
   useEffect(() => {
@@ -15,8 +14,8 @@ const BackdropSections = ({ title, img }) => {
 
   const getDataImg = async () => {
     const params = {
-      search: title
-        .toLowerCase()
+      search: img
+        // .toLowerCase()
         .normalize('NFD') // Descompone los caracteres con acento
         .replace(/[\u0300-\u036f]/g, ''),
     }
@@ -27,11 +26,15 @@ const BackdropSections = ({ title, img }) => {
 
   return (
     <div>
-      {img !== '' ? (
+      {imageBackdropDefault !== '' ? (
         <Container
           fluid
           style={{
-            backgroundImage: `url(${img ? img : imageBackdropDefault})`,
+            backgroundImage: `url(${
+              imageBackdropDefault
+                ? imageBackdropDefault
+                : 'images/imgDefecto.webp'
+            })`,
           }}
           className='imgFondo'
         >

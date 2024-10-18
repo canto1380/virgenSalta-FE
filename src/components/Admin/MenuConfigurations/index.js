@@ -35,7 +35,6 @@ const MenuConfigurations = () => {
   const resetValuesEdit = (valuesEdit) => {
     setDataRegisterEdit(valuesEdit)
     setFormEdit(!formEdit)
-    console.log(pageSelected)
   }
 
   return (
@@ -55,6 +54,7 @@ const MenuConfigurations = () => {
               deleted={deleted}
               setDeleted={setDeleted}
               setPageSelected={setPageSelected}
+              pageSelected={pageSelected}
             />
             <HeaderList
               title='Configuraciones'

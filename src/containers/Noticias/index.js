@@ -32,7 +32,7 @@ const Noticias = () => {
   return (
     <div className='bg-gradient-4'>
       <Layout />
-      <BackdropSections title='Noticias' />
+      <BackdropSections title='Noticias' img={'Noticias'}/>
       <Container className='mt-3 pt-3'>
         {newsData ? (
           <Row className='mt-3 pb-5'>

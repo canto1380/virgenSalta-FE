@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getNewsCategory } from '../../utils/queryAPI/newsCategory'
 import Layout from '../../components/Layout/Layout'
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
-import MoreNewsCarousel from '../../components/Carousel/MoreNewsCarousel'
+// import MoreNewsCarousel from '../../components/Carousel/MoreNewsCarousel'
 import { getNews } from '../../utils/queryAPI/news'
 import CardNewsPage from '../../components/News/NewsPage/CardNewsPage'
 import PaginationAdmin from '../../components/Admin/Pagination'
@@ -12,10 +12,10 @@ import BackdropSections from '../../components/Backdrops/BackdropSections'
 
 const SingleNewsCategory = () => {
   const { nameCategory } = useParams()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
-  const [allNewsCategory, setAllNewsCategory] = useState([])
-  const [singleNewsCategory, setSingleNewsCategory] = useState()
+  // const [allNewsCategory, setAllNewsCategory] = useState([])
+  // const [singleNewsCategory, setSingleNewsCategory] = useState()
   const [pageSelected, setPageSelected] = useState(1)
   const [news, setNews] = useState(null)
   const [limit, setLimit] = useState(12)
@@ -23,24 +23,27 @@ const SingleNewsCategory = () => {
 
   let deleted = false
   const TITLE_CATEGORY = nameCategory.replace(/-/g, ' ')
-  useEffect(() => {
-    dataNewsCategory()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
-  const dataNewsCategory = async () => {
-    const params = { limit: 1000, deleted: false }
-    const data = await getNewsCategory(params)
-    setAllNewsCategory(data.allNewsCategory)
-    const newsCategory = data.allNewsCategory.filter(
-      (d) => d.nameCategory.replace(/ /g, '-') === nameCategory
-    )
-    if (newsCategory.length === 0) {
-      navigate('/home')
-    } else {
-      setSingleNewsCategory(newsCategory[0]?.backdrop)
-    }
-  }
+  /** MODULO QUE BUSCA Y TRAE LA IMAGEN DE LA CATEGORIA QUE ESTAMOS DESDE EL CLIENTE **/
+  // useEffect(() => {
+  //   dataNewsCategory()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
+
+  // const dataNewsCategory = async () => {
+  //   const params = { limit: 1000, deleted: false }
+  //   const data = await getNewsCategory(params)
+  //   setAllNewsCategory(data.allNewsCategory)
+  //   const newsCategory = data.allNewsCategory.filter(
+  //     (d) => d.nameCategory.replace(/ /g, '-') === nameCategory
+  //   )
+  //   if (newsCategory.length === 0) {
+  //     navigate('/home')
+  //   } else {
+  //     setSingleNewsCategory(newsCategory[0]?.backdrop)
+  //   }
+  // }
+  /************************************************************************************/
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +75,7 @@ const SingleNewsCategory = () => {
   return (
     <div className='bg-gradient-4'>
       <Layout />
-      <BackdropSections title={TITLE_CATEGORY} img={singleNewsCategory} />
+      <BackdropSections title={TITLE_CATEGORY} img={'Categorias'} />
       <Container className='mt-3 pt-5'>
         {news ? (
           <Row className='mt-3 pb-5'>
@@ -115,13 +118,13 @@ const SingleNewsCategory = () => {
         <hr />
       </Container>
       <Container fluid>
-        <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
+        {/* <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
           <MoreNewsCarousel
             data={allNewsCategory}
             typeFlag='newsCategory'
             title='Secciones recientes'
           />
-        </Row>
+        </Row> */}
       </Container>
       <LayoutFoot />
     </div>

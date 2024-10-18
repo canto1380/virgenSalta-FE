@@ -133,6 +133,9 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 26px;
 }
+.bg-gradient-0 {
+  background-color: white;
+}
 .bg-gradient-1 {
   background: linear-gradient(to top, #1d333ccb, 70%, #4b98d3);
 }
@@ -199,8 +202,8 @@
 .container-preview {
   margin-right: 10px;
   position: relative;
-  width: 168px;
-  height: 100px;
+  width: 250px;
+  height: 78px;
 }
 .container-preview-msg {
   margin-right: 10px;

@@ -19,7 +19,7 @@ const MessageGeneral = () => {
     const params = {
       year,
       limit: 100000,
-      deleted: false
+      deleted: false,
     }
     const res = await getMessageGeneral(params)
     setMsgGeneral(res?.allMessage)
@@ -27,7 +27,7 @@ const MessageGeneral = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='bg-gradient-4'>
+      <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesCentral'} />
         <MsgVirgen
           msg={msgGeneral}

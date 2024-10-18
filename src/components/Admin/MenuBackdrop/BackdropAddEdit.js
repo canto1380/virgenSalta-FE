@@ -19,13 +19,13 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
     Resizer.imageFileResizer(
       file,
       title === 'Noticias' || title === 'Categorias' || title === 'Jornadas'
-        ? 500
-        : 2500,
+        ? 2500
+        : 500,
       title === 'Noticias' || title === 'Categorias' || title === 'Jornadas'
-        ? 450
-        : 780,
+        ? 780
+        : 450,
       'WEBP',
-      90,
+      80,
       0,
       (resizedImage) => {
         setImgData(resizedImage)
@@ -134,6 +134,7 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
       setPreview(data?.allBackdrops[0]?.backdrop)
     }
   }, [data])
+  console.log(title)
   return (
     <>
       <Form

@@ -27,7 +27,7 @@ const MessageVirgen = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='bg-gradient-4'>
+      <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesDeLaVirgen'} />
         <div className='container'>
           <Row className='mx-5 pt-4 pb-5'>

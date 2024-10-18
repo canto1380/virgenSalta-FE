@@ -62,6 +62,10 @@ const MenuCategories = ({ idTab }) => {
               idTab={idTab}
               bandSelect={true}
             />
+            <p className='px-5 text-important mb-0'>
+              <span className='text-danger fw-bolder'>*</span>Formato fotos:
+              Horizontal 1250x390
+            </p>
             <HeaderList
               title='Listado de Categorías'
               formAdd={formAdd}

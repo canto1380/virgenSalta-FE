@@ -27,7 +27,7 @@ const MessageJesus = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='bg-gradient-4'>
+      <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesDeJesucristo'} />
         <MsgVirgen
           msg={msgJesus}

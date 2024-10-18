@@ -31,7 +31,7 @@ const SpecialDaysPage = () => {
     <>
       <div className='bg-gradient-4'>
         <Layout />
-        <BackdropSections title='Jornadas' />
+        <BackdropSections title='Jornadas' img={'Jornadas'} />
         <Container className='mt-3 pt-5'>
           <NewsFilter
             typeFlag='jornadas'

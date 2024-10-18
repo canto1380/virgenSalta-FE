@@ -28,7 +28,7 @@ const Categories = () => {
   return (
     <div className='bg-gradient-4'>
       <Layout />
-      <BackdropSections title='Categorías' />
+      <BackdropSections title='Categorías' img={'Categorias'} />
       <Container className='mt-3 pt-5'>
         {newsCategoryData ? (
           <Row className='mt-3 pb-5'>
