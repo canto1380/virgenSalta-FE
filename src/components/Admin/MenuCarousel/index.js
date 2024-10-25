@@ -72,7 +72,7 @@ const MenuCarousel = () => {
             </p>
             <p className='px-5 text-important'>
               <span className='text-danger fw-bolder'>*</span>Calidad del video:
-              mp4
+              WEBM
             </p>
             <ListElements
               data={carouselData?.allCarousel}
@@ -110,7 +110,7 @@ const MenuCarousel = () => {
             </p>
             <p className='px-5 text-important'>
               <span className='text-danger fw-bolder'>*</span>Calidad del video:
-              mp4
+              WEBM
             </p>
             <CarouselAddEdit
               userToken={userToken}

@@ -58,8 +58,6 @@ const FormFooter = ({
     }
   }
   const handleUpdated = async (values) => {
-    console.log(values)
-    console.log(switchWindow)
     values.newWindows = switchWindow
     const res = await api(
       'PATCH',
