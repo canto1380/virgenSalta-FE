@@ -11,7 +11,6 @@ const BodyNews = ({ data, photos, fontSize }) => {
   }, [data])
 
   useEffect(() => {
-    console.log(fontSize)
     if (bodyRef.current) {
       bodyRef.current.style.fontSize = `${fontSize}px`
       const paragraphs = bodyRef.current.querySelectorAll('p')

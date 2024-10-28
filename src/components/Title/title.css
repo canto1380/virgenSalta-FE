@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'NovaQuinta';
+  src: url('/public/fonts/NOVAQUINTA_PERSONAL_USE_ONLY.OTF') format('opentype');
+  font-display: swap;
+}
 .container-title {
   background-color: #f8f9fa;
 }
@@ -9,7 +14,7 @@
   margin-bottom: 5px;
 }
 .phrase {
-  font-family: 'Mr Dafoe', cursive;
+  font-family: 'NovaQuinta', cursive;
   font-size: 42px;
   font-weight: 500;
   margin-bottom: 0px;

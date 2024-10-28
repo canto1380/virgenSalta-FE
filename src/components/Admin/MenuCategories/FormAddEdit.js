@@ -169,7 +169,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         </div>
         <div className='d-flex'>
           {preview ? (
-            <div className='container-preview'>
+            <div className='container-preview-global'>
               <img
                 src={preview}
                 id='img-preview-news'
@@ -186,7 +186,6 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
               </div>
             </div>
           ) : (
-            // <img src={preview} className="preview-upload me-4" alt="preview" />
             <>
               <input
                 className='btnUpload'

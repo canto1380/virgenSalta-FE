@@ -1,10 +1,11 @@
 .card-container {
-  /* width: 100% !important; */
+  width: 100% !important;
   height: 229px !important;
   border-radius: 15px !important;
 }
 .card-img {
   height: 100%;
+  /* width: 100%; */
   border-radius: 15px !important;
   background-size: cover !important;
   background-position: center;
@@ -54,7 +55,7 @@
   filter: saturate(3);
 }
 .title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Classica', serif;
   font-size: 7.5vw;
   color: white;
   font-weight: 500;
@@ -63,10 +64,11 @@
 .cardNewsPage {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 3px !important;
+  border-radius: 15px !important;
 }
 .cardNewsPage:hover {
-  border: 2px solid rgb(221, 221, 221) !important;
+  transform: scale(0.9);
+  border-radius: 15px !important;
 }
 .cardNewPage-body {
   display: flex;
@@ -85,6 +87,15 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300 !important;
 }
+.decoration-link {
+  text-decoration: none !important;
+  color: black;
+}
+.decoration-link:hover {
+  text-decoration: none !important;
+  color: black;
+}
+
 .cardNewsPage-subtitle {
   color: rgb(97, 97, 97) !important;
 }

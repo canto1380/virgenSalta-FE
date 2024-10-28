@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import '../news.css'
 import fotoDefault from '../../../images/logo-corazon.webp'
 
@@ -13,21 +13,21 @@ const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
   return (
     <>
       <Card className='cardNewsPage'>
-        <Card.Img
-          variant='top'
-          src={data.photos.length > 0 ? data.photos[0] : fotoDefault}
-          className='cardNewsPage-img'
-        />
-        <Card.Body className='cardNewPage-body'>
-          <Card.Title className='cardNewsPage-title'>{title}</Card.Title>
+        <a href={`/${pathUrl}/${titleParams}`} className='decoration-link'>
+          <Card.Img
+            variant='top'
+            src={data.photos.length > 0 ? data.photos[0] : fotoDefault}
+            className='cardNewsPage-img'
+          />
+          <Card.Body className='cardNewPage-body'>
+            <Card.Title className='cardNewsPage-title'>{title}</Card.Title>
 
-          <Card.Text>{data?.subtitle}</Card.Text>
-          <a href={`/${pathUrl}/${titleParams}`}>
-            <Button variant='primary' className='section-btn'>
+            <Card.Text>{data?.subtitle}</Card.Text>
+            {/* <Button variant='primary' className='section-btn'>
               Leer Más
-            </Button>
-          </a>
-        </Card.Body>
+            </Button> */}
+          </Card.Body>
+        </a>
       </Card>
     </>
   )

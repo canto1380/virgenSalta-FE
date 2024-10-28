@@ -31,7 +31,7 @@ const NewCarousel = ({ data, type }) => {
         slidesPerView={Math.min(data?.length, 3)}
         grabCursor={true}
         modules={[FreeMode, Navigation]}
-        centeredSlides={data?.length < 3 ? true : false}
+        // centeredSlides={data?.length < 3 ? true : false}
         // navigation={true}
         className={`mySwipper`}
         breakpoints={{
@@ -40,7 +40,8 @@ const NewCarousel = ({ data, type }) => {
             spaceBetween: 40,
           },
           768: {
-            slidesPerView: 2,
+            // slidesPerView: 2,
+            slidesPerView: Math.min(data?.length, 2),
             spaceBetween: 40,
           },
           992: {

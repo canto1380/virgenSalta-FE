@@ -20,12 +20,10 @@ const SingleNews = () => {
 
   const aumentarTexto = () => {
     setFontSize((prevSize) => prevSize + 2)
-    // console.log(`aumenta a ${fontSize}`)
   }
 
   const reducirTexto = () => {
     setFontSize((prevSize) => (prevSize > 10 ? prevSize - 2 : prevSize)) // Evita que sea demasiado pequeño
-    // console.log(`disminuye a ${fontSize}`)
   }
 
   useEffect(() => {

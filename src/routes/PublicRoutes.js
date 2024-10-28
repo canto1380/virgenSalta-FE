@@ -21,6 +21,7 @@ const PublicRoutes = ({ bandera, setBandera, token }) => {
   return (
     <Routes>
       <Route exact path='/home' element={<Home />} />
+      {/* <Route exact path='/admin/home/orden-noticias' element={<OrderNewsContainer />} /> */}
       <Route exact path='/noticias' element={<Noticias />} />
       <Route exact path='/noticias/:title' element={<SingleNews />} />
       <Route exact path='/categorias' element={<Categories />} />

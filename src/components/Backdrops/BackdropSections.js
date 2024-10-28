@@ -40,7 +40,7 @@ const BackdropSections = ({ title, img }) => {
         >
           <Row className='backdropNew'>
             <Col>
-              <p className='title m-0 text-center'>{title}</p>
+              <p className='title m-0 text-center'>{title.toUpperCase()}</p>
             </Col>
           </Row>
         </Container>

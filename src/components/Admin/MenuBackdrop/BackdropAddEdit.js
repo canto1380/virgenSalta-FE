@@ -134,7 +134,6 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
       setPreview(data?.allBackdrops[0]?.backdrop)
     }
   }, [data])
-  console.log(title)
   return (
     <>
       <Form

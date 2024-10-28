@@ -280,16 +280,7 @@ const SpecialDaysAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción
           </p>
         </div>
-        {/* <CKEditor
-          disabled={uploading ? true : false}
-          editor={ClassicEditor}
-          data={dataRegisterEdit ? dataRegisterEdit.description : ''}
-          onReady={(editor) => {}}
-          onChange={(event, editor) => {
-            const data = editor.getData()
-            setDescription(data)
-          }}
-        /> */}
+
         <App
           setDescription={setDescription}
           data={dataRegisterEdit ? dataRegisterEdit.description : ''}
@@ -303,7 +294,7 @@ const SpecialDaysAddEdit = ({
         <div className='d-flex mb-3'>
           {preview &&
             Object.values(preview).map((ob, i) => (
-              <div className='container-preview' key={i}>
+              <div className='container-preview-global' key={i}>
                 <img
                   src={ob}
                   id='img-preview-news'

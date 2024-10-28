@@ -15,6 +15,7 @@ import BackdropSection from '../containers/Admin/BackropSection.js'
 import MessageVirgen from '../containers/MessageVirgen/index.js'
 import MessageJesus from '../containers/MessageJesus/index.js'
 import MessageGeneral from '../containers/MessageGeneral/index.js'
+import OrderNewsContainer from '../containers/Admin/OrderNews/index.js'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -39,17 +40,18 @@ const PrivateRoutes = ({ token }) => {
         path='/mensajes-de-nuestro-señor-jesucristo'
         element={<MessageJesus />}
       />
-      <Route
-        exact
-        path='/mensaje-central'
-        element={<MessageGeneral />}
-      />
+      <Route exact path='/mensaje-central' element={<MessageGeneral />} />
 
       <Route exact path='/admin/home/:idTab' element={<MenuAdmin />} />
       <Route
         exact
         path='/admin/home/:idTab/backdrop'
         element={<BackdropSection />}
+      />
+      <Route
+        exact
+        path='/admin/home/orden-noticias'
+        element={<OrderNewsContainer />}
       />
 
       {token.length && window?.location?.pathname === '/admin/login' ? (

@@ -12,6 +12,7 @@ const NewsAddEdit = ({
   loading,
   setLoading,
   userToken,
+  title,
 }) => {
   const [description, setDescription] = useState()
   const [imgData, setImgData] = useState([])
@@ -287,7 +288,6 @@ const NewsAddEdit = ({
       }
     } catch (error) {
       setServerError(error)
-      console.log(error)
     }
   }
   const onFinishFailed = (errorInfo) => {
@@ -396,17 +396,7 @@ const NewsAddEdit = ({
             <span className='text-danger fw-bolder'>*</span>Descripción
           </p>
         </div>
-        {/* <CKEditor
-          disabled={uploading ? true : false}
-          editor={ClassicEditor}
-          config={editorConfiguration}
-          data={dataRegisterEdit ? dataRegisterEdit.description : ''}
-          onReady={handleEditorReady}
-          onChange={(event, editor) => {
-            const data = editor.getData()
-            setDescription(data)
-          }}
-        /> */}
+
         <App
           setDescription={setDescription}
           handleEditorReady={handleEditorReady}
@@ -419,7 +409,7 @@ const NewsAddEdit = ({
         <div className='d-flex mb-3'>
           {preview &&
             Object.values(preview).map((ob, i) => (
-              <div className='container-preview' key={i}>
+              <div className='container-preview-global' key={i}>
                 <img
                   src={ob}
                   id='img-preview-news'

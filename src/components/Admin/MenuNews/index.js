@@ -10,6 +10,7 @@ import { User } from '../../../context/userProvider'
 import { getNewsCategory } from '../../../utils/queryAPI/newsCategory'
 import NewsAddEdit from './NewsAddEdit'
 import HeaderBackdrop from '../HeaderBackdrop'
+import OrderNews from './OrderNews'
 
 const MenuNews = ({ idTab }) => {
   const [search, setSearch] = useState('')
@@ -79,6 +80,9 @@ const MenuNews = ({ idTab }) => {
               data={newsCategoryData?.allNewsCategory}
               setPageSelected={setPageSelected}
             />
+            <OrderNews
+              title={'Orden noticias visibles'}
+            />
             <HeaderBackdrop
               title={'Foto Portada'}
               idTab={idTab}
@@ -133,10 +137,7 @@ const MenuNews = ({ idTab }) => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            {/* <p className='px-5 text-important mb-0'>
-              <span className='text-danger fw-bolder'>*</span>Formato fotos: Cuadrada
-              1:1
-            </p> */}
+
             <p className='px-5 text-important mb-0'>
               <span className='text-danger fw-bolder'>*</span>Formato fotos:
               Horizontal 410x250
@@ -151,6 +152,7 @@ const MenuNews = ({ idTab }) => {
               setLoading={setLoading}
               dataRegisterEdit={dataRegisterEdit}
               data={newsCategoryData?.allNewsCategory}
+              title={'Noticias'}
             />
           </Col>
         </Row>
