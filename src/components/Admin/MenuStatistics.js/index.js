@@ -35,6 +35,7 @@ const MenuStatistics = () => {
   const resetValuesEdit = (valuesEdit) => {
     setDataRegisterEdit(valuesEdit)
     setFormEdit(!formEdit)
+    console.log(pageSelected)
   }
 
   return (

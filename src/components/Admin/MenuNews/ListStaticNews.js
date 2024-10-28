@@ -43,7 +43,6 @@ const ListStaticNews = ({ data, userToken, routeAPI, band, setBand }) => {
           values,
           userToken
         )
-        console.log(res)
         if (res.status === 200) {
           setLoading(true)
           setTimeout(() => {
@@ -58,6 +57,9 @@ const ListStaticNews = ({ data, userToken, routeAPI, band, setBand }) => {
           setTimeout(() => {
             setDataError(false)
           }, 3000)
+        }
+        if (res.response.status === 401) {
+          setModalUnauthorized(true)
         }
       })
     } catch (error) {
