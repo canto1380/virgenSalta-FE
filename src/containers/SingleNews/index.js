@@ -48,9 +48,9 @@ const SingleNews = () => {
   return (
     <>
       <Layout />
-      <Container>
+      <Container fluid className='container-single-news border border-5'>
         <Row className='mx-0 pt-2 pb-5'>
-          <Col xs={8} className='pt-5'>
+          <Col xs={8} className='pt-5 single-news-col1'>
             <div className='d-flex'>
               <button className='btn-size-letter me-2' onClick={aumentarTexto}>
                 <FaFont
@@ -74,7 +74,7 @@ const SingleNews = () => {
             />
           </Col>
 
-          <Col xs={4} className='py-5 px-5'>
+          <Col xs={4} className='py-5 ps-5 pe-0 container-more-news'>
             <p className='mb-0 mx-3 single-news-subtitle'>Más Noticias</p>
             <hr className='mt-1 mx-3' />
             <CardsMoreContainer moreNews={moreNews} />

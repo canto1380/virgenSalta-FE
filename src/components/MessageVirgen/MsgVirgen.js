@@ -17,6 +17,7 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
   // Función para detectar la posición del scroll
   const handleScroll = () => {
     const scrollPosition = window.scrollY
+    console.log(scrollPosition, isVisible)
     // Ajusta el valor '200' según cuándo quieras que aparezca el botón
     if (scrollPosition > 200) {
       setIsVisible(true)
@@ -34,6 +35,7 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+  console.log(isVisible)
   return (
     <div className='pb-5'>
       <div className='px-5'>

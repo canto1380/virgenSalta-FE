@@ -106,6 +106,10 @@
 .cardNewsPage-icon {
   font-size: 17px;
 }
+.container-single-news {
+  width: 80% !important;
+  /* margin: 0px !important; */
+}
 
 @media (max-width: 1399px) {
   .card-container {
@@ -136,6 +140,10 @@
     width: 334px !important;
     height: 202px !important;
   }
+  .container-single-news {
+    width: 100% !important;
+    margin: 0px !important;
+  }
 }
 @media (max-width: 767px) {
   .imgFondo {
@@ -148,6 +156,12 @@
   .cardNewsPage-img {
     width: 100% !important;
     height: 310px !important;
+  }
+  .container-more-news {
+    visibility: hidden;
+  }
+  .single-news-col1 {
+    width: 100% !important;
   }
 }
 @media (max-width: 575px) {
