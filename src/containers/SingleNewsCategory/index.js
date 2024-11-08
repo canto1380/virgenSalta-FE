@@ -9,6 +9,7 @@ import { getNews } from '../../utils/queryAPI/news'
 import CardNewsPage from '../../components/News/NewsPage/CardNewsPage'
 import PaginationAdmin from '../../components/Admin/Pagination'
 import BackdropSections from '../../components/Backdrops/BackdropSections'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const SingleNewsCategory = () => {
   const { nameCategory } = useParams()
@@ -125,6 +126,7 @@ const SingleNewsCategory = () => {
             title='Secciones recientes'
           />
         </Row> */}
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </div>

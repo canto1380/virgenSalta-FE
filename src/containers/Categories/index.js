@@ -6,6 +6,7 @@ import { getNewsCategory } from '../../utils/queryAPI/newsCategory'
 import CardNewsCategorypage from '../../components/Categories/CategoriesPage/CardNewsCategorypage'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
 import PaginationAdmin from '../../components/Admin/Pagination'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const Categories = () => {
   const [pageSelected, setPageSelected] = useState(1)
@@ -62,6 +63,7 @@ const Categories = () => {
             <Spinner animation='grow' variant='info' />
           </div>
         )}
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </div>

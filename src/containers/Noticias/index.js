@@ -6,6 +6,7 @@ import Layout from '../../components/Layout/Layout'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
 import { getNews } from '../../utils/queryAPI/news'
 import PaginationAdmin from '../../components/Admin/Pagination'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const Noticias = () => {
   const [pageSelected, setPageSelected] = useState(1)
@@ -70,6 +71,7 @@ const Noticias = () => {
             <Spinner animation='grow' variant='info' />
           </div>
         )}
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </div>

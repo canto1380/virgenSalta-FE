@@ -1,0 +1,33 @@
+.btn-up-letter {
+  position: fixed;
+  bottom: 20px;
+  left: 58px;
+  background-color: #2b9ac6 !important;
+  border-radius: 5px;
+  border: 0;
+}
+.btn-down-letter {
+  position: fixed;
+  bottom: 20px;
+  left: 25px;
+  background-color: #2b9ac6 !important;
+  border-radius: 5px;
+  border: 0;
+}
+
+.btn-up-letter:hover {
+  font-weight: 900 !important;
+  background-color: #00668e !important;
+}
+.btn-down-letter:hover {
+  font-weight: 900 !important;
+  background-color: #00668e !important;
+}
+.sizeIcon1 {
+  font-size: 22px;
+  color: white;
+}
+.sizeIcon2 {
+  font-size: 16px;
+  color: white;
+}

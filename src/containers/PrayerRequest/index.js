@@ -4,6 +4,7 @@ import LayoutFoot from '../../components/Layout/LayoutFoot'
 import { Container, Row } from 'react-bootstrap'
 import FormPrayerRequest from '../../components/PrayerRequest/FormPrayerRequest'
 import HeaderPrayerRequest from '../../components/PrayerRequest/HeaderPrayerRequest'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const PrayerRequest = () => {
   return (
@@ -16,6 +17,7 @@ const PrayerRequest = () => {
         <Row>
           <FormPrayerRequest />
         </Row>
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </div>

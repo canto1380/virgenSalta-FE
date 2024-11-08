@@ -69,14 +69,14 @@ const NavbarPrimary = ({ home }) => {
                 href={`/mensajes-de-la-virgen`}
                 target='_blank'
               >
-                Mensajes de la Virgen
+                Mensajes de la Ssma. Virgen
               </NavDropdown.Item>
               <NavDropdown.Item
                 key={2}
                 href={`/mensajes-de-nuestro-señor-jesucristo`}
                 target='_blank'
               >
-                Mensajes de Jesucristo
+                Mensajes de Nuestro Señor Jesucristo
               </NavDropdown.Item>
               <NavDropdown.Item
                 key={3}

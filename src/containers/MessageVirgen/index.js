@@ -6,6 +6,7 @@ import '../../components/MessageVirgen/message.css'
 import MsgVirgen from '../../components/MessageVirgen/MsgVirgen'
 import { getMessageVirgen } from '../../utils/queryAPI/messageVirgen'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const MessageVirgen = () => {
   const [msgVirgen, setMsgVirgen] = useState([])
@@ -19,7 +20,7 @@ const MessageVirgen = () => {
     const params = {
       year,
       limit: 100000,
-      deleted: false
+      deleted: false,
     }
     const res = await getMessageVirgen(params)
     setMsgVirgen(res?.allMessage)
@@ -47,6 +48,7 @@ const MessageVirgen = () => {
           text2='Salta - Argentina'
           filter={true}
         />
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </>

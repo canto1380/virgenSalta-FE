@@ -106,21 +106,6 @@
 .cardNewsPage-icon {
   font-size: 17px;
 }
-.btn-size-letter {
-  border: 0 !important;
-  border-radius: 5px;
-  background-color: #1540ccb4 !important;
-  height: 40px;
-  width: 40px;
-}
-.sizeIcon1 {
-  font-size: 24px;
-  color: white;
-}
-.sizeIcon2 {
-  font-size: 17px;
-  color: white;
-}
 
 @media (max-width: 1399px) {
   .card-container {

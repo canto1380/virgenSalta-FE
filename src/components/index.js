@@ -14,6 +14,7 @@ import LayoutFoot from './Layout/LayoutFoot'
 import axios from 'axios'
 import LiveVideo from './LiveChannel/LiveVideo'
 import { getConfigurations } from '../utils/queryAPI/configurations'
+import FloatingButton from './FloatingButton/FloatingButton'
 const Home = () => {
   const [videosBack, setVideosBack] = useState()
   const [videoLive, setVideoLive] = useState()
@@ -123,6 +124,7 @@ const Home = () => {
         <PhotosGallery />
         <hr className='my-5' />
         <VideoGallery videosBack={videosBack} />
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </div>

@@ -1,0 +1,17 @@
+.btn-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 5px 8px;
+  font-size: 16px;
+  border-radius: 10%;
+  background-color: #2b9ac6;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  /* box-sizing: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+}
+.icon-btn-floating {
+  font-size: 16px;
+  font-weight: 800;
+}

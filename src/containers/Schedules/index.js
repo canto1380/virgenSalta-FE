@@ -8,6 +8,7 @@ import { getEventType } from '../../utils/queryAPI/eventType'
 import { getDailyEvent } from '../../utils/queryAPI/dailyEvent'
 import { getImportantEventType } from '../../utils/queryAPI/importantEventType'
 import { getImportantEvent } from '../../utils/queryAPI/importantEvent'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const Schedules = () => {
   const [eventType, setEventType] = useState([])
@@ -85,6 +86,7 @@ const Schedules = () => {
             </Col>
           </Row>
         </div>
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </>

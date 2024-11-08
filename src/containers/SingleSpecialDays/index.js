@@ -7,6 +7,7 @@ import MoreNewsCarousel from '../../components/Carousel/MoreNewsCarousel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getSpecialDays } from '../../utils/queryAPI/specialDays'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const SingleSpecialDays = () => {
   const { title } = useParams()
@@ -61,6 +62,7 @@ const SingleSpecialDays = () => {
             title='Noticias recientes'
           />
         </Row>
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </>

@@ -6,6 +6,7 @@ import '../../components/MessageVirgen/message.css'
 import MsgVirgen from '../../components/MessageVirgen/MsgVirgen'
 import { getMessageGeneral } from '../../utils/queryAPI/messageGeneral'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const MessageGeneral = () => {
   const [msgGeneral, setMsgGeneral] = useState([])
@@ -36,6 +37,7 @@ const MessageGeneral = () => {
           text2='Salta - Argentina'
           filter={false}
         />
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </>

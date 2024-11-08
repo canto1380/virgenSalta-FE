@@ -8,6 +8,7 @@ import HeaderNews from '../../components/News/SingleNews/HeaderNews'
 import { getNews } from '../../utils/queryAPI/news'
 import CardsMoreContainer from '../../components/CardsMore'
 import { FaFont } from 'react-icons/fa'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const SingleNews = () => {
   const { title } = useParams()
@@ -80,6 +81,7 @@ const SingleNews = () => {
           </Col>
           <hr />
         </Row>
+        <FloatingButton />
       </Container>
       <LayoutFoot />
     </>

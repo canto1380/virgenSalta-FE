@@ -7,6 +7,7 @@ import NewsFilter from '../Noticias/NewsFilter'
 import { getSpecialDays } from '../../utils/queryAPI/specialDays'
 import PaginationAdmin from '../../components/Admin/Pagination'
 import CardNewsPage from '../../components/News/NewsPage/CardNewsPage'
+import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const SpecialDaysPage = () => {
   const [search, setSearch] = useState('')
@@ -70,6 +71,7 @@ const SpecialDaysPage = () => {
               <Spinner animation='grow' variant='info' />
             </div>
           )}
+          <FloatingButton />
         </Container>
         <LayoutFoot />
       </div>

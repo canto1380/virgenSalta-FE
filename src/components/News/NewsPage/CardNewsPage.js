@@ -23,9 +23,6 @@ const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl }) => {
             <Card.Title className='cardNewsPage-title'>{title}</Card.Title>
 
             <Card.Text>{data?.subtitle}</Card.Text>
-            {/* <Button variant='primary' className='section-btn'>
-              Leer Más
-            </Button> */}
           </Card.Body>
         </a>
       </Card>
