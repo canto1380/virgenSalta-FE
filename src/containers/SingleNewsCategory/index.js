@@ -84,18 +84,21 @@ const SingleNewsCategory = () => {
           title: 'Mensajes de la Ssma. Virgen',
           route: 'mensajes-de-la-virgen',
           photos: msjVirgen?.allBackdrops[0]?.backdrop,
+          preload: true,
         },
         {
           id: 2,
           title: 'Mensajes de Nuestro Señor Jesucristo',
           photos: msjJesus?.allBackdrops[0]?.backdrop,
           route: 'mensajes-de-nuestro-señor-jesucristo',
+          preload: true,
         },
         {
           id: 3,
           title: 'Mensaje Central',
           photos: msjCentral?.allBackdrops[0]?.backdrop,
           route: 'mensaje-central',
+          preload: true,
         },
       ]
       setNews((prevNews) => {

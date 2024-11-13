@@ -14,7 +14,12 @@ const CardNewsPage = ({ data: { img, title, _id }, data, pathUrl, type }) => {
     <>
       {type === 'Mensajes' ? (
         <Card className='cardNewsPage'>
-          <a href={`/${data.route}`} className='decoration-link'>
+          <a
+            href={`/${
+              data.preload === true ? data.route : `${pathUrl}/${titleParams}`
+            }`}
+            className='decoration-link'
+          >
             <Card.Img
               variant='top'
               src={data?.photos ? data.photos : fotoDefault}

@@ -7,8 +7,8 @@ import BodyNews from '../../components/News/SingleNews/BodyNews'
 import HeaderNews from '../../components/News/SingleNews/HeaderNews'
 import { getNews } from '../../utils/queryAPI/news'
 import CardsMoreContainer from '../../components/CardsMore'
-import { FaFont } from 'react-icons/fa'
 import FloatingButton from '../../components/FloatingButton/FloatingButton'
+import FontSize from '../../components/SizeFont/FontSize'
 
 const SingleNews = () => {
   const { title } = useParams()
@@ -48,25 +48,15 @@ const SingleNews = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='container-single-news border border-5'>
+      <Container fluid className='container-single-new'>
         <Row className='mx-0 pt-2 pb-5'>
           <Col xs={8} className='pt-5 single-news-col1'>
-            <div className='d-flex'>
-              <button className='btn-size-letter me-2' onClick={aumentarTexto}>
-                <FaFont
-                  title='Aumentar tamaño fuente'
-                  className={`sizeIcon1 cursorPointer`}
-                />
-              </button>
 
-              <button className='btn-size-letter' onClick={reducirTexto}>
-                <FaFont
-                  title='Reducir tamaño fuente'
-                  className={`sizeIcon2 cursorPointer`}
-                />
-              </button>
-            </div>
             <HeaderNews data={singleNews} />
+            <FontSize
+              aumentarTexto={aumentarTexto}
+              reducirTexto={reducirTexto}
+            />
             <BodyNews
               data={singleNews?.description}
               photos={singleNews?.photos}

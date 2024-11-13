@@ -34,8 +34,8 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log(isVisible)
   return (
     <div className='pb-5'>
       <div className='px-5'>
