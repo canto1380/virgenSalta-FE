@@ -10,6 +10,7 @@ import CardNewsPage from '../../components/News/NewsPage/CardNewsPage'
 import PaginationAdmin from '../../components/Admin/Pagination'
 import BackdropSections from '../../components/Backdrops/BackdropSections'
 import FloatingButton from '../../components/FloatingButton/FloatingButton'
+import { getBackdrop } from '../../utils/queryAPI/backdrop'
 
 const SingleNewsCategory = () => {
   const { nameCategory } = useParams()
@@ -45,6 +46,7 @@ const SingleNewsCategory = () => {
   //   }
   // }
   /************************************************************************************/
+
   useEffect(() => {
     dataNews()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,6 +73,38 @@ const SingleNewsCategory = () => {
     const data = await getNews(params)
     setNewsInf(data)
     setNews(data.allNews)
+    if (nameCategory === 'Mensajes') {
+      const msjVirgen = await getBackdrop({ search: 'MensajesDeLaVirgen' })
+      const msjJesus = await getBackdrop({ search: '"MensajesDeJesucristo"' })
+      const msjCentral = await getBackdrop({ search: 'MensajesCentral' })
+
+      const arrMensajes = [
+        {
+          id: 1,
+          title: 'Mensajes de la Ssma. Virgen',
+          route: 'mensajes-de-la-virgen',
+          photos: msjVirgen?.allBackdrops[0]?.backdrop,
+        },
+        {
+          id: 2,
+          title: 'Mensajes de Nuestro Señor Jesucristo',
+          photos: msjJesus?.allBackdrops[0]?.backdrop,
+          route: 'mensajes-de-nuestro-señor-jesucristo',
+        },
+        {
+          id: 3,
+          title: 'Mensaje Central',
+          photos: msjCentral?.allBackdrops[0]?.backdrop,
+          route: 'mensaje-central',
+        },
+      ]
+      setNews((prevNews) => {
+        const newUniqueItems = arrMensajes.filter(
+          (newItem) => !prevNews.some((item) => item.id === newItem.id)
+        )
+        return [...prevNews, ...newUniqueItems]
+      })
+    }
   }
 
   return (
@@ -92,7 +126,13 @@ const SingleNewsCategory = () => {
                   lg={4}
                   className='mb-4 cont-row-categ'
                 >
-                  <CardNewsPage data={not} pathUrl='noticias' />
+                  <CardNewsPage
+                    data={not}
+                    pathUrl='noticias'
+                    type={
+                      nameCategory === 'Mensajes' ? 'Mensajes' : 'categorias'
+                    }
+                  />
                 </Col>
               ))
             ) : (
