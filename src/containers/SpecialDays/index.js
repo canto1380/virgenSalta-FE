@@ -13,7 +13,7 @@ const SpecialDaysPage = () => {
   const [search, setSearch] = useState('')
   const [pageSelected, setPageSelected] = useState(1)
   const [limit, setLimit] = useState(12)
-  const [specialDaysData, setSpecialDaysData] = useState([])
+  const [specialDaysData, setSpecialDaysData] = useState(undefined)
   const [specialDaysInf, setSpecialDaysInf] = useState()
   const deleted = false
 
