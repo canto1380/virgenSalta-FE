@@ -11,7 +11,7 @@ import FloatingButton from '../../components/FloatingButton/FloatingButton'
 const Noticias = () => {
   const [pageSelected, setPageSelected] = useState(1)
   const [limit, setLimit] = useState(12)
-  const [newsData, setNewsData] = useState([])
+  const [newsData, setNewsData] = useState(undefined)
   const [newsInf, setNewsInf] = useState([])
   let deleted = false
   useEffect(() => {
@@ -29,11 +29,12 @@ const Noticias = () => {
     setNewsData(data.allNews)
     setNewsInf(data)
   }
+  console.log(newsData)
 
   return (
     <div className='bg-gradient-4'>
       <Layout />
-      <BackdropSections title='Noticias' img={'Noticias'}/>
+      <BackdropSections title='Noticias' img={'Noticias'} />
       <Container className='mt-3 pt-3'>
         {newsData ? (
           <Row className='mt-3 pb-5'>

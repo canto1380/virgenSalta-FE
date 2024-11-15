@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getSpecialDays } from '../../utils/queryAPI/specialDays'
 import LayoutFoot from '../../components/Layout/LayoutFoot'
 import FloatingButton from '../../components/FloatingButton/FloatingButton'
+import FontSize from '../../components/SizeFont/FontSize'
+import '../../components/SpecialDays/specialDays.css'
 
 const SingleSpecialDays = () => {
   const { title } = useParams()
@@ -15,6 +17,15 @@ const SingleSpecialDays = () => {
 
   const [singleSpecialDays, setSingleSpecialDays] = useState()
   const [moreSpecialDays, setMoreSpecialDays] = useState([])
+  const [fontSize, setFontSize] = useState(14)
+
+  const aumentarTexto = () => {
+    setFontSize((prevSize) => prevSize + 2)
+  }
+
+  const reducirTexto = () => {
+    setFontSize((prevSize) => (prevSize > 10 ? prevSize - 2 : prevSize)) // Evita que sea demasiado pequeño
+  }
 
   useEffect(() => {
     dataSpecialDays()
@@ -39,22 +50,30 @@ const SingleSpecialDays = () => {
   return (
     <>
       <Layout />
-      <Container>
-        <Row className='mx-3 pt-2 pb-5'>
-          <Col xs={12} className='pt-5'>
+      <Container fluid className='container-single-specialDays'>
+        <Row className='mx-0 pt-2 pb-5'>
+          <Col xs={8} className='pt-5 single-specialDays-col1'>
             <HeaderNews data={singleSpecialDays} sectionType='specialDays' />
-          </Col>
-          <hr className='pb-3' />
-          <Col xs={12} className='pb-5'>
+            <FontSize
+              aumentarTexto={aumentarTexto}
+              reducirTexto={reducirTexto}
+            />
             <BodyNews
               data={singleSpecialDays?.description}
               photos={singleSpecialDays?.photos}
+              fontSize={fontSize}
             />
+          </Col>
+          <Col xs={4} className='py-5 ps-5 pe-0 container-more-specialDays'>
+            <p className='mb-0 mx-3 single-news-subtitle'>Más Jornadas</p>
+            <hr className='mt-1 mx-3' />
+            <MoreNewsCarousel data={moreSpecialDays} />
           </Col>
           <hr />
         </Row>
+        <FloatingButton />
       </Container>
-      <Container fluid className=''>
+      {/* <Container fluid className=''>
         <Row className='bg-gradient-1 px-3 pt-4 pb-5'>
           <MoreNewsCarousel
             data={moreSpecialDays}
@@ -62,8 +81,7 @@ const SingleSpecialDays = () => {
             title='Noticias recientes'
           />
         </Row>
-        <FloatingButton />
-      </Container>
+      </Container> */}
       <LayoutFoot />
     </>
   )

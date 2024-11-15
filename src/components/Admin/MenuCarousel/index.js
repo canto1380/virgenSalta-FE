@@ -68,11 +68,11 @@ const MenuCarousel = () => {
             />
             <p className='px-5 text-important mb-0'>
               <span className='text-danger fw-bolder'>*</span>Formato del video:
-              Horizontal 16:9 (1280x720 | 1920x1080)
+              Horizontal 16:9 (1920x1080 | 1280x720)
             </p>
             <p className='px-5 text-important'>
               <span className='text-danger fw-bolder'>*</span>Calidad del video:
-              WEBM
+              MP4
             </p>
             <ListElements
               data={carouselData?.allCarousel}
@@ -110,7 +110,7 @@ const MenuCarousel = () => {
             </p>
             <p className='px-5 text-important'>
               <span className='text-danger fw-bolder'>*</span>Calidad del video:
-              WEBM
+              MP4
             </p>
             <CarouselAddEdit
               userToken={userToken}

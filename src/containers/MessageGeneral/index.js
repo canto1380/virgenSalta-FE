@@ -9,7 +9,7 @@ import LayoutFoot from '../../components/Layout/LayoutFoot'
 import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const MessageGeneral = () => {
-  const [msgGeneral, setMsgGeneral] = useState([])
+  const [msgGeneral, setMsgGeneral] = useState(undefined)
   const [year, setYear] = useState('Todos')
 
   useEffect(() => {
@@ -25,12 +25,13 @@ const MessageGeneral = () => {
     const res = await getMessageGeneral(params)
     setMsgGeneral(res?.allMessage)
   }
+  console.log(msgGeneral)
   return (
     <>
       <Layout />
       <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesCentral'} />
-        
+
         <MsgVirgen
           msg={msgGeneral}
           setYear={setYear}

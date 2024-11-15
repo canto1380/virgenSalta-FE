@@ -27,15 +27,27 @@
 }
 
 .cardTitle {
-  /* background-color: rgba(174, 174, 174, 0.514); */
   padding: 20px 8px 10px 8px;
   width: 100%;
   color: white;
   font-weight: 600;
   font-weight: 600;
-  /* position: absolute;
-  text-align: center;
-  bottom: 0px;
-  border-bottom-left-radius: 15px !important;
-  border-bottom-right-radius: 15px !important; */
+}
+.container-single-specialDays {
+  width: 80% !important;
+}
+@media (max-width: 991px) {
+  .container-single-specialDays {
+    width: 100% !important;
+    margin: 0px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .container-more-specialDays {
+    visibility: hidden;
+  }
+  .single-specialDays-col1 {
+    width: 100% !important;
+  }
 }

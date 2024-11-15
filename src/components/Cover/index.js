@@ -19,7 +19,14 @@ const Cover = () => {
     <>
       {carousel ? (
         <>
-          <video width='100%' autoPlay muted poster={FondoGris} loop>
+          <video
+            width='100%'
+            autoPlay
+            muted
+            playsInline
+            poster={FondoGris}
+            loop
+          >
             <source src={carousel.file} type='video/mp4' />
           </video>
         </>

@@ -9,7 +9,7 @@ import LayoutFoot from '../../components/Layout/LayoutFoot'
 import FloatingButton from '../../components/FloatingButton/FloatingButton'
 
 const MessageVirgen = () => {
-  const [msgVirgen, setMsgVirgen] = useState([])
+  const [msgVirgen, setMsgVirgen] = useState(undefined)
   const [year, setYear] = useState('Todos')
 
   useEffect(() => {

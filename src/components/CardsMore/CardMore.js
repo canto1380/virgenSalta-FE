@@ -17,7 +17,6 @@ const CardMore = ({ data }) => {
     // Limpiar el listener al desmontar el componente
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-  console.log(screenWidth)
 
   useEffect(() => {
     setTitleParams(data?.title.replace(/ /g, '-'))
@@ -34,7 +33,6 @@ const CardMore = ({ data }) => {
         : data?.subtitle
     setSubtitle(asdd)
   }
-  console.log(subtitle)
   return (
     <div className='mb-5 mx-3'>
       <a className='link-decoration' href={`/noticias/${titleParams}`}>

@@ -5,10 +5,12 @@ import { getBackdrop } from '../../utils/queryAPI/backdrop'
 
 const BackdropSections = ({ title, img }) => {
   const [imageBackdropDefault, setImageBackdropDefault] = useState('')
+  const [isFontLoaded, setIsFontLoaded] = useState(false)
 
   useEffect(() => {
     // setImageBackdropDefault(ImageBackdrop)
     getDataImg()
+    loadFont()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -22,6 +24,14 @@ const BackdropSections = ({ title, img }) => {
     const res = await getBackdrop(params)
     const data = res?.allBackdrops[0]?.backdrop
     setImageBackdropDefault(data)
+  }
+
+  const loadFont = () => {
+    const font = new FontFace('Classica', 'url(/fonts/CLASSICA-BOLD.TTF)')
+    font.load().then(() => {
+      document.fonts.add(font)
+      setIsFontLoaded(true)
+    })
   }
 
   return (
@@ -38,11 +48,13 @@ const BackdropSections = ({ title, img }) => {
           }}
           className='imgFondo'
         >
-          <Row className='backdropNew'>
-            <Col>
-              <p className='title m-0 text-center'>{title.toUpperCase()}</p>
-            </Col>
-          </Row>
+          {isFontLoaded && (
+            <Row className='backdropNew'>
+              <Col>
+                <p className='title m-0 text-center'>{title.toUpperCase()}</p>
+              </Col>
+            </Row>
+          )}
         </Container>
       ) : (
         <Container
@@ -52,7 +64,9 @@ const BackdropSections = ({ title, img }) => {
         >
           <Row className='backdropNew'>
             <Col>
-              <p className='title m-0 text-center'>{title}</p>
+              {isFontLoaded && (
+                <p className='title m-0 text-center'>{title}</p>
+              )}
             </Col>
           </Row>
         </Container>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MsgVirgenBody from './MsgVirgenBody'
+import { Spinner } from 'react-bootstrap'
 import FilterMsgVirgen from './FilterMsgVirgen'
 import FontSize from '../SizeFont/FontSize'
 
@@ -17,7 +18,6 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
   // Función para detectar la posición del scroll
   const handleScroll = () => {
     const scrollPosition = window.scrollY
-    console.log(scrollPosition, isVisible)
     // Ajusta el valor '200' según cuándo quieras que aparezca el botón
     if (scrollPosition > 200) {
       setIsVisible(true)
@@ -47,18 +47,26 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
         {isVisible && (
           <FontSize aumentarTexto={aumentarTexto} reducirTexto={reducirTexto} />
         )}
-        {msg.length > 0 ? (
-          msg?.map((data, i) => (
-            <MsgVirgenBody
-              title={data?.title}
-              message={data?.message}
-              key={i}
-              fontSize={fontSize}
-              typeMessage={text1}
-            />
-          ))
+        {msg ? (
+          msg.length > 0 ? (
+            msg?.map((data, i) => (
+              <MsgVirgenBody
+                title={data?.title}
+                message={data?.message}
+                key={i}
+                fontSize={fontSize}
+                typeMessage={text1}
+              />
+            ))
+          ) : (
+            <p className='text-danger fw-bold px-5'>
+              No se encontraron mensajes
+            </p>
+          )
         ) : (
-          <p className='text-danger fw-bold px-5'>No se encontraron mensajes</p>
+          <div className='text-center'>
+            <Spinner animation='grow' variant='info' />
+          </div>
         )}
       </div>
     </div>
