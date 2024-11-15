@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-const MsgVirgenBody = ({ title, message, fontSize }) => {
+const MsgVirgenBody = ({ title, message, fontSize, typeMessage }) => {
   const messageRef = useRef(null) // Referencia para el contenedor de cada mensaje
 
   useEffect(() => {
@@ -17,16 +17,18 @@ const MsgVirgenBody = ({ title, message, fontSize }) => {
       messageRef.current.innerHTML += `${d}`
     })
   }
-
+  console.log(typeMessage)
   return (
     <div className='px-5 py-3'>
       <div>
-        <p
-          className='title-msg-virgen mb-0'
-          style={{ fontSize: `${fontSize}px` }}
-        >
-          {title}
-        </p>
+        {typeMessage !== 'Mensaje Central' && (
+          <p
+            className='title-msg-virgen mb-0'
+            style={{ fontSize: `${fontSize}px` }}
+          >
+            {title}
+          </p>
+        )}
         <hr className='hor-line' />
       </div>
       <div

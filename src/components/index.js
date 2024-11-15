@@ -103,11 +103,11 @@ const Home = () => {
               <p className='phrase1 mb-0'>{frase1 && frase1.mixedField}</p>
               <p className='phrase1 mb-4'>{frase2 && frase2.mixedField}</p>
             </div>
-            <div className='text-center pb-3'>
+            <div className='text-center pb-1'>
               <p className='section-title'>
                 {sitioOficial && sitioOficial.mixedField}
               </p>
-              <p className='section-title'>SALTA - ARGENTINA</p>
+              <p className='section-title mb-0'>SALTA - ARGENTINA</p>
             </div>
           </>
         )}

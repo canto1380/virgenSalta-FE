@@ -6,6 +6,19 @@ import fotoDefault from '../../images/logo-corazon.webp'
 const CardMore = ({ data }) => {
   const [titleParams, setTitleParams] = useState(data.title)
   const [subtitle, setSubtitle] = useState(undefined)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth)
+
+    // Agregar un listener de evento resize
+    window.addEventListener('resize', handleResize)
+
+    // Limpiar el listener al desmontar el componente
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  console.log(screenWidth)
+
   useEffect(() => {
     setTitleParams(data?.title.replace(/ /g, '-'))
     subtituliCortado()
@@ -14,13 +27,14 @@ const CardMore = ({ data }) => {
 
   const subtituliCortado = () => {
     const puntos = '...'
-    const subt = data?.subtitle?.substr(0, 83)
+    const subt = data?.subtitle?.substr(0, 60)
     const asdd =
-      data.subtitle && data?.subtitle.length > 80
+      data.subtitle && data?.subtitle.length > 60
         ? subt.concat(' ', puntos)
         : data?.subtitle
     setSubtitle(asdd)
   }
+  console.log(subtitle)
   return (
     <div className='mb-5 mx-3'>
       <a className='link-decoration' href={`/noticias/${titleParams}`}>
@@ -34,7 +48,7 @@ const CardMore = ({ data }) => {
             <Card.Title className='single-news-subtitle'>
               {data?.title}
             </Card.Title>
-            <p className='title-card mb-0'>{subtitle}</p>
+            {screenWidth > 891 && <p className='title-card mb-0'>{subtitle}</p>}
           </Card.Body>
         </Card>
       </a>

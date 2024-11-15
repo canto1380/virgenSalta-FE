@@ -1,4 +1,6 @@
 .card-container {
+  position: relative;
+  overflow: hidden;
   width: 100% !important;
   height: 229px !important;
   border-radius: 15px !important;
@@ -15,7 +17,8 @@
 .card-title1 {
   background-color: rgba(174, 174, 174, 0.514);
   padding: 4px 8px;
-  width: 100%;
+  /* width: 100%; */
+  width: calc(100% - 0px);
   position: absolute;
   text-align: center;
 
@@ -24,6 +27,7 @@
   font-weight: 600;
   border-bottom-left-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
+  box-sizing: border-box;
 }
 .card-container:hover {
   transform: scale(0.9);
@@ -151,7 +155,7 @@
   }
   .card-container {
     width: 100% !important;
-    height: 100% !important;
+    height: 247px !important;
   }
   .cardNewsPage-img {
     width: 100% !important;

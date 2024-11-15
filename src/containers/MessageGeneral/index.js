@@ -30,10 +30,11 @@ const MessageGeneral = () => {
       <Layout />
       <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesCentral'} />
+        
         <MsgVirgen
           msg={msgGeneral}
           setYear={setYear}
-          text1='Mensajes dados por Nuestro Señor Jesucristo'
+          text1='Mensaje Central'
           text2='Salta - Argentina'
           filter={false}
         />

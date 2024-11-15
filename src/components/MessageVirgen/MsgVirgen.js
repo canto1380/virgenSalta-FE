@@ -39,7 +39,7 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
   return (
     <div className='pb-5'>
       <div className='px-5'>
-        <p className='text1-msg-virgen mb-0'>{text1}</p>
+        <p className='text1-msg-virgen mb-0 pt-5'>{text1}</p>
         <p className='text3-msg-virgen mb-0'>{text2}</p>
       </div>
       {filter === true && <FilterMsgVirgen setYear={setYear} />}
@@ -54,6 +54,7 @@ const MsgVirgen = ({ msg, setYear, text1, text2, filter }) => {
               message={data?.message}
               key={i}
               fontSize={fontSize}
+              typeMessage={text1}
             />
           ))
         ) : (

@@ -31,7 +31,7 @@ const MessageVirgen = () => {
       <Container fluid className='bg-gradient-0'>
         <ImgBackdrop type={'MensajesDeLaVirgen'} />
         <div className='container'>
-          <Row className='mx-5 pt-4 pb-5'>
+          <Row className='mx-5 pt-4'>
             <Col className='page-section-title text-light'>
               <p className='titleGen-msg-virgen'>
                 Mensajes que la Inmaculada Madre del Divino Corazón Eucarístico

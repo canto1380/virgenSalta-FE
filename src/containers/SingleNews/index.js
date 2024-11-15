@@ -48,10 +48,9 @@ const SingleNews = () => {
   return (
     <>
       <Layout />
-      <Container fluid className='container-single-new'>
+      <Container fluid className='container-single-news'>
         <Row className='mx-0 pt-2 pb-5'>
           <Col xs={8} className='pt-5 single-news-col1'>
-
             <HeaderNews data={singleNews} />
             <FontSize
               aumentarTexto={aumentarTexto}
