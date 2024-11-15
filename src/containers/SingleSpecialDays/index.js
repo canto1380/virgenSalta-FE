@@ -18,6 +18,17 @@ const SingleSpecialDays = () => {
   const [singleSpecialDays, setSingleSpecialDays] = useState()
   const [moreSpecialDays, setMoreSpecialDays] = useState([])
   const [fontSize, setFontSize] = useState(14)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth)
+
+    // Agregar un listener de evento resize
+    window.addEventListener('resize', handleResize)
+
+    // Limpiar el listener al desmontar el componente
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const aumentarTexto = () => {
     setFontSize((prevSize) => prevSize + 2)
@@ -64,12 +75,13 @@ const SingleSpecialDays = () => {
               fontSize={fontSize}
             />
           </Col>
-          <Col xs={4} className='py-5 ps-5 pe-0 container-more-specialDays'>
-            <p className='mb-0 mx-3 single-news-subtitle'>Más Jornadas</p>
-            <hr className='mt-1 mx-3' />
-            <MoreNewsCarousel data={moreSpecialDays} />
-          </Col>
-          <hr />
+          {screenWidth > 767 && (
+            <Col xs={4} className='py-5 ps-5 pe-0 container-more-specialDays'>
+              <p className='mb-0 mx-3 single-news-subtitle'>Más Jornadas</p>
+              <hr className='mt-1 mx-3' />
+              <MoreNewsCarousel data={moreSpecialDays} />
+            </Col>
+          )}
         </Row>
         <FloatingButton />
       </Container>
