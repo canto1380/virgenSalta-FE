@@ -33,29 +33,28 @@ const BackdropSections = ({ title, img }) => {
       setIsFontLoaded(true)
     })
   }
-
   return (
     <div>
       {imageBackdropDefault !== '' ? (
-        <Container
-          fluid
-          style={{
-            backgroundImage: `url(${
-              imageBackdropDefault
-                ? imageBackdropDefault
-                : 'images/imgDefecto.webp'
-            })`,
-          }}
-          className='imgFondo'
-        >
-          {isFontLoaded && (
+        isFontLoaded && (
+          <Container
+            fluid
+            style={{
+              backgroundImage: `url(${
+                imageBackdropDefault
+                  ? imageBackdropDefault
+                  : 'images/imgDefecto.webp'
+              })`,
+            }}
+            className='imgFondo'
+          >
             <Row className='backdropNew'>
               <Col>
                 <p className='title m-0 text-center'>{title.toUpperCase()}</p>
               </Col>
             </Row>
-          )}
-        </Container>
+          </Container>
+        )
       ) : (
         <Container
           fluid
@@ -64,9 +63,7 @@ const BackdropSections = ({ title, img }) => {
         >
           <Row className='backdropNew'>
             <Col>
-              {isFontLoaded && (
-                <p className='title m-0 text-center'>{title}</p>
-              )}
+              {isFontLoaded && <p className='title m-0 text-center'>{title}</p>}
             </Col>
           </Row>
         </Container>

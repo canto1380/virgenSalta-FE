@@ -11,7 +11,7 @@ import FloatingButton from '../../components/FloatingButton/FloatingButton'
 const Categories = () => {
   const [pageSelected, setPageSelected] = useState(1)
   const [limit, setLimit] = useState(12)
-  const [newsCategoryData, setNewsCategoryData] = useState([])
+  const [newsCategoryData, setNewsCategoryData] = useState(undefined)
   const [newsCategoryInf, setNewsCategoryInf] = useState()
   const deleted = false
 

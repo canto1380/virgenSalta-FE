@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-bootstrap'
 import './navbar.css'
-import ImageLogo from '../../images/logo-corazon.webp'
+import ImageLogo from '../../images/logo-principal.webp'
 import { getItemNav } from '../../utils/queryAPI/navbar'
 import { getItemNavCategory } from '../../utils/queryAPI/navbarCategory'
 import { getConfigurations } from '../../utils/queryAPI/configurations'
