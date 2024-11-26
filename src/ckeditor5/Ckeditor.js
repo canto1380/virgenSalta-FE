@@ -95,9 +95,9 @@ import './App.css'
  * Instructions on how to obtain them: https://ckeditor.com/docs/trial/latest/guides/real-time/quick-start.html
  */
 const LICENSE_KEY =
-  'aVhOL2tzazUxcUgxdkhnYWtHTEx3LzVtQWpzV2xXdG85STExamwvdXhjUnpEekVGSW8vRTRya25HN3VTbGc9PS1NakF5TkRBNU1qYz0='
+  'eFE2QUtDZEVneldWQWRXWEZ5OHp4QXhkMTUvaHZBdmFhb3lxYUdDV3ZOcXVWRzRSem82eThrZ0J6Sm9Vd2c9PS1NakF5TkRFeU1qWT0='
 const CKBOX_TOKEN_URL =
-  'https://117070.cke-cs.com/token/dev/d7yW03KXH8fremOe3Gq2vRaWQjYmHicxgQmA?limit=10'
+  'https://124012.cke-cs.com/token/dev/RILqDuA8LLyUAd9ssFPXexYza4f4FvxKbeTq?limit=10'
 
 export default function App({ setDescription, handleEditorReady, data }) {
   const editorContainerRef = useRef(null)

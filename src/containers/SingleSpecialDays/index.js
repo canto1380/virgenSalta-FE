@@ -44,7 +44,7 @@ const SingleSpecialDays = () => {
   }, [])
 
   const dataSpecialDays = async () => {
-    const params = { limit: 10000, deleted: false }
+    const params = { limit: 4, deleted: false }
     const data = await getSpecialDays(params)
     setMoreSpecialDays(data.allSpecialDays)
 
