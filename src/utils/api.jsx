@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const url = process.env.REACT_APP_API
-  ? process.env.REACT_APP_API
-  : process.env.REACT_APP_PRODUCTION
+const url = import.meta.env.VITE_API
+  ? import.meta.env.VITE_API
+  : import.meta.env.VITE_PRODUCTION
 export const api = async (method, endpoint, data, token) => {
   try {
     const res = await axios({

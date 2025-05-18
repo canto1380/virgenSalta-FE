@@ -34,7 +34,7 @@ const BackdropAddEdit = ({ title, data, userToken, routeAPI, idTab }) => {
     )
   }
 
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const estado = import.meta.env.VITE_API ? import.meta.env.VITE_API : null
   const URL_FIREBASE_IMG =
     estado !== null ? 'img-backdrops-dev' : 'img-backdrops'
 

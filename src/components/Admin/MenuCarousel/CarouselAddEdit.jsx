@@ -1,57 +1,41 @@
-import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Spin } from 'antd'
-import { api } from '../../../utils/api'
-import { uploadFile, deleteFile } from '../../../firebase/config'
+import React, { useState, useEffect } from 'react'
 import MsgError from '../../Messages/MsgError'
-import Resizer from 'react-image-file-resizer'
+import { uploadFile, uploadFileVideo } from '../../../firebase/config'
+import { api } from '../../../utils/api'
+import './menuCarousel.css'
 
-const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
+const CarouselAddEdit = ({
+  userToken,
+  loading,
+  setLoading,
+  dataRegisterEdit,
+}) => {
   const [imgData, setImgData] = useState()
   const [preview, setPreview] = useState()
   const [dataError, setDataError] = useState(false)
   const [messageError, setMessageError] = useState('')
   const [serverError, setServerError] = useState(false)
-  const [uploading, setUploading] = useState(false)
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    // Redimensionar y convertir a WebP
-    Resizer.imageFileResizer(
-      file,
-      1250,
-      390,
-      'WEBP',
-      80,
-      0,
-      (resizedImage) => {
-        setImgData(resizedImage)
-      },
-      'blob'
-    )
-  }
-
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const estado = import.meta.env.VITE_API ? import.meta.env.VITE_API : null
   const URL_FIREBASE_IMG =
-    estado !== null ? 'img-categorias-dev' : 'img-categorias'
+    estado !== null ? 'videos-carousel-dev' : 'videos-carousel'
 
   const handleSubmit = async (values) => {
     try {
       if (!dataRegisterEdit) {
         if (!imgData) {
-          alert('Debe seleccionar una imagen para continuar')
+          alert('Debe seleccionar un archivo para continuar')
           return
         }
-        const url = await uploadFile(URL_FIREBASE_IMG, imgData)
-        values.backdrop = url
-
-        const res = await api('POST', 'newsCategory', values, userToken)
+        const url = await uploadFileVideo(URL_FIREBASE_IMG, imgData)
+        values.file = url
+        const res = await api('POST', 'carousel', values, userToken)
         if (res.status === 200) {
-          setUploading(true)
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            setUploading(false)
-            window.location.href = '/admin/home/categorias'
+            window.location.href = '/admin/home/carousel'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -60,15 +44,13 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           setDataError(true)
           setTimeout(() => {
             setDataError(false)
-            setUploading(false)
           }, 3000)
         }
       } else {
         if (!imgData && !preview) {
-          alert('Debe seleccionar una imagen para continuar')
+          alert('Debe seleccionar un archivo para continuar')
           return
         }
-
         let url
         if (imgData) {
           url = await uploadFile(URL_FIREBASE_IMG, imgData)
@@ -78,22 +60,20 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         if (dataRegisterEdit.backdrop !== url) {
           deleteFile(dataRegisterEdit.backdrop)
         }
-        values.backdrop = url
+        values.file = url
 
         const res = await api(
           'PATCH',
-          `newsCategory/${dataRegisterEdit._id}`,
+          `carousel/${dataRegisterEdit._id}`,
           values,
           userToken
         )
 
         if (res.status === 200) {
-          setUploading(true)
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            setUploading(false)
-            window.location.href = '/admin/home/categorias'
+            window.location.href = '/admin/home/carousel'
           }, 2500)
         }
         if (res?.response?.status === 400) {
@@ -102,7 +82,6 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           setDataError(true)
           setTimeout(() => {
             setDataError(false)
-            setUploading(false)
           }, 3000)
         }
       }
@@ -114,11 +93,10 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
     }
   }
 
-  const deleteImg = (e) => {
+  const deleteFile = (e) => {
     setPreview(undefined)
     setImgData(undefined)
   }
-
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
@@ -136,18 +114,17 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
 
   useEffect(() => {
     if (!dataRegisterEdit) return
-    setPreview(dataRegisterEdit.backdrop)
+    setPreview(dataRegisterEdit.file)
   }, [dataRegisterEdit])
 
   return (
     <div className='menuContainer'>
       <Form
-        disabled={uploading ? true : false}
         labelCol={{ span: 22 }}
         wrapperCol={{ span: 22 }}
         initialValues={{
-          nameCategory: dataRegisterEdit?.nameCategory,
-          backdrop: dataRegisterEdit?.backdrop,
+          nameItem: dataRegisterEdit?.nameItem,
+          file: dataRegisterEdit?.file,
         }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
@@ -156,51 +133,52 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
         style={{ marginLeft: '2vh' }}
       >
         <Form.Item
-          label='Nombre Categoría'
-          name='nameCategory'
+          label='Nombre item'
+          name='nameItem'
           rules={[{ required: true, message: 'Debe ingresar un nombre' }]}
         >
           <Input />
         </Form.Item>
         <div>
           <p>
-            <span className='text-danger fw-bolder me-1'>*</span>Backdrop
+            <span className='text-danger fw-bolder me-1'>*</span>Video
           </p>
         </div>
         <div className='d-flex'>
           {preview ? (
-            <div className='container-preview-global'>
-              <img
+            <div className='container-preview-video'>
+              <video
                 src={preview}
                 id='img-preview-news'
-                className='preview-upload me-4'
+                className='preview-upload-video me-4 border border-3'
                 alt='preview'
+                controls
               />
-              <div className='btn btn-delete-img'>
+              <div className='btn btn-delete-video'>
                 <div
-                  onClick={() => deleteImg(preview)}
-                  className='btn-contianer-delete d-flex justify-content-center align-items-center'
+                  onClick={() => deleteFile(preview)}
+                  className='btn-contianer-delete-video d-flex justify-content-center align-items-center'
                 >
                   <p className='pb-2 mb-2'>x</p>
                 </div>
               </div>
             </div>
           ) : (
+            // <img src={preview} className="preview-upload me-4" alt="preview" />
             <>
               <input
-                className='btnUpload'
+                className='btnUploadVideo'
                 type='file'
+                accept='video/*'
                 name=''
                 id='id-btn-upload'
-                disabled={uploading ? true : false}
-                onChange={handleImageChange}
+                onChange={(e) => setImgData(e.target.files[0])}
               />
               <label
                 htmlFor='id-btn-upload'
-                className='d-flex text-center align-items-center btnUpload'
-                disabled={uploading ? true : false}
+                className='d-flex justify-content-center align-items-center btnUploadVideo'
               >
-                Agregar imagen
+                Agregar archivo
               </label>
             </>
           )}
@@ -230,7 +208,7 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
           )}
         </Form.Item>
         {dataError
-          ? messageError?.map((e, i) => <MsgError key={i} text2={e.msg} />)
+          ? messageError.map((e, i) => <MsgError key={i} text2={e.msg} />)
           : null}
         {serverError ? <MsgError text2='Server internal Error' /> : null}
       </Form>
@@ -238,4 +216,4 @@ const FormAddEdit = ({ userToken, loading, setLoading, dataRegisterEdit }) => {
   )
 }
 
-export default FormAddEdit
+export default CarouselAddEdit
