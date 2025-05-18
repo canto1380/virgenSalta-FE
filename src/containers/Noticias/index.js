@@ -29,7 +29,6 @@ const Noticias = () => {
     setNewsData(data.allNews)
     setNewsInf(data)
   }
-  console.log(newsData)
 
   return (
     <div className='bg-gradient-4'>

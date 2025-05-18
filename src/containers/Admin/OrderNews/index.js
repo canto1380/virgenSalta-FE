@@ -39,7 +39,6 @@ const OrderNewsContainer = () => {
     const data = await getNews(params)
     setNewsData(data)
   }
-  // console.log(newsData)
   return (
     <Container
       fluid

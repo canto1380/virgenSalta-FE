@@ -16,10 +16,10 @@ const PhotosGallery = () => {
   const getTokenRefresh = async () => {
     const token = process.env.REACT_APP_INSTAGRAM
 
-    const dd = await axios.get(
+    const dataToken = await axios.get(
       `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${token}`
     )
-    setTokenRefresh(dd?.data?.access_token)
+    setTokenRefresh(dataToken?.data?.access_token)
   }
 
   const getInstaFeed = async () => {

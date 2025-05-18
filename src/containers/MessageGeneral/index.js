@@ -25,7 +25,6 @@ const MessageGeneral = () => {
     const res = await getMessageGeneral(params)
     setMsgGeneral(res?.allMessage)
   }
-  console.log(msgGeneral)
   return (
     <>
       <Layout />

@@ -32,7 +32,6 @@ const FormPrayerRequest = () => {
   }
   const sendRequest = async (values) => {
     const res = await api('POST', 'requestPrayer/sendRequest', values)
-    console.log(res)
     if (res.status === 200) {
       setLoading(true)
       setTimeout(() => {

@@ -17,7 +17,6 @@ const MsgVirgenBody = ({ title, message, fontSize, typeMessage }) => {
       messageRef.current.innerHTML += `${d}`
     })
   }
-  console.log(typeMessage)
   return (
     <div className='px-5 py-3'>
       <div>

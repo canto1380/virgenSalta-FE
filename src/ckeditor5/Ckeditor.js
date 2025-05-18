@@ -97,7 +97,7 @@ import './App.css'
 const LICENSE_KEY =
   'eFE2QUtDZEVneldWQWRXWEZ5OHp4QXhkMTUvaHZBdmFhb3lxYUdDV3ZOcXVWRzRSem82eThrZ0J6Sm9Vd2c9PS1NakF5TkRFeU1qWT0='
 const CKBOX_TOKEN_URL =
-  'https://124012.cke-cs.com/token/dev/RILqDuA8LLyUAd9ssFPXexYza4f4FvxKbeTq?limit=10'
+  'https://117070.cke-cs.com/token/dev/d7yW03KXH8fremOe3Gq2vRaWQjYmHicxgQmA?limit=10'
 
 export default function App({ setDescription, handleEditorReady, data }) {
   const editorContainerRef = useRef(null)
