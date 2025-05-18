@@ -1,37 +1,52 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import FiltersAdmin from '../FiltersAdmin'
-import HeaderList from '../HeaderList'
 import { User } from '../../../context/userProvider'
-import { getStatistics } from '../../../utils/queryAPI/statistics.js'
-import ListStatistics from './ListStatistics.js'
-import FormStatistics from './FormStatistics.js'
+import HeaderList from '../HeaderList.jsx'
+import { getFooter } from '../../../utils/queryAPI/footer.jsx'
+import ListStatistics from '../MenuStatistics.js/ListStatistics.jsx'
+import FormFooter from './FormFooter.jsx'
+import { getNewsCategory } from '../../../utils/queryAPI/newsCategory.jsx'
+import { getSpecialDays } from '../../../utils/queryAPI/specialDays.jsx'
+import { getNews } from '../../../utils/queryAPI/news.jsx'
 
-const MenuStatistics = () => {
-  const [search, setSearch] = useState('')
-  const [deleted, setDeleted] = useState(undefined)
+const MenuFooter = () => {
   const [formAdd, setFormAdd] = useState(false)
   const [formEdit, setFormEdit] = useState(false)
-  const [statisticsData, setStatisticsData] = useState([])
+  const [footerData, setFooterData] = useState([])
   const [band, setBand] = useState(false)
   const [loading, setLoading] = useState(false)
   const [dataRegisterEdit, setDataRegisterEdit] = useState(null)
-  const [pageSelected, setPageSelected] = useState(1)
+  const [allCategories, setAllCategories] = useState([])
+  const [allSpecialDays, setAllSpecialDays] = useState([])
+  const [allNews, setAllNews] = useState([])
 
   const {
     state: { userToken },
   } = useContext(User)
 
   useEffect(() => {
-    dataStatistics()
+    dataFooter()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [band, deleted, search])
-
-  const dataStatistics = async () => {
-    const params = { deleted, search }
-    const data = await getStatistics(params)
-    setStatisticsData(data)
+  }, [band])
+  const dataFooter = async () => {
+    const data = await getFooter()
+    setFooterData(data)
   }
+
+  useEffect(() => {
+    dataRedirection()
+  }, [])
+
+  const dataRedirection = async () => {
+    const params = { limit: 10000, deleted: false }
+    const dataCategories = await getNewsCategory(params)
+    setAllCategories(dataCategories.allNewsCategory)
+    const dataSpecialDay = await getSpecialDays(params)
+    setAllSpecialDays(dataSpecialDay.allSpecialDays)
+    const dataNews = await getNews(params)
+    setAllNews(dataNews.allNews)
+  }
+
   const resetValuesEdit = (valuesEdit) => {
     setDataRegisterEdit(valuesEdit)
     setFormEdit(!formEdit)
@@ -42,21 +57,15 @@ const MenuStatistics = () => {
       <Row>
         <Col className='mt-3'>
           <div className='pt-4 pb-1 px-4'>
-            <h3>Estadísticas</h3>
+            <h3>Footer</h3>
           </div>
         </Col>
       </Row>
       {!formAdd && !formEdit ? (
         <Row>
           <Col>
-            <FiltersAdmin
-              setSearch={setSearch}
-              deleted={deleted}
-              setDeleted={setDeleted}
-              setPageSelected={setPageSelected}
-            />
             <HeaderList
-              title='Estadísticas'
+              title='Footer'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               formEdit={formEdit}
@@ -65,26 +74,25 @@ const MenuStatistics = () => {
               btnAdd={true}
             />
             <p className='px-5 text-important mb-1'>
-              <span className='text-danger fw-bolder'>*</span>Se muestran 5
-              estadísticas en la pantalla. Puede ordenarlas desplazando una
+              <span className='text-danger fw-bolder'>*</span>Se muestran 7
+              accesos rápido en el footer. Puede ordenarlas desplazando una
               arriba de otra.
             </p>
             <p className='px-5 text-important mb-1'>
-              <span className='text-danger fw-bolder'>*</span>Una estadistica
-              eliminada no va a ser visible.
+              <span className='text-danger fw-bolder'>*</span>Un acceso rápido
+              eliminado no va a ser visible.
             </p>
             <p className='px-5 text-important'>
               <span className='text-danger fw-bolder'>*</span>Arrastre las filas
               para ordenarlas.
             </p>
-
             <ListStatistics
-              data={statisticsData?.allStatistics}
+              data={footerData?.allDirectAccessFooter}
               userToken={userToken}
               band={band}
               setBand={setBand}
               resetValuesEdit={resetValuesEdit}
-              routeAPI='statistics'
+              routeAPI='footer'
             />
           </Col>
         </Row>
@@ -92,8 +100,8 @@ const MenuStatistics = () => {
         <Row>
           <Col>
             <HeaderList
-              title='Nueva estadística'
-              titleEdit='Editar estadística'
+              title='Nuevo acceso rápido'
+              titleEdit='Editar accesso rápido'
               formAdd={formAdd}
               setFormAdd={setFormAdd}
               loading={loading}
@@ -102,12 +110,15 @@ const MenuStatistics = () => {
               setFormEdit={setFormEdit}
               resetValuesEdit={resetValuesEdit}
             />
-            <FormStatistics
+            <FormFooter
               userToken={userToken}
               loading={loading}
               setLoading={setLoading}
+              dataCategories={allCategories}
+              dataSpecialDay={allSpecialDays}
+              dataNews={allNews}
               dataRegisterEdit={dataRegisterEdit}
-              routeAPI='statistics'
+              routeAPI='footer'
             />
           </Col>
         </Row>
@@ -116,4 +127,4 @@ const MenuStatistics = () => {
   )
 }
 
-export default MenuStatistics
+export default MenuFooter

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import FiltersAdmin from '../FiltersAdmin'
-import HeaderList from '../HeaderList'
-import { User } from '../../../context/userProvider'
-import { getConfigurations } from '../../../utils/queryAPI/configurations.js'
-import ListElements from '../ListElements.js'
-import FormConfigurations from './FormConfigurations.js'
+import FiltersAdmin from '../FiltersAdmin.jsx'
+import HeaderList from '../HeaderList.jsx'
+import { User } from '../../../context/userProvider.jsx'
+import { getConfigurations } from '../../../utils/queryAPI/configurations.jsx'
+import ListElements from '../ListElements.jsx'
+import FormConfigurations from './FormConfigurations.jsx'
 
 const MenuConfigurations = () => {
   const [search, setSearch] = useState('')

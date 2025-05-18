@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Collapse, Spin } from 'antd'
 import './menuNavbar.css'
-import ListItemNavbar from './ListItemNavbar.js'
-import Spinn from '../../Spinn/Spinn.js'
-import HeaderItemNavPanel from './HeaderItemNavPanel.js'
-import { api } from '../../../utils/api.js'
-import MsgError from '../../Messages/MsgError.js'
+import ListItemNavbar from './ListItemNavbar.jsx'
+import Spinn from '../../Spinn/Spinn.jsx'
+import HeaderItemNavPanel from './HeaderItemNavPanel.jsx'
+import { api } from '../../../utils/api.jsx'
+import MsgError from '../../Messages/MsgError.jsx'
 
 const { Panel } = Collapse
 

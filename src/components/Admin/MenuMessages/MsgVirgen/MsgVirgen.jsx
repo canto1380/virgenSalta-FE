@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import HeaderList from '../../HeaderList'
+import HeaderList from '../../HeaderList.jsx'
 import ListElements from '../../ListElements'
-import PaginationAdmin from '../../Pagination'
+import PaginationAdmin from '../../Pagination.jsx'
 import { User } from '../../../../context/userProvider'
-import { getMessageVirgen } from '../../../../utils/queryAPI/messageVirgen.js'
-import MsgVirgenAddEdit from './MsgVirgenAddEdit.js'
-import MsgFilters from '../MsgFilters'
-import HeaderBackdrop from '../../HeaderBackdrop.js'
+import { getMessageVirgen } from '../../../../utils/queryAPI/messageVirgen.jsx'
+import MsgVirgenAddEdit from './MsgVirgenAddEdit.jsx'
+import MsgFilters from '../MsgFilters.jsx'
+import HeaderBackdrop from '../../HeaderBackdrop.jsx'
 
 const MenuMsgVirgen = ({ idTab }) => {
   const [formAdd, setFormAdd] = useState(false)
