@@ -48,13 +48,13 @@ const Login = ({ bandera, setBandera }) => {
           token,
           user: { _id, nickname, name, surname },
         } = res.data
-        Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API, {
+        Cookies.set(COOKIES.authToken, token, import.meta.env.VITE_API, {
           expires: 1,
         })
         Cookies.set(
           COOKIES.authId,
           (_id, nickname, name, surname),
-          process.env.REACT_APP_API,
+          import.meta.env.VITE_API,
           { expires: 1 }
         )
         setToken(res?.data?.token)

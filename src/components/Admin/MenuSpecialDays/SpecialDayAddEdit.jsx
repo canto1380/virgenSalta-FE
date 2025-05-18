@@ -21,7 +21,7 @@ const SpecialDaysAddEdit = ({
   const [uploading, setUploading] = useState(false)
   const [newImages, setNewImages] = useState([])
 
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const estado = import.meta.env.VITE_API ? import.meta.env.VITE_API : null
   const URL_FIREBASE_IMG = estado !== null ? 'img-jornadas-dev' : 'img-jornadas'
 
   const getPreview = (file) => {

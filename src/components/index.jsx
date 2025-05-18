@@ -23,8 +23,8 @@ const Home = () => {
   const [frase2, setFrase2] = useState(undefined)
   const [sitioOficial, setSitioOficial] = useState(undefined)
 
-  const { REACT_APP_CHANNEL_ID_YOUTUBE, REACT_APP_API_KEY_YOUTUBE } =
-    process.env
+  const { VITE_CHANNEL_ID_YOUTUBE, VITE_API_KEY_YOUTUBE } =
+    import.meta.env
   useEffect(() => {
     fetchVideos()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,8 +35,8 @@ const Home = () => {
         'https://www.googleapis.com/youtube/v3/search',
         {
           params: {
-            key: REACT_APP_API_KEY_YOUTUBE,
-            channelId: REACT_APP_CHANNEL_ID_YOUTUBE,
+            key: VITE_API_KEY_YOUTUBE,
+            channelId: VITE_CHANNEL_ID_YOUTUBE,
             part: 'snippet',
             type: 'video',
             maxResults: 10,

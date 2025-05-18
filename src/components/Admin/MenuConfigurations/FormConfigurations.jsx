@@ -20,7 +20,7 @@ const FormConfigurations = ({
   const [imgData, setImgData] = useState()
   const [uploading, setUploading] = useState(false)
 
-  const estado = process.env.REACT_APP_API ? process.env.REACT_APP_API : null
+  const estado = import.meta.env.VITE_API ? import.meta.env.VITE_API : null
   const URL_FIREBASE_IMG =
     estado !== null ? 'img-configuraciones-dev' : 'img-configuraciones'
 
