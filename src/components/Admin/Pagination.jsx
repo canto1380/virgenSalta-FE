@@ -1,3 +1,4 @@
+import React from 'react'
 import { Pagination } from 'antd'
 
 const PaginationAdmin = ({ data, pageSelected, setPageSelected, setLimit }) => {

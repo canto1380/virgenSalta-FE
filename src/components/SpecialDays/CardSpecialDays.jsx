@@ -10,9 +10,7 @@ const CardSpecialDay = ({ data: { title }, photos, styleAdd }) => {
           alt='imagen'
           className={`cardG-img ${styleAdd}`}
         />
-        {/* {nameCategory && ( */}
         <p className='mb-0 cardG-title'>{title}</p>
-        {/* )} */}
       </Card>
     </a>
   )
