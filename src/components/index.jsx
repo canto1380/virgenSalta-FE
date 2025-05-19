@@ -23,8 +23,7 @@ const Home = () => {
   const [frase2, setFrase2] = useState(undefined)
   const [sitioOficial, setSitioOficial] = useState(undefined)
 
-  const { VITE_CHANNEL_ID_YOUTUBE, VITE_API_KEY_YOUTUBE } =
-    import.meta.env
+  const { VITE_CHANNEL_ID_YOUTUBE, VITE_API_KEY_YOUTUBE } = import.meta.env
   useEffect(() => {
     fetchVideos()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,7 +120,7 @@ const Home = () => {
       <Container className='py-5'>
         <Statics />
         <hr className='my-5' />
-        <PhotosGallery />
+        {/* <PhotosGallery /> */}
         <hr className='my-5' />
         <VideoGallery videosBack={videosBack} />
         <FloatingButton />

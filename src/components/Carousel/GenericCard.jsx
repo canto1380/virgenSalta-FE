@@ -6,7 +6,8 @@ const CardModel = ({ data: { photos, img, title, _id }, photos1, type }) => {
   return (
     <div className='card-container text-center' key={_id}>
       <a
-        href={`/${type === 'news' ? 'noticias' : 'jornadas'}/${title.replace(
+        href={`/${type === 'news' ? 'noticias' : 'jornadas'}/${title?.replace(
+
           / /g,
           '-'
         )}`}
