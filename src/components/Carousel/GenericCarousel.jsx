@@ -7,7 +7,6 @@ import 'swiper/css/navigation'
 import GenericCard from './GenericCard.jsx'
 
 const NewCarousel = ({ data, type }) => {
-  console.log(data)
   return (
     <div className='d-flex justify-content-start'>
       {data?.length < 3 ? (
@@ -53,37 +52,6 @@ const NewCarousel = ({ data, type }) => {
           ))}
         </Swiper>
       )}
-      {/* <Swiper
-        freeMode={true}
-        grabCursor={true}
-        modules={[FreeMode, Navigation]}
-        navigation={data?.length > 1}
-        className={`mySwipper`}
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            spaceBetween: data?.length > 1 ? 40 : 0,
-          },
-          576: {
-            slidesPerView: 2,
-            spaceBetween: data?.length > 1 ? 40 : 0,
-          },
-          992: {
-            slidesPerView: 3,
-            spaceBetween: data?.length > 1 ? 40 : 0,
-          },
-        }}
-      >
-        {data?.map((d, i) => (
-          <SwiperSlide key={i}>
-            <GenericCard
-              data={d}
-              photos1={d.photos ? d?.photos[0] : d?.photo}
-              type={type}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
     </div>
   )
 }

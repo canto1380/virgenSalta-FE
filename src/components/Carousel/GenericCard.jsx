@@ -3,11 +3,11 @@ import '../News/news.css'
 import fotoDefault from '../../images/logo-corazon-min.webp'
 
 const CardModel = ({ data: { photos, img, title, _id }, photos1, type }) => {
-  console.log(title)
   return (
     <div className='card-container text-center' key={_id}>
       <a
         href={`/${type === 'news' ? 'noticias' : 'jornadas'}/${title?.replace(
+
           / /g,
           '-'
         )}`}
